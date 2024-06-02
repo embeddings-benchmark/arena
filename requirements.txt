@@ -1,3 +1,4 @@
 fire
 gradio
 mteb
+plotly
