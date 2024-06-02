@@ -1,4 +1,4 @@
 fire
 gradio
-mteb
+git+https://github.com/embeddings-benchmark/mteb.git@add-e5
 plotly

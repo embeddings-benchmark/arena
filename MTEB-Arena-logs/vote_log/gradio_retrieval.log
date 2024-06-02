@@ -6688,3 +6688,114 @@
 2024-06-01 22:36:09 | ERROR | stderr | 
 2024-06-01 22:36:12 | INFO | gradio_retrieval | bothbadvote (named). ip: None
 2024-06-01 22:36:21 | INFO | stdout | Keyboard interruption in main thread... closing server.
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:855: UserWarning: Expected 6 arguments for function functools.partial(<function retrieve_anon at 0x17dd14ca0>, <bound method ModelManager.retrieve_parallel_anon of <models.ModelManager object at 0x102de8ca0>>), received 5.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:859: UserWarning: Expected at least 6 arguments for function functools.partial(<function retrieve_anon at 0x17dd14ca0>, <bound method ModelManager.retrieve_parallel_anon of <models.ModelManager object at 0x102de8ca0>>), received 5.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:855: UserWarning: Expected 5 arguments for function functools.partial(<function vote_last_response at 0x17dd14af0>, 'leftvote'), received 4.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:859: UserWarning: Expected at least 5 arguments for function functools.partial(<function vote_last_response at 0x17dd14af0>, 'leftvote'), received 4.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:855: UserWarning: Expected 5 arguments for function functools.partial(<function vote_last_response at 0x17dd14af0>, 'rightvote'), received 4.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:859: UserWarning: Expected at least 5 arguments for function functools.partial(<function vote_last_response at 0x17dd14af0>, 'rightvote'), received 4.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:855: UserWarning: Expected 5 arguments for function functools.partial(<function vote_last_response at 0x17dd14af0>, 'tievote'), received 4.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:859: UserWarning: Expected at least 5 arguments for function functools.partial(<function vote_last_response at 0x17dd14af0>, 'tievote'), received 4.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:855: UserWarning: Expected 5 arguments for function functools.partial(<function vote_last_response at 0x17dd14af0>, 'bothbadvote'), received 4.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:859: UserWarning: Expected at least 5 arguments for function functools.partial(<function vote_last_response at 0x17dd14af0>, 'bothbadvote'), received 4.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:855: UserWarning: Expected 5 arguments for function functools.partial(<function vote_last_response at 0x17dd14af0>, 'share'), received 4.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:859: UserWarning: Expected at least 5 arguments for function functools.partial(<function vote_last_response at 0x17dd14af0>, 'share'), received 4.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:855: UserWarning: Expected 4 arguments for function functools.partial(<function retrieve at 0x17dd14e50>, <bound method ModelManager.retrieve of <models.ModelManager object at 0x102de8ca0>>), received 3.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:859: UserWarning: Expected at least 4 arguments for function functools.partial(<function retrieve at 0x17dd14e50>, <bound method ModelManager.retrieve of <models.ModelManager object at 0x102de8ca0>>), received 3.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:855: UserWarning: Expected 3 arguments for function functools.partial(<function vote_last_response_single at 0x17dd14b80>, 'upvote'), received 2.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:859: UserWarning: Expected at least 3 arguments for function functools.partial(<function vote_last_response_single at 0x17dd14b80>, 'upvote'), received 2.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:855: UserWarning: Expected 3 arguments for function functools.partial(<function vote_last_response_single at 0x17dd14b80>, 'downvote'), received 2.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:859: UserWarning: Expected at least 3 arguments for function functools.partial(<function vote_last_response_single at 0x17dd14b80>, 'downvote'), received 2.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:855: UserWarning: Expected 3 arguments for function functools.partial(<function vote_last_response_single at 0x17dd14b80>, 'flag'), received 2.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/utils.py:859: UserWarning: Expected at least 3 arguments for function functools.partial(<function vote_last_response_single at 0x17dd14b80>, 'flag'), received 2.
+2024-06-01 22:56:28 | ERROR | stderr |   warnings.warn(
+2024-06-01 22:56:28 | INFO | stdout | IMPORTANT: You are using gradio version 4.20.0, however version 4.29.0 is available, please upgrade.
+2024-06-01 22:56:28 | INFO | stdout | --------
+2024-06-01 22:56:29 | INFO | stdout | Running on local URL:  http://127.0.0.1:7860
+2024-06-01 22:56:29 | INFO | stdout | 
+2024-06-01 22:56:29 | INFO | stdout | To create a public link, set `share=True` in `launch()`.
+2024-06-01 23:03:13 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/helpers.py:824: UserWarning:
+2024-06-01 23:03:13 | ERROR | stderr | 
+2024-06-01 23:03:13 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-06-01 23:03:13 | ERROR | stderr | 
+2024-06-01 23:03:13 | INFO | gradio_retrieval | Retrieval. ip: None
+2024-06-01 23:03:13 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/huggingface_hub/file_download.py:1132: FutureWarning:
+2024-06-01 23:03:13 | ERROR | stderr | 
+2024-06-01 23:03:13 | ERROR | stderr | `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+2024-06-01 23:03:13 | ERROR | stderr | 
+2024-06-01 23:03:14 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/huggingface_hub/file_download.py:1132: FutureWarning:
+2024-06-01 23:03:14 | ERROR | stderr | 
+2024-06-01 23:03:14 | ERROR | stderr | `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+2024-06-01 23:03:14 | ERROR | stderr | 
+2024-06-01 23:03:14 | INFO | stdout | Loading index from: index_sentence-transformers_all-MiniLM-L6-v2
+2024-06-01 23:03:14 | ERROR | stderr | Batches:   0%|                                                                     | 0/1 [00:00<?, ?it/s]
+2024-06-01 23:03:15 | ERROR | stderr | Batches: 100%|█████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  3.61it/s]
+2024-06-01 23:03:15 | ERROR | stderr | Batches: 100%|█████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  3.61it/s]
+2024-06-01 23:03:15 | ERROR | stderr | 
+2024-06-01 23:03:16 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/huggingface_hub/file_download.py:1132: FutureWarning:
+2024-06-01 23:03:16 | ERROR | stderr | 
+2024-06-01 23:03:16 | ERROR | stderr | `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+2024-06-01 23:03:16 | ERROR | stderr | 
+2024-06-01 23:03:17 | INFO | stdout | Loading index from: index_intfloat_multilingual-e5-small
+2024-06-01 23:03:17 | ERROR | stderr | Batches:   0%|                                                                     | 0/1 [00:00<?, ?it/s]
+2024-06-01 23:03:17 | ERROR | stderr | Batches: 100%|█████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 19.67it/s]
+2024-06-01 23:03:17 | ERROR | stderr | 
+2024-06-01 23:03:22 | ERROR | stderr | /Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/helpers.py:824: UserWarning:
+2024-06-01 23:03:22 | ERROR | stderr | 
+2024-06-01 23:03:22 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-06-01 23:03:22 | ERROR | stderr | 
+2024-06-01 23:03:22 | INFO | gradio_retrieval | Retrieval. ip: None
+2024-06-01 23:03:22 | ERROR | stderr | Batches:   0%|                                                                     | 0/1 [00:00<?, ?it/s]
+2024-06-01 23:03:22 | ERROR | stderr | 
+2024-06-01 23:03:22 | ERROR | stderr | Batches:   0%|                                                                     | 0/1 [00:00<?, ?it/s]
+2024-06-01 23:03:22 | ERROR | stderr | [A
+2024-06-01 23:03:22 | ERROR | stderr | Batches: 100%|█████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  9.60it/s]
+2024-06-01 23:03:22 | ERROR | stderr | Batches: 100%|█████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  9.57it/s]
+2024-06-01 23:03:22 | ERROR | stderr | 
+2024-06-01 23:03:22 | ERROR | stderr | 
+2024-06-01 23:03:22 | ERROR | stderr | Batches: 100%|█████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  8.90it/s]
+2024-06-01 23:03:22 | ERROR | stderr | [A
+2024-06-01 23:03:22 | ERROR | stderr | Batches: 100%|█████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  8.87it/s]
+2024-06-01 23:03:22 | ERROR | stderr | 
+2024-06-01 23:03:27 | INFO | gradio_retrieval | rightvote (named). ip: None
+2024-06-01 23:05:40 | INFO | stdout | Keyboard interruption in main thread... closing server.
+2024-06-01 23:05:40 | ERROR | stderr | Traceback (most recent call last):
+2024-06-01 23:05:40 | ERROR | stderr |   File "/Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/blocks.py", line 2374, in block_thread
+2024-06-01 23:05:40 | ERROR | stderr |     time.sleep(0.1)
+2024-06-01 23:05:40 | ERROR | stderr | KeyboardInterrupt
+2024-06-01 23:05:40 | ERROR | stderr | 
+2024-06-01 23:05:40 | ERROR | stderr | During handling of the above exception, another exception occurred:
+2024-06-01 23:05:40 | ERROR | stderr | 
+2024-06-01 23:05:40 | ERROR | stderr | Traceback (most recent call last):
+2024-06-01 23:05:40 | ERROR | stderr |   File "/Users/muennighoff/Desktop/arena/app.py", line 93, in <module>
+2024-06-01 23:05:40 | ERROR | stderr |     block.launch()
+2024-06-01 23:05:40 | ERROR | stderr |   File "/Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/blocks.py", line 2281, in launch
+2024-06-01 23:05:40 | ERROR | stderr |     self.block_thread()
+2024-06-01 23:05:40 | ERROR | stderr |   File "/Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/blocks.py", line 2378, in block_thread
+2024-06-01 23:05:40 | ERROR | stderr |     self.server.close()
+2024-06-01 23:05:40 | ERROR | stderr |   File "/Users/muennighoff/Desktop/env/lib/python3.9/site-packages/gradio/networking.py", line 76, in close
+2024-06-01 23:05:40 | ERROR | stderr |     self.thread.join()
+2024-06-01 23:05:40 | ERROR | stderr |   File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py", line 1053, in join
+2024-06-01 23:05:40 | ERROR | stderr |     self._wait_for_tstate_lock()
+2024-06-01 23:05:40 | ERROR | stderr |   File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py", line 1069, in _wait_for_tstate_lock
+2024-06-01 23:05:40 | ERROR | stderr |     elif lock.acquire(block, timeout):
+2024-06-01 23:05:40 | ERROR | stderr | KeyboardInterrupt
