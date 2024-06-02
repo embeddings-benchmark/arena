@@ -7,8 +7,6 @@ from pytz import timezone
 import time
 
 import pandas as pd  # pandas>=2.0.3
-import plotly.express as px
-import plotly.graph_objects as go
 from tqdm import tqdm
 
 NUM_SERVERS = 1
@@ -94,6 +92,7 @@ def merge_counts(series, on, names):
 
 
 def report_basic_stats(log_files):
+    import plotly.graph_objects as go
     df_all = load_log_files_parallel(log_files)
     df_all = pd.DataFrame(df_all)
     now_t = df_all["tstamp"].max()

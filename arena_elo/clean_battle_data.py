@@ -11,9 +11,6 @@ import os
 import sys
 from pytz import timezone
 import time
-import PIL
-from PIL import ImageFile
-ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 from tqdm import tqdm
 

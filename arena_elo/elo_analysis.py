@@ -8,7 +8,6 @@ from yaml import safe_load
 
 import numpy as np
 import pandas as pd
-import plotly.express as px
 from tqdm import tqdm
 
 from .basic_stats import get_log_files
@@ -161,6 +160,7 @@ def visualize_leaderboard_table(rating):
 
 
 def visualize_pairwise_win_fraction(battles, model_order):
+    import plotly.express as px
     row_beats_col = compute_pairwise_win_fraction(battles, model_order)
     fig = px.imshow(
         row_beats_col,
@@ -184,6 +184,7 @@ def visualize_pairwise_win_fraction(battles, model_order):
 
 
 def visualize_battle_count(battles, model_order):
+    import plotly.express as px
     ptbl = pd.pivot_table(
         battles, index="model_a", columns="model_b", aggfunc="size", fill_value=0
     )
@@ -208,6 +209,7 @@ def visualize_battle_count(battles, model_order):
 
 
 def visualize_average_win_rate(battles, limit_show_number):
+    import plotly.express as px
     row_beats_col_freq = compute_pairwise_win_fraction(
         battles, None, limit_show_number=limit_show_number
     )
