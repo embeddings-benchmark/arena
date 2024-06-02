@@ -1,0 +1,25 @@
+model_meta:
+  sentence-transformers/all-MiniLM-L6-v2:
+    link: https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
+    desc: all-MiniLM-L6-v2 by Sentence Transformers
+    seq_len: 512
+    size: 23
+    dim: 384
+    limit: 10
+    index_dtype: float32
+    license: Apache-2.0
+    organization: Sentence Transformers
+    mteb_overall: 56.26
+    mteb_retrieval: 41.95    
+  intfloat/multilingual-e5-small:
+    link: https://huggingface.co/intfloat/multilingual-e5-small
+    desc: multilingual-e5-small by Microsoft
+    seq_len: 512
+    size: 44
+    dim: 384
+    limit: 10
+    index_dtype: float32
+    license: MIT License
+    organization: Microsoft    
+    mteb_overall: 57.87
+    mteb_retrieval: 46.64

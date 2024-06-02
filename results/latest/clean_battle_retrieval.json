@@ -1,0 +1,58 @@
+[
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "intfloat/multilingual-e5-small",
+    "winner": "tie",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717280182.8683
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "intfloat/multilingual-e5-small",
+    "winner": "model_a",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717284514.123
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-small",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "tie",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717284525.5372
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "intfloat/multilingual-e5-small",
+    "winner": "model_a",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717294054.7695
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "intfloat/multilingual-e5-small",
+    "winner": "model_b",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717294060.0244
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "intfloat/multilingual-e5-small",
+    "winner": "model_b",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717294067.2153
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-small",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "model_a",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717294071.959
+  }
+]

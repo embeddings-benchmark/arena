@@ -1,0 +1,44 @@
+model_meta:
+  sentence-transformers/all-MiniLM-L6-v2:
+    link: https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
+    desc: all-MiniLM-L6-v2 by Sentence Transformers
+    seq_len: 512
+    size: 23
+    dim: 384
+    license: Apache-2.0
+    organization: Sentence Transformers
+    mteb_overall: 56.26
+    mteb_retrieval: 41.95
+  intfloat/multilingual-e5-small:
+    link: https://huggingface.co/intfloat/multilingual-e5-small
+    desc: multilingual-e5-small by Microsoft
+    seq_len: 512
+    size: 44
+    dim: 384
+    license: MIT License
+    organization: Microsoft
+    mteb_overall: 57.87
+    mteb_retrieval: 46.64
+  GritLM/GritLM-7B:
+    link: https://huggingface.co/GritLM/GritLM-7B
+    desc: GritLM-7B by Contextual AI, HKU, Microsoft
+    seq_len: 32768
+    size: 7240
+    dim: 4096
+    organization: Contextual AI, HKU, Microsoft
+    mteb_overall: 66.76
+    mteb_retrieval: 57.41
+  BAAI/bge-large-en-v1.5:
+    link: https://huggingface.co/BAAI/bge-large-en-v1.5
+    desc: bge-large-en-v1.5 by BAAI
+    seq_len: 512
+    size: null
+    dim: 1024
+    organization: BAAI
+    mteb_overall: 64.23
+    mteb_retrieval: 54.29
+  bm25: 
+    link: https://en.wikipedia.org/wiki/Okapi_BM25
+    desc: Keyword-based matching
+    size: 0
+  
