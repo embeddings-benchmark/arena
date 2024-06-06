@@ -17,7 +17,7 @@ class ModelManager:
     def load_model(self, model_name):
         if model_name in self.loaded_models:
             return self.loaded_models[model_name]
-        model = mteb.get_model(model_name)
+        model = mteb.get_model(model_name, revision=self.model_meta[model_name].get("revision", None))
         self.loaded_models[model_name] = model
         return model
 
