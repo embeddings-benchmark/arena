@@ -9,6 +9,8 @@ model_meta:
     organization: Sentence Transformers
     mteb_overall: 56.26
     mteb_retrieval: 41.95
+    mteb_sts: 78.90
+    mteb_clustering: 42.35
   intfloat/multilingual-e5-small:
     link: https://huggingface.co/intfloat/multilingual-e5-small
     desc: multilingual-e5-small by Microsoft
@@ -19,26 +21,45 @@ model_meta:
     organization: Microsoft
     mteb_overall: 57.87
     mteb_retrieval: 46.64
+    mteb_sts: 79.10
+    mteb_clustering: 37.08
   GritLM/GritLM-7B:
     link: https://huggingface.co/GritLM/GritLM-7B
     desc: GritLM-7B by Contextual AI, HKU, Microsoft
     seq_len: 32768
     size: 7240
     dim: 4096
+    license: Apache-2.0
     organization: Contextual AI, HKU, Microsoft
     mteb_overall: 66.76
     mteb_retrieval: 57.41
+    mteb_sts: 83.35
+    mteb_clustering: 50.61
   BAAI/bge-large-en-v1.5:
     link: https://huggingface.co/BAAI/bge-large-en-v1.5
     desc: bge-large-en-v1.5 by BAAI
     seq_len: 512
-    size: null
+    size: 335
     dim: 1024
+    license: MIT
     organization: BAAI
     mteb_overall: 64.23
     mteb_retrieval: 54.29
-  bm25: 
+    mteb_sts: 83.11
+    mteb_clustering: 46.08
+  nvidia/NV-Embed-v1:
+    link: https://huggingface.co/nvidia/NV-Embed-v1
+    desc: NV-Embed-v1 by Nvidia
+    seq_len: 32768
+    size: 7851
+    dim: 4096
+    license: CC-BY-NC-4.0
+    organization: Nvidia
+    mteb_overall: 69.32
+    mteb_retrieval: 59.36
+    mteb_sts: 82.84
+    mteb_clustering: 52.8
+  bm25:
     link: https://en.wikipedia.org/wiki/Okapi_BM25
     desc: Keyword-based matching
     size: 0
-  

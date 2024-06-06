@@ -102,6 +102,9 @@ def clean_battle_data(
     ct_banned = 0
     battles = []
     for row in tqdm(data, desc="Cleaning"):
+
+        if row["task_type"].lower() != task_name.lower(): continue
+
         if row["models"][0] is None or row["models"][1] is None:
             print(f"Invalid model names: {row['models']}")
             continue

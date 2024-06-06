@@ -5,21 +5,25 @@ model_meta:
     seq_len: 512
     size: 23
     dim: 384
-    limit: 10
+    limit: 1000
     index_dtype: float32
     license: Apache-2.0
     organization: Sentence Transformers
     mteb_overall: 56.26
-    mteb_retrieval: 41.95    
+    mteb_retrieval: 41.95
+    mteb_sts: 78.90
+    mteb_clustering: 42.35    
   intfloat/multilingual-e5-small:
     link: https://huggingface.co/intfloat/multilingual-e5-small
     desc: multilingual-e5-small by Microsoft
     seq_len: 512
     size: 44
     dim: 384
-    limit: 10
+    limit: 1000
     index_dtype: float32
     license: MIT License
     organization: Microsoft    
     mteb_overall: 57.87
     mteb_retrieval: 46.64
+    mteb_sts: 79.10
+    mteb_clustering: 37.08

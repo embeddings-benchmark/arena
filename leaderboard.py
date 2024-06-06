@@ -35,13 +35,13 @@ def load_leaderboard_table_csv(filename, add_hyperlink=True):
     for col in df.columns:
         if "Arena Elo rating" in col:
             df[col] = df[col].apply(lambda x: int(x) if x != "-" else np.nan)
-        elif col in ("MTEB Overall Avg", "MTEB Retrieval Avg"):
+        elif col in ("MTEB Overall Avg", "MTEB Retrieval Avg", "MTEB Clustering Avg", "MTEB STS Avg"):
             df[col] = df[col].apply(lambda x: x if x != "-" else np.nan)
         if add_hyperlink and col == "Model":
             df[col] = df.apply(lambda row: model_hyperlink(row[col], row["Link"]), axis=1)
     return df
 
-def get_arena_table(arena_df, model_table_df):
+def get_arena_table(arena_df, model_table_df, task_type="Retrieval"):
     # sort by rating
     arena_df = arena_df.sort_values(by=["rating"], ascending=False)
     values = []
@@ -61,7 +61,7 @@ def get_arena_table(arena_df, model_table_df):
         # num battles
         row.append(round(arena_df.iloc[i]["num_battles"]))
         row.append(model_table_df.iloc[i]["MTEB Overall Avg"])
-        row.append(model_table_df.iloc[i]["MTEB Retrieval Avg"])
+        row.append(model_table_df.iloc[i][f"MTEB {task_type} Avg"])
         # Organization
         row.append(
             model_table_df[model_table_df["key"] == model_key]["Organization"].values[0]
@@ -73,7 +73,7 @@ def get_arena_table(arena_df, model_table_df):
         values.append(row)
     return values
 
-def build_leaderboard_tab(elo_results_file, leaderboard_table_file, show_plot=False):
+def build_leaderboard_tab(elo_results_file, leaderboard_table_file, show_plot=False, task_type="Retrieval"):
     if elo_results_file is None:  # Do live update
         md = "Loading ..."
         p1 = p2 = p3 = p4 = None
@@ -89,15 +89,14 @@ def build_leaderboard_tab(elo_results_file, leaderboard_table_file, show_plot=Fa
         p4 = anony_elo_results["average_win_rate_bar"]
 
         md = f"""
-# 🏆 MTEB Arena Leaderboard
-| [GitHub](https://github.com/embeddings-benchmark) |
-
+# 🏆 MTEB Arena {task_type} Leaderboard
 """
+    # | [GitHub](https://github.com/embeddings-benchmark) |
     md_1 = gr.Markdown(md, elem_id="leaderboard_markdown")
 
     if leaderboard_table_file:
         model_table_df = load_leaderboard_table_csv(leaderboard_table_file)
-        arena_table_vals = get_arena_table(anony_arena_df, model_table_df)
+        arena_table_vals = get_arena_table(anony_arena_df, model_table_df, task_type=task_type)
         md = make_arena_leaderboard_md(anony_elo_results)
         gr.Markdown(md, elem_id="leaderboard_markdown")
         gr.Dataframe(
@@ -108,7 +107,7 @@ def build_leaderboard_tab(elo_results_file, leaderboard_table_file, show_plot=Fa
                 "📊 95% CI",
                 "🗳️ Votes",
                 "🥇 MTEB Overall Avg",
-                "🥇 MTEB Retrieval Avg",                        
+                f"🥇 MTEB {task_type} Avg",                        
                 "Organization",
                 "License",
             ],

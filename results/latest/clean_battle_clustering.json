@@ -1,0 +1,74 @@
+[
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "intfloat/multilingual-e5-small",
+    "winner": "model_b",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717701143.8442
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-small",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "tie",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717701166.106
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-small",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "model_a",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717701207.6374
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "intfloat/multilingual-e5-small",
+    "winner": "model_a",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717701257.7889
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "intfloat/multilingual-e5-small",
+    "winner": "model_a",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717701306.7372
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-small",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "model_b",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717701455.8414
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "intfloat/multilingual-e5-small",
+    "winner": "model_b",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717701548.4854
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-small",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "tie",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717707438.6238
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "intfloat/multilingual-e5-small",
+    "winner": "model_b",
+    "judge": "arena_user_None",
+    "anony": true,
+    "tstamp": 1717714628.5518
+  }
+]

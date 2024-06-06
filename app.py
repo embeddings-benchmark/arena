@@ -5,7 +5,7 @@ import os
 
 from leaderboard import build_leaderboard_tab
 from models import ModelManager
-from ui import build_side_by_side_ui_anon, build_side_by_side_ui_named, build_single_model_ui
+from ui import build_side_by_side_ui_anon, build_side_by_side_ui_anon_sts, build_side_by_side_ui_anon_clustering, build_side_by_side_ui_named, build_side_by_side_ui_named_sts, build_side_by_side_ui_named_clustering, build_single_model_ui, build_single_model_ui_sts, build_single_model_ui_clustering
 
 ELO_RESULTS_DIR = os.getenv("ELO_RESULTS_DIR", "./results/latest")
 MODEL_META_PATH = "model_meta.yml"
@@ -24,13 +24,21 @@ def load_elo_results(elo_results_dir):
         elo_results_file = {}
         leaderboard_table_file = {}
         for file in elo_results_dir.glob('elo_results_*.pkl'):
-            if 'retrieval' in file.name:
+            if 'clustering' in file.name:
+                elo_results_file['clustering'] = file
+            elif 'retrieval' in file.name:
                 elo_results_file['retrieval'] = file
+            elif 'sts' in file.name:
+                elo_results_file['sts'] = file
             else:
                 raise ValueError(f"Unknown file name: {file.name}")
         for file in elo_results_dir.glob('*_leaderboard.csv'):
-            if 'retrieval' in file.name:
+            if 'clustering' in file.name:
+                leaderboard_table_file['clustering'] = file
+            elif 'retrieval' in file.name:
                 leaderboard_table_file['retrieval'] = file
+            elif 'sts' in file.name:
+                leaderboard_table_file['sts'] = file
             else:
                 raise ValueError(f"Unknown file name: {file.name}")
             
@@ -54,40 +62,42 @@ with gr.Blocks(title="MTEB Arena", head=head_js) as block:
             with gr.Tab("Retrieval Playground", id=2):
                 build_single_model_ui(models)
 
-            if elo_results_file:
+            if (elo_results_file) and ('retrieval' in elo_results_file):
                 with gr.Tab("Retrieval Leaderboard", id=3):
-                    build_leaderboard_tab(elo_results_file['retrieval'], leaderboard_table_file['retrieval'])
+                    build_leaderboard_tab(elo_results_file['retrieval'], leaderboard_table_file['retrieval'], task_type="Retrieval")
     
     with gr.Tab("Clustering", id=5):
         with gr.Tabs() as tabs_ie:
             with gr.Tab("Clustering Arena (battle)", id=5):
-                pass#build_side_by_side_ui_anony_ie(models)
+                build_side_by_side_ui_anon_clustering(models)
 
             with gr.Tab("Clustering Arena (side-by-side)", id=6):
-                pass#build_side_by_side_ui_named_ie(models)
+                build_side_by_side_ui_named_clustering(models)
 
             with gr.Tab("Clustering Playground", id=7): #Direct Chat
-                pass#build_single_model_ui_ie(models, add_promotion_links=True)
-            #if elo_results_file:
-            #    with gr.Tab("Clustering Leaderboard", id=8):
-            #        build_leaderboard_tab(elo_results_file['image_editing'], leaderboard_table_file['image_editing'])
+                build_single_model_ui_clustering(models)
+
+            if (elo_results_file) and ('clustering' in elo_results_file):
+                with gr.Tab("Clustering Leaderboard", id=8):
+                    build_leaderboard_tab(elo_results_file['clustering'], leaderboard_table_file['clustering'], task_type="Clustering")
 
     with gr.Tab("STS", id=10):
         with gr.Tabs() as tabs_vg:
             with gr.Tab("STS Arena (battle)", id=10):
-                pass#build_side_by_side_ui_anony_vg(models)
+                build_side_by_side_ui_anon_sts(models)
 
             with gr.Tab("STS Arena (side-by-side)", id=11):
-                pass#build_side_by_side_ui_named_vg(models)
+                build_side_by_side_ui_named_sts(models)
 
-            with gr.Tab("STS Playground", id=12): #Direct Chat
-                pass#build_single_model_ui_vg(models, add_promotion_links=True)
-            #if elo_results_file and 'video_generation' in elo_results_file:
-            #    with gr.Tab("Video Generation Leaderboard", id=13):
-            #        build_leaderboard_tab(elo_results_file['video_generation'], leaderboard_table_file['video_generation'])
+            with gr.Tab("STS Playground", id=12):
+                build_single_model_ui_sts(models)
 
-    with gr.Tab("About Us", id=4): 
-        pass#build_about()
+            if (elo_results_file) and ('sts' in elo_results_file):
+                with gr.Tab("STS Leaderboard", id=3):
+                    build_leaderboard_tab(elo_results_file['sts'], leaderboard_table_file['sts'], task_type="STS")
+
+    # with gr.Tab("About Us", id=4): 
+    #     pass#build_about()
 
 block.queue(max_size=10)
 block.launch()
