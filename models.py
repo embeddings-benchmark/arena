@@ -71,26 +71,28 @@ class ModelManager:
         docs = [[query, "Title: " + docs[0][0]["title"] + "\n\n" + "Passage: " + docs[0][0]["text"]]]
         return docs
     
-    def clustering_parallel(self, prompt, model_A, model_B):
+    def clustering_parallel(self, prompt, model_A, model_B, ncluster=1):
         if model_A == "" and model_B == "":
             model_names = random.sample(list(self.model_meta.keys()), 2)
         else:
             model_names = [model_A, model_B]
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [executor.submit(self.clustering, prompt, model) for model in model_names]
+            futures = [executor.submit(self.clustering, prompt, model, ncluster) for model in model_names]
             results = [future.result() for future in futures]
         return results[0], results[1], model_names[0], model_names[1]
     
-    def clustering(self, queries, model_name, method="PCA"):
+    def clustering(self, queries, model_name, ncluster=1, method="PCA"):
         """
         Sources:
         - https://www.gradio.app/guides/plot-component-for-maps
         - https://github.com/openai/openai-cookbook/blob/main/examples/Visualizing_embeddings_in_3D.ipynb
         - https://www.nlplanet.org/course-practical-nlp/02-practical-nlp-first-tasks/12-clustering-articles
         """
+        print("GOT NC: ", ncluster)
         if isinstance(queries, str):
             queries = [queries]
+
         model = self.load_model(model_name)
         emb = model.encode(queries)
 
@@ -106,7 +108,7 @@ class ModelManager:
 
             # Put queries & vis_dims into a DataFrame
             df = pd.DataFrame({"text": queries, "x": vis_dims[:, 0]})
-            df["text_short"] = df["text"].str[:50]
+            df["text_short"] = df["text"].str[:64]
 
             hover_data = {
                 "text_short": True,
@@ -134,7 +136,7 @@ class ModelManager:
 
             # Put queries & vis_dims into a DataFrame
             df = pd.DataFrame({"text": queries, "x": vis_dims[:, 0], "y": vis_dims[:, 1]})
-            df["text_short"] = df["text"].str[:50]
+            df["text_short"] = df["text"].str[:64]
 
             hover_data = {
                 "text_short": True,
@@ -150,12 +152,9 @@ class ModelManager:
 
         pca = PCA(n_components=3)
         vis_dims = pca.fit_transform(emb)
-
         # Put queries & vis_dims into a DataFrame
         import pandas as pd
-        df = pd.DataFrame({"text": queries, "x": vis_dims[:, 0], "y": vis_dims[:, 1], "z": vis_dims[:, 2]})
-        df["text_short"] = df["text"].str[:50]
-
+        data = {"text": queries, "x": vis_dims[:, 0], "y": vis_dims[:, 1], "z": vis_dims[:, 2]}
         hover_data = {
             "text_short": True,
             "x": False,
@@ -163,9 +162,26 @@ class ModelManager:
             "z": False,
         }
 
-        fig = px.scatter_3d(
-            df, x="x", y="y", z="z", template="plotly_dark", title="Cluster", hover_data=hover_data
-        )
+        if ncluster > 1:
+            from sklearn.cluster import KMeans
+            # Fit KMeans
+            cluster_labels = KMeans(n_clusters=ncluster, n_init='auto', random_state=0).fit_predict(emb).tolist()
+            hover_data["cluster"] = False
+            data["cluster"] = list(map(str,cluster_labels))
+
+        df = pd.DataFrame(data)
+        df["text_short"] = df["text"].str[:64]
+
+        if ncluster > 1:
+            fig = px.scatter_3d(
+                df, x="x", y="y", z="z", color="cluster", template="plotly_dark", hover_data=hover_data,
+            )
+            # Without legend / colorbar
+            fig = fig.update_layout(showlegend=False)
+        else:
+            fig = px.scatter_3d(
+                df, x="x", y="y", z="z", template="plotly_dark", hover_data=hover_data,
+            )
 
         return fig
 

@@ -12,7 +12,7 @@ model_meta:
     mteb_overall: 56.26
     mteb_retrieval: 41.95
     mteb_sts: 78.90
-    mteb_clustering: 42.35    
+    mteb_clustering: 42.35
   intfloat/multilingual-e5-small:
     link: https://huggingface.co/intfloat/multilingual-e5-small
     revision: e4ce9877abf3edfe10b0d82785e83bdcb973e22e
@@ -23,7 +23,7 @@ model_meta:
     limit: 1000
     index_dtype: float32
     license: MIT License
-    organization: Microsoft    
+    organization: Microsoft
     mteb_overall: 57.87
     mteb_retrieval: 46.64
     mteb_sts: 79.10

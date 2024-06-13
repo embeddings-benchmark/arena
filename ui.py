@@ -41,6 +41,9 @@ def clear_history():
 def clear_history_sts():
     return None, "", "", "", None
 
+def clear_history_clustering():
+    return None, "", 1, None
+
 def clear_history_side_by_side():
     return None, None, "", None, None
 
@@ -49,6 +52,9 @@ def clear_history_side_by_side_anon():
 
 def clear_history_side_by_side_anon_sts():
     return None, None, "", "", "",  None, None, gr.Markdown("", visible=False), gr.Markdown("", visible=False)
+
+def clear_history_side_by_side_anon_clustering():
+    return None, None, "", 1, None, None, gr.Markdown("", visible=False), gr.Markdown("", visible=False)
 
 def enable_buttons(i=5):
     return tuple(gr.update(interactive=True) for _ in range(i))
@@ -64,9 +70,9 @@ def enable_buttons_side_by_side(i=6):
 
 def enable_buttons_side_by_side_clustering(state0):
     if (state0 is not None) and (len(state0.prompts) >= 3):
-        return enable_buttons_side_by_side(7)
+        return enable_buttons_side_by_side(8)
     else:
-        return enable_buttons_side_by_side(2) + disable_buttons_side_by_side(5)
+        return enable_buttons_side_by_side(3) + disable_buttons_side_by_side(5)
 
 def vote_last_response(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
     retrieval_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
@@ -122,8 +128,8 @@ def vote_last_response_clustering(vote_type, state0, state1, model_selector0, mo
     if vote_type == "share": return
 
     if model_selector0 == "":
-        return (disable_btn_visible,) * 2 + (disable_btn,) * 4 + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
-    return (disable_btn_visible,) * 2 + (disable_btn,) * 4 + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
+        return (disable_btn_visible,) * 3 + (disable_btn,) * 4 + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
+    return (disable_btn_visible,) * 3 + (disable_btn,) * 4 + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
 
 def vote_last_response_single(vote_type, state, model_selector, request: gr.Request):
     retrieval_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
@@ -165,7 +171,7 @@ def vote_last_response_single_clustering(vote_type, state, model_selector, reque
             "ip": get_ip(request),
         }
         fout.write(json.dumps(data) + "\n")
-    return (disable_btn_visible,) * 2 + (disable_btn,) * 3
+    return (disable_btn_visible,) * 3 + (disable_btn,) * 3
 
 def get_conv_log_filename():
     t = datetime.datetime.now()
@@ -331,6 +337,15 @@ def build_side_by_side_ui_anon(models):
         # regenerate_btn = gr.Button(value="🔄  Regenerate", interactive=False)
         share_btn = gr.Button(value="📷  Share")
 
+    gr.Examples(
+        examples=[
+            ["What is an MLP?"],
+            ["I am looking for information regarding minority interest"],
+            ["I am searching for a very remote island withouth any human inhabitants"],
+        ],
+        inputs=[textbox],
+    )
+
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
 
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn,]
@@ -369,7 +384,7 @@ def build_side_by_side_ui_anon(models):
         api_name="send_btn_anon"
     ).then(
         enable_buttons_side_by_side,
-        inputs=state0,
+        inputs=None,
         outputs=btn_list
     )
 
@@ -532,6 +547,15 @@ def build_side_by_side_ui_named(models):
         clear_btn = gr.Button(value="🗑️  Clear history", interactive=False)
         share_btn = gr.Button(value="📷  Share")
 
+    gr.Examples(
+        examples=[
+            ["What is an MLP?"],
+            ["I am looking for information regarding minority interest"],
+            ["I am searching for a very remote island withouth any human inhabitants"],
+        ],
+        inputs=[textbox],
+    )
+
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
     
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
@@ -689,6 +713,15 @@ def build_single_model_ui(models):
         flag_btn = gr.Button(value="⚠️  Flag", interactive=False)
         clear_btn = gr.Button(value="🗑️  Clear history", interactive=False)
 
+    gr.Examples(
+        examples=[
+            ["What is an MLP?"],
+            ["I am looking for information regarding minority interest"],
+            ["I am searching for a very remote island withouth any human inhabitants"],
+        ],
+        inputs=[textbox],
+    )
+
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
     
     btn_list = [upvote_btn, downvote_btn, flag_btn, clear_btn]
@@ -791,29 +824,36 @@ class ClusteringState:
         self.model_name = model_name
         self.prompts = []
         self.output = None
+        self.ncluster = 1
 
     def dict(self):
-        return {"conv_id": self.conv_id, "model_name": self.model_name, "prompt": self.prompts, "output": self.output}
+        return {"conv_id": self.conv_id, "model_name": self.model_name, "prompt": self.prompts, "ncluster": self.ncluster, "output": self.output}
 
-def clustering_side_by_side(gen_func, state0, state1, txt, model_name0, model_name1, request: gr.Request):
+def clustering_side_by_side(gen_func, state0, state1, txt, model_name0, model_name1, ncluster, request: gr.Request):
     if not txt: raise gr.Warning("Prompt cannot be empty.")
     if state0 is None:
         state0 = ClusteringState(model_name1)
     if state1 is None:
         state1 = ClusteringState(model_name0)
-    state0.prompts.append(txt)
-    state1.prompts.append(txt)
+    if "<|SEP|>" in txt:
+        state0.prompts.extend(txt.split("<|SEP|>"))
+        state1.prompts.extend(txt.split("<|SEP|>"))
+    else:    
+        state0.prompts.append(txt)
+        state1.prompts.append(txt)
+    state0.ncluster = ncluster
+    state1.ncluster = ncluster
 
     ip = get_ip(request)
     clustering_logger.info(f"Clustering. ip: {ip}")
     start_tstamp = time.time()
     model_name0, model_name1 = "", ""
-    generated_image0, generated_image1, model_name0, model_name1 = gen_func(state0.prompts, model_name0, model_name1)
+    generated_image0, generated_image1, model_name0, model_name1 = gen_func(state0.prompts, model_name0, model_name1, ncluster)
     #state0.output, state1.output = generated_image0, generated_image1
     state0.model_name, state1.model_name = model_name0, model_name1
     
     yield state0, state1, generated_image0, generated_image1, \
-        gr.Markdown(f"### Model A: {model_name0}", visible=False), gr.Markdown(f"### Model B: {model_name1}", visible=False), None
+        gr.Markdown(f"### Model A: {model_name0}", visible=False), gr.Markdown(f"### Model B: {model_name1}", visible=False), None, ncluster
     
     finish_tstamp = time.time()
     
@@ -846,20 +886,24 @@ def clustering_side_by_side(gen_func, state0, state1, txt, model_name0, model_na
         # append_json_item_on_log_server(data, get_conv_log_filename())
 
 
-def clustering(gen_func, state, text, model_name, request: gr.Request):
-    if not text: raise gr.Warning("Prompt cannot be empty.")
+def clustering(gen_func, state, txt, model_name, ncluster, request: gr.Request):
+    if not txt: raise gr.Warning("Prompt cannot be empty.")
     if not model_name: raise gr.Warning("Model name cannot be empty.")
     if state is None:
         state = ClusteringState(model_name)
     ip = get_ip(request)
     clustering_logger.info(f"Clustering. ip: {ip}")
     start_tstamp = time.time()
-    state.prompts.append(text)
-    generated_img = gen_func(state.prompts, model_name)
+    if "<|SEP|>" in txt:
+        state.prompts.extend(txt.split("<|SEP|>"))
+    else:
+        state.prompts.append(txt)
+    state.ncluster = ncluster
+    generated_img = gen_func(state.prompts, model_name, state.ncluster)
     #state.output = retrieved_txt
     state.model_name = model_name
 
-    yield state, generated_img, None
+    yield state, generated_img, None, ncluster
     
     finish_tstamp = time.time()
     # logger.info(f"===output===: {output}")
@@ -885,6 +929,7 @@ def build_side_by_side_ui_anon_clustering(models):
 
 ## 📜 Rules
 - Input texts one-by-one and submit them to two anonymous models. Vote which model clusters the texts better in the plot.
+- You can also enter multiple texts at once, separated by `<|SEP|>`.
 - You have to **enter at least 3 texts**, else cluster qualities cannot be judged.
 - The cluster will be 1D for 1 text, 2D for 2-3 texts, 3D for >3 texts.
 - Whenever you have decided which model is better, click the button below to vote.
@@ -929,15 +974,33 @@ def build_side_by_side_ui_anon_clustering(models):
 
     with gr.Row():
         textbox = gr.Textbox(
-            show_label=False,
+            show_label=True,
+            label="Text to cluster",
             placeholder="👉 Enter your text and press ENTER",
-            container=True,
             elem_id="input_box",
+            scale=6,
+        )
+        ncluster = gr.Number(
+            show_label=True,
+            label="Optional num clusters",
+            elem_id="ncluster_box",
+            value=1,
+            minimum=1,
+            scale=1,
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
 
     with gr.Row():
         clear_btn = gr.Button(value="🎲 New Round", interactive=False)
+        
+    gr.Examples(
+        examples=[
+            ["Shanghai<|SEP|>Beijing<|SEP|>Shenzhen<|SEP|>Hangzhou<|SEP|>Seattle<|SEP|>Boston<|SEP|>New York<|SEP|>San Francisco", 2],
+            ["Pikachu<|SEP|>Charmander<|SEP|>Squirtle<|SEP|>Chikorita<|SEP|>Electabuzz<|SEP|>Ponyta<|SEP|>Poliwhirl<|SEP|>Sunflora<|SEP|>Mareep<|SEP|>Slugma<|SEP|>Staryu<|SEP|>Grovyle<|SEP|>Bellossom<|SEP|>Voltorb", 4],
+            ["which airlines fly from boston to washington dc via other cities<|SEP|>show me the airlines that fly between toronto and denver<|SEP|>show me round trip first class tickets from new york to miami<|SEP|>i'd like the lowest fare from denver to pittsburgh<|SEP|>show me a list of ground transportation at boston airport<|SEP|>show me boston ground transportation<|SEP|>of all airlines which airline has the most arrivals in atlanta<|SEP|>what ground transportation is available in boston<|SEP|>i would like your rates between atlanta and boston on september third<|SEP|>which airlines fly between boston and pittsburgh", 2],
+        ],
+        inputs=[textbox, ncluster],
+    )
 
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
 
@@ -948,18 +1011,18 @@ def build_side_by_side_ui_anon_clustering(models):
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 2),
+        partial(disable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, ncluster],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
+        inputs=[state0, state1, textbox, model_selector_left, model_selector_right, ncluster],
+        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox, ncluster],
         api_name="submit_btn_anon"
     ).then(
         enable_buttons_side_by_side_clustering,
         inputs=state0,
-        outputs=[send_btn, textbox] + btn_list,
+        outputs=[send_btn, textbox, ncluster] + btn_list,
     )
 
     send_btn.click(
@@ -967,33 +1030,33 @@ def build_side_by_side_ui_anon_clustering(models):
         inputs=textbox,
         outputs=None,
     ).success(        
-        partial(disable_buttons_side_by_side, 2),
+        partial(disable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],   
+        outputs=[send_btn, textbox, ncluster],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
+        inputs=[state0, state1, textbox, model_selector_left, model_selector_right, ncluster],
+        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox, ncluster],
         api_name="send_btn_anon"
     ).then(
         enable_buttons_side_by_side_clustering,
         inputs=state0,
-        outputs=[send_btn, textbox] + btn_list,
+        outputs=[send_btn, textbox, ncluster] + btn_list,
     )
 
     clear_btn.click(
-        clear_history_side_by_side_anon,
+        clear_history_side_by_side_anon_clustering,
         inputs=None,
-        outputs=[state0, state1, textbox, chatbot_left, chatbot_right, model_selector_left, model_selector_right],
+        outputs=[state0, state1, textbox, ncluster, chatbot_left, chatbot_right, model_selector_left, model_selector_right],
         api_name="clear_btn_anon"
     ).then(
         disable_buttons_side_by_side,
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 2),
+        partial(enable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, ncluster],
     )
 
     dummy_left_model = gr.State("")
@@ -1001,22 +1064,22 @@ def build_side_by_side_ui_anon_clustering(models):
     leftvote_btn.click(
         partial(vote_last_response_clustering, "leftvote"),
         inputs=[state0, state1, dummy_left_model, dummy_right_model],
-        outputs=[send_btn, textbox, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     rightvote_btn.click(
         partial(vote_last_response_clustering, "rightvote"),
         inputs=[state0, state1, dummy_left_model, dummy_right_model],
-        outputs=[send_btn, textbox, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     tie_btn.click(
         partial(vote_last_response_clustering, "tievote"),
         inputs=[state0, state1, dummy_left_model, dummy_right_model],
-        outputs=[send_btn, textbox, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     bothbad_btn.click(
         partial(vote_last_response_clustering, "bothbadvote"),
         inputs=[state0, state1, dummy_left_model, dummy_right_model],
-        outputs=[send_btn, textbox, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
 
 def build_side_by_side_ui_named_clustering(models):
@@ -1085,37 +1148,55 @@ def build_side_by_side_ui_named_clustering(models):
 
     with gr.Row():
         textbox = gr.Textbox(
-            show_label=False,
+            show_label=True,
+            label="Text to cluster",
             placeholder="👉 Enter your text and press ENTER",
-            elem_id="input_box"
+            elem_id="input_box",
+            scale=6,
+        )
+        ncluster = gr.Number(
+            show_label=True,
+            label="Optional num clusters",
+            elem_id="ncluster_box",
+            value=1,
+            minimum=1,
+            scale=1,
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
 
     with gr.Row():
         clear_btn = gr.Button(value="🗑️  Clear history", interactive=False)
 
+    gr.Examples(
+        examples=[
+            ["Shanghai<|SEP|>Beijing<|SEP|>Shenzhen<|SEP|>Hangzhou<|SEP|>Seattle<|SEP|>Boston<|SEP|>New York<|SEP|>San Francisco", 2],
+            ["Pikachu<|SEP|>Charmander<|SEP|>Squirtle<|SEP|>Chikorita<|SEP|>Electabuzz<|SEP|>Ponyta<|SEP|>Poliwhirl<|SEP|>Sunflora<|SEP|>Mareep<|SEP|>Slugma<|SEP|>Staryu<|SEP|>Grovyle<|SEP|>Bellossom<|SEP|>Voltorb", 4],
+            ["which airlines fly from boston to washington dc via other cities<|SEP|>show me the airlines that fly between toronto and denver<|SEP|>show me round trip first class tickets from new york to miami<|SEP|>i'd like the lowest fare from denver to pittsburgh<|SEP|>show me a list of ground transportation at boston airport<|SEP|>show me boston ground transportation<|SEP|>of all airlines which airline has the most arrivals in atlanta<|SEP|>what ground transportation is available in boston<|SEP|>i would like your rates between atlanta and boston on september third<|SEP|>which airlines fly between boston and pittsburgh", 2],
+        ],
+        inputs=[textbox, ncluster],
+    )
+
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
     
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
-
 
     textbox.submit(
         check_input_clustering,
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 2),
+        partial(disable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, ncluster],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
+        inputs=[state0, state1, textbox, model_selector_left, model_selector_right, ncluster],
+        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox, ncluster],
         api_name="textbox_side_by_side"
     ).then(
         enable_buttons_side_by_side_clustering,
         inputs=state0,
-        outputs=[send_btn, textbox] + btn_list,
+        outputs=[send_btn, textbox, ncluster] + btn_list,
     )
 
     send_btn.click(
@@ -1123,54 +1204,54 @@ def build_side_by_side_ui_named_clustering(models):
         inputs=textbox,
         outputs=None,
     ).success(        
-        partial(disable_buttons_side_by_side, 2),
+        partial(disable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],   
+        outputs=[send_btn, textbox, ncluster],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
+        inputs=[state0, state1, textbox, model_selector_left, model_selector_right, ncluster],
+        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox, ncluster],
         api_name="send_side_by_side"
     ).then(
         enable_buttons_side_by_side_clustering,
         inputs=state0,
-        outputs=[send_btn, textbox] + btn_list,
+        outputs=[send_btn, textbox, ncluster] + btn_list,
     )
 
     clear_btn.click(
-        clear_history_side_by_side_anon,
+        clear_history_side_by_side_anon_clustering,
         inputs=None,
-        outputs=[state0, state1, textbox, chatbot_left, chatbot_right, model_selector_left, model_selector_right],
+        outputs=[state0, state1, textbox, ncluster, chatbot_left, chatbot_right, model_selector_left, model_selector_right],
         api_name="clear_btn_anon"
     ).then(
         disable_buttons_side_by_side,
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 2),
+        partial(enable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, ncluster],
     )
 
     leftvote_btn.click(
         partial(vote_last_response_clustering, "leftvote"),
         inputs=[state0, state1, model_selector_left, model_selector_right],
-        outputs=[send_btn, textbox, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     rightvote_btn.click(
         partial(vote_last_response_clustering, "rightvote"),
         inputs=[state0, state1, model_selector_left, model_selector_right],
-        outputs=[send_btn, textbox, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     tie_btn.click(
         partial(vote_last_response_clustering, "tievote"),
         inputs=[state0, state1, model_selector_left, model_selector_right],
-        outputs=[send_btn, textbox, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     bothbad_btn.click(
         partial(vote_last_response_clustering, "bothbadvote"),
         inputs=[state0, state1, model_selector_left, model_selector_right],
-        outputs=[send_btn, textbox, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
 
 def build_single_model_ui_clustering(models):
@@ -1205,11 +1286,20 @@ def build_single_model_ui_clustering(models):
 
     with gr.Row():
         textbox = gr.Textbox(
-            show_label=False,
+            show_label=True,
+            label="Text to cluster",
             placeholder="👉 Enter your text and press ENTER",
-            elem_id="input_box"
+            elem_id="input_box",
+            scale=6,
         )
-
+        ncluster = gr.Number(
+            show_label=True,
+            label="Optional num clusters",
+            elem_id="ncluster_box",
+            value=1,
+            minimum=1,
+            scale=1,
+        )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
 
     with gr.Row():
@@ -1221,23 +1311,32 @@ def build_single_model_ui_clustering(models):
         flag_btn = gr.Button(value="⚠️  Flag", interactive=False)
         clear_btn = gr.Button(value="🗑️  Clear history", interactive=False)
 
+    gr.Examples(
+        examples=[
+            ["Shanghai<|SEP|>Beijing<|SEP|>Shenzhen<|SEP|>Hangzhou<|SEP|>Seattle<|SEP|>Boston<|SEP|>New York<|SEP|>San Francisco", 2],
+            ["Pikachu<|SEP|>Charmander<|SEP|>Squirtle<|SEP|>Chikorita<|SEP|>Electabuzz<|SEP|>Ponyta<|SEP|>Poliwhirl<|SEP|>Sunflora<|SEP|>Mareep<|SEP|>Slugma<|SEP|>Staryu<|SEP|>Grovyle<|SEP|>Bellossom<|SEP|>Voltorb", 4],
+            ["which airlines fly from boston to washington dc via other cities<|SEP|>show me the airlines that fly between toronto and denver<|SEP|>show me round trip first class tickets from new york to miami<|SEP|>i'd like the lowest fare from denver to pittsburgh<|SEP|>show me a list of ground transportation at boston airport<|SEP|>show me boston ground transportation<|SEP|>of all airlines which airline has the most arrivals in atlanta<|SEP|>what ground transportation is available in boston<|SEP|>i would like your rates between atlanta and boston on september third<|SEP|>which airlines fly between boston and pittsburgh", 2],
+        ],
+        inputs=[textbox, ncluster],
+    )
+
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
 
     btn_list = [upvote_btn, downvote_btn, flag_btn, clear_btn]
 
     model_selector.change(
-        clear_history, 
+        clear_history_clustering,
         inputs=None, 
-        outputs=[state, textbox, chatbot], 
+        outputs=[state, textbox, ncluster, chatbot], 
         api_name="model_selector_single"
     ).then(
         disable_buttons,
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 2),
+        partial(enable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, ncluster],
     )
     
     textbox.submit(
@@ -1245,19 +1344,19 @@ def build_single_model_ui_clustering(models):
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 2),
+        partial(disable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, ncluster],
     ).then(
         gen_func,
-        inputs=[state, textbox, model_selector],
-        outputs=[state, chatbot, textbox],
+        inputs=[state, textbox, model_selector, ncluster],
+        outputs=[state, chatbot, textbox, ncluster],
         api_name="submit_btn_single",
         show_progress="full"
     ).then(
         enable_buttons_side_by_side_clustering,
         inputs=state,
-        outputs=[send_btn, textbox] + btn_list,
+        outputs=[send_btn, textbox, ncluster] + btn_list,
     )
 
     send_btn.click(
@@ -1265,40 +1364,40 @@ def build_single_model_ui_clustering(models):
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 2),
+        partial(disable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, ncluster],
     ).then(
         gen_func,
-        inputs=[state, textbox, model_selector],
-        outputs=[state, chatbot, textbox],
+        inputs=[state, textbox, model_selector, ncluster],
+        outputs=[state, chatbot, textbox, ncluster],
         api_name="send_btn_single",
         show_progress="full"
     ).then(
         enable_buttons_side_by_side_clustering,
         inputs=state,
-        outputs=[send_btn, textbox] + btn_list,
+        outputs=[send_btn, textbox, ncluster] + btn_list,
     )
 
     upvote_btn.click(
         partial(vote_last_response_single_clustering, "upvote"),
         inputs=[state, model_selector],
-        outputs=[send_btn, textbox, upvote_btn, downvote_btn, flag_btn]
+        outputs=[send_btn, textbox, ncluster, upvote_btn, downvote_btn, flag_btn]
     )
     downvote_btn.click(
         partial(vote_last_response_single_clustering, "downvote"),
         inputs=[state, model_selector],
-        outputs=[send_btn, textbox, upvote_btn, downvote_btn, flag_btn]
+        outputs=[send_btn, textbox, ncluster, upvote_btn, downvote_btn, flag_btn]
     )
     flag_btn.click(
         partial(vote_last_response_single_clustering, "flag"),
         inputs=[state, model_selector],
-        outputs=[send_btn, textbox, upvote_btn, downvote_btn, flag_btn]
+        outputs=[send_btn, textbox, ncluster, upvote_btn, downvote_btn, flag_btn]
     )
     clear_btn.click(
-        clear_history,
+        clear_history_clustering,
         inputs=None,
-        outputs=[state, textbox, chatbot],
+        outputs=[state, textbox, ncluster, chatbot],
         api_name="clear_history_single",
         show_progress="full"
     ).then(
@@ -1306,9 +1405,9 @@ def build_single_model_ui_clustering(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 2),
+        partial(enable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, ncluster],
     )
 
 ### STS ###
@@ -1476,6 +1575,15 @@ def build_side_by_side_ui_anon_sts(models):
 
     with gr.Row():
         clear_btn = gr.Button(value="🎲 New Round", interactive=False)
+
+    gr.Examples(
+        examples=[
+            ["hello", "good morning", "早上好"],
+            ["I love you", "I hate you", "I like you"],
+            ["I am happy", "I am sad", "I am angry"],
+        ],
+        inputs=[textbox0, textbox1, textbox2],
+    )
 
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
 
