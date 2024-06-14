@@ -100,4 +100,4 @@ with gr.Blocks(title="MTEB Arena", head=head_js) as block:
     #     pass#build_about()
 
 block.queue(max_size=10)
-block.launch()
+block.launch(share=True)
