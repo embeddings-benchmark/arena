@@ -1126,12 +1126,11 @@ def build_side_by_side_ui_named_clustering(models):
     state1 = gr.State(None)
     gen_func = partial(clustering_side_by_side, models.clustering_parallel)    
 
-    with gr.Group(elem_id="share-region-rules"):
-        with gr.Row():
-            with gr.Column():
-                gr.Markdown(notice_markdown, elem_id="notice_markdown")
-            with gr.Column():
-                gr.Video("videos/clustering_explanation.mov", label="Video Explanation", elem_id="video")
+    with gr.Row():
+        with gr.Column():
+            gr.Markdown(notice_markdown, elem_id="notice_markdown")
+        with gr.Column():
+            gr.Video("videos/clustering_explanation.mov", label="Video Explanation", elem_id="video")
 
     with gr.Group(elem_id="share-region-named"):
         with gr.Row():
