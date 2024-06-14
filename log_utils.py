@@ -30,7 +30,8 @@ scheduler = CommitScheduler(
     repo_type="dataset",
     folder_path=JSON_DATASET_DIR,
     path_in_repo="data",
-    every=5
+    every=5,
+    token=os.environ["HF_TOKEN"]
 )
 
 #from .utils import save_log_str_on_log_server
