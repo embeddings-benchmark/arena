@@ -7,12 +7,27 @@ import pandas as pd
 
 acknowledgment_md = """
 ### Acknowledgment
-We thank X, Y, Z for their generous sponsorship. If you would like to sponsor us, please get in touch.
+We thank X, Y, Z, [Contextual AI](https://contextual.ai/) and [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).
 
-We thank [Chatbot Arena](https://chat.lmsys.org/), [Vision Arena](https://huggingface.co/spaces/WildVision/vision-arena) and [GenAI-Arena](https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena) for their great work.
+<div class="sponsor-image-about" style="display: flex; align-items: center; gap: 10px;">
+    <a href="https://contextual.ai/">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd4EDMoZLFRrIjVBrSXOQYGcmvUJ3kL4U2usvjuKPla-LoRTZtLzFnb_Cu5tXzRI7DNBo&usqp=CAU" width="60" height="55" style="padding: 10px;">
+    </a>
+    <a href="https://huggingface.co">
+        <img src="https://raw.githubusercontent.com/embeddings-benchmark/mteb/main/docs/images/hf_logo.png" width="60" height="55" style="padding: 10px;">
+    </a>
+</div>
+
+We thank [Chatbot Arena](https://chat.lmsys.org/), [Vision Arena](https://huggingface.co/spaces/WildVision/vision-arena) and [GenAI-Arena](https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena) for inspiration.
 """
 
 leader_component_values = [None] * 5
+
+TASK_TYPE_TO_EMOJI = {
+    "Retrieval": "🔎",
+    "Clustering": "✨",
+    "STS": "☘️",
+}
 
 def make_arena_leaderboard_md(elo_results):
     arena_df = elo_results["leaderboard_table_df"]
@@ -21,7 +36,7 @@ def make_arena_leaderboard_md(elo_results):
     total_models = len(arena_df)
 
     leaderboard_md = f"""
-Total #models: **{total_models}**. Total #votes: **{total_votes}**. Last updated: {last_updated}.
+Total #models: **{total_models}**.&nbsp;&nbsp;&nbsp;&nbsp;Total #votes: **{total_votes}**.&nbsp;&nbsp;&nbsp;&nbsp;Last updated: {last_updated}.
 
 Contribute your votes 🗳️ at [MTEB Arena](https://huggingface.co/spaces/mteb/arena)! 
 """
@@ -89,7 +104,7 @@ def build_leaderboard_tab(elo_results_file, leaderboard_table_file, show_plot=Fa
         p4 = anony_elo_results["average_win_rate_bar"]
 
         md = f"""
-# 🏆 MTEB Arena {task_type} Leaderboard
+# 🏆 MTEB Arena Leaderboard: {task_type} {TASK_TYPE_TO_EMOJI[task_type]}
 """
     # | [GitHub](https://github.com/embeddings-benchmark) |
     md_1 = gr.Markdown(md, elem_id="leaderboard_markdown")

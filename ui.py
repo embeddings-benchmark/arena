@@ -1,6 +1,5 @@
 from functools import partial
 import datetime
-import json
 import time
 import os
 import uuid
@@ -11,11 +10,22 @@ from log_utils import build_logger, store_data_in_hub
 
 LOGDIR = os.getenv("LOGDIR", "./MTEB-Arena-logs/vote_log")
 
+info_txt = "🎉 Thanks for voting! Your vote shapes the leaderboard, please vote RESPONSIBLY."
+
 acknowledgment_md = """
 ### Acknowledgment
-We thank X, Y, Z for their generous sponsorship. If you would like to sponsor us, please get in touch.
+We thank X, Y, Z, [Contextual AI](https://contextual.ai/) and [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).
 
-We thank [Chatbot Arena](https://chat.lmsys.org/), [Vision Arena](https://huggingface.co/spaces/WildVision/vision-arena) and [GenAI-Arena](https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena) for their great work.
+<div class="sponsor-image-about" style="display: flex; align-items: center; gap: 10px;">
+    <a href="https://contextual.ai/">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd4EDMoZLFRrIjVBrSXOQYGcmvUJ3kL4U2usvjuKPla-LoRTZtLzFnb_Cu5tXzRI7DNBo&usqp=CAU" width="60" height="55" style="padding: 10px;">
+    </a>
+    <a href="https://huggingface.co">
+        <img src="https://raw.githubusercontent.com/embeddings-benchmark/mteb/main/docs/images/hf_logo.png" width="60" height="55" style="padding: 10px;">
+    </a>
+</div>
+
+We thank [Chatbot Arena](https://chat.lmsys.org/), [Vision Arena](https://huggingface.co/spaces/WildVision/vision-arena) and [GenAI-Arena](https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena) for inspiration.
 """
 # loggers for side-by-side and battle
 retrieval_logger = build_logger("gradio_retrieval", "gradio_retrieval.log")
@@ -75,6 +85,7 @@ def enable_buttons_side_by_side_clustering(state0):
         return enable_buttons_side_by_side(3) + disable_buttons_side_by_side(5)
 
 def vote_last_response(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
+    gr.Info(info_txt)
     retrieval_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
 
     data = {
@@ -95,6 +106,7 @@ def vote_last_response(vote_type, state0, state1, model_selector0, model_selecto
     return ("",) + (disable_btn,) * 4 + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
 
 def vote_last_response_sts(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
+    gr.Info(info_txt)
     sts_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
 
     data = {
@@ -116,6 +128,7 @@ def vote_last_response_sts(vote_type, state0, state1, model_selector0, model_sel
     return (disable_btn,) * 4 + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
 
 def vote_last_response_clustering(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
+    gr.Info(info_txt)
     clustering_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
 
     data = {
@@ -137,6 +150,7 @@ def vote_last_response_clustering(vote_type, state0, state1, model_selector0, mo
     return (disable_btn_visible,) * 3 + (disable_btn,) * 4 + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
 
 def vote_last_response_single(vote_type, state, model_selector, request: gr.Request):
+    gr.Info(info_txt)
     retrieval_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
 
     data = {
@@ -152,6 +166,7 @@ def vote_last_response_single(vote_type, state, model_selector, request: gr.Requ
     return ("",) + (disable_btn,) * 3
 
 def vote_last_response_single_sts(vote_type, state, model_selector, request: gr.Request):
+    gr.Info(info_txt)
     sts_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
 
     data = {
@@ -167,6 +182,7 @@ def vote_last_response_single_sts(vote_type, state, model_selector, request: gr.
     return (disable_btn,) * 3
 
 def vote_last_response_single_clustering(vote_type, state, model_selector, request: gr.Request):
+    gr.Info(info_txt)
     clustering_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
 
     data = {
@@ -277,11 +293,10 @@ def check_input_retrieval(txt):
 
 def build_side_by_side_ui_anon(models):
     notice_markdown = """
-# ⚔️ MTEB Arena ⚔️ : Retrieval 🔎
+# ⚔️ MTEB Arena: Retrieval 🔎
 ## 📜 Rules
-- Input a search query to two anonymous models and vote which retrieves the better passage for your query.
-- Whenever you have decided which model is better, click the button below to vote.
-- Click "New Round" to start a new round.
+- Send any query to two anonymous models and vote which retrieves the better document.
+- Both models retrieve from the same corpus: Wikipedia.
 
 ## 👇 Vote now!
 """
@@ -349,6 +364,7 @@ def build_side_by_side_ui_anon(models):
             ["What is an MLP?"],
             ["I am looking for information regarding minority interest"],
             ["I am searching for a very remote island withouth any human inhabitants"],
+            ["端午节是什么？"],
         ],
         inputs=[textbox],
     )
@@ -474,12 +490,11 @@ function (a, b, c, d) {
 
 def build_side_by_side_ui_named(models):
     notice_markdown = """
-# ⚔️ MTEB Arena ⚔️ : Retrieval 🔎
+# ⚔️ MTEB Arena: Retrieval 🔎
 
 ## 📜 Rules
-- Input a search query to two anonymous models and vote which retrieves the better passage for your query.
-- Whenever you have decided which model is better, click the button below to vote.
-- Click "New Round" to start a new round.
+- Send any query to two anonymous models and vote which retrieves the better document.
+- Both models retrieve from the same corpus: Wikipedia.
 
 ## 👇 Choose two models & vote now!
 """
@@ -559,6 +574,7 @@ def build_side_by_side_ui_named(models):
             ["What is an MLP?"],
             ["I am looking for information regarding minority interest"],
             ["I am searching for a very remote island withouth any human inhabitants"],
+            ["端午节是什么？"],            
         ],
         inputs=[textbox],
     )
@@ -670,7 +686,7 @@ function (a, b, c, d) {
 
 def build_single_model_ui(models):
     notice_markdown = f"""
-# MTEB Arena Playground: Retrieval 🔎
+# 💧 MTEB Arena Single Model: Retrieval 🔎
 """
     #| [GitHub](https://github.com/embeddings-benchmark) |
     ### 🤖 Choose any retriever
@@ -932,24 +948,27 @@ def clustering(gen_func, state, txt, model_name, ncluster, request: gr.Request):
 
 def build_side_by_side_ui_anon_clustering(models):
     notice_markdown = """
-# ⚔️ MTEB Arena ⚔️ : Clustering ✨
+# ⚔️ MTEB Arena: Clustering ✨
 
-## 📜 Rules
-- Input texts one-by-one and submit them to two anonymous models. Vote which model clusters the texts better in the plot.
-- You can also enter multiple texts at once, separated by `<|SEP|>`.
+## 📜 Rules (Play the video for an explanation ➡️)
+- Input & submit texts one-by-one to two anonymous models & vote which clusters them better.
+- You can enter >1 texts at once if you separate them with `<|SEP|>` like in the examples.
+- If you specify a number of clusters >1, a KMeans will be trained on the embeddings and clusters colored according to its predictions.
+- Clusters are 1D for 1 text, 2D for 2-3 texts, 3D for >3 texts.
 - You have to **enter at least 3 texts**, else cluster qualities cannot be judged.
-- The cluster will be 1D for 1 text, 2D for 2-3 texts, 3D for >3 texts.
-- Whenever you have decided which model is better, click the button below to vote.
-- Click "New Round" to start a new round.
-- Tips for voting: Are similar texts clustered close together? Are dissimilar texts clustered far apart?
 
-## 👇 Choose two models & vote now!
+## 👇 Vote now!
 """
     state0 = gr.State(None)
     state1 = gr.State(None)
     gen_func = partial(clustering_side_by_side, models.clustering_parallel)    
 
-    gr.Markdown(notice_markdown, elem_id="notice_markdown")
+    with gr.Group(elem_id="share-region-rules"):
+        with gr.Row():
+            with gr.Column():
+                gr.Markdown(notice_markdown, elem_id="notice_markdown")
+            with gr.Column():
+                gr.Video("videos/clustering_explanation.mp4", label="Video Explanation", elem_id="video")
 
     with gr.Group(elem_id="share-region-anon"):
         with gr.Accordion("🔍 Expand to see all Arena players", open=False):
@@ -989,7 +1008,7 @@ def build_side_by_side_ui_anon_clustering(models):
         )
         ncluster = gr.Number(
             show_label=True,
-            label="Optional num clusters",
+            label="Number of clusters",
             elem_id="ncluster_box",
             value=1,
             minimum=1,
@@ -1091,17 +1110,16 @@ def build_side_by_side_ui_anon_clustering(models):
 
 def build_side_by_side_ui_named_clustering(models):
     notice_markdown = """
-# ⚔️ MTEB Arena ⚔️ : Clustering ✨
+# ⚔️ MTEB Arena: Clustering ✨
 
-## 📜 Rules
-- Input texts one-by-one and submit them to two models. Vote which model clusters the texts better in the plot.
+## 📜 Rules (Play the video for an explanation ➡️)
+- Input & submit texts one-by-one to two models & vote which clusters them better.
+- You can enter >1 texts at once if you separate them with `<|SEP|>` like in the examples.
+- If you specify a number of clusters >1, a KMeans will be trained on the embeddings and clusters colored according to its predictions.
+- Clusters are 1D for 1 text, 2D for 2-3 texts, 3D for >3 texts.
 - You have to **enter at least 3 texts**, else cluster qualities cannot be judged.
-- The cluster will be 1D for 1 text, 2D for 2-3 texts, 3D for >3 texts.
-- Whenever you have decided which model is better, click the button below to vote.
-- Click "New Round" to start a new round.
-- Tips for voting: Are similar texts clustered close together? Are dissimilar texts clustered far apart?
 
-## 👇 Choose two models & vote now!
+## 👇 Vote now!
 """
     model_list = list(models.model_meta.keys())
 
@@ -1109,7 +1127,12 @@ def build_side_by_side_ui_named_clustering(models):
     state1 = gr.State(None)
     gen_func = partial(clustering_side_by_side, models.clustering_parallel)    
 
-    gr.Markdown(notice_markdown, elem_id="notice_markdown")
+    with gr.Group(elem_id="share-region-rules"):
+        with gr.Row():
+            with gr.Column():
+                gr.Markdown(notice_markdown, elem_id="notice_markdown")
+            with gr.Column():
+                gr.Video("videos/clustering_explanation.mov", label="Video Explanation", elem_id="video")
 
     with gr.Group(elem_id="share-region-named"):
         with gr.Row():
@@ -1163,7 +1186,7 @@ def build_side_by_side_ui_named_clustering(models):
         )
         ncluster = gr.Number(
             show_label=True,
-            label="Optional num clusters",
+            label="Number of clusters",
             elem_id="ncluster_box",
             value=1,
             minimum=1,
@@ -1263,7 +1286,7 @@ def build_side_by_side_ui_named_clustering(models):
 
 def build_single_model_ui_clustering(models):
     notice_markdown = f"""
-# MTEB Arena Playground: Clustering ✨
+# 💧 MTEB Arena Single Model: Clustering ✨
 """
     # | [GitHub](https://github.com/embeddings-benchmark) | 
     ## 🤖 Choose any clustering model
@@ -1301,7 +1324,7 @@ def build_single_model_ui_clustering(models):
         )
         ncluster = gr.Number(
             show_label=True,
-            label="Optional num clusters",
+            label="Number of clusters",
             elem_id="ncluster_box",
             value=1,
             minimum=1,
@@ -1514,11 +1537,10 @@ def check_input_sts(txt0, txt1, txt2):
 
 def build_side_by_side_ui_anon_sts(models):
     notice_markdown = """
-# ⚔️ MTEB Arena ⚔️ : STS 🤖
+# ⚔️ MTEB Arena: STS ☘️
 ## 📜 Rules
 - Input three different texts to two anonymous models and vote which visualizes their similarity better.
-- Whenever you have decided which model is better, click the button below to vote.
-- Click "New Round" to start a new round.
+- The closer two corners of the triangle are, the more similar their texts are to the model.
 
 ## 👇 Vote now!
 """
@@ -1655,13 +1677,12 @@ def build_side_by_side_ui_anon_sts(models):
 
 def build_side_by_side_ui_named_sts(models):
     notice_markdown = """
-# ⚔️ MTEB Arena ⚔️ : STS 🤖
+# ⚔️ MTEB Arena: STS ☘️
 ## 📜 Rules
 - Input three different texts to two models and vote which visualizes their similarity better.
-- Whenever you have decided which model is better, click the button below to vote.
-- Click "New Round" to start a new round.
+- The closer two corners of the triangle are, the more similar their texts are to the model.
 
-## 👇 Choose two models & vote now!
+## 👇 Vote now!
 """
     model_list = list(models.model_meta.keys())
 
@@ -1804,7 +1825,7 @@ def build_side_by_side_ui_named_sts(models):
 
 def build_single_model_ui_sts(models):
     notice_markdown = f"""
-# MTEB Arena Playground: STS 🤖
+# 💧 MTEB Arena Single Model: STS ☘️
 """
     #| [GitHub](https://github.com/embeddings-benchmark) |
     ## 🤖 Choose any model
