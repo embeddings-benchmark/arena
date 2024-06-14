@@ -12,7 +12,8 @@ from tqdm import tqdm
 NUM_SERVERS = 1
 LOG_ROOT_DIR = os.getenv("LOGDIR", None)
 if LOG_ROOT_DIR is None:
-    raise ValueError("LOGDIR environment variable not set, please set it by `export LOGDIR=...`")
+    print(f"LOG_ROOT_DIR: {LOG_ROOT_DIR}")
+    # raise ValueError("LOGDIR environment variable not set, please set it by `export LOGDIR=...`")
 
 def get_log_files(max_num_files=None):
     log_root = os.path.expanduser(LOG_ROOT_DIR)

@@ -7,7 +7,7 @@ import uuid
 
 import gradio as gr
 
-from log_utils import build_logger
+from log_utils import build_logger, store_data_in_hub
 
 LOGDIR = os.getenv("LOGDIR", "./MTEB-Arena-logs/vote_log")
 
@@ -32,7 +32,7 @@ def get_ip(request: gr.Request):
         else:
             ip = request.client.host
     else:
-        ip = None
+        ip = ""
     return ip
 
 def clear_history():
@@ -76,16 +76,17 @@ def enable_buttons_side_by_side_clustering(state0):
 
 def vote_last_response(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
     retrieval_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
-    with open(get_conv_log_filename(), "a") as fout:
-        data = {
-            "tstamp": round(time.time(), 4),
-            "task_type": "retrieval",
-            "type": vote_type,
-            "models": [model_selector0, model_selector1],
-            "states": [state0.dict(), state1.dict()],
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
+
+    data = {
+        "tstamp": round(time.time(), 4),
+        "task_type": "retrieval",
+        "type": vote_type,
+        "models": [model_selector0, model_selector1],
+        "ip": get_ip(request),
+        **state0.dict(prefix="0"),
+        **state1.dict(prefix="1")
+    }
+    store_data_in_hub(data, "retrieval_battle")
 
     if vote_type == "share": return
 
@@ -95,16 +96,18 @@ def vote_last_response(vote_type, state0, state1, model_selector0, model_selecto
 
 def vote_last_response_sts(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
     sts_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
-    with open(get_conv_log_filename(), "a") as fout:
-        data = {
-            "tstamp": round(time.time(), 4),
-            "task_type": "sts",
-            "type": vote_type,
-            "models": [model_selector0, model_selector1],
-            "states": [state0.dict(), state1.dict()],
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
+
+    data = {
+        "tstamp": round(time.time(), 4),
+        "task_type": "sts",
+        "type": vote_type,
+        "models": [model_selector0, model_selector1],
+        "ip": get_ip(request),
+        **state0.dict(prefix="0"),
+        **state1.dict(prefix="1")
+    }
+    store_data_in_hub(data, "sts_battle")
+
 
     if vote_type == "share": return
 
@@ -114,16 +117,18 @@ def vote_last_response_sts(vote_type, state0, state1, model_selector0, model_sel
 
 def vote_last_response_clustering(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
     clustering_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
-    with open(get_conv_log_filename(), "a") as fout:
-        data = {
-            "tstamp": round(time.time(), 4),
-            "task_type": "clustering",
-            "type": vote_type,
-            "models": [model_selector0, model_selector1],
-            "states": [state0.dict(), state1.dict()],
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
+
+    data = {
+        "tstamp": round(time.time(), 4),
+        "task_type": "clustering",
+        "type": vote_type,
+        "models": [model_selector0, model_selector1],
+        "ip": get_ip(request),
+        **state0.dict(prefix="0"),
+        **state1.dict(prefix="1")
+    }
+    store_data_in_hub(data, "clustering_battle")
+
 
     if vote_type == "share": return
 
@@ -133,44 +138,47 @@ def vote_last_response_clustering(vote_type, state0, state1, model_selector0, mo
 
 def vote_last_response_single(vote_type, state, model_selector, request: gr.Request):
     retrieval_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
-    with open(get_conv_log_filename(), "a") as fout:
-        data = {
-            "tstamp": round(time.time(), 4),
-            "task_type": "retrieval",
-            "type": vote_type,
-            "models": model_selector,
-            "states": state.dict(),
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
+
+    data = {
+        "tstamp": round(time.time(), 4),
+        "task_type": "retrieval",
+        "type": vote_type,
+        "models": model_selector,
+        "ip": get_ip(request),
+        **state.dict()
+    }
+    store_data_in_hub(data, "retrieval_single_choice")
+
     return ("",) + (disable_btn,) * 3
 
 def vote_last_response_single_sts(vote_type, state, model_selector, request: gr.Request):
     sts_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
-    with open(get_conv_log_filename(), "a") as fout:
-        data = {
-            "tstamp": round(time.time(), 4),
-            "task_type": "sts",
-            "type": vote_type,
-            "models": model_selector,
-            "states": state.dict(),
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
+
+    data = {
+        "tstamp": round(time.time(), 4),
+        "task_type": "sts",
+        "type": vote_type,
+        "models": model_selector,
+        "ip": get_ip(request),
+        **state.dict()
+    }
+    store_data_in_hub(data, "sts_single_choice")
+
     return (disable_btn,) * 3
 
 def vote_last_response_single_clustering(vote_type, state, model_selector, request: gr.Request):
     clustering_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
-    with open(get_conv_log_filename(), "a") as fout:
-        data = {
-            "tstamp": round(time.time(), 4),
-            "task_type": "clustering",
-            "type": vote_type,
-            "models": model_selector,
-            "states": state.dict(),
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
+
+    data = {
+        "tstamp": round(time.time(), 4),
+        "task_type": "clustering",
+        "type": vote_type,
+        "models": model_selector,
+        "ip": get_ip(request),
+        **state.dict()
+    }
+    store_data_in_hub(data, "clustering_single_choice")
+
     return (disable_btn_visible,) * 3 + (disable_btn,) * 3
 
 def get_conv_log_filename():
@@ -182,11 +190,14 @@ class RetrievalState:
     def __init__(self, model_name):
         self.conv_id = uuid.uuid4().hex
         self.model_name = model_name
-        self.prompt = None
-        self.output = None
+        self.prompt = ""
+        self.output = ""
 
-    def dict(self):
-        return {"conv_id": self.conv_id, "model_name": self.model_name, "prompt": self.prompt, "output": self.output}
+    def dict(self, prefix: str = None):
+        if prefix is None:
+            return {"conv_id": self.conv_id, "model_name": self.model_name, "prompt": self.prompt, "output": self.output}
+        else:
+            return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_prompt": self.prompt, f"{prefix}_output": self.output}
 
 def retrieve_side_by_side(gen_func, state0, state1, text, model_name0, model_name1, request: gr.Request):
     if not text: raise gr.Warning("Prompt cannot be empty.")
@@ -205,33 +216,31 @@ def retrieve_side_by_side(gen_func, state0, state1, text, model_name0, model_nam
     
     finish_tstamp = time.time()
     
-    with open(get_conv_log_filename(), "a") as fout:
-        data = {
-            "tstamp": round(finish_tstamp, 4),
-            "task_type": "retrieval",
-            "type": "chat",
-            "model": model_name0,
-            "gen_params": {},
-            "start": round(start_tstamp, 4),
-            "finish": round(finish_tstamp, 4),
-            "state": state0.dict(),
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
-        # append_json_item_on_log_server(data, get_conv_log_filename())
-        data = {
-            "tstamp": round(finish_tstamp, 4),
-            "task_type": "retrieval",
-            "type": "chat",
-            "model": model_name1,
-            "gen_params": {},
-            "start": round(start_tstamp, 4),
-            "finish": round(finish_tstamp, 4),
-            "state": state1.dict(),
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
-        # append_json_item_on_log_server(data, get_conv_log_filename())
+    data = {
+        "tstamp": round(finish_tstamp, 4),
+        "task_type": "retrieval",
+        "type": "chat",
+        "model": model_name0,
+        "gen_params": {},
+        "start": round(start_tstamp, 4),
+        "finish": round(finish_tstamp, 4),
+        "ip": get_ip(request),
+        **state0.dict()
+    }
+    store_data_in_hub(data, "retrieval_individual")
+
+    data = {
+        "tstamp": round(finish_tstamp, 4),
+        "task_type": "retrieval",
+        "type": "chat",
+        "model": model_name1,
+        "gen_params": {},
+        "start": round(start_tstamp, 4),
+        "finish": round(finish_tstamp, 4),
+        "ip": get_ip(request),
+        **state1.dict()
+    }
+    store_data_in_hub(data, "retrieval_individual")
 
 def retrieve(gen_func, state, text, model_name, request: gr.Request):
     if not text: raise gr.Warning("Prompt cannot be empty.")
@@ -250,20 +259,18 @@ def retrieve(gen_func, state, text, model_name, request: gr.Request):
     finish_tstamp = time.time()
     # logger.info(f"===output===: {output}")
 
-    with open(get_conv_log_filename(), "a") as fout:
-        data = {
-            "tstamp": round(finish_tstamp, 4),
-            "task_type": "retrieval",
-            "type": "chat",
-            "model": model_name,
-            "gen_params": {},
-            "start": round(start_tstamp, 4),
-            "finish": round(finish_tstamp, 4),
-            "state": state.dict(),
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
-    #    append_json_item_on_log_server(data, get_conv_log_filename())
+    data = {
+        "tstamp": round(finish_tstamp, 4),
+        "task_type": "retrieval",
+        "type": "chat",
+        "model": model_name,
+        "gen_params": {},
+        "start": round(start_tstamp, 4),
+        "finish": round(finish_tstamp, 4),
+        "ip": get_ip(request),
+        **state.dict()
+    }
+    store_data_in_hub(data, "retrieval_individual")
 
 def check_input_retrieval(txt):
     if not(txt): raise gr.Warning("Prompt cannot be empty.")
@@ -823,11 +830,14 @@ class ClusteringState:
         self.conv_id = uuid.uuid4().hex
         self.model_name = model_name
         self.prompts = []
-        self.output = None
+        self.output = ""
         self.ncluster = 1
 
-    def dict(self):
-        return {"conv_id": self.conv_id, "model_name": self.model_name, "prompt": self.prompts, "ncluster": self.ncluster, "output": self.output}
+    def dict(self, prefix: str = None):
+        if prefix is None:
+            return {"conv_id": self.conv_id, "model_name": self.model_name, "prompt": self.prompts, "ncluster": self.ncluster, "output": self.output}
+        else:
+            return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_prompt": self.prompts, f"{prefix}_ncluster": self.ncluster, f"{prefix}_output": self.output}
 
 def clustering_side_by_side(gen_func, state0, state1, txt, model_name0, model_name1, ncluster, request: gr.Request):
     if not txt: raise gr.Warning("Prompt cannot be empty.")
@@ -857,33 +867,31 @@ def clustering_side_by_side(gen_func, state0, state1, txt, model_name0, model_na
     
     finish_tstamp = time.time()
     
-    with open(get_conv_log_filename(), "a") as fout:
-        data = {
-            "tstamp": round(finish_tstamp, 4),
-            "task_type": "clustering",
-            "type": "chat",
-            "model": model_name0,
-            "gen_params": {},
-            "start": round(start_tstamp, 4),
-            "finish": round(finish_tstamp, 4),
-            "state": state0.dict(),
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
-        # append_json_item_on_log_server(data, get_conv_log_filename())
-        data = {
-            "tstamp": round(finish_tstamp, 4),
-            "task_type": "clustering",
-            "type": "chat",
-            "model": model_name1,
-            "gen_params": {},
-            "start": round(start_tstamp, 4),
-            "finish": round(finish_tstamp, 4),
-            "state": state1.dict(),
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
-        # append_json_item_on_log_server(data, get_conv_log_filename())
+    data = {
+        "tstamp": round(finish_tstamp, 4),
+        "task_type": "clustering",
+        "type": "chat",
+        "model": model_name0,
+        "gen_params": {},
+        "start": round(start_tstamp, 4),
+        "finish": round(finish_tstamp, 4),
+        "ip": get_ip(request),
+        **state0.dict()
+    }
+    store_data_in_hub(data, "clustering_individual")
+    
+    data = {
+        "tstamp": round(finish_tstamp, 4),
+        "task_type": "clustering",
+        "type": "chat",
+        "model": model_name1,
+        "gen_params": {},
+        "start": round(start_tstamp, 4),
+        "finish": round(finish_tstamp, 4),
+        "ip": get_ip(request),
+        **state1.dict()
+    }
+    store_data_in_hub(data, "clustering_individual")
 
 
 def clustering(gen_func, state, txt, model_name, ncluster, request: gr.Request):
@@ -908,20 +916,19 @@ def clustering(gen_func, state, txt, model_name, ncluster, request: gr.Request):
     finish_tstamp = time.time()
     # logger.info(f"===output===: {output}")
 
-    with open(get_conv_log_filename(), "a") as fout:
-        data = {
-            "tstamp": round(finish_tstamp, 4),
-            "task_type": "clustering",
-            "type": "chat",
-            "model": model_name,
-            "gen_params": {},
-            "start": round(start_tstamp, 4),
-            "finish": round(finish_tstamp, 4),
-            "state": state.dict(),
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
-    #    append_json_item_on_log_server(data, get_conv_log_filename())
+    data = {
+        "tstamp": round(finish_tstamp, 4),
+        "task_type": "clustering",
+        "type": "chat",
+        "model": model_name,
+        "gen_params": {},
+        "start": round(start_tstamp, 4),
+        "finish": round(finish_tstamp, 4),
+        "ip": get_ip(request),
+        **state.dict()
+    }
+    store_data_in_hub(data, "clustering_individual")
+
 
 def build_side_by_side_ui_anon_clustering(models):
     notice_markdown = """
@@ -1415,13 +1422,17 @@ class STSState:
     def __init__(self, model_name):
         self.conv_id = uuid.uuid4().hex
         self.model_name = model_name
-        self.txt0 = None
-        self.txt1 = None
-        self.txt2 = None
-        self.output = None
+        self.txt0 = ""
+        self.txt1 = ""
+        self.txt2 = ""
+        self.output = ""
 
-    def dict(self):
-        return {"conv_id": self.conv_id, "model_name": self.model_name, "txt0": self.txt0, "txt1": self.txt1, "txt2": self.txt2, "output": self.output}
+    def dict(self, prefix: str = None):
+        if prefix is None:
+            return {"conv_id": self.conv_id, "model_name": self.model_name, "txt0": self.txt0, "txt1": self.txt1, "txt2": self.txt2, "output": self.output}
+        else:
+            return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_txt0": self.txt0, f"{prefix}_txt1": self.txt1, f"{prefix}_txt2": self.txt2, f"{prefix}_output": self.output}
+        
 
 def sts_side_by_side(gen_func, state0, state1, txt0, txt1, txt2, model_name0, model_name1, request: gr.Request):
     if any([x is None for x in (txt0, txt1, txt2)]): raise gr.Warning("Prompt cannot be empty.")
@@ -1441,33 +1452,31 @@ def sts_side_by_side(gen_func, state0, state1, txt0, txt1, txt2, model_name0, mo
     
     finish_tstamp = time.time()
     
-    with open(get_conv_log_filename(), "a") as fout:
-        data = {
-            "tstamp": round(finish_tstamp, 4),
-            "task_type": "sts",
-            "type": "chat",
-            "model": model_name0,
-            "gen_params": {},
-            "start": round(start_tstamp, 4),
-            "finish": round(finish_tstamp, 4),
-            "state": state0.dict(),
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
-        # append_json_item_on_log_server(data, get_conv_log_filename())
-        data = {
-            "tstamp": round(finish_tstamp, 4),
-            "task_type": "sts",
-            "type": "chat",
-            "model": model_name1,
-            "gen_params": {},
-            "start": round(start_tstamp, 4),
-            "finish": round(finish_tstamp, 4),
-            "state": state1.dict(),
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
-        # append_json_item_on_log_server(data, get_conv_log_filename())
+    data = {
+        "tstamp": round(finish_tstamp, 4),
+        "task_type": "sts",
+        "type": "chat",
+        "model": model_name0,
+        "gen_params": {},
+        "start": round(start_tstamp, 4),
+        "finish": round(finish_tstamp, 4),
+        "ip": get_ip(request),
+        **state0.dict()
+    }
+    store_data_in_hub(data, "sts_individual")
+
+    data = {
+        "tstamp": round(finish_tstamp, 4),
+        "task_type": "sts",
+        "type": "chat",
+        "model": model_name1,
+        "gen_params": {},
+        "start": round(start_tstamp, 4),
+        "finish": round(finish_tstamp, 4),
+        "ip": get_ip(request),
+        **state1.dict()
+    }
+    store_data_in_hub(data, "sts_individual")
 
 def sts(gen_func, state, txt0, txt1, txt2, model_name, request: gr.Request):
     if any([x is None for x in (txt0, txt1, txt2)]): raise gr.Warning("Prompt cannot be empty.")
@@ -1485,20 +1494,18 @@ def sts(gen_func, state, txt0, txt1, txt2, model_name, request: gr.Request):
 
     finish_tstamp = time.time()
     
-    with open(get_conv_log_filename(), "a") as fout:
-        data = {
-            "tstamp": round(finish_tstamp, 4),
-            "task_type": "sts",
-            "type": "chat",
-            "model": model_name,
-            "gen_params": {},
-            "start": round(start_tstamp, 4),
-            "finish": round(finish_tstamp, 4),
-            "state": state.dict(),
-            "ip": get_ip(request),
-        }
-        fout.write(json.dumps(data) + "\n")
-        # append_json_item_on_log_server(data, get_conv_log_filename())
+    data = {
+        "tstamp": round(finish_tstamp, 4),
+        "task_type": "sts",
+        "type": "chat",
+        "model": model_name,
+        "gen_params": {},
+        "start": round(start_tstamp, 4),
+        "finish": round(finish_tstamp, 4),
+        "ip": get_ip(request),
+        **state.dict()
+    }
+    store_data_in_hub(data, "sts_individual")
 
 
 def check_input_sts(txt0, txt1, txt2):

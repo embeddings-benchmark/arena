@@ -15,6 +15,7 @@ import time
 from tqdm import tqdm
 
 from .basic_stats import get_log_files, NUM_SERVERS, LOG_ROOT_DIR
+from datasets import load_dataset
 
 VOTES = ["tievote", "leftvote", "rightvote", "bothbad_vote"]
 
@@ -83,9 +84,8 @@ def read_file_parallel(log_files, num_threads=16):
     return data_all
 
 def clean_battle_data(
-    log_files, exclude_model_names, ban_ip_list=None, sanitize_ip=False, task_name="retrieval"
+    data, exclude_model_names, ban_ip_list=None, sanitize_ip=False, task_name="retrieval"
 ):
-    data = read_file_parallel(log_files, num_threads=16)
 
     convert_type = {
         "leftvote": "model_a",
@@ -105,19 +105,18 @@ def clean_battle_data(
 
         if row["task_type"].lower() != task_name.lower(): continue
 
-        if row["models"][0] is None or row["models"][1] is None:
-            print(f"Invalid model names: {row['models']}")
-            continue
+        ## Don't think we need this anymore, but leaving commented just in case
+        # if row["models"][0] in ["", None] or row["models"][1] in ["", None]:
+        #     print(f"Invalid model names: {row['models']}")
+        #     continue
 
         # Resolve model names
         models_public = [remove_html(row["models"][0]), remove_html(row["models"][1])]
-        if "model_name" in row["states"][0]:
+        if row["0_model_name"].strip() != "":
             models_hidden = [
-                row["states"][0]["model_name"],
-                row["states"][1]["model_name"],
+                row["0_model_name"],
+                row["1_model_name"]
             ]
-            if models_hidden[0] is None:
-                models_hidden = models_public
         else:
             models_hidden = models_public
 
@@ -170,7 +169,7 @@ def clean_battle_data(
         #     ct_invalid += 1
         #     continue
         
-        question_id = row["states"][0]["conv_id"]
+        question_id = row["0_conv_id"]
         # conversation_a = to_openai_format(
         #     row["states"][0]["messages"][row["states"][0]["offset"] :]
         # )
@@ -187,7 +186,7 @@ def clean_battle_data(
         else:
             user_id = f"{all_ips[ip]['ip']}"
 
-        if ban_ip_list is not None and ip in ban_ip_list:
+        if ban_ip_list not in ["", None] and ip in ban_ip_list:
             ct_banned += 1
             print(f"User {user_id} is banned")
             continue
@@ -245,11 +244,11 @@ if __name__ == "__main__":
     parser.add_argument("--sanitize-ip", action="store_true", default=False)
     args = parser.parse_args()
 
-    log_files = get_log_files(args.max_num_files)
+    data = load_dataset("mteb/arena-results", args.task_name + "_battle")["data"]
     ban_ip_list = json.load(open(args.ban_ip_file)) if args.ban_ip_file else None
 
     battles = clean_battle_data(
-        log_files, args.exclude_model_names or [], ban_ip_list, args.sanitize_ip, args.task_name
+        data, args.exclude_model_names or [], ban_ip_list, args.sanitize_ip, args.task_name
     )
     last_updated_tstamp = battles[-1]["tstamp"]
     cutoff_date = datetime.datetime.fromtimestamp(

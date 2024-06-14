@@ -8,8 +8,30 @@ import platform
 import sys
 import warnings
 from pathlib import Path
-
+from uuid import uuid4
+from datetime import datetime
+from huggingface_hub import CommitScheduler
 import requests
+import json
+
+
+# build a local storage that will schedule uploads to the hub
+# this is the robust way of pushing it, see https://huggingface.co/spaces/Wauplin/space_to_dataset_saver
+JSON_DATASET_DIR = Path("results_dataset_to_upload")
+JSON_DATASET_DIR.mkdir(parents=True, exist_ok=True)
+
+# Each instance of this space will spawn a unique file for each type of result
+# For the life of that space, it will append to that file pushed to a dataset every so often
+# It also is append_only, so no previous data will be overwritten
+JSON_DATASET_PATH = JSON_DATASET_DIR / f"NAME_TO_REPLACE-{uuid4()}.jsonl"
+
+scheduler = CommitScheduler(
+    repo_id="mteb/arena-results",
+    repo_type="dataset",
+    folder_path=JSON_DATASET_DIR,
+    path_in_repo="data",
+    every=5
+)
 
 #from .utils import save_log_str_on_log_server
 
@@ -134,3 +156,11 @@ class StreamToLogger(object):
             encoded_message = self.linebuf.encode("utf-8", "ignore").decode("utf-8")
             self.logger.log(self.log_level, encoded_message.rstrip())
         self.linebuf = ""
+
+
+def store_data_in_hub(message: str, message_type: str):
+    with scheduler.lock:
+        file_to_upload = Path(str(JSON_DATASET_PATH).replace("NAME_TO_REPLACE", message_type))
+        with file_to_upload.open("a") as f:
+            json.dump(message, f)
+            f.write("\n")

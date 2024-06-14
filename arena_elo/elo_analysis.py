@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 from tqdm import tqdm
+from datasets import load_dataset
 
 from .basic_stats import get_log_files
 from .clean_battle_data import clean_battle_data
@@ -293,6 +294,9 @@ def report_elo_analysis_results(battles_json, rating_system="bt", num_bootstrap=
             + battles["model_b"].value_counts(),
         }
     )
+    # required for leaderboard, catch it here
+    assert not leaderboard_table_df["num_battles"].isna().any(), leaderboard_table_df
+
 
     # Plots
     leaderboard_table = visualize_leaderboard_table(elo_rating_final)
@@ -351,8 +355,8 @@ if __name__ == "__main__":
         battles = pd.read_json(args.clean_battle_file)
     else:
         # Read data from all log files
-        log_files = get_log_files(args.max_num_files)
-        battles = clean_battle_data(log_files)
+        data = load_dataset("mteb/arena-results", args.task_name + "_battle")["data"]
+        battles = clean_battle_data(data)
 
     anony_results = report_elo_analysis_results(
         battles, rating_system=args.rating_system, num_bootstrap=args.num_bootstrap, anony_only=True

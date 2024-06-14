@@ -1,3 +1,5 @@
 .DS_Store
 corpus.jsonl
 corpus.jsonl.gz
+results_dataset_to_upload
+*.pyc

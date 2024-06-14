@@ -28,4 +28,7 @@ tags:
 
 `python app.py`
 
+## Results
+Results are auto-saved to [mteb/arena-results](https://huggingface.co/datasets/mteb/arena-results).
+
 # python gritlm/rag/eval.py --model_name_or_path GritLM/gritlm-7b --eval_data gritlm/rag/nq_data/test.jsonl --passages corpus.jsonl --save_index_path index_nq
