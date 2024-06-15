@@ -62,5 +62,13 @@
     "judge": "arena_user_",
     "anony": true,
     "tstamp": 1718380430.3121
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "intfloat/multilingual-e5-small",
+    "winner": "tie (bothbad)",
+    "judge": "arena_user_",
+    "anony": false,
+    "tstamp": 1718413146.0478
   }
 ]
