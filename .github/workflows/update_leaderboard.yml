@@ -16,6 +16,9 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        lfs: true
     - name: Set up Python 3.9
       uses: actions/setup-python@v4
       with:
@@ -31,3 +34,7 @@ jobs:
       with:
         commit_message: Automated Leaderboard Update
         file_pattern: 'results/*'
+    - name: Push to hub
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      run: git push https://mteb:$HF_TOKEN@huggingface.co/spaces/mteb/arena main
