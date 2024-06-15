@@ -1,0 +1,33 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: update_leaderboard_daily
+
+on:
+  schedule:
+    - cron: '30 2 * * *'
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10
+    - name: Install requirements
+      run: |
+        pip install -r requirements.txt
+    - name: Run leaderboard updating code
+      run: |
+        bash arena_elo/update_elo.sh
+    - name: Commit updates
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Automated Leaderboard Update
+        file_pattern: 'results/*'
