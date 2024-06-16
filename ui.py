@@ -75,14 +75,20 @@ def disable_buttons(i=5):
 def disable_buttons_side_by_side(i=6):
     return tuple(gr.update(visible=i>=4, interactive=False) for i in range(i))
 
+def disable_buttons_side_by_side_sts(i=6):
+    return tuple(gr.update(visible=False, interactive=False) for i in range(i))
+
+def disable_buttons_side_by_side_clustering(i=6):
+    return tuple(gr.update(visible=False, interactive=False) for _ in range(i))
+
 def enable_buttons_side_by_side(i=6):
     return tuple(gr.update(visible=True, interactive=True) for i in range(i))
 
 def enable_buttons_side_by_side_clustering(state0):
     if (state0 is not None) and (len(state0.prompts) >= 3):
-        return enable_buttons_side_by_side(8)
+        return enable_buttons_side_by_side(9)
     else:
-        return enable_buttons_side_by_side(3) + disable_buttons_side_by_side(5)
+        return enable_buttons_side_by_side(4) + disable_buttons_side_by_side(5)
 
 def vote_last_response(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
     gr.Info(info_txt)
@@ -146,8 +152,8 @@ def vote_last_response_clustering(vote_type, state0, state1, model_selector0, mo
     if vote_type == "share": return
 
     if model_selector0 == "":
-        return (disable_btn_visible,) * 3 + (disable_btn,) * 4 + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
-    return (disable_btn_visible,) * 3 + (disable_btn,) * 4 + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
+        return (disable_btn_visible,) * 4 + (disable_btn,) * 4 + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
+    return (disable_btn_visible,) * 4 + (disable_btn,) * 4 + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
 
 def vote_last_response_single(vote_type, state, model_selector, request: gr.Request):
     gr.Info(info_txt)
@@ -195,7 +201,7 @@ def vote_last_response_single_clustering(vote_type, state, model_selector, reque
     }
     store_data_in_hub(data, "clustering_single_choice")
 
-    return (disable_btn_visible,) * 3 + (disable_btn,) * 3
+    return (disable_btn_visible,) * 4 + (disable_btn,) * 3
 
 def get_conv_log_filename():
     t = datetime.datetime.now()
@@ -353,6 +359,7 @@ def build_side_by_side_ui_anon(models):
             elem_id="input_box",
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
+        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
 
     with gr.Row():
         clear_btn = gr.Button(value="🎲 New Round", interactive=False)
@@ -371,16 +378,23 @@ def build_side_by_side_ui_anon(models):
 
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
 
-    btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn,]
+    btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
+
+    draw_btn.click(
+        models.retrieve_draw,
+        inputs=None,
+        outputs=[textbox],
+        api_name="draw_btn_anon"
+    )
 
     textbox.submit(
         check_input_retrieval,
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 2),
+        partial(disable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, draw_btn],
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
@@ -397,9 +411,9 @@ def build_side_by_side_ui_anon(models):
         inputs=textbox,
         outputs=None,
     ).success(        
-        partial(disable_buttons_side_by_side, 2),
+        partial(disable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],   
+        outputs=[send_btn, textbox, draw_btn],
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
@@ -421,9 +435,9 @@ def build_side_by_side_ui_anon(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 2),
+        partial(enable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, draw_btn],
     )
     
     """
@@ -564,6 +578,7 @@ def build_side_by_side_ui_named(models):
             elem_id="input_box"
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
+        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
 
     with gr.Row():
         clear_btn = gr.Button(value="🗑️  Clear history", interactive=False)
@@ -583,14 +598,21 @@ def build_side_by_side_ui_named(models):
     
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
+    draw_btn.click(
+        models.retrieve_draw,
+        inputs=None,
+        outputs=[textbox],
+        api_name="draw_btn_anon"
+    )
+
     textbox.submit(
         check_input_retrieval,
         inputs=textbox,
         outputs=None,
     ).success(        
-        partial(disable_buttons_side_by_side, 2),
+        partial(disable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, draw_btn],
     ).then(        
         gen_func,
         inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
@@ -631,9 +653,9 @@ def build_side_by_side_ui_named(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 2),
+        partial(enable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, draw_btn],
     )
 
     leftvote_btn.click(
@@ -719,8 +741,8 @@ def build_single_model_ui(models):
             placeholder="👉 Enter your query and press ENTER",
             elem_id="input_box"
         )
-
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
+        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
 
     with gr.Row():
         chatbot = gr.Chatbot(
@@ -749,6 +771,13 @@ def build_single_model_ui(models):
     
     btn_list = [upvote_btn, downvote_btn, flag_btn, clear_btn]
 
+    draw_btn.click(
+        models.retrieve_draw,
+        inputs=None,
+        outputs=[textbox],
+        api_name="draw_btn_single"
+    )
+
     model_selector.change(
         clear_history, 
         inputs=None,
@@ -759,9 +788,9 @@ def build_single_model_ui(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 2),
+        partial(enable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, draw_btn],
     )
 
     textbox.submit(
@@ -829,9 +858,9 @@ def build_single_model_ui(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 2),
+        partial(enable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[send_btn, textbox, draw_btn],
     )
 
 ### Clustering ###
@@ -867,6 +896,7 @@ def clustering_side_by_side(gen_func, state0, state1, txt, model_name0, model_na
     else:    
         state0.prompts.append(txt)
         state1.prompts.append(txt)
+
     state0.ncluster = ncluster
     state1.ncluster = ncluster
 
@@ -1014,6 +1044,7 @@ def build_side_by_side_ui_anon_clustering(models):
             scale=1,
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
+        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
 
     with gr.Row():
         clear_btn = gr.Button(value="🎲 New Round", interactive=False)
@@ -1031,14 +1062,21 @@ def build_side_by_side_ui_anon_clustering(models):
 
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
+    draw_btn.click(
+        models.clustering_draw,
+        inputs=None,
+        outputs=[textbox, ncluster],
+        api_name="draw_btn_anon"
+    )
+
     textbox.submit(
         check_input_clustering,
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 3),
+        partial(disable_buttons_side_by_side_clustering, 4),
         inputs=None,
-        outputs=[send_btn, textbox, ncluster],
+        outputs=[send_btn, textbox, ncluster, draw_btn],
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, model_selector_left, model_selector_right, ncluster],
@@ -1047,7 +1085,7 @@ def build_side_by_side_ui_anon_clustering(models):
     ).then(
         enable_buttons_side_by_side_clustering,
         inputs=state0,
-        outputs=[send_btn, textbox, ncluster] + btn_list,
+        outputs=[send_btn, textbox, ncluster, draw_btn] + btn_list,
     )
 
     send_btn.click(
@@ -1055,9 +1093,9 @@ def build_side_by_side_ui_anon_clustering(models):
         inputs=textbox,
         outputs=None,
     ).success(        
-        partial(disable_buttons_side_by_side, 3),
+        partial(disable_buttons_side_by_side_clustering, 4),
         inputs=None,
-        outputs=[send_btn, textbox, ncluster],
+        outputs=[send_btn, textbox, ncluster, draw_btn],
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, model_selector_left, model_selector_right, ncluster],
@@ -1066,7 +1104,7 @@ def build_side_by_side_ui_anon_clustering(models):
     ).then(
         enable_buttons_side_by_side_clustering,
         inputs=state0,
-        outputs=[send_btn, textbox, ncluster] + btn_list,
+        outputs=[send_btn, textbox, ncluster, draw_btn] + btn_list,
     )
 
     clear_btn.click(
@@ -1079,9 +1117,9 @@ def build_side_by_side_ui_anon_clustering(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 3),
+        partial(enable_buttons_side_by_side, 4),
         inputs=None,
-        outputs=[send_btn, textbox, ncluster],
+        outputs=[send_btn, textbox, ncluster, draw_btn],
     )
 
     dummy_left_model = gr.State("")
@@ -1089,22 +1127,22 @@ def build_side_by_side_ui_anon_clustering(models):
     leftvote_btn.click(
         partial(vote_last_response_clustering, "leftvote"),
         inputs=[state0, state1, dummy_left_model, dummy_right_model],
-        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     rightvote_btn.click(
         partial(vote_last_response_clustering, "rightvote"),
         inputs=[state0, state1, dummy_left_model, dummy_right_model],
-        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     tie_btn.click(
         partial(vote_last_response_clustering, "tievote"),
         inputs=[state0, state1, dummy_left_model, dummy_right_model],
-        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     bothbad_btn.click(
         partial(vote_last_response_clustering, "bothbadvote"),
         inputs=[state0, state1, dummy_left_model, dummy_right_model],
-        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
 
 def build_side_by_side_ui_named_clustering(models):
@@ -1191,6 +1229,7 @@ def build_side_by_side_ui_named_clustering(models):
             scale=1,
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
+        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
 
     with gr.Row():
         clear_btn = gr.Button(value="🗑️  Clear history", interactive=False)
@@ -1208,14 +1247,21 @@ def build_side_by_side_ui_named_clustering(models):
     
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
+    draw_btn.click(
+        models.clustering_draw,
+        inputs=None,
+        outputs=[textbox, ncluster],
+        api_name="draw_btn_anon"
+    )
+
     textbox.submit(
         check_input_clustering,
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 3),
+        partial(disable_buttons_side_by_side_clustering, 4),
         inputs=None,
-        outputs=[send_btn, textbox, ncluster],
+        outputs=[send_btn, textbox, ncluster, draw_btn],
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, model_selector_left, model_selector_right, ncluster],
@@ -1224,7 +1270,7 @@ def build_side_by_side_ui_named_clustering(models):
     ).then(
         enable_buttons_side_by_side_clustering,
         inputs=state0,
-        outputs=[send_btn, textbox, ncluster] + btn_list,
+        outputs=[send_btn, draw_btn, textbox, ncluster] + btn_list,
     )
 
     send_btn.click(
@@ -1232,9 +1278,9 @@ def build_side_by_side_ui_named_clustering(models):
         inputs=textbox,
         outputs=None,
     ).success(        
-        partial(disable_buttons_side_by_side, 3),
+        partial(disable_buttons_side_by_side_clustering, 4),
         inputs=None,
-        outputs=[send_btn, textbox, ncluster],
+        outputs=[send_btn, draw_btn, textbox, ncluster],
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, model_selector_left, model_selector_right, ncluster],
@@ -1243,7 +1289,7 @@ def build_side_by_side_ui_named_clustering(models):
     ).then(
         enable_buttons_side_by_side_clustering,
         inputs=state0,
-        outputs=[send_btn, textbox, ncluster] + btn_list,
+        outputs=[send_btn, draw_btn, textbox, ncluster] + btn_list,
     )
 
     clear_btn.click(
@@ -1256,30 +1302,30 @@ def build_side_by_side_ui_named_clustering(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 3),
+        partial(enable_buttons_side_by_side, 4),
         inputs=None,
-        outputs=[send_btn, textbox, ncluster],
+        outputs=[send_btn, draw_btn, textbox, ncluster],
     )
 
     leftvote_btn.click(
         partial(vote_last_response_clustering, "leftvote"),
         inputs=[state0, state1, model_selector_left, model_selector_right],
-        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     rightvote_btn.click(
         partial(vote_last_response_clustering, "rightvote"),
         inputs=[state0, state1, model_selector_left, model_selector_right],
-        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     tie_btn.click(
         partial(vote_last_response_clustering, "tievote"),
         inputs=[state0, state1, model_selector_left, model_selector_right],
-        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     bothbad_btn.click(
         partial(vote_last_response_clustering, "bothbadvote"),
         inputs=[state0, state1, model_selector_left, model_selector_right],
-        outputs=[send_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
 
 def build_single_model_ui_clustering(models):
@@ -1329,6 +1375,7 @@ def build_single_model_ui_clustering(models):
             scale=1,
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
+        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
 
     with gr.Row():
         chatbot = gr.Plot(label="Model")
@@ -1352,6 +1399,13 @@ def build_single_model_ui_clustering(models):
 
     btn_list = [upvote_btn, downvote_btn, flag_btn, clear_btn]
 
+    draw_btn.click(
+        models.clustering_draw,
+        inputs=None,
+        outputs=[textbox, ncluster],
+        api_name="draw_btn_anon"
+    )
+
     model_selector.change(
         clear_history_clustering,
         inputs=None, 
@@ -1362,9 +1416,9 @@ def build_single_model_ui_clustering(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 3),
+        partial(enable_buttons_side_by_side, 4),
         inputs=None,
-        outputs=[send_btn, textbox, ncluster],
+        outputs=[send_btn, draw_btn, textbox, ncluster],
     )
     
     textbox.submit(
@@ -1372,9 +1426,9 @@ def build_single_model_ui_clustering(models):
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 3),
+        partial(disable_buttons_side_by_side_clustering, 4),
         inputs=None,
-        outputs=[send_btn, textbox, ncluster],
+        outputs=[send_btn, draw_btn, textbox, ncluster],
     ).then(
         gen_func,
         inputs=[state, textbox, model_selector, ncluster],
@@ -1384,7 +1438,7 @@ def build_single_model_ui_clustering(models):
     ).then(
         enable_buttons_side_by_side_clustering,
         inputs=state,
-        outputs=[send_btn, textbox, ncluster] + btn_list,
+        outputs=[send_btn, draw_btn, textbox, ncluster] + btn_list,
     )
 
     send_btn.click(
@@ -1392,9 +1446,9 @@ def build_single_model_ui_clustering(models):
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 3),
+        partial(disable_buttons_side_by_side_clustering, 4),
         inputs=None,
-        outputs=[send_btn, textbox, ncluster],
+        outputs=[send_btn, draw_btn, textbox, ncluster],
     ).then(
         gen_func,
         inputs=[state, textbox, model_selector, ncluster],
@@ -1404,23 +1458,23 @@ def build_single_model_ui_clustering(models):
     ).then(
         enable_buttons_side_by_side_clustering,
         inputs=state,
-        outputs=[send_btn, textbox, ncluster] + btn_list,
+        outputs=[send_btn, draw_btn, textbox, ncluster] + btn_list,
     )
 
     upvote_btn.click(
         partial(vote_last_response_single_clustering, "upvote"),
         inputs=[state, model_selector],
-        outputs=[send_btn, textbox, ncluster, upvote_btn, downvote_btn, flag_btn]
+        outputs=[send_btn, draw_btn, textbox, ncluster, upvote_btn, downvote_btn, flag_btn]
     )
     downvote_btn.click(
         partial(vote_last_response_single_clustering, "downvote"),
         inputs=[state, model_selector],
-        outputs=[send_btn, textbox, ncluster, upvote_btn, downvote_btn, flag_btn]
+        outputs=[send_btn, draw_btn, textbox, ncluster, upvote_btn, downvote_btn, flag_btn]
     )
     flag_btn.click(
         partial(vote_last_response_single_clustering, "flag"),
         inputs=[state, model_selector],
-        outputs=[send_btn, textbox, ncluster, upvote_btn, downvote_btn, flag_btn]
+        outputs=[send_btn, draw_btn, textbox, ncluster, upvote_btn, downvote_btn, flag_btn]
     )
     clear_btn.click(
         clear_history_clustering,
@@ -1433,9 +1487,9 @@ def build_single_model_ui_clustering(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 3),
+        partial(enable_buttons_side_by_side_clustering, 4),
         inputs=None,
-        outputs=[send_btn, textbox, ncluster],
+        outputs=[send_btn, draw_btn, textbox, ncluster],
     )
 
 ### STS ###
@@ -1599,6 +1653,7 @@ def build_side_by_side_ui_anon_sts(models):
             elem_id="input_box",
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
+        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
 
     with gr.Row():
         clear_btn = gr.Button(value="🎲 New Round", interactive=False)
@@ -1616,14 +1671,21 @@ def build_side_by_side_ui_anon_sts(models):
 
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
+    draw_btn.click(
+        models.sts_draw,
+        inputs=None,
+        outputs=[textbox0, textbox1, textbox2],
+        api_name="draw_btn_anon"
+    )
+
     send_btn.click(
         check_input_sts,
         inputs=[textbox0, textbox1, textbox2],
         outputs=None
     ).success(
-        partial(disable_buttons, 4),
+        partial(disable_buttons, 5),
         inputs=None,
-        outputs=[send_btn, textbox0, textbox1, textbox2],   
+        outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],   
     ).success(
         gen_func,
         inputs=[state0, state1, textbox0, textbox1, textbox2, model_selector_left, model_selector_right],
@@ -1645,9 +1707,9 @@ def build_side_by_side_ui_anon_sts(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 4),
+        partial(enable_buttons_side_by_side, 5),
         inputs=None,
-        outputs=[send_btn, textbox0, textbox1, textbox2],
+        outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],
     )
 
     dummy_left_model = gr.State("")
@@ -1758,22 +1820,38 @@ def build_side_by_side_ui_named_sts(models):
             elem_id="input_box",
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
+        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
 
     with gr.Row():
         clear_btn = gr.Button(value="🗑️  Clear history", interactive=False)
 
+    gr.Examples(
+        examples=[
+            ["hello", "good morning", "早上好"],
+            ["I love you", "I hate you", "I like you"],
+            ["I am happy", "I am sad", "I am angry"],
+        ],
+        inputs=[textbox0, textbox1, textbox2],
+    )
+
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
     
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
+
+    draw_btn.click(
+        models.sts_draw,
+        inputs=None,
+        outputs=[textbox0, textbox1, textbox2],
+    )
 
     send_btn.click(
         check_input_sts,
         inputs=[textbox0, textbox1, textbox2],
         outputs=None
     ).success(
-        partial(disable_buttons_side_by_side, 4),
+        partial(disable_buttons, 5),
         inputs=None,
-        outputs=[send_btn, textbox0, textbox1, textbox2],   
+        outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],
     ).success(
         gen_func,
         inputs=[state0, state1, textbox0, textbox1, textbox2, model_selector_left, model_selector_right],
@@ -1795,9 +1873,9 @@ def build_side_by_side_ui_named_sts(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 4),
+        partial(enable_buttons_side_by_side, 5),
         inputs=None,
-        outputs=[send_btn, textbox0, textbox1, textbox2],
+        outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],
     )
 
     leftvote_btn.click(
@@ -1833,6 +1911,7 @@ def build_single_model_ui_sts(models):
     gr.Markdown(notice_markdown, elem_id="notice_markdown")
 
     model_list = list(models.model_meta.keys())
+
 
     with gr.Row(elem_id="model_selector_row"):
         model_selector = gr.Dropdown(
@@ -1874,11 +1953,13 @@ def build_single_model_ui_sts(models):
             elem_id="input_box",
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
+        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
 
-    with gr.Row():
-        chatbot = gr.HTML(
-            label="Model",
-        )
+    with gr.Group(elem_id="model"):
+        with gr.Row():
+            chatbot = gr.HTML(
+                label="Model",
+            )
 
     with gr.Row() as button_row:
         upvote_btn = gr.Button(value="👍  Upvote", interactive=False)
@@ -1890,6 +1971,12 @@ def build_single_model_ui_sts(models):
     
     btn_list = [upvote_btn, downvote_btn, flag_btn, clear_btn]
 
+    draw_btn.click(
+        models.sts_draw,
+        inputs=None,
+        outputs=[textbox0, textbox1, textbox2],
+    )
+
     model_selector.change(
         clear_history_sts, 
         inputs=None, 
@@ -1900,9 +1987,9 @@ def build_single_model_ui_sts(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 4),
+        partial(enable_buttons_side_by_side, 5),
         inputs=None,
-        outputs=[send_btn, textbox0, textbox1, textbox2],
+        outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],
     )
 
     send_btn.click(
@@ -1910,9 +1997,9 @@ def build_single_model_ui_sts(models):
         inputs=[textbox0, textbox1, textbox2],
         outputs=None
     ).success(
-        partial(disable_buttons, 4),
+        partial(disable_buttons, 5),
         inputs=None,
-        outputs=[send_btn, textbox0, textbox1, textbox2],   
+        outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],   
     ).success(
         gen_func,
         inputs=[state, textbox0, textbox1, textbox2, model_selector],
@@ -1951,9 +2038,9 @@ def build_single_model_ui_sts(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 4),
+        partial(enable_buttons_side_by_side, 5),
         inputs=None,
-        outputs=[send_btn, textbox0, textbox1, textbox2],
+        outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],
     )
 
 

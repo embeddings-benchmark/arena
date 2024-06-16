@@ -13,6 +13,7 @@ class ModelManager:
         self.model_meta = model_meta["model_meta"]
         self.loaded_models = {}
         self.loaded_indices = {}
+        self.loaded_samples = {}
 
     def load_model(self, model_name):
         if model_name in self.loaded_models:
@@ -51,6 +52,31 @@ class ModelManager:
 
         self.loaded_indices[model_name] = index
         return index
+    
+    def retrieve_draw(self):
+        if "retrieval" not in self.loaded_samples:
+            from datasets import load_dataset
+            self.loaded_samples["retrieval"] = load_dataset("mteb/nq", "queries")["queries"]["text"]
+        return random.choice(self.loaded_samples["retrieval"])
+
+    def clustering_draw(self):
+        if "clustering" not in self.loaded_samples:
+            from datasets import load_dataset
+            ds = load_dataset("mteb/reddit-clustering", split="test")
+            #ds = load_dataset("mteb/twentynewsgroups-clustering", split="test")
+            self.loaded_samples["clustering"] = []
+            for s, l in zip(ds["sentences"], ds["labels"]):
+                # Limit to 8 labels to avoid having every sample stem from a different cluster
+                rand_clusters = random.sample(l, 4)
+                self.loaded_samples["clustering"].append([(x, y) for x, y in zip(s, l) if y in rand_clusters])
+        samples = random.sample(random.choice(self.loaded_samples["clustering"]), random.randint(4, 16))
+        return "<|SEP|>".join([x for x, y in samples]), len(set(y for x, y in samples))
+
+    def sts_draw(self):
+        if "sts" not in self.loaded_samples:
+            from datasets import load_dataset
+            self.loaded_samples["sts"] = [[row["sentence1"], row["sentence2"]] for row in load_dataset("mteb/sts16-sts", split="test")]
+        return random.choice(self.loaded_samples["sts"]) + [random.choice(self.loaded_samples["sts"])[random.randint(0, 1)]]
 
     def retrieve_parallel(self, prompt, model_A, model_B):
         if model_A == "" and model_B == "":
@@ -89,100 +115,42 @@ class ModelManager:
         - https://github.com/openai/openai-cookbook/blob/main/examples/Visualizing_embeddings_in_3D.ipynb
         - https://www.nlplanet.org/course-practical-nlp/02-practical-nlp-first-tasks/12-clustering-articles
         """
-        print("GOT NC: ", ncluster)
-        if isinstance(queries, str):
-            queries = [queries]
-
-        model = self.load_model(model_name)
-        emb = model.encode(queries)
-
-        ### Plotting ###
+        import pandas as pd
         import plotly.express as px
-        import numpy as np
-        import pandas as pd
+        from sklearn.cluster import KMeans
         from sklearn.decomposition import PCA
-        # If only 1 query is given, return a 1D plot
+
         if len(queries) == 1:
-            pca = PCA(n_components=1)
-            vis_dims = pca.fit_transform(emb)
-
-            # Put queries & vis_dims into a DataFrame
-            df = pd.DataFrame({"text": queries, "x": vis_dims[:, 0]})
-            df["text_short"] = df["text"].str[:64]
-
-            hover_data = {
-                "text_short": True,
-                "x": False,
-            }
-            if "index" in df.columns:
-                hover_data["index"] = False
-
-            fig = px.scatter(
-                df, x="x", template="plotly_dark", title="Cluster", hover_data=hover_data
-            )
-            fig.update_layout(
-                xaxis_title='',
-                yaxis_title=''
-            )
-
-            return fig
-
-
-        # If 2 or 3 queries are given, return a 2D plot
-        # Somehow putting 3 queries in a 3D plot makes the plot very buggy and not look well
+            # No need to do PCA; just return a 1D plot
+            df = pd.DataFrame({"txt": queries, "x": [0]})
+            df["txt"] = df["txt"].str[:90]
+            fig = px.scatter(df, x="x", template="plotly_dark", hover_name="txt")
+            fig.update_layout(xaxis_title='', yaxis_title='')
         elif len(queries) < 4:
-            pca = PCA(n_components=2)
-            vis_dims = pca.fit_transform(emb)
-
-            # Put queries & vis_dims into a DataFrame
-            df = pd.DataFrame({"text": queries, "x": vis_dims[:, 0], "y": vis_dims[:, 1]})
-            df["text_short"] = df["text"].str[:64]
-
-            hover_data = {
-                "text_short": True,
-                "x": False,
-                "y": False,
-            }
-
-            fig = px.scatter(
-                df, x="x", y="y", template="plotly_dark", title="Cluster", hover_data=hover_data
-            )
-
-            return fig
-
-        pca = PCA(n_components=3)
-        vis_dims = pca.fit_transform(emb)
-        # Put queries & vis_dims into a DataFrame
-        import pandas as pd
-        data = {"text": queries, "x": vis_dims[:, 0], "y": vis_dims[:, 1], "z": vis_dims[:, 2]}
-        hover_data = {
-            "text_short": True,
-            "x": False,
-            "y": False,
-            "z": False,
-        }
-
-        if ncluster > 1:
-            from sklearn.cluster import KMeans
-            # Fit KMeans
-            cluster_labels = KMeans(n_clusters=ncluster, n_init='auto', random_state=0).fit_predict(emb).tolist()
-            hover_data["cluster"] = False
-            data["cluster"] = list(map(str,cluster_labels))
-
-        df = pd.DataFrame(data)
-        df["text_short"] = df["text"].str[:64]
-
-        if ncluster > 1:
-            fig = px.scatter_3d(
-                df, x="x", y="y", z="z", color="cluster", template="plotly_dark", hover_data=hover_data,
-            )
-            # Without legend / colorbar
-            fig = fig.update_layout(showlegend=False)
+            model = self.load_model(model_name)
+            emb = model.encode(queries)
+            vis_dims = PCA(n_components=2).fit_transform(emb)
+            df = pd.DataFrame({"txt": queries, "x": vis_dims[:, 0], "y": vis_dims[:, 1]})
+            df["txt"] = df["txt"].str[:90]
+            fig = px.scatter(df, x="x", y="y", template="plotly_dark", hover_name="txt")
         else:
-            fig = px.scatter_3d(
-                df, x="x", y="y", z="z", template="plotly_dark", hover_data=hover_data,
-            )
-
+            model = self.load_model(model_name)
+            emb = model.encode(queries)
+            vis_dims = PCA(n_components=3).fit_transform(emb)
+            data = {"txt": queries, "x": vis_dims[:, 0], "y": vis_dims[:, 1], "z": vis_dims[:, 2]}
+            if ncluster > 1:
+                data["cluster"] = KMeans(n_clusters=ncluster, n_init='auto', random_state=0).fit_predict(emb).tolist()
+            df = pd.DataFrame(data)
+            df["txt"] = df["txt"].str[:90]
+            if ncluster > 1:
+                fig = px.scatter_3d(df, x="x", y="y", z="z", color="cluster", template="plotly_dark", hover_name="txt")
+            else:
+                fig = px.scatter_3d(df, x="x", y="y", z="z", template="plotly_dark", hover_name="txt")
+        fig.update_traces(
+            hovertemplate="<b>%{hovertext}</b><extra></extra>",
+            hovertext=df["txt"].tolist()
+        )
+        fig.update_layout(showlegend=False, coloraxis_showscale=False) # Remove legend / colorbar
         return fig
 
     def sts_parallel(self, txt0, txt1, txt2, model_A, model_B):
