@@ -24,6 +24,19 @@ model_meta:
     mteb_retrieval: 46.64
     mteb_sts: 79.10
     mteb_clustering: 37.08
+  intfloat/e5-mistral-7b-instruct:
+    link: https://huggingface.co/intfloat/e5-mistral-7b-instruct
+    revision: 07163b72af1488142a360786df853f237b1a3ca1
+    desc: e5-mistral-7b-instruct by Microsoft
+    seq_len: 32768
+    size: 7111
+    dim: 4096
+    license: MIT License
+    organization: Microsoft
+    mteb_overall: 66.63
+    mteb_retrieval: 56.89
+    mteb_sts: 84.63
+    mteb_clustering: 50.26
   GritLM/GritLM-7B:
     link: https://huggingface.co/GritLM/GritLM-7B
     desc: GritLM-7B by Contextual AI, HKU, Microsoft
@@ -60,6 +73,18 @@ model_meta:
     mteb_retrieval: 59.36
     mteb_sts: 82.84
     mteb_clustering: 52.8
+  gte-Qwen2-7B-instruct:
+    link: https://huggingface.co/Alibaba-NLP/gte-Qwen2-7B-instruct
+    desc: gte-Qwen2-7B-instruct by Alibaba
+    seq_len: 131072
+    size: 7613
+    dim: 4096
+    license: Apache 2.0
+    organization: Alibaba
+    mteb_overall: 70.24
+    mteb_retrieval: 60.25
+    mteb_sts: 83.04
+    mteb_clustering: 56.92
   bm25:
     link: https://en.wikipedia.org/wiki/Okapi_BM25
     desc: Keyword-based matching

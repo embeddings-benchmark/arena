@@ -66,10 +66,11 @@ class ModelManager:
             #ds = load_dataset("mteb/twentynewsgroups-clustering", split="test")
             self.loaded_samples["clustering"] = []
             for s, l in zip(ds["sentences"], ds["labels"]):
-                # Limit to 8 labels to avoid having every sample stem from a different cluster
+                # Limit to 4 labels to avoid having every sample stem from a different cluster
                 rand_clusters = random.sample(l, 4)
                 self.loaded_samples["clustering"].append([(x, y) for x, y in zip(s, l) if y in rand_clusters])
-        samples = random.sample(random.choice(self.loaded_samples["clustering"]), random.randint(4, 16))
+        # Select 4-12 random samples
+        samples = random.sample(random.choice(self.loaded_samples["clustering"]), random.randint(4, 12))
         return "<|SEP|>".join([x for x, y in samples]), len(set(y for x, y in samples))
 
     def sts_draw(self):
@@ -79,7 +80,6 @@ class ModelManager:
         samples = list(random.choice(self.loaded_samples["sts"]).values())
         random.shuffle(samples) # Randomly permute order of the three samples
         return samples
-
 
     def retrieve_parallel(self, prompt, model_A, model_B):
         if model_A == "" and model_B == "":

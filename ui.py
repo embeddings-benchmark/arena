@@ -108,8 +108,8 @@ def vote_last_response(vote_type, state0, state1, model_selector0, model_selecto
     if vote_type == "share": return
 
     if model_selector0 == "":
-        return ("",) + (disable_btn,) * 4 + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
-    return ("",) + (disable_btn,) * 4 + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
+        return ("Press 🎲 New Round to start over 👇 (Note: Your vote shapes the leaderboard, please vote RESPONSIBLY!)",) + (disable_btn,) * 4 + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
+    return ("Press 🎲 New Round to start over 👇 (Note: Your vote shapes the leaderboard, please vote RESPONSIBLY!)",) + (disable_btn,) * 4 + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
 
 def vote_last_response_sts(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
     gr.Info(info_txt)
@@ -439,19 +439,7 @@ def build_side_by_side_ui_anon(models):
         inputs=None,
         outputs=[send_btn, textbox, draw_btn],
     )
-    
-    """
-    regenerate_btn.click(
-        gen_func,
-        inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right],
-        api_name="regenerate_btn_anon"
-    ).then(
-        enable_buttons_side_by_side,
-        inputs=None,
-        outputs=btn_list
-    )
-    """
+
     dummy_left_model = gr.State("")
     dummy_right_model = gr.State("")
     leftvote_btn.click(
@@ -629,9 +617,9 @@ def build_side_by_side_ui_named(models):
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 2),
+        partial(disable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[textbox, send_btn, draw_btn],
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
@@ -655,7 +643,7 @@ def build_side_by_side_ui_named(models):
     ).then(
         partial(enable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox, draw_btn],
+        outputs=[textbox, send_btn, draw_btn],
     )
 
     leftvote_btn.click(
@@ -790,7 +778,7 @@ def build_single_model_ui(models):
     ).then(
         partial(enable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox, draw_btn],
+        outputs=[textbox, send_btn, draw_btn],
     )
 
     textbox.submit(
@@ -798,19 +786,19 @@ def build_single_model_ui(models):
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 2),
+        partial(disable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
-    ).then(        
+        outputs=[textbox, send_btn, draw_btn],
+    ).then(
         gen_func,
-        inputs=[state, textbox, model_selector], 
+        inputs=[state, textbox, model_selector],
         outputs=[state, chatbot],
         api_name="submit_btn_single",
         show_progress = "full"
     ).success(
-        enable_buttons, 
-        inputs=None,  
-        outputs=btn_list 
+        enable_buttons,
+        inputs=None,
+        outputs=btn_list
     )
 
     send_btn.click(
@@ -818,9 +806,9 @@ def build_single_model_ui(models):
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 2),
+        partial(disable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox],
+        outputs=[textbox, send_btn, draw_btn],
     ).then(
         gen_func,
         inputs=[state, textbox, model_selector],
@@ -860,7 +848,7 @@ def build_single_model_ui(models):
     ).then(
         partial(enable_buttons_side_by_side, 3),
         inputs=None,
-        outputs=[send_btn, textbox, draw_btn],
+        outputs=[textbox, send_btn, draw_btn],
     )
 
 ### Clustering ###
@@ -1389,6 +1377,9 @@ def build_single_model_ui_clustering(models):
     gr.Examples(
         examples=[
             ["Shanghai<|SEP|>Beijing<|SEP|>Shenzhen<|SEP|>Hangzhou<|SEP|>Seattle<|SEP|>Boston<|SEP|>New York<|SEP|>San Francisco", 2],
+            # https://www.reddit.com/r/Bitcoin/top/?t=all ; https://www.reddit.com/r/longevity/top/?t=all ; https://www.reddit.com/r/MachineLearning/top/?t=all
+            ["It's official! 1 Bitcoin = $10,000 USD<|SEP|>Everyone who's trading BTC right now<|SEP|>Age reversal not only achievable but also possibly imminent: Retro Biosciences<|SEP|>MicroRNA regrows 90% of lost hair, study finds<|SEP|>Researchers have found that people who live beyond 105 years tend to have a unique genetic background that makes their bodies more efficient at repairing DNA, according to a new study.<|SEP|>[D] A Demo from 1993 of 32-year-old Yann LeCun showing off the World's first Convolutional Network for Text Recognition<|SEP|>Speech-to-speech translation for a real-world unwritten language<|SEP|>Seeking the Best Embedding Model: Experiences with bge & GritLM?", 3],
+            ["If someone online buys something off of my Amazon wish list, do they get my full name and address?<|SEP|>Package \"In Transit\" over a week. No scheduled delivery date, no locations. What's up?<|SEP|>Can Amazon gift cards replace a debit card?<|SEP|>Homesick GWS star Cameron McCarthy on road to recovery<|SEP|>Accidently ordered 2 of an item, how do I only return 1? For free?<|SEP|>Need help ASAP, someone ordering in my account<|SEP|>So who's everyone tipping for Round 1?", 2],
             ["Pikachu<|SEP|>Charmander<|SEP|>Squirtle<|SEP|>Chikorita<|SEP|>Electabuzz<|SEP|>Ponyta<|SEP|>Poliwhirl<|SEP|>Sunflora<|SEP|>Mareep<|SEP|>Slugma<|SEP|>Staryu<|SEP|>Grovyle<|SEP|>Bellossom<|SEP|>Voltorb", 4],
             ["which airlines fly from boston to washington dc via other cities<|SEP|>show me the airlines that fly between toronto and denver<|SEP|>show me round trip first class tickets from new york to miami<|SEP|>i'd like the lowest fare from denver to pittsburgh<|SEP|>show me a list of ground transportation at boston airport<|SEP|>show me boston ground transportation<|SEP|>of all airlines which airline has the most arrivals in atlanta<|SEP|>what ground transportation is available in boston<|SEP|>i would like your rates between atlanta and boston on september third<|SEP|>which airlines fly between boston and pittsburgh", 2],
         ],
@@ -1661,8 +1652,10 @@ def build_side_by_side_ui_anon_sts(models):
     gr.Examples(
         examples=[
             ["hello", "good morning", "早上好"],
-            ["I love you", "I hate you", "I like you"],
-            ["I am happy", "I am sad", "I am angry"],
+            ["The dog likes to catch baseballs.", "a puppy about to jump to intercept a yellow ball", "The dog is trying to catch a tennis ball."],
+            ["A spaceship is flying very fast.", "The Millenium Falcon travelling in hyperspace", "A spaceship is landing very fast."],
+            ["People are shopping.", "Numerous customers browsing for produce in a market", "People are showering."],
+            ["There's a red bus making a left turn into a traffic circle that has a sprinkler system.", "A red bus making a turn", "A red bus backing up into a spot"],
         ],
         inputs=[textbox0, textbox1, textbox2],
     )
@@ -1828,8 +1821,10 @@ def build_side_by_side_ui_named_sts(models):
     gr.Examples(
         examples=[
             ["hello", "good morning", "早上好"],
-            ["I love you", "I hate you", "I like you"],
-            ["I am happy", "I am sad", "I am angry"],
+            ["The dog likes to catch baseballs.", "a puppy about to jump to intercept a yellow ball", "The dog is trying to catch a tennis ball."],
+            ["A spaceship is flying very fast.", "The Millenium Falcon travelling in hyperspace", "A spaceship is landing very fast."],
+            ["People are shopping.", "Numerous customers browsing for produce in a market", "People are showering."],
+            ["There's a red bus making a left turn into a traffic circle that has a sprinkler system.", "A red bus making a turn", "A red bus backing up into a spot"],
         ],
         inputs=[textbox0, textbox1, textbox2],
     )
@@ -1966,6 +1961,17 @@ def build_single_model_ui_sts(models):
         downvote_btn = gr.Button(value="👎  Downvote", interactive=False)
         flag_btn = gr.Button(value="⚠️  Flag", interactive=False)
         clear_btn = gr.Button(value="🗑️  Clear history", interactive=False)
+
+    gr.Examples(
+        examples=[
+            ["hello", "good morning", "早上好"],
+            ["The dog likes to catch baseballs.", "a puppy about to jump to intercept a yellow ball", "The dog is trying to catch a tennis ball."],
+            ["A spaceship is flying very fast.", "The Millenium Falcon travelling in hyperspace", "A spaceship is landing very fast."],
+            ["People are shopping.", "Numerous customers browsing for produce in a market", "People are showering."],
+            ["There's a red bus making a left turn into a traffic circle that has a sprinkler system.", "A red bus making a turn", "A red bus backing up into a spot"],
+        ],
+        inputs=[textbox0, textbox1, textbox2],
+    )
 
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
     
