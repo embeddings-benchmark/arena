@@ -75,8 +75,11 @@ class ModelManager:
     def sts_draw(self):
         if "sts" not in self.loaded_samples:
             from datasets import load_dataset
-            self.loaded_samples["sts"] = [[row["sentence1"], row["sentence2"]] for row in load_dataset("mteb/sts16-sts", split="test")]
-        return random.choice(self.loaded_samples["sts"]) + [random.choice(self.loaded_samples["sts"])[random.randint(0, 1)]]
+            self.loaded_samples["sts"] = load_dataset("sentence-transformers/all-nli", "triplet", split="test")
+        samples = list(random.choice(self.loaded_samples["sts"]).values())
+        random.shuffle(samples) # Randomly permute order of the three samples
+        return samples
+
 
     def retrieve_parallel(self, prompt, model_A, model_B):
         if model_A == "" and model_B == "":
