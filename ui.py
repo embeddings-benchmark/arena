@@ -751,6 +751,7 @@ def build_single_model_ui(models):
             ["What is an MLP?"],
             ["I am looking for information regarding minority interest"],
             ["I am searching for a very remote island withouth any human inhabitants"],
+            ["端午节是什么？"],            
         ],
         inputs=[textbox],
     )
@@ -1040,6 +1041,9 @@ def build_side_by_side_ui_anon_clustering(models):
     gr.Examples(
         examples=[
             ["Shanghai<|SEP|>Beijing<|SEP|>Shenzhen<|SEP|>Hangzhou<|SEP|>Seattle<|SEP|>Boston<|SEP|>New York<|SEP|>San Francisco", 2],
+            # https://www.reddit.com/r/Bitcoin/top/?t=all ; https://www.reddit.com/r/longevity/top/?t=all ; https://www.reddit.com/r/MachineLearning/top/?t=all
+            ["It's official! 1 Bitcoin = $10,000 USD<|SEP|>Everyone who's trading BTC right now<|SEP|>Age reversal not only achievable but also possibly imminent: Retro Biosciences<|SEP|>MicroRNA regrows 90% of lost hair, study finds<|SEP|>Researchers have found that people who live beyond 105 years tend to have a unique genetic background that makes their bodies more efficient at repairing DNA, according to a new study.<|SEP|>[D] A Demo from 1993 of 32-year-old Yann LeCun showing off the World's first Convolutional Network for Text Recognition<|SEP|>Speech-to-speech translation for a real-world unwritten language<|SEP|>Seeking the Best Embedding Model: Experiences with bge & GritLM?", 3],
+            ["If someone online buys something off of my Amazon wish list, do they get my full name and address?<|SEP|>Package \"In Transit\" over a week. No scheduled delivery date, no locations. What's up?<|SEP|>Can Amazon gift cards replace a debit card?<|SEP|>Homesick GWS star Cameron McCarthy on road to recovery<|SEP|>Accidently ordered 2 of an item, how do I only return 1? For free?<|SEP|>Need help ASAP, someone ordering in my account<|SEP|>So who's everyone tipping for Round 1?", 2],
             ["Pikachu<|SEP|>Charmander<|SEP|>Squirtle<|SEP|>Chikorita<|SEP|>Electabuzz<|SEP|>Ponyta<|SEP|>Poliwhirl<|SEP|>Sunflora<|SEP|>Mareep<|SEP|>Slugma<|SEP|>Staryu<|SEP|>Grovyle<|SEP|>Bellossom<|SEP|>Voltorb", 4],
             ["which airlines fly from boston to washington dc via other cities<|SEP|>show me the airlines that fly between toronto and denver<|SEP|>show me round trip first class tickets from new york to miami<|SEP|>i'd like the lowest fare from denver to pittsburgh<|SEP|>show me a list of ground transportation at boston airport<|SEP|>show me boston ground transportation<|SEP|>of all airlines which airline has the most arrivals in atlanta<|SEP|>what ground transportation is available in boston<|SEP|>i would like your rates between atlanta and boston on september third<|SEP|>which airlines fly between boston and pittsburgh", 2],
         ],
@@ -1225,6 +1229,9 @@ def build_side_by_side_ui_named_clustering(models):
     gr.Examples(
         examples=[
             ["Shanghai<|SEP|>Beijing<|SEP|>Shenzhen<|SEP|>Hangzhou<|SEP|>Seattle<|SEP|>Boston<|SEP|>New York<|SEP|>San Francisco", 2],
+            # https://www.reddit.com/r/Bitcoin/top/?t=all ; https://www.reddit.com/r/longevity/top/?t=all ; https://www.reddit.com/r/MachineLearning/top/?t=all
+            ["It's official! 1 Bitcoin = $10,000 USD<|SEP|>Everyone who's trading BTC right now<|SEP|>Age reversal not only achievable but also possibly imminent: Retro Biosciences<|SEP|>MicroRNA regrows 90% of lost hair, study finds<|SEP|>Researchers have found that people who live beyond 105 years tend to have a unique genetic background that makes their bodies more efficient at repairing DNA, according to a new study.<|SEP|>[D] A Demo from 1993 of 32-year-old Yann LeCun showing off the World's first Convolutional Network for Text Recognition<|SEP|>Speech-to-speech translation for a real-world unwritten language<|SEP|>Seeking the Best Embedding Model: Experiences with bge & GritLM?", 3],
+            ["If someone online buys something off of my Amazon wish list, do they get my full name and address?<|SEP|>Package \"In Transit\" over a week. No scheduled delivery date, no locations. What's up?<|SEP|>Can Amazon gift cards replace a debit card?<|SEP|>Homesick GWS star Cameron McCarthy on road to recovery<|SEP|>Accidently ordered 2 of an item, how do I only return 1? For free?<|SEP|>Need help ASAP, someone ordering in my account<|SEP|>So who's everyone tipping for Round 1?", 2],
             ["Pikachu<|SEP|>Charmander<|SEP|>Squirtle<|SEP|>Chikorita<|SEP|>Electabuzz<|SEP|>Ponyta<|SEP|>Poliwhirl<|SEP|>Sunflora<|SEP|>Mareep<|SEP|>Slugma<|SEP|>Staryu<|SEP|>Grovyle<|SEP|>Bellossom<|SEP|>Voltorb", 4],
             ["which airlines fly from boston to washington dc via other cities<|SEP|>show me the airlines that fly between toronto and denver<|SEP|>show me round trip first class tickets from new york to miami<|SEP|>i'd like the lowest fare from denver to pittsburgh<|SEP|>show me a list of ground transportation at boston airport<|SEP|>show me boston ground transportation<|SEP|>of all airlines which airline has the most arrivals in atlanta<|SEP|>what ground transportation is available in boston<|SEP|>i would like your rates between atlanta and boston on september third<|SEP|>which airlines fly between boston and pittsburgh", 2],
         ],
