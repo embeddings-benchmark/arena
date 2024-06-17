@@ -32,9 +32,6 @@ retrieval_logger = build_logger("gradio_retrieval", "gradio_retrieval.log")
 clustering_logger = build_logger("gradio_clustering", "gradio_clustering.log")
 sts_logger = build_logger("gradio_sts", "gradio_sts.log")
 
-disable_btn = gr.update(interactive=False)
-disable_btn_visible = gr.update(interactive=False, visible=False)
-
 def get_ip(request: gr.Request):
     if request:
         if "cf-connecting-ip" in request.headers:
@@ -45,50 +42,26 @@ def get_ip(request: gr.Request):
         ip = ""
     return ip
 
-def clear_history():
-    return None, "", None
-
-def clear_history_sts():
-    return None, "", "", "", None
-
-def clear_history_clustering():
-    return None, "", 1, None
-
-def clear_history_side_by_side():
-    return None, None, "", None, None
-
+def clear_history(): return None, "", None
+def clear_history_sts(): return None, "", "", "", None
+def clear_history_clustering(): return None, "", 1, None
+def clear_history_side_by_side(): return None, None, "", None, None
 def clear_history_side_by_side_anon():
     return None, None, "", None, None, gr.Markdown("", visible=False), gr.Markdown("", visible=False)
-
 def clear_history_side_by_side_anon_sts():
     return None, None, "", "", "",  None, None, gr.Markdown("", visible=False), gr.Markdown("", visible=False)
-
 def clear_history_side_by_side_anon_clustering():
     return None, None, "", 1, None, None, gr.Markdown("", visible=False), gr.Markdown("", visible=False)
 
-def enable_buttons(i=5):
-    return tuple(gr.update(interactive=True) for _ in range(i))
+def disable_btns(i=6, visible=True): return (gr.update(interactive=False, visible=visible),) * i
+def enable_btns(i=6, visible=True): return (gr.update(interactive=True, visible=visible),) * i
 
-def disable_buttons(i=5):
-    return tuple(gr.update(interactive=False) for _ in range(i))
+def enable_btns_clustering(state0):
+    if (state0 is not None) and (len(state0.prompts) >= 3): return enable_btns(9)
+    return enable_btns(4) + disable_buttons_side_by_side(5)
 
 def disable_buttons_side_by_side(i=6):
     return tuple(gr.update(visible=i>=4, interactive=False) for i in range(i))
-
-def disable_buttons_side_by_side_sts(i=6):
-    return tuple(gr.update(visible=False, interactive=False) for i in range(i))
-
-def disable_buttons_side_by_side_clustering(i=6):
-    return tuple(gr.update(visible=False, interactive=False) for _ in range(i))
-
-def enable_buttons_side_by_side(i=6):
-    return tuple(gr.update(visible=True, interactive=True) for i in range(i))
-
-def enable_buttons_side_by_side_clustering(state0):
-    if (state0 is not None) and (len(state0.prompts) >= 3):
-        return enable_buttons_side_by_side(9)
-    else:
-        return enable_buttons_side_by_side(4) + disable_buttons_side_by_side(5)
 
 def vote_last_response(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
     gr.Info(info_txt)
@@ -108,8 +81,8 @@ def vote_last_response(vote_type, state0, state1, model_selector0, model_selecto
     if vote_type == "share": return
 
     if model_selector0 == "":
-        return ("Press 🎲 New Round to start over 👇 (Note: Your vote shapes the leaderboard, please vote RESPONSIBLY!)",) + (disable_btn,) * 4 + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
-    return ("Press 🎲 New Round to start over 👇 (Note: Your vote shapes the leaderboard, please vote RESPONSIBLY!)",) + (disable_btn,) * 4 + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
+        return ("Press 🎲 New Round to start over 👇 (Note: Your vote shapes the leaderboard, please vote RESPONSIBLY!)",) + disable_btns(4) + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
+    return ("Press 🎲 New Round to start over 👇 (Note: Your vote shapes the leaderboard, please vote RESPONSIBLY!)",) + disable_btns(4) + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
 
 def vote_last_response_sts(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
     gr.Info(info_txt)
@@ -130,8 +103,8 @@ def vote_last_response_sts(vote_type, state0, state1, model_selector0, model_sel
     if vote_type == "share": return
 
     if model_selector0 == "":
-        return (disable_btn,) * 4 + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
-    return (disable_btn,) * 4 + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
+        return disable_btns(4) + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
+    return disable_btns(4) + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
 
 def vote_last_response_clustering(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
     gr.Info(info_txt)
@@ -152,8 +125,8 @@ def vote_last_response_clustering(vote_type, state0, state1, model_selector0, mo
     if vote_type == "share": return
 
     if model_selector0 == "":
-        return (disable_btn_visible,) * 4 + (disable_btn,) * 4 + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
-    return (disable_btn_visible,) * 4 + (disable_btn,) * 4 + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
+        return disable_btns(4, visible=False) + disable_btns(4) + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
+    return disable_btns(4, visible=False) + disable_btns(4) + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
 
 def vote_last_response_single(vote_type, state, model_selector, request: gr.Request):
     gr.Info(info_txt)
@@ -169,7 +142,7 @@ def vote_last_response_single(vote_type, state, model_selector, request: gr.Requ
     }
     store_data_in_hub(data, "retrieval_single_choice")
 
-    return ("",) + (disable_btn,) * 3
+    return ("",) + disable_btns(3)
 
 def vote_last_response_single_sts(vote_type, state, model_selector, request: gr.Request):
     gr.Info(info_txt)
@@ -185,7 +158,7 @@ def vote_last_response_single_sts(vote_type, state, model_selector, request: gr.
     }
     store_data_in_hub(data, "sts_single_choice")
 
-    return (disable_btn,) * 3
+    return disable_btns(3)
 
 def vote_last_response_single_clustering(vote_type, state, model_selector, request: gr.Request):
     gr.Info(info_txt)
@@ -201,7 +174,7 @@ def vote_last_response_single_clustering(vote_type, state, model_selector, reque
     }
     store_data_in_hub(data, "clustering_single_choice")
 
-    return (disable_btn_visible,) * 4 + (disable_btn,) * 3
+    return disable_btns(4, visible=False) + disable_btns(3)
 
 def get_conv_log_filename():
     t = datetime.datetime.now()
@@ -222,7 +195,7 @@ class RetrievalState:
             return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_prompt": self.prompt, f"{prefix}_output": self.output}
 
 def retrieve_side_by_side(gen_func, state0, state1, text, model_name0, model_name1, request: gr.Request):
-    if not text: raise gr.Warning("Prompt cannot be empty.")
+    if not text: raise gr.Warning("Query cannot be empty.")
     state0, state1 = RetrievalState(model_name0), RetrievalState(model_name1)
     ip = get_ip(request)
     retrieval_logger.info(f"Retrieval. ip: {ip}")
@@ -265,7 +238,7 @@ def retrieve_side_by_side(gen_func, state0, state1, text, model_name0, model_nam
     store_data_in_hub(data, "retrieval_individual")
 
 def retrieve(gen_func, state, text, model_name, request: gr.Request):
-    if not text: raise gr.Warning("Prompt cannot be empty.")
+    if not text: raise gr.Warning("Query cannot be empty.")
     if not model_name: raise gr.Warning("Model name cannot be empty.")
     state = RetrievalState(model_name)
     ip = get_ip(request)
@@ -279,7 +252,6 @@ def retrieve(gen_func, state, text, model_name, request: gr.Request):
     yield state, retrieved_txt
     
     finish_tstamp = time.time()
-    # logger.info(f"===output===: {output}")
 
     data = {
         "tstamp": round(finish_tstamp, 4),
@@ -295,7 +267,7 @@ def retrieve(gen_func, state, text, model_name, request: gr.Request):
     store_data_in_hub(data, "retrieval_individual")
 
 def check_input_retrieval(txt):
-    if not(txt): raise gr.Warning("Prompt cannot be empty.")
+    if not(txt): raise gr.Warning("Query cannot be empty.")
 
 def build_side_by_side_ui_anon(models):
     notice_markdown = """
@@ -401,7 +373,7 @@ def build_side_by_side_ui_anon(models):
         outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right],
         api_name="submit_btn_anon"
     ).then(
-        enable_buttons_side_by_side,
+        enable_btns,
         inputs=None,
         outputs=btn_list
     )
@@ -420,7 +392,7 @@ def build_side_by_side_ui_anon(models):
         outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right],
         api_name="send_btn_anon"
     ).then(
-        enable_buttons_side_by_side,
+        enable_btns,
         inputs=None,
         outputs=btn_list
     )
@@ -435,7 +407,7 @@ def build_side_by_side_ui_anon(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 3),
+        partial(enable_btns, 3),
         inputs=None,
         outputs=[send_btn, textbox, draw_btn],
     )
@@ -607,7 +579,7 @@ def build_side_by_side_ui_named(models):
         outputs=[state0, state1, chatbot_left, chatbot_right],
         api_name="textbox_side_by_side"
     ).then(
-        enable_buttons_side_by_side, 
+        enable_btns, 
         inputs=None,  
         outputs=btn_list 
     )
@@ -626,7 +598,7 @@ def build_side_by_side_ui_named(models):
         outputs=[state0, state1, chatbot_left, chatbot_right],
         api_name="send_side_by_side"
     ).then(
-        enable_buttons_side_by_side,
+        enable_btns,
         inputs=None,
         outputs=btn_list
     )
@@ -641,7 +613,7 @@ def build_side_by_side_ui_named(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 3),
+        partial(enable_btns, 3),
         inputs=None,
         outputs=[textbox, send_btn, draw_btn],
     )
@@ -773,11 +745,11 @@ def build_single_model_ui(models):
         outputs=[state, textbox, chatbot], 
         api_name="model_selector_single"
     ).then(
-        disable_buttons,
+        partial(disable_btns, 4),
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 3),
+        partial(enable_btns, 3),
         inputs=None,
         outputs=[textbox, send_btn, draw_btn],
     )
@@ -797,7 +769,7 @@ def build_single_model_ui(models):
         api_name="submit_btn_single",
         show_progress = "full"
     ).success(
-        enable_buttons,
+        partial(enable_btns, 4),
         inputs=None,
         outputs=btn_list
     )
@@ -817,7 +789,7 @@ def build_single_model_ui(models):
         api_name="send_btn_single",
         show_progress = "full"
     ).success(
-        enable_buttons,
+        partial(enable_btns, 4),
         inputs=None,
         outputs=btn_list
     )
@@ -843,19 +815,20 @@ def build_single_model_ui(models):
         api_name="clear_history_single",
         show_progress="full"
     ).then(
-        disable_buttons,
+        partial(disable_btns, 4),
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 3),
+        partial(enable_btns, 3),
         inputs=None,
         outputs=[textbox, send_btn, draw_btn],
     )
 
 ### Clustering ###
 
-def check_input_clustering(txt):
-    if not(txt): raise gr.Warning("Prompt cannot be empty.")
+def check_input_clustering(state, txt):
+    if not(txt): raise gr.Warning("Text cannot be empty.")
+    if (state) and (hasattr(state, "prompts")) and (txt in state.prompts): raise gr.Warning("Text already added.")
 
 # https://github.com/lm-sys/FastChat/blob/73936244535664c7e4c9bc1a419aa7f77b2da88e/fastchat/serve/gradio_web_server.py#L100
 # https://github.com/lm-sys/FastChat/blob/73936244535664c7e4c9bc1a419aa7f77b2da88e/fastchat/serve/gradio_block_arena_named.py#L165
@@ -874,7 +847,7 @@ class ClusteringState:
             return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_prompt": self.prompts, f"{prefix}_ncluster": self.ncluster, f"{prefix}_output": self.output}
 
 def clustering_side_by_side(gen_func, state0, state1, txt, model_name0, model_name1, ncluster, request: gr.Request):
-    if not txt: raise gr.Warning("Prompt cannot be empty.")
+    if not txt: raise gr.Warning("Text cannot be empty.")
     if state0 is None:
         state0 = ClusteringState(model_name1)
     if state1 is None:
@@ -930,7 +903,7 @@ def clustering_side_by_side(gen_func, state0, state1, txt, model_name0, model_na
 
 
 def clustering(gen_func, state, txt, model_name, ncluster, request: gr.Request):
-    if not txt: raise gr.Warning("Prompt cannot be empty.")
+    if not txt: raise gr.Warning("Text cannot be empty.")
     if not model_name: raise gr.Warning("Model name cannot be empty.")
     if state is None:
         state = ClusteringState(model_name)
@@ -949,7 +922,6 @@ def clustering(gen_func, state, txt, model_name, ncluster, request: gr.Request):
     yield state, generated_img, None, ncluster
     
     finish_tstamp = time.time()
-    # logger.info(f"===output===: {output}")
 
     data = {
         "tstamp": round(finish_tstamp, 4),
@@ -1063,10 +1035,10 @@ def build_side_by_side_ui_anon_clustering(models):
 
     textbox.submit(
         check_input_clustering,
-        inputs=textbox,
+        inputs=[state0, textbox],
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side_clustering, 4),
+        partial(disable_btns, 4, visible=False),
         inputs=None,
         outputs=[send_btn, textbox, ncluster, draw_btn],
     ).then(
@@ -1075,17 +1047,17 @@ def build_side_by_side_ui_anon_clustering(models):
         outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox, ncluster],
         api_name="submit_btn_anon"
     ).then(
-        enable_buttons_side_by_side_clustering,
+        enable_btns_clustering,
         inputs=state0,
         outputs=[send_btn, textbox, ncluster, draw_btn] + btn_list,
     )
 
     send_btn.click(
         check_input_clustering,
-        inputs=textbox,
+        inputs=[state0, textbox],
         outputs=None,
     ).success(        
-        partial(disable_buttons_side_by_side_clustering, 4),
+        partial(disable_btns, 4, visible=False),
         inputs=None,
         outputs=[send_btn, textbox, ncluster, draw_btn],
     ).then(
@@ -1094,7 +1066,7 @@ def build_side_by_side_ui_anon_clustering(models):
         outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox, ncluster],
         api_name="send_btn_anon"
     ).then(
-        enable_buttons_side_by_side_clustering,
+        enable_btns_clustering,
         inputs=state0,
         outputs=[send_btn, textbox, ncluster, draw_btn] + btn_list,
     )
@@ -1109,7 +1081,7 @@ def build_side_by_side_ui_anon_clustering(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 4),
+        partial(enable_btns, 4),
         inputs=None,
         outputs=[send_btn, textbox, ncluster, draw_btn],
     )
@@ -1251,10 +1223,10 @@ def build_side_by_side_ui_named_clustering(models):
 
     textbox.submit(
         check_input_clustering,
-        inputs=textbox,
+        inputs=[state0, textbox],
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side_clustering, 4),
+        partial(disable_btns, 4, visible=False),
         inputs=None,
         outputs=[send_btn, textbox, ncluster, draw_btn],
     ).then(
@@ -1263,17 +1235,17 @@ def build_side_by_side_ui_named_clustering(models):
         outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox, ncluster],
         api_name="textbox_side_by_side"
     ).then(
-        enable_buttons_side_by_side_clustering,
+        enable_btns_clustering,
         inputs=state0,
         outputs=[send_btn, draw_btn, textbox, ncluster] + btn_list,
     )
 
     send_btn.click(
         check_input_clustering,
-        inputs=textbox,
+        inputs=[state0, textbox],
         outputs=None,
     ).success(        
-        partial(disable_buttons_side_by_side_clustering, 4),
+        partial(disable_btns, 4, visible=False),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox, ncluster],
     ).then(
@@ -1282,7 +1254,7 @@ def build_side_by_side_ui_named_clustering(models):
         outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox, ncluster],
         api_name="send_side_by_side"
     ).then(
-        enable_buttons_side_by_side_clustering,
+        enable_btns_clustering,
         inputs=state0,
         outputs=[send_btn, draw_btn, textbox, ncluster] + btn_list,
     )
@@ -1297,7 +1269,7 @@ def build_side_by_side_ui_named_clustering(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 4),
+        partial(enable_btns, 4),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox, ncluster],
     )
@@ -1410,21 +1382,21 @@ def build_single_model_ui_clustering(models):
         outputs=[state, textbox, ncluster, chatbot], 
         api_name="model_selector_single"
     ).then(
-        disable_buttons,
+        partial(disable_btns, 4),
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 4),
+        partial(enable_btns, 4),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox, ncluster],
     )
     
     textbox.submit(
         check_input_clustering,
-        inputs=textbox,
+        inputs=[state, textbox],
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side_clustering, 4),
+        partial(disable_btns, 4, visible=False),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox, ncluster],
     ).then(
@@ -1434,17 +1406,17 @@ def build_single_model_ui_clustering(models):
         api_name="submit_btn_single",
         show_progress="full"
     ).then(
-        enable_buttons_side_by_side_clustering,
+        enable_btns_clustering,
         inputs=state,
         outputs=[send_btn, draw_btn, textbox, ncluster] + btn_list,
     )
 
     send_btn.click(
         check_input_clustering,
-        inputs=textbox,
+        inputs=[state, textbox],
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side_clustering, 4),
+        partial(disable_btns, 4, visible=False),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox, ncluster],
     ).then(
@@ -1454,7 +1426,7 @@ def build_single_model_ui_clustering(models):
         api_name="send_btn_single",
         show_progress="full"
     ).then(
-        enable_buttons_side_by_side_clustering,
+        enable_btns_clustering,
         inputs=state,
         outputs=[send_btn, draw_btn, textbox, ncluster] + btn_list,
     )
@@ -1481,11 +1453,11 @@ def build_single_model_ui_clustering(models):
         api_name="clear_history_single",
         show_progress="full"
     ).then(
-        disable_buttons,
+        partial(disable_btns, 4),
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side_clustering, 4),
+        partial(enable_btns_clustering, 4),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox, ncluster],
     )
@@ -1508,7 +1480,7 @@ class STSState:
         
 
 def sts_side_by_side(gen_func, state0, state1, txt0, txt1, txt2, model_name0, model_name1, request: gr.Request):
-    if any([x is None for x in (txt0, txt1, txt2)]): raise gr.Warning("Prompt cannot be empty.")
+    if any([x is None for x in (txt0, txt1, txt2)]): raise gr.Warning("Text cannot be empty.")
     state0, state1 = STSState(model_name0), STSState(model_name1)
     ip = get_ip(request)
     retrieval_logger.info(f"Retrieval. ip: {ip}")
@@ -1552,7 +1524,7 @@ def sts_side_by_side(gen_func, state0, state1, txt0, txt1, txt2, model_name0, mo
     store_data_in_hub(data, "sts_individual")
 
 def sts(gen_func, state, txt0, txt1, txt2, model_name, request: gr.Request):
-    if any([x is None for x in (txt0, txt1, txt2)]): raise gr.Warning("Prompt cannot be empty.")
+    if any([x is None for x in (txt0, txt1, txt2)]): raise gr.Warning("Text cannot be empty.")
     if not model_name: raise gr.Warning("Model name cannot be empty.")
     state = STSState(model_name)
     ip = get_ip(request)
@@ -1582,7 +1554,7 @@ def sts(gen_func, state, txt0, txt1, txt2, model_name, request: gr.Request):
 
 
 def check_input_sts(txt0, txt1, txt2):
-    if any([not(x) for x in (txt0, txt1, txt2)]): raise gr.Warning("Prompt cannot be empty.")
+    if any([not(x) for x in (txt0, txt1, txt2)]): raise gr.Warning("Text cannot be empty.")
     if len(set([txt0, txt1, txt2])) != 3: raise gr.Warning("Please input three different texts.")
 
 def build_side_by_side_ui_anon_sts(models):
@@ -1688,7 +1660,7 @@ def build_side_by_side_ui_anon_sts(models):
         inputs=[textbox0, textbox1, textbox2],
         outputs=None
     ).success(
-        partial(disable_buttons, 5),
+        partial(disable_btns, 5),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],   
     ).success(
@@ -1697,7 +1669,7 @@ def build_side_by_side_ui_anon_sts(models):
         outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right],
         api_name="send_btn_anon"
     ).success(
-        enable_buttons_side_by_side,
+        enable_btns,
         inputs=None,
         outputs=btn_list
     )
@@ -1712,7 +1684,7 @@ def build_side_by_side_ui_anon_sts(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 5),
+        partial(enable_btns, 5),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],
     )
@@ -1857,7 +1829,7 @@ def build_side_by_side_ui_named_sts(models):
         inputs=[textbox0, textbox1, textbox2],
         outputs=None
     ).success(
-        partial(disable_buttons, 5),
+        partial(disable_btns, 5),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],
     ).success(
@@ -1866,7 +1838,7 @@ def build_side_by_side_ui_named_sts(models):
         outputs=[state0, state1, chatbot_left, chatbot_right],
         api_name="send_side_by_side"
     ).success(
-        enable_buttons_side_by_side,
+        enable_btns,
         inputs=None,
         outputs=btn_list
     )
@@ -1881,7 +1853,7 @@ def build_side_by_side_ui_named_sts(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 5),
+        partial(enable_btns, 5),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],
     )
@@ -1999,11 +1971,11 @@ def build_single_model_ui_sts(models):
         outputs=[state, textbox0, textbox1, textbox2, chatbot], 
         api_name="model_selector_single"
     ).then(
-        disable_buttons,
+        partial(disable_btns, 4),
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 5),
+        partial(enable_btns, 5),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],
     )
@@ -2013,7 +1985,7 @@ def build_single_model_ui_sts(models):
         inputs=[textbox0, textbox1, textbox2],
         outputs=None
     ).success(
-        partial(disable_buttons, 5),
+        partial(disable_btns, 5),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],   
     ).success(
@@ -2023,7 +1995,7 @@ def build_single_model_ui_sts(models):
         api_name="send_btn_single",
         show_progress="full"
     ).success(
-        enable_buttons,
+        partial(enable_btns, 4),
         inputs=None,
         outputs=btn_list
     )
@@ -2050,11 +2022,11 @@ def build_single_model_ui_sts(models):
         api_name="clear_history_single",
         show_progress="full"
     ).then(
-        disable_buttons,
+        partial(disable_btns, 4),
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_buttons_side_by_side, 5),
+        partial(enable_btns, 5),
         inputs=None,
         outputs=[send_btn, draw_btn, textbox0, textbox1, textbox2],
     )
