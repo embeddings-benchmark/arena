@@ -1510,7 +1510,7 @@ def sts_side_by_side(gen_func, state0, state1, txt0, txt1, txt2, model_name0, mo
     generated_image0, generated_image1, model_name0, model_name1 = gen_func(txt0, txt1, txt2, model_name0, model_name1)
     state0.txt0, state0.txt1, state0.txt2 = txt0, txt1, txt2
     state1.txt0, state1.txt1, state1.txt2 = txt0, txt1, txt2
-    state0.output, state1.output = generated_image0, generated_image1
+    # state0.output, state1.output = generated_image0, generated_image1
     state0.model_name, state1.model_name = model_name0, model_name1
     
     yield state0, state1, generated_image0, generated_image1, \
@@ -1553,7 +1553,7 @@ def sts(gen_func, state, txt0, txt1, txt2, model_name, request: gr.Request):
     start_tstamp = time.time()
     generated_image = gen_func(txt0, txt1, txt2, model_name)
     state.txt0, state.txt1, state.txt2 = txt0, txt1, txt2
-    state.output = generated_image
+    # state.output = generated_image
     state.model_name = model_name
     
     yield state, generated_image
@@ -1581,17 +1581,22 @@ def check_input_sts(txt0, txt1, txt2):
 def build_side_by_side_ui_anon_sts(models):
     notice_markdown = """
 # ⚔️ MTEB Arena: STS ☘️
-## 📜 Rules
+## 📜 Rules (Play the video for an explanation ➡️)
 - Input three different texts to two anonymous models and vote which visualizes their similarity better.
-- The closer two corners of the triangle are, the more similar their texts are to the model.
+- The closer (smaller distance) two corners of the triangle are, the more similar their texts are to the model.
+- The distances between the corners are inverted and scaled cosine similarities and displayed on the edges.
 
 ## 👇 Vote now!
 """
     state0 = gr.State()
     state1 = gr.State()
     gen_func = partial(sts_side_by_side, models.sts_parallel)
-    
-    gr.Markdown(notice_markdown, elem_id="notice_markdown")
+
+    with gr.Row():
+        with gr.Column(scale=3):
+            gr.Markdown(notice_markdown, elem_id="notice_markdown")
+        with gr.Column(scale=2):
+            gr.Video("videos/sts_explanation.mp4", label="Video Explanation", elem_id="video")
 
     with gr.Group(elem_id="share-region-anon"):
         with gr.Accordion("🔍 Expand to see all Arena players", open=False):
@@ -1599,9 +1604,9 @@ def build_side_by_side_ui_anon_sts(models):
             gr.Markdown(model_description_md, elem_id="model_description_markdown")
         with gr.Row():
             with gr.Column():
-                chatbot_left = gr.HTML(label="Model A")
+                chatbot_left = gr.Plot(label="Model A")
             with gr.Column():
-                chatbot_right = gr.HTML(label="Model B")
+                chatbot_right = gr.Plot(label="Model B")
 
         with gr.Row():
             with gr.Column():
@@ -1731,9 +1736,10 @@ def build_side_by_side_ui_anon_sts(models):
 def build_side_by_side_ui_named_sts(models):
     notice_markdown = """
 # ⚔️ MTEB Arena: STS ☘️
-## 📜 Rules
-- Input three different texts to two models and vote which visualizes their similarity better.
-- The closer two corners of the triangle are, the more similar their texts are to the model.
+## 📜 Rules (Play the video for an explanation ➡️)
+- Input three different texts to two anonymous models and vote which visualizes their similarity better.
+- The closer (smaller distance) two corners of the triangle are, the more similar their texts are to the model.
+- The distances between the corners are inverted and scaled cosine similarities and displayed on the edges.
 
 ## 👇 Vote now!
 """
@@ -1742,7 +1748,11 @@ def build_side_by_side_ui_named_sts(models):
     state0 = gr.State()
     state1 = gr.State()
     gen_func = partial(sts_side_by_side, models.sts_parallel)
-    gr.Markdown(notice_markdown, elem_id="notice_markdown")
+    with gr.Row():
+        with gr.Column(scale=3):
+            gr.Markdown(notice_markdown, elem_id="notice_markdown")
+        with gr.Column(scale=2):
+            gr.Video("videos/sts_explanation.mp4", label="Video Explanation", elem_id="video")
 
     with gr.Group(elem_id="share-region-named"):
         with gr.Row():
@@ -1771,13 +1781,9 @@ def build_side_by_side_ui_named_sts(models):
 
         with gr.Row():
             with gr.Column():
-                chatbot_left = gr.HTML(
-                    label="Model A",
-                )
+                chatbot_left = gr.Plot(label="Model A")
             with gr.Column():
-                chatbot_right = gr.HTML(
-                    label="Model B",
-                )
+                chatbot_right = gr.Plot(label="Model B")
         with gr.Row():
             leftvote_btn = gr.Button(
                 value="👈  A is better", visible=False, interactive=False
@@ -1907,7 +1913,6 @@ def build_single_model_ui_sts(models):
 
     model_list = list(models.model_meta.keys())
 
-
     with gr.Row(elem_id="model_selector_row"):
         model_selector = gr.Dropdown(
             choices=model_list,
@@ -1952,9 +1957,7 @@ def build_single_model_ui_sts(models):
 
     with gr.Group(elem_id="model"):
         with gr.Row():
-            chatbot = gr.HTML(
-                label="Model",
-            )
+            chatbot = gr.Plot(label="Model")
 
     with gr.Row() as button_row:
         upvote_btn = gr.Button(value="👍  Upvote", interactive=False)

@@ -1,12 +1,12 @@
 import concurrent.futures
 import os
+import math
 import random
 
 import mteb
 #import spaces
 
 from retrieval.index import build_index, load_or_initialize_index
-
 
 class ModelManager:
     def __init__(self, model_meta):
@@ -166,10 +166,12 @@ class ModelManager:
             futures = [executor.submit(self.sts, txt0, txt1, txt2, model) for model in model_names]
             results = [future.result() for future in futures]
         return results[0], results[1], model_names[0], model_names[1]
-        
+
+
     def sts(self, txt0, txt1, txt2, model_name):
         import numpy as np
         from numpy.linalg import norm
+        import plotly.graph_objects as go
 
         model = self.load_model(model_name)
         # Compute cos sim all texts; Shape: [3, dim]
@@ -200,49 +202,97 @@ class ModelManager:
         A = (0, 0)
         B = (cos_sims[0], 0)
 
-        # Use the law of cosines to find the third point
-        a = cos_sims[0]
+        # Given distances
+        c = cos_sims[0]
         b = cos_sims[1]
-        c = cos_sims[2]
+        a = cos_sims[2]
 
-        # Calculate coordinates of point C using the law of cosines
-        cos_angle = (a**2 + b**2 - c**2) / (2 * a * b)
-        angle = np.arccos(cos_angle)
+        # Compute angle at A
+        # https://en.wikipedia.org/wiki/Law_of_cosines#Use_in_solving_triangles
+        angle_A = math.acos((b**2 + c**2 - a**2) / (2 * b * c))
+        # https://en.wikipedia.org/wiki/Law_of_cosines#Cartesian_coordinates
+        C_x = b * math.cos(angle_A)
+        C_y = b * math.sin(angle_A)
 
-        Cx = b * np.cos(angle)
-        Cy = b * np.sin(angle)
-        C = (Cx, Cy)
+        C = (C_x, C_y)
 
-        print(f"A: {A}, B: {B}, C: {C}")
+        # Create Plotly plot
+        fig = go.Figure()
 
-        # Create HTML string with SVG to display the triangle
-        html_string = f"""
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Cosine Similarity Triangle</title>
-</head>
-<body>
-    <svg width="400" height="400" viewBox="-150 -50 400 400">
-        <!-- Draw the triangle -->
-        <line x1="{A[0]}" y1="{A[1]}" x2="{B[0]}" y2="{B[1]}" stroke="black" stroke-width="2"/>
-        <line x1="{B[0]}" y1="{B[1]}" x2="{C[0]}" y2="{C[1]}" stroke="black" stroke-width="2"/>
-        <line x1="{C[0]}" y1="{C[1]}" x2="{A[0]}" y2="{A[1]}" stroke="black" stroke-width="2"/>
-        
-        <!-- Draw the points -->
-        <circle cx="{A[0]}" cy="{A[1]}" r="8" fill="red"/>
-        <circle cx="{B[0]}" cy="{B[1]}" r="8" fill="green"/>
-        <circle cx="{C[0]}" cy="{C[1]}" r="8" fill="blue"/>
-        
-        <!-- Label the points -->
-        <text x="{A[0] + 5}" y="{A[1] - 5}" font-family="Arial" font-size="40" fill="black">(1)</text>
-        <text x="{B[0] + 5}" y="{B[1] - 5}" font-family="Arial" font-size="40" fill="black">(2)</text>
-        <text x="{C[0] + 5}" y="{C[1] + 20}" font-family="Arial" font-size="40" fill="black">(3)</text>
-    </svg>
-</body>
-</html>
-"""
-        return html_string
+        # Add lines for the triangle
+        fig.add_trace(go.Scatter(
+            x=[A[0], B[0], C[0], A[0]],
+            y=[A[1], B[1], C[1], A[1]],
+            mode='lines',
+            line=dict(color='black', width=2),
+            showlegend=False,
+            hoverinfo='none',  # Disable hoverinfo for lines
+        ))        
+
+        # Format hovertext with rounded coordinates
+        hovertext = [
+            f"(1) {txt0}<br>({round(A[0])}, {round(A[1])})",
+            f"(2) {txt1}<br>({round(B[0])}, {round(B[1])})",
+            f"(3) {txt2}<br>({round(C[0])}, {round(C[1])})"
+        ]
+
+        # Add points for the vertices with hover information
+        fig.add_trace(go.Scatter(
+            x=[A[0], B[0], C[0]],
+            y=[A[1], B[1], C[1]],
+            mode='markers+text',
+            text=['(1)', '(2)', '(3)'],
+            textposition='top center',
+            hovertext=hovertext,
+            hoverinfo='text',
+            textfont=dict(size=16),
+            marker=dict(size=20, color=['#f6511d', '#ffb400', '#00a6ed']),
+            showlegend=False
+        ))
+        # Calculate distances for annotation
+        distances = [
+            f"{round(c)}",
+            f"{round(b)}",
+            f"{round(a)}"
+        ] 
+        # Calculate midpoints for annotation placement
+        midpoints = [
+            ((A[0] + B[0]) / 2, (A[1] + B[1]) / 2),
+            ((A[0] + C[0]) / 2, (A[1] + C[1]) / 2),
+            ((B[0] + C[0]) / 2, (B[1] + C[1]) / 2),
+        ]        
+        # Add distance annotations
+        for i, (x, y) in enumerate(midpoints):
+            fig.add_trace(go.Scatter(
+                x=[x],
+                y=[y],
+                mode='text',
+                text=[distances[i]],
+                textposition='top center',
+                textfont=dict(size=20, color='black', family='Arial', weight='bold'),
+                showlegend=False,
+                hoverinfo='none'
+            ))
+
+        # Update layout
+        fig.update_layout(
+            title='Similarity Triangle',
+            xaxis=dict(
+                visible=False,
+                scaleanchor='y',  # Anchor x-axis scale to y-axis
+                scaleratio=1,     # Ensure equal scaling
+            ),
+            yaxis=dict(
+                visible=False,
+                scaleanchor='x',  # Anchor y-axis scale to x-axis
+                scaleratio=1,     # Ensure equal scaling
+            ),
+            width=600,
+            height=600,
+            plot_bgcolor='white'
+        )
+
+        return fig
 
     def get_model_description_md(self):
         model_description_md = """
