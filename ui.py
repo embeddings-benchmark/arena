@@ -12,21 +12,6 @@ LOGDIR = os.getenv("LOGDIR", "./MTEB-Arena-logs/vote_log")
 
 info_txt = "🎉 Thanks for voting! Your vote shapes the leaderboard, please vote RESPONSIBLY."
 
-acknowledgment_md = """
-### Acknowledgment
-We thank X, Y, Z, [Contextual AI](https://contextual.ai/) and [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).
-
-<div class="sponsor-image-about" style="display: flex; align-items: center; gap: 10px;">
-    <a href="https://contextual.ai/">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd4EDMoZLFRrIjVBrSXOQYGcmvUJ3kL4U2usvjuKPla-LoRTZtLzFnb_Cu5tXzRI7DNBo&usqp=CAU" width="60" height="55" style="padding: 10px;">
-    </a>
-    <a href="https://huggingface.co">
-        <img src="https://raw.githubusercontent.com/embeddings-benchmark/mteb/main/docs/images/hf_logo.png" width="60" height="55" style="padding: 10px;">
-    </a>
-</div>
-
-We thank [Chatbot Arena](https://chat.lmsys.org/), [Vision Arena](https://huggingface.co/spaces/WildVision/vision-arena) and [GenAI-Arena](https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena) for inspiration.
-"""
 # loggers for side-by-side and battle
 retrieval_logger = build_logger("gradio_retrieval", "gradio_retrieval.log")
 clustering_logger = build_logger("gradio_clustering", "gradio_clustering.log")
@@ -348,8 +333,6 @@ def build_side_by_side_ui_anon(models):
         inputs=[textbox],
     )
 
-    gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
-
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
     draw_btn.click(
@@ -553,8 +536,6 @@ def build_side_by_side_ui_named(models):
         ],
         inputs=[textbox],
     )
-
-    gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
     
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
@@ -696,6 +677,14 @@ def build_single_model_ui(models):
             gr.Markdown(model_description_md, elem_id="model_description_markdown")
 
     with gr.Row():
+        chatbot = gr.Chatbot(
+            label="Model",
+            elem_id="chatbot",
+            height=550,
+            show_copy_button=True,
+        )
+
+    with gr.Row():
         textbox = gr.Textbox(
             show_label=False,
             placeholder="👉 Enter your query and press ENTER",
@@ -703,14 +692,6 @@ def build_single_model_ui(models):
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
         draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
-
-    with gr.Row():
-        chatbot = gr.Chatbot(
-            label="Model",
-            elem_id="chatbot",
-            height=550,
-            show_copy_button=True,
-        )
 
     with gr.Row() as button_row:
         upvote_btn = gr.Button(value="👍  Upvote", interactive=False)
@@ -728,8 +709,6 @@ def build_single_model_ui(models):
         inputs=[textbox],
     )
 
-    gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
-    
     btn_list = [upvote_btn, downvote_btn, flag_btn, clear_btn]
 
     draw_btn.click(
@@ -1022,8 +1001,6 @@ def build_side_by_side_ui_anon_clustering(models):
         inputs=[textbox, ncluster],
     )
 
-    gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
-
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
     draw_btn.click(
@@ -1210,8 +1187,6 @@ def build_side_by_side_ui_named_clustering(models):
         inputs=[textbox, ncluster],
     )
 
-    gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
-    
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
     draw_btn.click(
@@ -1326,6 +1301,9 @@ def build_single_model_ui_clustering(models):
             gr.Markdown(model_description_md, elem_id="model_description_markdown")
 
     with gr.Row():
+        chatbot = gr.Plot(label="Model")
+
+    with gr.Row():
         textbox = gr.Textbox(
             show_label=True,
             label="Text to cluster",
@@ -1344,9 +1322,6 @@ def build_single_model_ui_clustering(models):
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
         draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
 
-    with gr.Row():
-        chatbot = gr.Plot(label="Model")
-
     with gr.Row() as button_row:
         upvote_btn = gr.Button(value="👍  Upvote", interactive=False)
         downvote_btn = gr.Button(value="👎  Downvote", interactive=False)
@@ -1364,8 +1339,6 @@ def build_single_model_ui_clustering(models):
         ],
         inputs=[textbox, ncluster],
     )
-
-    gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
 
     btn_list = [upvote_btn, downvote_btn, flag_btn, clear_btn]
 
@@ -1644,8 +1617,6 @@ def build_side_by_side_ui_anon_sts(models):
         inputs=[textbox0, textbox1, textbox2],
     )
 
-    gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
-
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
     draw_btn.click(
@@ -1813,8 +1784,6 @@ def build_side_by_side_ui_named_sts(models):
         ],
         inputs=[textbox0, textbox1, textbox2],
     )
-
-    gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
     
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
@@ -1909,6 +1878,10 @@ def build_single_model_ui_sts(models):
             model_description_md = models.get_model_description_md()
             gr.Markdown(model_description_md, elem_id="model_description_markdown")
 
+    with gr.Group(elem_id="model"):
+        with gr.Row():
+            chatbot = gr.Plot(label="Model")
+
     with gr.Row():
         textbox0 = gr.Textbox(
             show_label=True,
@@ -1934,10 +1907,6 @@ def build_single_model_ui_sts(models):
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
         draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
 
-    with gr.Group(elem_id="model"):
-        with gr.Row():
-            chatbot = gr.Plot(label="Model")
-
     with gr.Row() as button_row:
         upvote_btn = gr.Button(value="👍  Upvote", interactive=False)
         downvote_btn = gr.Button(value="👎  Downvote", interactive=False)
@@ -1954,8 +1923,6 @@ def build_single_model_ui_sts(models):
         ],
         inputs=[textbox0, textbox1, textbox2],
     )
-
-    gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
     
     btn_list = [upvote_btn, downvote_btn, flag_btn, clear_btn]
 

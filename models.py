@@ -133,9 +133,15 @@ class ModelManager:
             model = self.load_model(model_name)
             emb = model.encode(queries)
             vis_dims = PCA(n_components=2).fit_transform(emb)
-            df = pd.DataFrame({"txt": queries, "x": vis_dims[:, 0], "y": vis_dims[:, 1]})
+            data = {"txt": queries, "x": vis_dims[:, 0], "y": vis_dims[:, 1]}
+            if ncluster > 1:
+                data["cluster"] = KMeans(n_clusters=ncluster, n_init='auto', random_state=0).fit_predict(emb).tolist()
+            df = pd.DataFrame(data)
             df["txt"] = df["txt"].str[:90]
-            fig = px.scatter(df, x="x", y="y", template="plotly_dark", hover_name="txt")
+            if ncluster > 1:
+                fig = px.scatter(df, x="x", y="y", color="cluster", template="plotly_dark", hover_name="txt")
+            else:            
+                fig = px.scatter(df, x="x", y="y", template="plotly_dark", hover_name="txt")
         else:
             model = self.load_model(model_name)
             emb = model.encode(queries)
@@ -229,13 +235,6 @@ class ModelManager:
             hoverinfo='none',  # Disable hoverinfo for lines
         ))        
 
-        # Format hovertext with rounded coordinates
-        hovertext = [
-            f"(1) {txt0}<br>({round(A[0])}, {round(A[1])})",
-            f"(2) {txt1}<br>({round(B[0])}, {round(B[1])})",
-            f"(3) {txt2}<br>({round(C[0])}, {round(C[1])})"
-        ]
-
         # Add points for the vertices with hover information
         fig.add_trace(go.Scatter(
             x=[A[0], B[0], C[0]],
@@ -243,7 +242,7 @@ class ModelManager:
             mode='markers+text',
             text=['(1)', '(2)', '(3)'],
             textposition='top center',
-            hovertext=hovertext,
+            hovertext=[txt0, txt1, txt2],
             hoverinfo='text',
             textfont=dict(size=16),
             marker=dict(size=20, color=['#f6511d', '#ffb400', '#00a6ed']),
