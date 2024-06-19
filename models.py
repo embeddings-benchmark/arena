@@ -100,18 +100,18 @@ class ModelManager:
         docs = [[query, "Title: " + docs[0][0]["title"] + "\n\n" + "Passage: " + docs[0][0]["text"]]]
         return docs
     
-    def clustering_parallel(self, prompt, model_A, model_B, ncluster=1):
+    def clustering_parallel(self, prompt, model_A, model_B, ncluster=1, ndim="3D"):
         if model_A == "" and model_B == "":
             model_names = random.sample(list(self.model_meta.keys()), 2)
         else:
             model_names = [model_A, model_B]
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [executor.submit(self.clustering, prompt, model, ncluster) for model in model_names]
+            futures = [executor.submit(self.clustering, prompt, model, ncluster, ndim) for model in model_names]
             results = [future.result() for future in futures]
         return results[0], results[1], model_names[0], model_names[1]
     
-    def clustering(self, queries, model_name, ncluster=1, method="PCA"):
+    def clustering(self, queries, model_name, ncluster=1, ndim="3D", method="PCA"):
         """
         Sources:
         - https://www.gradio.app/guides/plot-component-for-maps
@@ -129,7 +129,7 @@ class ModelManager:
             df["txt"] = df["txt"].str[:90]
             fig = px.scatter(df, x="x", template="plotly_dark", hover_name="txt")
             fig.update_layout(xaxis_title='', yaxis_title='')
-        elif len(queries) < 4:
+        elif (ndim == "2D") or (len(queries) < 4):
             model = self.load_model(model_name)
             emb = model.encode(queries)
             vis_dims = PCA(n_components=2).fit_transform(emb)
@@ -142,6 +142,7 @@ class ModelManager:
                 fig = px.scatter(df, x="x", y="y", color="cluster", template="plotly_dark", hover_name="txt")
             else:            
                 fig = px.scatter(df, x="x", y="y", template="plotly_dark", hover_name="txt")
+            fig.update_traces(marker=dict(size=12))
         else:
             model = self.load_model(model_name)
             emb = model.encode(queries)
