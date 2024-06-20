@@ -819,6 +819,8 @@ class ClusteringState:
         self.output = ""
         self.ncluster = 1
         self.ndim = "3D"
+        self.dim_method = "PCA"
+        self.clustering_method = "KMeans"
 
     def dict(self, prefix: str = None):
         if prefix is None:
@@ -826,7 +828,7 @@ class ClusteringState:
         else:
             return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_prompt": self.prompts, f"{prefix}_ncluster": self.ncluster, f"{prefix}_output": self.output}
 
-def clustering_side_by_side(gen_func, state0, state1, txt, ncluster, ndim, model_name0, model_name1, request: gr.Request):
+def clustering_side_by_side(gen_func, state0, state1, txt, ncluster, ndim, dim_method, clustering_method, model_name0, model_name1, request: gr.Request):
     if state0 is None:
         state0 = ClusteringState(model_name1)
     if state1 is None:
@@ -846,11 +848,17 @@ def clustering_side_by_side(gen_func, state0, state1, txt, ncluster, ndim, model
     state0.ndim = ndim
     state1.ndim = ndim
 
+    state0.dim_method = dim_method
+    state1.dim_method = dim_method
+
+    state0.clustering_method = clustering_method
+    state1.clustering_method = clustering_method
+
     ip = get_ip(request)
     clustering_logger.info(f"Clustering. ip: {ip}")
     start_tstamp = time.time()
     model_name0, model_name1 = "", ""
-    generated_image0, generated_image1, model_name0, model_name1 = gen_func(state0.prompts, model_name0, model_name1, ncluster, ndim=ndim.split(" ")[0])
+    generated_image0, generated_image1, model_name0, model_name1 = gen_func(state0.prompts, model_name0, model_name1, ncluster, ndim=ndim.split(" ")[0], dim_method=dim_method, clustering_method=clustering_method)
     state0.model_name, state1.model_name = model_name0, model_name1
     
     yield state0, state1, generated_image0, generated_image1, \
@@ -899,10 +907,9 @@ def clustering(gen_func, state, txt, model_name, ncluster, request: gr.Request):
         state.prompts.append(txt)
     state.ncluster = ncluster
     generated_img = gen_func(state.prompts, model_name, state.ncluster)
-    #state.output = retrieved_txt
     state.model_name = model_name
 
-    yield state, generated_img, None, ncluster
+    yield state, generated_img, None
     
     finish_tstamp = time.time()
 
@@ -919,6 +926,12 @@ def clustering(gen_func, state, txt, model_name, ncluster, request: gr.Request):
     }
     store_data_in_hub(data, "clustering_individual")
 
+def toggle_btn(btn):
+    if btn == "3D (press for 2D)": return gr.update(value="2D (press for 3D)", variant="primary")
+    else: return gr.update(value="3D (press for 2D)", variant="primary")
+    
+def check_input_clustering_dim(state):
+    if not(state) or not(state.prompts): raise
 
 def build_side_by_side_ui_anon_clustering(models):
     notice_markdown = """
@@ -994,6 +1007,21 @@ def build_side_by_side_ui_anon_clustering(models):
 
     with gr.Row():
         clear_btn = gr.Button(value="🎲 New Round", interactive=False)
+
+    with gr.Accordion("⚙️ Parameters", open=False) as parameter_row:
+        with gr.Row():
+            dim_method = gr.Radio(
+                ["PCA", "UMAP", "TSNE"],
+                value="PCA",
+                interactive=True,
+                label="Dimensioality reduction algorithm",
+            )
+            clustering_method = gr.Radio(
+                ["KMeans", "MiniBatchKMeans"],
+                value="KMeans",
+                interactive=True,
+                label="Clustering algorithm",
+            )
         
     gr.Examples(
         examples=[
@@ -1009,22 +1037,13 @@ def build_side_by_side_ui_anon_clustering(models):
 
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
-    def toggle_btn(btn):
-        if btn == "3D (press for 2D)":
-            return gr.update(value="2D (press for 3D)", variant="primary")
-        else:
-            return gr.update(value="3D (press for 2D)", variant="primary")
-        
-    def check_input_clustering_dim(state, txt):
-        if not(state) or not(state.prompts): raise
-
     dim_btn.click(
         toggle_btn,
         inputs=[dim_btn],
         outputs=[dim_btn],
     ).then(
         check_input_clustering_dim,
-        inputs=[state0, textbox],
+        inputs=[state0],
         outputs=None,
     ).success(
         partial(disable_btns, 5, visible=False),
@@ -1032,7 +1051,7 @@ def build_side_by_side_ui_anon_clustering(models):
         outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, ncluster, dim_btn, model_selector_left, model_selector_right],
+        inputs=[state0, state1, textbox, ncluster, dim_btn, dim_method, clustering_method, model_selector_left, model_selector_right],
         outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
         api_name="textbox_side_by_side"
     ).then(
@@ -1058,7 +1077,7 @@ def build_side_by_side_ui_anon_clustering(models):
         outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, ncluster, dim_btn, model_selector_left, model_selector_right],
+        inputs=[state0, state1, textbox, ncluster, dim_btn, dim_method, clustering_method, model_selector_left, model_selector_right],
         outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
         api_name="submit_btn_anon"
     ).then(
@@ -1077,7 +1096,7 @@ def build_side_by_side_ui_anon_clustering(models):
         outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, ncluster, dim_btn, model_selector_left, model_selector_right],
+        inputs=[state0, state1, textbox, ncluster, dim_btn, dim_method, clustering_method, model_selector_left, model_selector_right],
         outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
         api_name="send_btn_anon"
     ).then(
@@ -1197,7 +1216,7 @@ def build_side_by_side_ui_named_clustering(models):
             label="Text to cluster",
             placeholder="👉 Enter your text and press ENTER",
             elem_id="input_box",
-            scale=6,
+            scale=64,
         )
         ncluster = gr.Number(
             show_label=True,
@@ -1205,13 +1224,30 @@ def build_side_by_side_ui_named_clustering(models):
             elem_id="ncluster_box",
             value=1,
             minimum=1,
-            scale=1,
+            scale=12,
+            min_width=0,
         )
-        send_btn = gr.Button(value="Send", variant="primary", scale=0)
-        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
+        send_btn = gr.Button(value="Send", variant="primary", scale=8, min_width=0)
+        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=8, min_width=0)
+        dim_btn = gr.Button(value="3D (press for 2D)", variant="primary", scale=5, min_width=0)
 
     with gr.Row():
         clear_btn = gr.Button(value="🗑️  Clear history", interactive=False)
+
+    with gr.Accordion("⚙️ Parameters", open=False) as parameter_row:
+        with gr.Row():
+            dim_method = gr.Radio(
+                ["PCA", "UMAP", "TSNE"],
+                value="PCA",
+                interactive=True,
+                label="Dimensioality reduction algorithm",
+            )
+            clustering_method = gr.Radio(
+                ["KMeans", "MiniBatchKMeans"],
+                value="KMeans",
+                interactive=True,
+                label="Clustering algorithm",
+            )
 
     gr.Examples(
         examples=[
@@ -1227,6 +1263,29 @@ def build_side_by_side_ui_named_clustering(models):
 
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
+    dim_btn.click(
+        toggle_btn,
+        inputs=[dim_btn],
+        outputs=[dim_btn],
+    ).then(
+        check_input_clustering_dim,
+        inputs=[state0],
+        outputs=None,
+    ).success(
+        partial(disable_btns, 5, visible=False),
+        inputs=None,
+        outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn],
+    ).then(
+        gen_func,
+        inputs=[state0, state1, textbox, ncluster, dim_btn, dim_method, clustering_method, model_selector_left, model_selector_right],
+        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
+        api_name="textbox_side_by_side"
+    ).then(
+        enable_btns_clustering,
+        inputs=state0,
+        outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn] + btn_list,
+    )
+
     draw_btn.click(
         models.clustering_draw,
         inputs=None,
@@ -1239,18 +1298,18 @@ def build_side_by_side_ui_named_clustering(models):
         inputs=[state0, textbox],
         outputs=None,
     ).success(
-        partial(disable_btns, 4, visible=False),
+        partial(disable_btns, 5, visible=False),
         inputs=None,
-        outputs=[send_btn, textbox, ncluster, draw_btn],
+        outputs=[send_btn, textbox, ncluster, draw_btn, dim_btn],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, model_selector_left, model_selector_right, ncluster],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox, ncluster],
+        inputs=[state0, state1, textbox, ncluster, dim_btn, dim_method, clustering_method, model_selector_left, model_selector_right],
+        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
         api_name="textbox_side_by_side"
     ).then(
         enable_btns_clustering,
         inputs=state0,
-        outputs=[send_btn, draw_btn, textbox, ncluster] + btn_list,
+        outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn] + btn_list,
     )
 
     send_btn.click(
@@ -1258,18 +1317,18 @@ def build_side_by_side_ui_named_clustering(models):
         inputs=[state0, textbox],
         outputs=None,
     ).success(        
-        partial(disable_btns, 4, visible=False),
+        partial(disable_btns, 5, visible=False),
         inputs=None,
-        outputs=[send_btn, draw_btn, textbox, ncluster],
+        outputs=[send_btn, draw_btn, textbox, ncluster, dim_btn],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, model_selector_left, model_selector_right, ncluster],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox, ncluster],
+        inputs=[state0, state1, textbox, ncluster, dim_btn, dim_method, clustering_method, model_selector_left, model_selector_right],
+        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
         api_name="send_side_by_side"
     ).then(
         enable_btns_clustering,
         inputs=state0,
-        outputs=[send_btn, draw_btn, textbox, ncluster] + btn_list,
+        outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn] + btn_list,
     )
 
     clear_btn.click(
@@ -1284,7 +1343,7 @@ def build_side_by_side_ui_named_clustering(models):
     ).then(
         partial(enable_btns, 4),
         inputs=None,
-        outputs=[send_btn, draw_btn, textbox, ncluster],
+        outputs=[send_btn, textbox, ncluster, draw_btn],
     )
 
     leftvote_btn.click(
@@ -1347,7 +1406,7 @@ def build_single_model_ui_clustering(models):
             label="Text to cluster",
             placeholder="👉 Enter your text and press ENTER",
             elem_id="input_box",
-            scale=6,
+            scale=64,
         )
         ncluster = gr.Number(
             show_label=True,
@@ -1355,16 +1414,33 @@ def build_single_model_ui_clustering(models):
             elem_id="ncluster_box",
             value=1,
             minimum=1,
-            scale=1,
+            scale=12,
+            min_width=0,
         )
-        send_btn = gr.Button(value="Send", variant="primary", scale=0)
-        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
+        send_btn = gr.Button(value="Send", variant="primary", scale=8, min_width=0)
+        draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=8, min_width=0)
+        dim_btn = gr.Button(value="3D (press for 2D)", variant="primary", scale=5, min_width=0)
 
     with gr.Row() as button_row:
         upvote_btn = gr.Button(value="👍  Upvote", interactive=False)
         downvote_btn = gr.Button(value="👎  Downvote", interactive=False)
         flag_btn = gr.Button(value="⚠️  Flag", interactive=False)
         clear_btn = gr.Button(value="🗑️  Clear history", interactive=False)
+
+    with gr.Accordion("⚙️ Parameters", open=False) as parameter_row:
+        with gr.Row():
+            dim_method = gr.Radio(
+                ["PCA", "UMAP", "TSNE"],
+                value="PCA",
+                interactive=True,
+                label="Dimensioality reduction algorithm",
+            )
+            clustering_method = gr.Radio(
+                ["KMeans", "MiniBatchKMeans"],
+                value="KMeans",
+                interactive=True,
+                label="Clustering algorithm",
+            )
 
     gr.Examples(
         examples=[
@@ -1402,24 +1478,48 @@ def build_single_model_ui_clustering(models):
         outputs=[send_btn, draw_btn, textbox, ncluster],
     )
     
-    textbox.submit(
-        check_input_clustering,
-        inputs=[state, textbox],
+    dim_btn.click(
+        toggle_btn,
+        inputs=[dim_btn],
+        outputs=[dim_btn],
+    ).then(
+        check_input_clustering_dim,
+        inputs=[state],
         outputs=None,
     ).success(
-        partial(disable_btns, 4, visible=False),
+        partial(disable_btns, 5, visible=False),
         inputs=None,
-        outputs=[send_btn, draw_btn, textbox, ncluster],
+        outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn],
     ).then(
         gen_func,
-        inputs=[state, textbox, model_selector, ncluster],
-        outputs=[state, chatbot, textbox, ncluster],
+        inputs=[state, textbox, ncluster, dim_method, clustering_method, model_selector],
+        outputs=[state, chatbot, textbox],
         api_name="submit_btn_single",
         show_progress="full"
     ).then(
         enable_btns_clustering,
         inputs=state,
-        outputs=[send_btn, draw_btn, textbox, ncluster] + btn_list,
+        outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn] + btn_list,
+    )
+    
+    textbox.submit(
+        check_input_clustering,
+        inputs=[state, textbox],
+        outputs=None,
+    ).success(
+        partial(disable_btns, 5, visible=False),
+        inputs=None,
+        outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn],
+    ).then(
+        gen_func,
+        inputs=[state, textbox, ncluster, dim_method, clustering_method, model_selector],
+        outputs=[state, chatbot, textbox],
+        api_name="submit_btn_single",
+        show_progress="full"
+    ).then(
+        enable_btns_clustering,
+        inputs=state,
+        outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn] + btn_list,
     )
 
     send_btn.click(
@@ -1427,19 +1527,19 @@ def build_single_model_ui_clustering(models):
         inputs=[state, textbox],
         outputs=None,
     ).success(
-        partial(disable_btns, 4, visible=False),
+        partial(disable_btns, 5, visible=False),
         inputs=None,
-        outputs=[send_btn, draw_btn, textbox, ncluster],
+        outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn],
     ).then(
         gen_func,
-        inputs=[state, textbox, model_selector, ncluster],
-        outputs=[state, chatbot, textbox, ncluster],
+        inputs=[state, textbox, ncluster, dim_method, clustering_method, model_selector],
+        outputs=[state, chatbot, textbox],
         api_name="send_btn_single",
         show_progress="full"
     ).then(
         enable_btns_clustering,
         inputs=state,
-        outputs=[send_btn, draw_btn, textbox, ncluster] + btn_list,
+        outputs=[textbox, ncluster, send_btn, draw_btn, dim_btn] + btn_list,
     )
 
     upvote_btn.click(

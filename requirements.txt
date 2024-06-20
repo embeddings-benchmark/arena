@@ -2,3 +2,4 @@ fire
 gradio
 mteb
 plotly
+umap-learn
