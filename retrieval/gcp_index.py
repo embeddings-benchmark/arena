@@ -3,7 +3,8 @@ import math
 import json
 from google.cloud import aiplatform, storage
 
-from ..models import load_passages, model_name_as_path
+from ..models import model_name_as_path
+from .index import load_passages
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +16,7 @@ class VertexIndex:
     index: aiplatform.MatchingEngineIndex = None
     endpoint: aiplatform.MatchingEngineIndexEndpoint = None
     PROJECT_ID = "[your_project_id]"
-    REGION = "[your_region]"
+    REGION = "us-central1"
     MACHINE_TYPE = "e2-standard-16"
     GCS_BUCKET_NAME = "GCS_BUCKET_NAME"
     GCS_BUCKET_URI = f"gs://{GCS_BUCKET_NAME}"

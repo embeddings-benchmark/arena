@@ -16,9 +16,9 @@ def model_name_as_path(model_name) -> str:
 
 
 class ModelManager:
-    use_gcp_index = False
-    def __init__(self, model_meta):
+    def __init__(self, model_meta, use_gcp_index: bool = False):
         self.model_meta = model_meta["model_meta"]
+        self.use_gcp_index = use_gcp_index
         self.loaded_models = {}
         self.loaded_indices = {}
         self.loaded_samples = {}
