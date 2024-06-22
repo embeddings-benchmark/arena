@@ -1,13 +1,17 @@
 import logging
 import math
 import json
+import os
+from tqdm import tqdm
 from google.cloud import aiplatform, storage
 
-from ..models import model_name_as_path
 from .index import load_passages
 
 logger = logging.getLogger(__name__)
 
+
+def model_name_as_path(model_name) -> str:
+    return model_name.replace("/", "__").replace(" ", "_")
 
 class VertexIndex:
     """
@@ -15,10 +19,10 @@ class VertexIndex:
     """
     index: aiplatform.MatchingEngineIndex = None
     endpoint: aiplatform.MatchingEngineIndexEndpoint = None
-    PROJECT_ID = "[your_project_id]"
+    PROJECT_ID = "mike-sandbox-376720"
     REGION = "us-central1"
     MACHINE_TYPE = "e2-standard-16"
-    GCS_BUCKET_NAME = "GCS_BUCKET_NAME"
+    GCS_BUCKET_NAME = "arena-embed-test-1"
     GCS_BUCKET_URI = f"gs://{GCS_BUCKET_NAME}"
     TMP_FILE_PATH = "tmp.json"
 
@@ -30,6 +34,9 @@ class VertexIndex:
         self.index_name = f"index_{model_path}"
         self.endpoint_name = f"endpoint_{model_path}"
         self.doc_map = dict()
+
+        if os.path.exists(self.TMP_FILE_PATH):
+            os.remove(self.TMP_FILE_PATH)
     
     def _index_exists(self) -> bool:
         index_names = [
@@ -54,25 +61,25 @@ class VertexIndex:
             ]
             f.writelines(embeddings_formatted)
 
-    def _write_embeddings(self, gpu_embedder_batch_size=512) -> None:
+    def _write_embeddings(self, gpu_embedder_batch_size=8) -> None:
         """Batch encoding passages, the write a jsonl file."""
-        passages = load_passages(filenames=["corpus.jsonl"])
+        passages = load_passages(filenames=["corpus.jsonl"], maxload=10)
         self.doc_map = {i: doc for i, doc in enumerate(passages)}
 
         n_batch = math.ceil(len(passages) / gpu_embedder_batch_size)
         total = 0
-        for i in range(n_batch):
+        for i in tqdm(range(n_batch), desc="Encoding passages"):
             indices = range(i * gpu_embedder_batch_size, (i + 1) * gpu_embedder_batch_size)
             batch = passages[i * gpu_embedder_batch_size : (i + 1) * gpu_embedder_batch_size]
             if hasattr(self.model, "encode_corpus"):
-                embeddings = self.model.encode_corpus(batch, batch_size=gpu_embedder_batch_size, convert_to_tensor=True)
+                embeddings = self.model.encode_corpus(batch, batch_size=gpu_embedder_batch_size)
             else:
-                embeddings = self.model.encode(batch, batch_size=gpu_embedder_batch_size, convert_to_tensor=True)
+                embeddings = self.model.encode(batch, batch_size=gpu_embedder_batch_size)
             total += len(embeddings)
-            self._write_embeddings_to_tmp_file(embeddings, indices)
+            self._write_embeddings_to_tmp_file(embeddings.tolist(), indices)
             if i % 500 == 0 and i > 0:
                 logger.info(f"Number of passages encoded: {total}")
-        
+        import pdb; pdb.set_trace()
         logger.info(f"{total} passages encoded.")
 
     def _upload_embedding_file(self)-> None:
@@ -85,14 +92,19 @@ class VertexIndex:
 
 
     def _create_index(self) -> None:
-        """Create empty index and update it with embeddings."""
+        """
+        Create empty index and update it with embeddings.
+        Reference: https://cloud.google.com/vertex-ai/docs/vector-search/configuring-indexes
+        """
         logger.info(f"Creating Vector Search index {self.index_name} ...")
         self.index = aiplatform.MatchingEngineIndex.create_tree_ah_index(
             display_name=self.index_name,
             dimensions=self.dim,
+            approximate_neighbors_count=150,
             distance_measure_type="DOT_PRODUCT_DISTANCE",
+            feature_norm_type="UNIT_L2_NORM",
             shard_size="SHARD_SIZE_SMALL",
-            index_update_method="STREAM_UPDATE",  # allowed values BATCH_UPDATE , STREAM_UPDATE
+            index_update_method="BATCH_UPDATE",
         )
         logger.info(
             f"Vector Search index {self.index.display_name} created with resource name {self.index.resource_name}"
@@ -106,12 +118,13 @@ class VertexIndex:
         )
     
 
-    def load_index(self) -> None:
+    def _load_index(self) -> None:
         """Load self.index if exists. Create and load index if not."""
         if self._index_exists():
             self.index = aiplatform.MatchingEngineIndex(index_name=self.index_name)
             logger.info(f"Vector Search index {self.index.display_name} exists with resource name {self.index.resource_name}")
             return
+        print(f"Index does not exist. Creating {self.index_name}")
         self._create_index()
     
     def _endpoint_exists(self) -> bool:
@@ -126,7 +139,7 @@ class VertexIndex:
     def load_endpoint(self) -> None:
         """Load a public endpoint if exists. Create and load endpoint if not."""
         if self.index is None:
-            self.load_index()
+            self._load_index()
 
         if self._endpoint_exists():
             self.endpoint = aiplatform.MatchingEngineIndexEndpoint(

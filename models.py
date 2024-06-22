@@ -2,6 +2,7 @@ import concurrent.futures
 import os
 import math
 import random
+import logging
 
 import mteb
 #import spaces
@@ -9,10 +10,6 @@ import mteb
 from retrieval.index import build_index, load_or_initialize_index
 from retrieval.index import DistributedIndex
 from retrieval.gcp_index import VertexIndex
-
-
-def model_name_as_path(model_name) -> str:
-    return model_name.replace("/", "__").replace(" ", "_")
 
 
 class ModelManager:
@@ -106,6 +103,7 @@ class ModelManager:
         model = self.load_model(model_name)
         query_embed = model.encode([query], convert_to_tensor=True)
         if self.use_gcp_index:
+            logging.info("Using GCP index.")
             dim = self.model_meta[model_name].get("dim", None)
             if dim is None:
                 raise Exception(f"Model {model_name} does not have `dim` in its model meta.")
