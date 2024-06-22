@@ -7,8 +7,16 @@ import mteb
 #import spaces
 
 from retrieval.index import build_index, load_or_initialize_index
+from retrieval.index import DistributedIndex
+from retrieval.gcp_index import VertexIndex
+
+
+def model_name_as_path(model_name) -> str:
+    return model_name.replace("/", "__").replace(" ", "_")
+
 
 class ModelManager:
+    use_gcp_index = False
     def __init__(self, model_meta):
         self.model_meta = model_meta["model_meta"]
         self.loaded_models = {}
@@ -22,7 +30,8 @@ class ModelManager:
         self.loaded_models[model_name] = model
         return model
 
-    def load_index(self, model_name, embedbs=32):
+    def load_local_index(self, model_name, embedbs=32) -> DistributedIndex:
+        """Load local index into memory. Create index if it does not exist."""
         if model_name in self.loaded_indices:
             return self.loaded_indices[model_name]
         meta = self.model_meta.get(model_name, {})
@@ -95,8 +104,19 @@ class ModelManager:
     # @spaces.GPU(duration=120)
     def retrieve(self, query, model_name, topk=1):
         model = self.load_model(model_name)
-        index = self.load_index(model_name)
-        docs, scores = index.search_knn(model.encode([query], convert_to_tensor=True), topk=topk)
+        query_embed = model.encode([query], convert_to_tensor=True)
+        if self.use_gcp_index:
+            dim = self.model_meta[model_name].get("dim", None)
+            if dim is None:
+                raise Exception(f"Model {model_name} does not have `dim` in its model meta.")
+            gcp_index = VertexIndex(dim=dim, model_name=model_name, model=model)
+            gcp_index.load_endpoint()
+            docs = gcp_index.search(query_embeds=[query_embed], topk=topk)
+            docs = [[query, "Title: " + docs[0]["title"] + "\n\n" + "Passage: " + docs[0]["text"]]]
+            return docs
+
+        index = self.load_local_index(model_name)
+        docs, scores = index.search_knn(query_embed, topk=topk)
         docs = [[query, "Title: " + docs[0][0]["title"] + "\n\n" + "Passage: " + docs[0][0]["text"]]]
         return docs
     

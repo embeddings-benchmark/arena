@@ -1,4 +1,5 @@
 fire
+google-cloud-aiplatform
 gradio
 mteb
 plotly
