@@ -101,7 +101,7 @@ class ModelManager:
     # @spaces.GPU(duration=120)
     def retrieve(self, query, model_name, topk=1):
         model = self.load_model(model_name)
-        query_embed = model.encode([query], convert_to_tensor=True)
+        
         if self.use_gcp_index:
             logging.info("Using GCP index.")
             dim = self.model_meta[model_name].get("dim", None)
@@ -109,10 +109,13 @@ class ModelManager:
                 raise Exception(f"Model {model_name} does not have `dim` in its model meta.")
             gcp_index = VertexIndex(dim=dim, model_name=model_name, model=model)
             gcp_index.load_endpoint()
-            docs = gcp_index.search(query_embeds=[query_embed], topk=topk)
+            query_embed = model.encode([query])
+            docs = gcp_index.search(query_embeds=query_embed.tolist(), topk=topk)
             docs = [[query, "Title: " + docs[0]["title"] + "\n\n" + "Passage: " + docs[0]["text"]]]
+            # gcp_index.cleanup()
             return docs
-
+        
+        query_embed = model.encode([query], convert_to_tensor=True)
         index = self.load_local_index(model_name)
         docs, scores = index.search_knn(query_embed, topk=topk)
         docs = [[query, "Title: " + docs[0][0]["title"] + "\n\n" + "Passage: " + docs[0][0]["text"]]]

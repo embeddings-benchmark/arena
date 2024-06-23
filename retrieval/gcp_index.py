@@ -22,7 +22,7 @@ class VertexIndex:
     PROJECT_ID = "mike-sandbox-376720"
     REGION = "us-central1"
     MACHINE_TYPE = "e2-standard-16"
-    GCS_BUCKET_NAME = "arena-embed-test-1"
+    GCS_BUCKET_NAME = "arena-embed-test"
     GCS_BUCKET_URI = f"gs://{GCS_BUCKET_NAME}"
     TMP_FILE_PATH = "tmp.json"
 
@@ -32,8 +32,12 @@ class VertexIndex:
         self.model = model
         model_path = model_name_as_path(model_name)
         self.index_name = f"index_{model_path}"
+        self.index_resource_name = None
+        self.deploy_index_name = None
         self.endpoint_name = f"endpoint_{model_path}"
-        self.doc_map = dict()
+        self.endpoint_resource_name = None
+        passages = load_passages(filenames=["corpus.jsonl"], maxload=10)
+        self.doc_map = {str(i): doc for i, doc in enumerate(passages)}
 
         if os.path.exists(self.TMP_FILE_PATH):
             os.remove(self.TMP_FILE_PATH)
@@ -45,7 +49,10 @@ class VertexIndex:
                 filter=f"display_name={self.index_name}"
             )
         ]
-        return len(index_names)
+        if len(index_names):
+            self.index_resource_name = index_names[0]
+            return True
+        return False
 
     def _write_embeddings_to_tmp_file(self, embeddings, indices):
         with open(self.TMP_FILE_PATH, "a") as f:
@@ -121,7 +128,7 @@ class VertexIndex:
     def _load_index(self) -> None:
         """Load self.index if exists. Create and load index if not."""
         if self._index_exists():
-            self.index = aiplatform.MatchingEngineIndex(index_name=self.index_name)
+            self.index = aiplatform.MatchingEngineIndex(index_name=self.index_resource_name)
             logger.info(f"Vector Search index {self.index.display_name} exists with resource name {self.index.resource_name}")
             return
         print(f"Index does not exist. Creating {self.index_name}")
@@ -134,7 +141,22 @@ class VertexIndex:
                 filter=f"display_name={self.endpoint_name}"
             )
         ]
-        return len(endpoint_names)
+        if len(endpoint_names):
+            self.endpoint_resource_name = endpoint_names[0]
+            return True
+        return False
+    
+    def _endpoint_deployed(self) -> bool:
+        index_endpoints = [
+            (deployed_index.index_endpoint, deployed_index.deployed_index_id)
+            for deployed_index in self.index.deployed_indexes
+        ]
+
+        if len(index_endpoints):
+            self.index_endpoint_name = index_endpoints[0][0]
+            self.deploy_index_name = index_endpoints[0][1]
+            return True
+        return False
 
     def load_endpoint(self) -> None:
         """Load a public endpoint if exists. Create and load endpoint if not."""
@@ -143,19 +165,29 @@ class VertexIndex:
 
         if self._endpoint_exists():
             self.endpoint = aiplatform.MatchingEngineIndexEndpoint(
-                index_endpoint_name=self.endpoint_name
+                index_endpoint_name=self.endpoint_resource_name
             )
             logger.info(
                 f"Vector Search index endpoint {self.endpoint.display_name} exists with resource name {self.endpoint.resource_name}"
             )
-            return 
+        else: 
+            logger.info(f"Creating Vector Search index endpoint {self.endpoint_name} ...")
+            self.endpoint = aiplatform.MatchingEngineIndexEndpoint.create(
+                display_name=self.endpoint_name, public_endpoint_enabled=True
+            )
+
+        if self._endpoint_deployed():
+            self.endpoint = aiplatform.MatchingEngineIndexEndpoint(
+                index_endpoint_name=self.index_endpoint_name
+            )
+            return
+
+        logger.info(f"Deploying Vector Search index {self.index.display_name}...")
         
-        logger.info(
-            f"Deploying Vector Search index {self.index.display_name} at endpoint {self.endpoint.display_name} ..."
-        )
+        self.deploy_index_name = "endpoint_" + self.endpoint_resource_name.split("/")[-1]
         self.endpoint = self.endpoint.deploy_index(
             index=self.index,
-            deployed_index_id=self.index_name,
+            deployed_index_id=self.deploy_index_name,
             display_name=self.index_name,
             machine_type=self.MACHINE_TYPE,
             min_replica_count=1,
@@ -170,11 +202,16 @@ class VertexIndex:
         if self.endpoint is None:
             self.load_endpoint()
 
-        response = self.endpoint.match(
-            deployed_index_id=self.index_name,
+        response = self.endpoint.find_neighbors(
+            deployed_index_id=self.deploy_index_name,
             queries=query_embeds,
             num_neighbors=topk,
         )
+
         sorted_data = sorted(response[0], key=lambda x: x.distance, reverse=True)
-        docs = [self.doc[x.id] for x in sorted_data]
+        docs = [self.doc_map[x.id] for x in sorted_data]
         return docs
+
+    def cleanup(self):
+        self.endpoint.delete(force=True)
+        self.index.delete(sync=False)
