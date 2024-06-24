@@ -107,7 +107,8 @@ class ModelManager:
             dim = self.model_meta[model_name].get("dim", None)
             if dim is None:
                 raise Exception(f"Model {model_name} does not have `dim` in its model meta.")
-            gcp_index = VertexIndex(dim=dim, model_name=model_name, model=model)
+            limit = self.model_meta[model_name].get("limit", None)
+            gcp_index = VertexIndex(dim=dim, model_name=model_name, model=model, limit=limit)
             gcp_index.load_endpoint()
             query_embed = model.encode([query])
             docs = gcp_index.search(query_embeds=query_embed.tolist(), topk=topk)

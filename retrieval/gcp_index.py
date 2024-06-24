@@ -26,7 +26,7 @@ class VertexIndex:
     GCS_BUCKET_URI = f"gs://{GCS_BUCKET_NAME}"
     TMP_FILE_PATH = "tmp.json"
 
-    def __init__(self, dim: int, model_name: str, model):
+    def __init__(self, dim: int, model_name: str, model, limit=None):
         aiplatform.init(project=self.PROJECT_ID, location=self.REGION)
         self.dim = dim
         self.model = model
@@ -36,11 +36,8 @@ class VertexIndex:
         self.deploy_index_name = None
         self.endpoint_name = f"endpoint_{model_path}"
         self.endpoint_resource_name = None
-        passages = load_passages(filenames=["corpus.jsonl"], maxload=10)
-        self.doc_map = {str(i): doc for i, doc in enumerate(passages)}
-
-        if os.path.exists(self.TMP_FILE_PATH):
-            os.remove(self.TMP_FILE_PATH)
+        self.passages = load_passages(filenames=["corpus.jsonl"], maxload=limit)
+        self.doc_map = {str(i): doc for i, doc in enumerate(self.passages)}
     
     def _index_exists(self) -> bool:
         index_names = [
@@ -68,16 +65,16 @@ class VertexIndex:
             ]
             f.writelines(embeddings_formatted)
 
-    def _write_embeddings(self, gpu_embedder_batch_size=8) -> None:
+    def _write_embeddings(self, gpu_embedder_batch_size=512) -> None:
         """Batch encoding passages, the write a jsonl file."""
-        passages = load_passages(filenames=["corpus.jsonl"], maxload=10)
-        self.doc_map = {i: doc for i, doc in enumerate(passages)}
+        if os.path.exists(self.TMP_FILE_PATH):
+            os.remove(self.TMP_FILE_PATH)
 
-        n_batch = math.ceil(len(passages) / gpu_embedder_batch_size)
+        n_batch = math.ceil(len(self.passages) / gpu_embedder_batch_size)
         total = 0
         for i in tqdm(range(n_batch), desc="Encoding passages"):
             indices = range(i * gpu_embedder_batch_size, (i + 1) * gpu_embedder_batch_size)
-            batch = passages[i * gpu_embedder_batch_size : (i + 1) * gpu_embedder_batch_size]
+            batch = self.passages[i * gpu_embedder_batch_size : (i + 1) * gpu_embedder_batch_size]
             if hasattr(self.model, "encode_corpus"):
                 embeddings = self.model.encode_corpus(batch, batch_size=gpu_embedder_batch_size)
             else:
@@ -86,7 +83,6 @@ class VertexIndex:
             self._write_embeddings_to_tmp_file(embeddings.tolist(), indices)
             if i % 500 == 0 and i > 0:
                 logger.info(f"Number of passages encoded: {total}")
-        import pdb; pdb.set_trace()
         logger.info(f"{total} passages encoded.")
 
     def _upload_embedding_file(self)-> None:
@@ -103,10 +99,13 @@ class VertexIndex:
         Create empty index and update it with embeddings.
         Reference: https://cloud.google.com/vertex-ai/docs/vector-search/configuring-indexes
         """
+        self._write_embeddings()
+        self._upload_embedding_file()
         logger.info(f"Creating Vector Search index {self.index_name} ...")
         self.index = aiplatform.MatchingEngineIndex.create_tree_ah_index(
             display_name=self.index_name,
             dimensions=self.dim,
+            contents_delta_uri=self.GCS_BUCKET_URI,
             approximate_neighbors_count=150,
             distance_measure_type="DOT_PRODUCT_DISTANCE",
             feature_norm_type="UNIT_L2_NORM",
@@ -116,14 +115,6 @@ class VertexIndex:
         logger.info(
             f"Vector Search index {self.index.display_name} created with resource name {self.index.resource_name}"
         )
-
-        self._write_embeddings()
-        self._upload_embedding_file()
-
-        self.index.update_embeddings(
-            contents_delta_uri=self.GCS_BUCKET_URI,
-        )
-    
 
     def _load_index(self) -> None:
         """Load self.index if exists. Create and load index if not."""
@@ -175,6 +166,7 @@ class VertexIndex:
             self.endpoint = aiplatform.MatchingEngineIndexEndpoint.create(
                 display_name=self.endpoint_name, public_endpoint_enabled=True
             )
+            self.endpoint_resource_name = self.endpoint.resource_name
 
         if self._endpoint_deployed():
             self.endpoint = aiplatform.MatchingEngineIndexEndpoint(
@@ -182,8 +174,8 @@ class VertexIndex:
             )
             return
 
+        ## Synchronous call. This could take up to 30 minutes.
         logger.info(f"Deploying Vector Search index {self.index.display_name}...")
-        
         self.deploy_index_name = "endpoint_" + self.endpoint_resource_name.split("/")[-1]
         self.endpoint = self.endpoint.deploy_index(
             index=self.index,

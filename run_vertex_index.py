@@ -4,14 +4,12 @@ from models import ModelManager
 
 """
 Script for testing the VertexIndex code and setup the vector search index.
-Note that batch updating the index will take a long time. Consider switching 
-to stream update instead (costs more).
 
 Download corpus.jsonl by running
 >>> wget https://huggingface.co/datasets/mteb/nq/resolve/main/corpus.jsonl
 """
 
-MODEL_META_PATH = "model_meta.yml"
+MODEL_META_PATH = "model_meta_debug.yml"
 with open(MODEL_META_PATH, 'r', encoding='utf-8') as f:
     model_meta = safe_load(f)
 
