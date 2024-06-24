@@ -1,5 +1,6 @@
 fire
 gradio
+gritlm
 mteb
 plotly
 umap-learn
