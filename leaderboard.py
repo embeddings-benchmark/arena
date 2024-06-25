@@ -5,22 +5,6 @@ import numpy as np
 import pandas as pd
 
 
-acknowledgment_md = """
-### Acknowledgment
-We thank X, Y, Z, [Contextual AI](https://contextual.ai/) and [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).
-
-<div class="sponsor-image-about" style="display: flex; align-items: center; gap: 10px;">
-    <a href="https://contextual.ai/">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd4EDMoZLFRrIjVBrSXOQYGcmvUJ3kL4U2usvjuKPla-LoRTZtLzFnb_Cu5tXzRI7DNBo&usqp=CAU" width="60" height="55" style="padding: 10px;">
-    </a>
-    <a href="https://huggingface.co">
-        <img src="https://raw.githubusercontent.com/embeddings-benchmark/mteb/main/docs/images/hf_logo.png" width="60" height="55" style="padding: 10px;">
-    </a>
-</div>
-
-We thank [Chatbot Arena](https://chat.lmsys.org/), [Vision Arena](https://huggingface.co/spaces/WildVision/vision-arena) and [GenAI-Arena](https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena) for inspiration.
-"""
-
 leader_component_values = [None] * 5
 
 TASK_TYPE_TO_EMOJI = {
@@ -177,8 +161,5 @@ def build_leaderboard_tab(elo_results_file, leaderboard_table_file, show_plot=Fa
             )
             plot_4 = gr.Plot(p4, show_label=False)
     """
-
-    gr.Markdown(acknowledgment_md)
-
     # return [md_1, plot_1, plot_2, plot_3, plot_4]
     return [md_1]
