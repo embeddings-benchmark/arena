@@ -6,12 +6,6 @@ import argparse
 
 from extractor import _parse_and_clean_wikicode, ENDING_PHRASES
 
-# api.upload_file(
-#     path_or_fileobj="train.json",
-#     path_in_repo="train.json",
-#     repo_id="orionweller/wikipedia-2024-06-24-docs",
-#     repo_type="dataset",
-# )
 
 def read_in_cirrus(args, path_to_file: str, output_file: str):
     data = []
@@ -89,4 +83,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     create_chunks(args)
 
-    # python retrieval/create_index_chunks.py -c /home/hltcoe/oweller/my_exps/mteb-lite/enwiki-20240624-cirrussearch-content.json -o wiki_extracted.json -t wikipedia
+    # python retrieval/create_index_chunks.py -c enwiki-20240624-cirrussearch-content.json -o wiki_extracted.json -t wikipedia
