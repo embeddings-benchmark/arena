@@ -22,9 +22,8 @@ def read_in_cirrus(args, path_to_file: str, output_file: str):
                 if prev_doc_type != "_doc":
                     print(f"Skipping non-doc type {prev_doc_type}")
                     continue
+                
                 inst = json.loads(line)
-                # if inst["title"] == "Scott LeDoux":
-                #     breakpoint()
                 text = _parse_and_clean_wikicode(inst["source_text"])
 
 
@@ -67,10 +66,9 @@ def create_chunks(args):
     if args.corpus_type == "wikipedia":
         data = read_in_cirrus(args, args.corpus, args.output_dir)
     else:
+        # TODO add other corpora here
         raise NotImplementedError("Only wikipedia is supported at the moment")
 
-
-    # greedily chunk into up to `args.word_limit` words, or at least one paragraph
 
 
 if __name__ == "__main__":
