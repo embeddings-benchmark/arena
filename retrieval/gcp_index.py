@@ -1,17 +1,33 @@
 import logging
+from datasets import load_dataset
 import math
 import json
 import os
 from tqdm import tqdm
 from google.cloud import aiplatform, storage
 
-from .index import load_passages
-
 logger = logging.getLogger(__name__)
 
 
 def model_name_as_path(model_name) -> str:
     return model_name.replace("/", "__").replace(" ", "_")
+
+
+def load_passages_from_hf(repo: str = "orionweller/wikipedia-2024-06-24-docs", limit: int = None):
+    """ 
+    Returns a list of passages. Each passage is a dict with the following keys:
+    {
+        "_id:" doc0,
+        "title": "Title 1",
+        "text": "Body text 1",
+    }
+    """
+    ds = load_dataset(repo, split="train")
+    passages = ds.rename_column("id", "_id")
+    if limit and limit > 1:
+        passages = passages.take(limit)
+    return passages.to_list()
+
 
 class VertexIndex:
     """
@@ -36,8 +52,9 @@ class VertexIndex:
         self.deploy_index_name = None
         self.endpoint_name = f"endpoint_{model_path}"
         self.endpoint_resource_name = None
-        self.passages = load_passages(filenames=["corpus.jsonl"], maxload=limit)
+        self.passages = load_passages_from_hf(limit=limit)
         self.doc_map = {str(i): doc for i, doc in enumerate(self.passages)}
+    
     
     def _index_exists(self) -> bool:
         index_names = [
