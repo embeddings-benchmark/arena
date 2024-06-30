@@ -144,6 +144,14 @@ class DistributedIndex(object):
         return True
     
 def load_passages(filenames, maxload=-1):
+    """ 
+    Returns a list of passages. Each passage is a dict with the following keys:
+    {
+        "_id:" doc0,
+        "title": "Title 1",
+        "text": "Body text 1",
+    }
+    """
     def process_jsonl(
         fname,
         counter,
