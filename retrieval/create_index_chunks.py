@@ -7,15 +7,23 @@ import argparse
 from extractor import _parse_and_clean_wikicode, ENDING_PHRASES
 
 
-def read_in_cirrus(args, path_to_file: str, output_file: str):
+def read_in_cirrus(args):
+    """
+    Reads in a Cirrus dump from Wikipedia (https://dumps.wikimedia.org/other/cirrussearch/) and extracts the text
+        from the pages. The text is then chunked into paragraphs of a certain length and written out in JSONL format.
+
+    :param args: argparse object (containing the path to the file, the output file, and the word limit)
+
+    :return: None
+    """
     data = []
-    output_f = open(output_file, "w")
-    with open(path_to_file, "r") as f:
+    output_f = open(args.output_file, "w")
+    with open(args.path_to_file, "r") as f:
         # they come in twos
         prev_doc_type = None
         for idx, line in tqdm.tqdm(enumerate(f)):
 
-            if args.debug and idx >= 1000:
+            if args.debug and idx >= 5000:
                 break
 
             if idx % 2 == 1:
@@ -63,11 +71,19 @@ def read_in_cirrus(args, path_to_file: str, output_file: str):
 
 
 def create_chunks(args):
+    """
+    A wrapper for created a chunked corpus from a given corpus type. Currently only Wikipedia is implemented
+        but other corpora can be added.
+
+    :param args: argparse object
+
+    :return: None
+    """
     if args.corpus_type == "wikipedia":
-        data = read_in_cirrus(args, args.corpus, args.output_dir)
+        data = read_in_cirrus(args)
     else:
         # TODO add other corpora here
-        raise NotImplementedError("Only wikipedia is supported at the moment")
+        raise NotImplementedError("Only Wikipedia is supported at the moment")
 
 
 

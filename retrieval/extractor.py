@@ -1,6 +1,7 @@
 import mwparserfromhell as mwp
 import re
 
+# we don't want to include these sections in the final text
 ENDING_PHRASES = [
   "Reference",
   "References",
@@ -22,8 +23,15 @@ ENDING_PHRASES = [
   "Notes",
   "Bibliography",
   "Selected bibliography",
+  "References and notes",
+  "References:",
+  "References and external links",
+  "ReferencesSources",
+  "References Sources",
+  "== References ==",
   # Can't do `Works`, it destroys some of the Wikipedia formatting and also applies to artists
 ]
+
 
 def reverse_in(text, substrings):
     """Checks if any of the substrings are in the text."""
@@ -55,7 +63,7 @@ def _parse_and_clean_wikicode(raw_content):
     section_text = []
     for section in wikicode.get_sections(flat=True, include_lead=True, include_headings=True):
         if section.filter_headings():
-            heading = str(section.filter_headings()[0].title)
+            heading = str(section.filter_headings()[0].title).strip()
             if reverse_in(heading, ENDING_PHRASES):
                 break
 
@@ -101,7 +109,20 @@ def _parse_and_clean_wikicode(raw_content):
         clean_lines = [line.strip() for line in clean_text.split('\n') if line.strip()]
         clean_text = '\n'.join(clean_lines)
 
+        # remove any {{.*}} if they close
+        clean_text = re.sub(r'{{.*}}', '', clean_text, flags=re.DOTALL)
+        # if the strings "{{" is in there with no "}}" then remove {{ and the word attached to it
+        if "{{" in clean_text or "}}" in clean_text:
+            clean_text_words = clean_text.split()
+            index_of_open = [idx for idx, word in enumerate(clean_text_words) if ("{{" in word or "}}" in word)]
+            # delete the word that has the {{
+            for i in reversed(index_of_open):
+                clean_text_words.pop(i)
+            # put it back together
+            clean_text = " ".join(clean_text_words)
+
         if clean_text:
             section_text.append(clean_text)
 
-    return "\n\n".join(section_text)
+    final_str = "\n\n".join(section_text)
+    return final_str
