@@ -3,6 +3,8 @@ import tqdm
 import json
 import glob
 import argparse
+from datasets import load_dataset
+import gzip
 
 from extractor import _parse_and_clean_wikicode, ENDING_PHRASES
 
@@ -10,7 +12,7 @@ from extractor import _parse_and_clean_wikicode, ENDING_PHRASES
 def read_in_cirrus(args):
     """
     Reads in a Cirrus dump from Wikipedia (https://dumps.wikimedia.org/other/cirrussearch/) and extracts the text
-        from the pages. The text is then chunked into paragraphs of a certain length and written out in JSONL format.
+        from the pages. The text is then chunked into paragraphs of a certain length and wr for Areoitten out in JSONL format.
 
     :param args: argparse object (containing the path to the file, the output file, and the word limit)
 
@@ -70,6 +72,68 @@ def read_in_cirrus(args):
                 prev_doc_type = json.loads(line)["index"]["_type"]
 
 
+def prep_stackexchange(args):
+    """
+    Creates the index for stackexchange, limiting the corpus to instances less than `args.word_limit`.
+        The `args.corpus` directory should be a folder full of files from the original Dolma setup
+        See https://huggingface.co/datasets/orionweller/stackexchange_redpajamas for an example
+
+    NOTE: this corpus is large and we only filter about 700k out of ~22 million with a word limit of 500
+    """
+    print(f"Loading stackexchange dataset")
+    if not os.path.isdir(args.output_dir):
+        os.makedirs(args.output_dir)
+    output_f = open(os.path.join(args.output_dir, "train.jsonl"), "w")
+
+    written_out = 0
+    skipped = 0
+    data = []
+    for file in tqdm.tqdm(glob.glob(os.path.join(args.corpus, "*.json.gz"))):
+        with gzip.open(file, "rb") as f:
+            for line in tqdm.tqdm(f):
+                inst = json.loads(line)
+                if len(inst["text"].split(" ")) > args.word_limit:
+                    skipped += 1
+                    continue
+                output_f.write(json.dumps({
+                    "text": inst["text"],
+                    "id": inst["id"],
+                }) + "\n")
+                written_out += 1
+
+    print(f"Skipped {skipped} and wrote out {written_out}")
+
+
+def prep_arxiv(args):
+    """
+    Creates the index for arxiv, limiting it to `args.word_limit` words per document.
+        The `args.corpus` directory should be a folder full of files from the original Dolma setup
+        See https://huggingface.co/datasets/orionweller/arxiv_redpajamas for an example
+
+    NOTE: Redpajama's arxiv does not have a title
+    """
+    print(f"Loading arxiv dataset")
+    if not os.path.isdir(args.output_dir):
+        os.makedirs(args.output_dir)
+    output_f = open(os.path.join(args.output_dir, "train.jsonl"), "w")
+
+    written_out = 0
+    skipped = 0
+    data = []
+    for file in tqdm.tqdm(glob.glob(os.path.join(args.corpus, "*.json.gz"))):
+        with gzip.open(file, "rb") as f:
+            for line in tqdm.tqdm(f):
+                inst = json.loads(line)
+                inst["text"] = " ".join(inst["text"].split()[:args.word_limit])
+                output_f.write(json.dumps({
+                    "text": inst["text"],
+                    "id": inst["id"],
+                }) + "\n")
+                written_out += 1
+
+    print(f"Wrote out {written_out}")
+
+
 def create_chunks(args):
     """
     A wrapper for created a chunked corpus from a given corpus type. Currently only Wikipedia is implemented
@@ -80,10 +144,14 @@ def create_chunks(args):
     :return: None
     """
     if args.corpus_type == "wikipedia":
-        data = read_in_cirrus(args)
+        read_in_cirrus(args)
+    elif args.corpus_type == "arxiv":
+        # make sure that the repo is cloned 
+        prep_arxiv(args)
+    elif args.corpus_type == "stackexchange":
+        prep_stackexchange(args)
     else:
-        # TODO add other corpora here
-        raise NotImplementedError("Only Wikipedia is supported at the moment")
+        raise NotImplementedError(f"Corpus type {args.corpus_type} not implemented")
 
 
 
@@ -97,4 +165,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     create_chunks(args)
 
-    # python retrieval/create_index_chunks.py -c enwiki-20240624-cirrussearch-content.json -o wiki_extracted.json -t wikipedia
+    # example usages:
+    #   python retrieval/create_index_chunks.py -c enwiki-20240624-cirrussearch-content.json -o wiki_extracted.json -t wikipedia
+    #   python retrieval/create_index_chunks.py -c stackexchange_redpajamas -o stackexchange_extracted -t stackexchange
+    #   python retrieval/create_index_chunks.py -c arxiv_redpajamas -o arxiv_extracted -t arxiv
