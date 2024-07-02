@@ -12,7 +12,7 @@ from extractor import _parse_and_clean_wikicode, ENDING_PHRASES
 def read_in_cirrus(args):
     """
     Reads in a Cirrus dump from Wikipedia (https://dumps.wikimedia.org/other/cirrussearch/) and extracts the text
-        from the pages. The text is then chunked into paragraphs of a certain length and wr for Areoitten out in JSONL format.
+        from the pages. The text is then chunked into paragraphs of a certain length and written out in JSONL format.
 
     :param args: argparse object (containing the path to the file, the output file, and the word limit)
 
@@ -146,9 +146,14 @@ def create_chunks(args):
     if args.corpus_type == "wikipedia":
         read_in_cirrus(args)
     elif args.corpus_type == "arxiv":
-        # make sure that the repo is cloned 
+        # make sure that the repo exists and has *.json.gz files
+        # NOTE: cannot stream from HF due to issues with metadata in the original not being consistent (pyarrow)
+        assert os.path.isdir(args.corpus), f"Directory {args.corpus} does not exist"
         prep_arxiv(args)
     elif args.corpus_type == "stackexchange":
+        # make sure that the repo exists and has *.json.gz files
+        # NOTE: cannot stream from HF due to issues with metadata in the original not being consistent (pyarrow)
+        assert os.path.isdir(args.corpus), f"Directory {args.corpus} does not exist"
         prep_stackexchange(args)
     else:
         raise NotImplementedError(f"Corpus type {args.corpus_type} not implemented")
