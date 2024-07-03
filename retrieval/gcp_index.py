@@ -9,11 +9,16 @@ from google.cloud import aiplatform, storage
 logger = logging.getLogger(__name__)
 
 
+CORPORA = {
+    "wikipedia": {"name": "orionweller/wikipedia-2024-06-24-docs", "columns": {"id": "_id"}},
+    "arxiv": {"name": "orionweller/raw_arxiv_7_2_24", "columns": {"id": "_id", "abstract": "text"}},
+    "stackexchange": {"name": "orionweller/stackexchange_chunked", "columns": {"id": "_id"}},
+}
+
 def model_name_as_path(model_name) -> str:
     return model_name.replace("/", "__").replace(" ", "_")
 
-
-def load_passages_from_hf(repo: str = "orionweller/wikipedia-2024-06-24-docs", limit: int = None):
+def load_passages_from_hf(corpus: str, limit: int = None):
     """ 
     Returns a list of passages. Each passage is a dict with the following keys:
     {
@@ -22,8 +27,11 @@ def load_passages_from_hf(repo: str = "orionweller/wikipedia-2024-06-24-docs", l
         "text": "Body text 1",
     }
     """
-    ds = load_dataset(repo, split="train")
-    passages = ds.rename_column("id", "_id")
+    if CORPORA.get(corpus) is None:
+        raise NotImplementedError(f"Corpus={corpus} is not found. Try using `wikipedia`, `arxiv`, or `stackexchange`.")
+    corpus_dict = CORPORA[corpus]
+    ds = load_dataset(corpus_dict['name'], split="train")
+    passages = ds.rename_columns(corpus_dict['columns'])
     if limit and limit > 1:
         passages = passages.take(limit)
     return passages.to_list()
@@ -42,7 +50,7 @@ class VertexIndex:
     GCS_BUCKET_URI = f"gs://{GCS_BUCKET_NAME}"
     TMP_FILE_PATH = "tmp.json"
 
-    def __init__(self, dim: int, model_name: str, model, limit=None):
+    def __init__(self, dim: int, model_name: str, model, corpus: str = "wikipedia",limit=None):
         aiplatform.init(project=self.PROJECT_ID, location=self.REGION)
         self.dim = dim
         self.model = model
@@ -52,7 +60,7 @@ class VertexIndex:
         self.deploy_index_name = None
         self.endpoint_name = f"endpoint_{model_path}"
         self.endpoint_resource_name = None
-        self.passages = load_passages_from_hf(limit=limit)
+        self.passages = load_passages_from_hf(corpus=corpus, limit=limit)
         self.doc_map = {str(i): doc for i, doc in enumerate(self.passages)}
     
     
@@ -224,3 +232,7 @@ class VertexIndex:
     def cleanup(self):
         self.endpoint.delete(force=True)
         self.index.delete(sync=False)
+
+
+if __name__ == '__main__':
+    print(len(load_passages_from_hf(corpus='stackexchange')))
