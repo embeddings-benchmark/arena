@@ -112,14 +112,14 @@ class ModelManager:
             gcp_index.load_endpoint()
             query_embed = model.encode([query])
             docs = gcp_index.search(query_embeds=query_embed.tolist(), topk=topk)
-            docs = [[query, "Title: " + docs[0]["title"] + "\n\n" + "Passage: " + docs[0]["text"]]]
+            docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0]["text"]]]
             # gcp_index.cleanup()
             return docs
         
         query_embed = model.encode([query], convert_to_tensor=True)
         index = self.load_local_index(model_name)
         docs, scores = index.search_knn(query_embed, topk=topk)
-        docs = [[query, "Title: " + docs[0][0]["title"] + "\n\n" + "Passage: " + docs[0][0]["text"]]]
+        docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0][0]["text"]]]
         return docs
     
     def clustering_parallel(self, prompt, model_A, model_B, ncluster=1, ndim="3D", dim_method="PCA", clustering_method="KMeans"):
