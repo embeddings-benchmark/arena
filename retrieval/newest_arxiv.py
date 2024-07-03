@@ -1,5 +1,6 @@
 """Take data from https://www.kaggle.com/datasets/Cornell-University/arxiv?resource=download and
 only keep useful information
+Adapted from https://github.com/embeddings-benchmark/mteb/blob/main/scripts/data/arxiv/script_raw.py
 """
 
 from __future__ import annotations
