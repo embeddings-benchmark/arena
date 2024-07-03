@@ -7,7 +7,7 @@ from datasets import load_dataset
 import gzip
 
 from extractor import _parse_and_clean_wikicode, ENDING_PHRASES
-
+from newest_arxiv import create_newest_arxiv
 
 def read_in_cirrus(args):
     """
@@ -146,10 +146,9 @@ def create_chunks(args):
     if args.corpus_type == "wikipedia":
         read_in_cirrus(args)
     elif args.corpus_type == "arxiv":
-        # make sure that the repo exists and has *.json.gz files
-        # NOTE: cannot stream from HF due to issues with metadata in the original not being consistent (pyarrow)
-        assert os.path.isdir(args.corpus), f"Directory {args.corpus} does not exist"
-        prep_arxiv(args)
+        # make sure the file is downloaded (e.g. "arxiv-metadata-oai-snapshot.json") see `newest_arxiv.py` for details
+        assert os.path.isfile(args.corpus), f"File {args.corpus} does not exist"
+        create_newest_arxiv(args)
     elif args.corpus_type == "stackexchange":
         # make sure that the repo exists and has *.json.gz files
         # NOTE: cannot stream from HF due to issues with metadata in the original not being consistent (pyarrow)
@@ -173,4 +172,4 @@ if __name__ == "__main__":
     # example usages:
     #   python retrieval/create_index_chunks.py -c enwiki-20240624-cirrussearch-content.json -o wiki_extracted.json -t wikipedia
     #   python retrieval/create_index_chunks.py -c stackexchange_redpajamas -o stackexchange_extracted -t stackexchange
-    #   python retrieval/create_index_chunks.py -c arxiv_redpajamas -o arxiv_extracted -t arxiv
+    #   python retrieval/create_index_chunks.py -c arxiv-metadata-oai-snapshot.json -o raw_arxiv -t arxiv
