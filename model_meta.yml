@@ -86,7 +86,7 @@ model_meta:
     mteb_retrieval: 59.36
     mteb_sts: 82.84
     mteb_clustering: 52.8
-  gte-Qwen2-7B-instruct:
+  Alibaba-NLP/gte-Qwen2-7B-instruct:
     link: https://huggingface.co/Alibaba-NLP/gte-Qwen2-7B-instruct
     desc: gte-Qwen2-7B-instruct by Alibaba
     seq_len: 131072
@@ -98,7 +98,7 @@ model_meta:
     mteb_retrieval: 60.25
     mteb_sts: 83.04
     mteb_clustering: 56.92
-  SFR-Embedding-2_R:
+  Salesforce/SFR-Embedding-2_R:
     link: https://huggingface.co/Salesforce/SFR-Embedding-2_R
     desc: SFR-Embedding-2_R by Salesforce
     seq_len: 32768
@@ -110,7 +110,7 @@ model_meta:
     mteb_retrieval: 60.18
     mteb_sts: 81.26
     mteb_clustering: 56.17
-  jina-embeddings-v2-base-en:
+  jinaai/jina-embeddings-v2-base-en:
     link: https://huggingface.co/jinaai/jina-embeddings-v2-base-en
     desc: jina-embeddings-v2-base-en by Jina AI
     seq_len: 8192
@@ -122,7 +122,7 @@ model_meta:
     mteb_retrieval: 47.87
     mteb_sts: 80.70
     mteb_clustering: 41.73
-  mxbai-embed-large-v1:
+  mixedbread-ai/mxbai-embed-large-v1:
     link: https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1
     desc: mxbai-embed-large-v1 by mixedbread.ai
     seq_len: 512
@@ -134,7 +134,7 @@ model_meta:
     mteb_retrieval: 54.39
     mteb_sts: 85.00
     mteb_clustering: 46.71
-  nomic-embed-text-v1.5:
+  nomic-ai/nomic-embed-text-v1.5:
     link: https://huggingface.co/nomic-ai/nomic-embed-text-v1.5
     desc: nomic-embed-text-v1.5 by nomic.ai
     seq_len: 8192
@@ -146,7 +146,7 @@ model_meta:
     mteb_retrieval: 53.01
     mteb_sts: 81.94
     mteb_clustering: 43.93
-  LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised:
+  McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised:
     link: https://huggingface.co/McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised
     desc: LLM2Vec by McGill
     seq_len: 8192
