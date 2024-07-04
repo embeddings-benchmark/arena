@@ -1,6 +1,7 @@
 model_meta:
   sentence-transformers/all-MiniLM-L6-v2:
     link: https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
+    revision: 8b3219a92973c328a8e22fadcfa821b5dc75636a
     desc: all-MiniLM-L6-v2 by Sentence Transformers
     seq_len: 512
     size: 23
@@ -52,6 +53,7 @@ model_meta:
     mteb_clustering: 50.26
   GritLM/GritLM-7B:
     link: https://huggingface.co/GritLM/GritLM-7B
+    revision: 13f00a0e36500c80ce12870ea513846a066004af
     desc: GritLM-7B by Contextual AI, HKU, Microsoft
     seq_len: 32768
     size: 7240
@@ -64,6 +66,7 @@ model_meta:
     mteb_clustering: 50.61
   BAAI/bge-large-en-v1.5:
     link: https://huggingface.co/BAAI/bge-large-en-v1.5
+    revision: d4aa6901d3a41ba39fb536a557fa166f842b0e09
     desc: bge-large-en-v1.5 by BAAI
     seq_len: 512
     size: 335
@@ -76,6 +79,7 @@ model_meta:
     mteb_clustering: 46.08
   nvidia/NV-Embed-v1:
     link: https://huggingface.co/nvidia/NV-Embed-v1
+    revision: 77b11725df91ca45663471a0f2ec6c06e04cbadb
     desc: NV-Embed-v1 by Nvidia
     seq_len: 32768
     size: 7851
@@ -88,6 +92,7 @@ model_meta:
     mteb_clustering: 52.8
   Alibaba-NLP/gte-Qwen2-7B-instruct:
     link: https://huggingface.co/Alibaba-NLP/gte-Qwen2-7B-instruct
+    revision: e26182b2122f4435e8b3ebecbf363990f409b45b
     desc: gte-Qwen2-7B-instruct by Alibaba
     seq_len: 131072
     size: 7613
@@ -100,6 +105,7 @@ model_meta:
     mteb_clustering: 56.92
   Salesforce/SFR-Embedding-2_R:
     link: https://huggingface.co/Salesforce/SFR-Embedding-2_R
+    revision: 91762139d94ed4371a9fa31db5551272e0b83818
     desc: SFR-Embedding-2_R by Salesforce
     seq_len: 32768
     size: 7111
@@ -112,6 +118,7 @@ model_meta:
     mteb_clustering: 56.17
   jinaai/jina-embeddings-v2-base-en:
     link: https://huggingface.co/jinaai/jina-embeddings-v2-base-en
+    revision: 31b72fbf354fea65264ec54edf0b189d94b92d39
     desc: jina-embeddings-v2-base-en by Jina AI
     seq_len: 8192
     size: 137
@@ -124,6 +131,7 @@ model_meta:
     mteb_clustering: 41.73
   mixedbread-ai/mxbai-embed-large-v1:
     link: https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1
+    revision: 990580e27d329c7408b3741ecff85876e128e203
     desc: mxbai-embed-large-v1 by mixedbread.ai
     seq_len: 512
     size: 335
@@ -136,6 +144,7 @@ model_meta:
     mteb_clustering: 46.71
   nomic-ai/nomic-embed-text-v1.5:
     link: https://huggingface.co/nomic-ai/nomic-embed-text-v1.5
+    revision: b0753ae76394dd36bcfb912a46018088bca48be0
     desc: nomic-embed-text-v1.5 by nomic.ai
     seq_len: 8192
     size: 137
@@ -148,6 +157,7 @@ model_meta:
     mteb_clustering: 43.93
   McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised:
     link: https://huggingface.co/McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised
+    revision: baa8ebf04a1c2500e61288e7dad65e8ae42601a7
     desc: LLM2Vec by McGill
     seq_len: 8192
     size: 7505
