@@ -43,10 +43,10 @@ class VertexIndex:
     """
     index: aiplatform.MatchingEngineIndex = None
     endpoint: aiplatform.MatchingEngineIndexEndpoint = None
-    PROJECT_ID = "mike-sandbox-376720"
-    REGION = "us-central1"
+    PROJECT_ID = "contextual-research-common"
+    REGION = "us-east1"
     MACHINE_TYPE = "e2-standard-16"
-    GCS_BUCKET_NAME = "arena-embed-test"
+    GCS_BUCKET_NAME = "mtebarena"
     GCS_BUCKET_URI = f"gs://{GCS_BUCKET_NAME}"
     TMP_FILE_PATH = "tmp.json"
 
@@ -91,7 +91,7 @@ class VertexIndex:
             f.writelines(embeddings_formatted)
 
     def _write_embeddings(self, gpu_embedder_batch_size=512) -> None:
-        """Batch encoding passages, the write a jsonl file."""
+        """Batch encoding passages, then write a jsonl file."""
         if os.path.exists(self.TMP_FILE_PATH):
             os.remove(self.TMP_FILE_PATH)
 
@@ -117,7 +117,6 @@ class VertexIndex:
         bucket = storage_client.bucket(self.GCS_BUCKET_NAME)
         blob = bucket.blob(self.TMP_FILE_PATH)
         blob.upload_from_filename(self.TMP_FILE_PATH)
-
 
     def _create_index(self) -> None:
         """

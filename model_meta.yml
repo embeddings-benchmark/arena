@@ -24,6 +24,19 @@ model_meta:
     mteb_retrieval: 46.64
     mteb_sts: 79.10
     mteb_clustering: 37.08
+  intfloat/multilingual-e5-large-instruct:
+    link: https://huggingface.co/intfloat/multilingual-e5-large-instruct
+    revision: ab10c1a7f42e74530fe7ae5be82e6d4f11a719eb
+    desc: multilingual-e5-large-instruct by Microsoft
+    seq_len: 514
+    size: 560
+    dim: 1024
+    license: MIT License
+    organization: Microsoft
+    mteb_overall: 64.41
+    mteb_retrieval: 52.47
+    mteb_sts: 84.78
+    mteb_clustering: 47.10
   intfloat/e5-mistral-7b-instruct:
     link: https://huggingface.co/intfloat/e5-mistral-7b-instruct
     revision: 07163b72af1488142a360786df853f237b1a3ca1
@@ -85,6 +98,66 @@ model_meta:
     mteb_retrieval: 60.25
     mteb_sts: 83.04
     mteb_clustering: 56.92
+  SFR-Embedding-2_R:
+    link: https://huggingface.co/Salesforce/SFR-Embedding-2_R
+    desc: SFR-Embedding-2_R by Salesforce
+    seq_len: 32768
+    size: 7111
+    dim: 4096
+    license: CC-BY-NC-4.0
+    organization: Salesforce
+    mteb_overall: 70.31
+    mteb_retrieval: 60.18
+    mteb_sts: 81.26
+    mteb_clustering: 56.17
+  jina-embeddings-v2-base-en:
+    link: https://huggingface.co/jinaai/jina-embeddings-v2-base-en
+    desc: jina-embeddings-v2-base-en by Jina AI
+    seq_len: 8192
+    size: 137
+    dim: 768
+    license: Apache 2.0
+    organization: Jina AI
+    mteb_overall: 60.38
+    mteb_retrieval: 47.87
+    mteb_sts: 80.70
+    mteb_clustering: 41.73
+  mxbai-embed-large-v1:
+    link: https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1
+    desc: mxbai-embed-large-v1 by mixedbread.ai
+    seq_len: 512
+    size: 335
+    dim: 1024
+    license: Apache 2.0
+    organization: mixedbread.ai
+    mteb_overall: 64.68
+    mteb_retrieval: 54.39
+    mteb_sts: 85.00
+    mteb_clustering: 46.71
+  nomic-embed-text-v1.5:
+    link: https://huggingface.co/nomic-ai/nomic-embed-text-v1.5
+    desc: nomic-embed-text-v1.5 by nomic.ai
+    seq_len: 8192
+    size: 137
+    dim: 768
+    license: Apache 2.0
+    organization: nomic.ai
+    mteb_overall: 62.28
+    mteb_retrieval: 53.01
+    mteb_sts: 81.94
+    mteb_clustering: 43.93
+  LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised:
+    link: https://huggingface.co/McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised
+    desc: LLM2Vec by McGill
+    seq_len: 8192
+    size: 7505
+    dim: 4096
+    license: MIT
+    organization: McGill
+    mteb_overall: 65.01
+    mteb_retrieval: 56.63
+    mteb_sts: 83.58
+    mteb_clustering: 46.45
   bm25:
     link: https://en.wikipedia.org/wiki/Okapi_BM25
     desc: Keyword-based matching
