@@ -2,14 +2,16 @@ import concurrent.futures
 import os
 import math
 import random
-import logging
 
 import mteb
 #import spaces
 
+from log_utils import build_logger
 from retrieval.index import build_index, load_or_initialize_index
 from retrieval.index import DistributedIndex
 from retrieval.gcp_index import VertexIndex
+
+model_logger = build_logger("model_logger", "model_logger.log")
 
 
 class ModelManager:
@@ -59,6 +61,17 @@ class ModelManager:
         self.loaded_indices[model_name] = index
         return index
     
+    def load_gcp_index(self, model_name) -> VertexIndex:
+        if model_name in self.loaded_indices:
+            return self.loaded_indices[model_name]
+        meta = self.model_meta.get(model_name, {})
+        dim = meta.get("dim", None)
+        limit = meta.get("limit", None)
+        index = VertexIndex(dim=dim, model_name=model_name, model=self.loaded_models[model_name], limit=limit)
+        index.load_endpoint()
+        self.loaded_indices[model_name] = index
+        return index
+    
     def retrieve_draw(self):
         if "retrieval" not in self.loaded_samples:
             from datasets import load_dataset
@@ -103,23 +116,23 @@ class ModelManager:
         model = self.load_model(model_name)
         
         if self.use_gcp_index:
-            logging.info("Using GCP index.")
-            dim = self.model_meta[model_name].get("dim", None)
-            if dim is None:
-                raise Exception(f"Model {model_name} does not have `dim` in its model meta.")
-            limit = self.model_meta[model_name].get("limit", None)
-            gcp_index = VertexIndex(dim=dim, model_name=model_name, model=model, limit=limit)
-            gcp_index.load_endpoint()
+            # Optionally time embedding & search
+            # import time
+            # x = time.time()
             query_embed = model.encode([query])
-            docs = gcp_index.search(query_embeds=query_embed.tolist(), topk=topk)
+            # y = time.time()
+            # model_logger.info(f"Embedding time: {y - x}")
+            index = self.load_gcp_index(model_name)
+            # z = time.time()
+            # model_logger.info(f"Loading time: {z - y}")
+            docs = index.search(query_embeds=query_embed.tolist(), topk=topk)
+            # model_logger.info(f"Search time: {time.time() - z}")
             docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0]["text"]]]
-            # gcp_index.cleanup()
-            return docs
-        
-        query_embed = model.encode([query], convert_to_tensor=True)
-        index = self.load_local_index(model_name)
-        docs, scores = index.search_knn(query_embed, topk=topk)
-        docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0][0]["text"]]]
+        else:
+            query_embed = model.encode([query], convert_to_tensor=True)
+            index = self.load_local_index(model_name)
+            docs, scores = index.search_knn(query_embed, topk=topk)
+            docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0][0]["text"]]]
         return docs
     
     def clustering_parallel(self, prompt, model_A, model_B, ncluster=1, ndim="3D", dim_method="PCA", clustering_method="KMeans"):

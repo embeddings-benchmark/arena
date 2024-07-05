@@ -1,4 +1,3 @@
-import logging
 from datasets import load_dataset
 import math
 import json
@@ -6,7 +5,10 @@ import os
 from tqdm import tqdm
 from google.cloud import aiplatform, storage
 
-logger = logging.getLogger(__name__)
+from log_utils import build_logger
+logger = build_logger("index_logger", "index_logger.log")
+
+#logger = logging.getLogger(__name__)
 
 
 CORPORA = {
@@ -55,10 +57,17 @@ class VertexIndex:
         self.dim = dim
         self.model = model
         model_path = model_name_as_path(model_name)
-        self.index_name = f"index_{corpus}_{model_path}"
+        # Legacy indices
+        if (model_path in ("intfloat__multilingual-e5-small", "sentence-transformers__all-MiniLM-L6-v2")) and (corpus == "wikipedia"):
+            self.index_name = f"index_{model_path}"
+        else:
+            self.index_name = f"index_{corpus}_{model_path}"
         self.index_resource_name = None
         self.deploy_index_name = None
-        self.endpoint_name = f"endpoint_{corpus}_{model_path}"
+        if (model_path in ("intfloat__multilingual-e5-small", "sentence-transformers__all-MiniLM-L6-v2")) and (corpus == "wikipedia"):
+            self.endpoint_name = f"endpoint_{model_path}"
+        else:
+            self.endpoint_name = f"endpoint_{corpus}_{model_path}"
         self.endpoint_resource_name = None
         self.passages = load_passages_from_hf(corpus=corpus, limit=limit)
         self.doc_map = {str(i): doc for i, doc in enumerate(self.passages)}

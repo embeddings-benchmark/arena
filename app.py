@@ -29,7 +29,7 @@ MODEL_META_PATH = "model_meta.yml"
 MODEL_META_PATH = "model_meta_debug.yml"
 with open(MODEL_META_PATH, 'r', encoding='utf-8') as f:
     model_meta = safe_load(f)
-models = ModelManager(model_meta)
+models = ModelManager(model_meta, use_gcp_index=True)
 
 def load_elo_results(elo_results_dir):
     from collections import defaultdict
