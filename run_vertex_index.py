@@ -18,5 +18,8 @@ models = ModelManager(model_meta, use_gcp_index=True)
 
 
 ## Test with a small model
+#model_name = "intfloat/e5-mistral-7b-instruct"
 model_name = "GritLM/GritLM-7B"
-print(models.retrieve(query="What is this code telling me?", model_name=model_name))
+#model_name = "BAAI/bge-large-en-v1.5"
+#model_name = "intfloat/multilingual-e5-small"
+print(models.retrieve(query="Where is Japan?", model_name=model_name))

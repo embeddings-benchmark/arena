@@ -48,17 +48,17 @@ class VertexIndex:
     MACHINE_TYPE = "e2-standard-16"
     GCS_BUCKET_NAME = "mtebarena"
     GCS_BUCKET_URI = f"gs://{GCS_BUCKET_NAME}"
-    TMP_FILE_PATH = "tmp.json"
+    TMP_FILE_PATH = "tmp_gritlm.json"
 
-    def __init__(self, dim: int, model_name: str, model, corpus: str = "wikipedia",limit=None):
+    def __init__(self, dim: int, model_name: str, model, corpus: str = "wikipedia", limit=None):
         aiplatform.init(project=self.PROJECT_ID, location=self.REGION)
         self.dim = dim
         self.model = model
         model_path = model_name_as_path(model_name)
-        self.index_name = f"index_{model_path}"
+        self.index_name = f"index_{corpus}_{model_path}"
         self.index_resource_name = None
         self.deploy_index_name = None
-        self.endpoint_name = f"endpoint_{model_path}"
+        self.endpoint_name = f"endpoint_{corpus}_{model_path}"
         self.endpoint_resource_name = None
         self.passages = load_passages_from_hf(corpus=corpus, limit=limit)
         self.doc_map = {str(i): doc for i, doc in enumerate(self.passages)}
@@ -90,7 +90,7 @@ class VertexIndex:
             ]
             f.writelines(embeddings_formatted)
 
-    def _write_embeddings(self, gpu_embedder_batch_size=512) -> None:
+    def _write_embeddings(self, gpu_embedder_batch_size=64*8) -> None:
         """Batch encoding passages, then write a jsonl file."""
         if os.path.exists(self.TMP_FILE_PATH):
             os.remove(self.TMP_FILE_PATH)
@@ -101,9 +101,9 @@ class VertexIndex:
             indices = range(i * gpu_embedder_batch_size, (i + 1) * gpu_embedder_batch_size)
             batch = self.passages[i * gpu_embedder_batch_size : (i + 1) * gpu_embedder_batch_size]
             if hasattr(self.model, "encode_corpus"):
-                embeddings = self.model.encode_corpus(batch, batch_size=gpu_embedder_batch_size)
+                embeddings = self.model.encode_corpus(batch, batch_size=gpu_embedder_batch_size//8)
             else:
-                embeddings = self.model.encode(batch, batch_size=gpu_embedder_batch_size)
+                embeddings = self.model.encode(batch, batch_size=gpu_embedder_batch_size//8)
             total += len(embeddings)
             self._write_embeddings_to_tmp_file(embeddings.tolist(), indices)
             if i % 500 == 0 and i > 0:
