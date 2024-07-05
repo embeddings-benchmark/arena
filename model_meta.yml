@@ -27,7 +27,7 @@ model_meta:
     mteb_clustering: 37.08
   intfloat/multilingual-e5-large-instruct:
     link: https://huggingface.co/intfloat/multilingual-e5-large-instruct
-    revision: ab10c1a7f42e74530fe7ae5be82e6d4f11a719eb
+    revision: baa7be480a7de1539afce709c8f13f833a510e0a
     desc: multilingual-e5-large-instruct by Microsoft
     seq_len: 514
     size: 560
