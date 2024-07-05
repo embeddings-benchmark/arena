@@ -29,13 +29,13 @@ class ModelManager:
         self.loaded_models[model_name] = model
         return model
 
-    def load_local_index(self, model_name, embedbs=32) -> DistributedIndex:
+    def load_local_index(self, model_name, corpus, embedbs=32) -> DistributedIndex:
         """Load local index into memory. Create index if it does not exist."""
         if model_name in self.loaded_indices:
             return self.loaded_indices[model_name]
         meta = self.model_meta.get(model_name, {})
 
-        save_path = "index_" + model_name.replace("/", "_")
+        save_path = "index_" + corpus + "_" + model_name.replace("/", "_")
         load_index_path = None
         if os.path.exists(save_path):
             load_index_path = save_path
@@ -61,13 +61,17 @@ class ModelManager:
         self.loaded_indices[model_name] = index
         return index
     
-    def load_gcp_index(self, model_name) -> VertexIndex:
-        if model_name in self.loaded_indices:
+    def load_gcp_index(self, model_name, corpus) -> VertexIndex:
+        if model_name in self.loaded_indices: 
             return self.loaded_indices[model_name]
         meta = self.model_meta.get(model_name, {})
-        dim = meta.get("dim", None)
-        limit = meta.get("limit", None)
-        index = VertexIndex(dim=dim, model_name=model_name, model=self.loaded_models[model_name], limit=limit)
+        index = VertexIndex(
+            dim=meta.get("dim", None), 
+            model_name=model_name, 
+            model=self.loaded_models[model_name], 
+            corpus=corpus, 
+            limit=meta.get("limit", None)
+        )
         index.load_endpoint()
         self.loaded_indices[model_name] = index
         return index
@@ -100,19 +104,19 @@ class ModelManager:
         random.shuffle(samples) # Randomly permute order of the three samples
         return samples
 
-    def retrieve_parallel(self, prompt, model_A, model_B):
+    def retrieve_parallel(self, prompt, corpus, model_A, model_B):
         if model_A == "" and model_B == "":
             model_names = random.sample(list(self.model_meta.keys()), 2)
         else:
             model_names = [model_A, model_B]
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [executor.submit(self.retrieve, prompt, model) for model in model_names]
+            futures = [executor.submit(self.retrieve, prompt, corpus, model) for model in model_names]
             results = [future.result() for future in futures]
         return results[0], results[1], model_names[0], model_names[1]
 
     # @spaces.GPU(duration=120)
-    def retrieve(self, query, model_name, topk=1):
+    def retrieve(self, query, corpus, model_name, topk=1):
         model = self.load_model(model_name)
         
         if self.use_gcp_index:
@@ -122,7 +126,7 @@ class ModelManager:
             query_embed = model.encode([query])
             # y = time.time()
             # model_logger.info(f"Embedding time: {y - x}")
-            index = self.load_gcp_index(model_name)
+            index = self.load_gcp_index(model_name, corpus)
             # z = time.time()
             # model_logger.info(f"Loading time: {z - y}")
             docs = index.search(query_embeds=query_embed.tolist(), topk=topk)
@@ -130,7 +134,7 @@ class ModelManager:
             docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0]["text"]]]
         else:
             query_embed = model.encode([query], convert_to_tensor=True)
-            index = self.load_local_index(model_name)
+            index = self.load_local_index(model_name, corpus)
             docs, scores = index.search_knn(query_embed, topk=topk)
             docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0][0]["text"]]]
         return docs

@@ -71,8 +71,7 @@ class VertexIndex:
         self.endpoint_resource_name = None
         self.passages = load_passages_from_hf(corpus=corpus, limit=limit)
         self.doc_map = {str(i): doc for i, doc in enumerate(self.passages)}
-    
-    
+
     def _index_exists(self) -> bool:
         index_names = [
             index.resource_name
