@@ -7,6 +7,16 @@ from leaderboard import build_leaderboard_tab
 from models import ModelManager
 from ui import build_side_by_side_ui_anon, build_side_by_side_ui_anon_sts, build_side_by_side_ui_anon_clustering, build_side_by_side_ui_named, build_side_by_side_ui_named_sts, build_side_by_side_ui_named_clustering, build_single_model_ui, build_single_model_ui_sts, build_single_model_ui_clustering
 
+
+# download the videos 
+from huggingface_hub import hf_hub_url
+for file_to_download in ["sts_explanation.mp4", "clustering_explanation.mp4"]:
+    file_url = hf_hub_url(repo_id="mteb/arena-videos", repo_type="dataset", endpoint=None, filename=file_to_download)
+    # download it to videos/ folder using wget
+    os.system(f"wget {file_url} -O videos/{file_to_download}")
+
+
+
 acknowledgment_md = """
 ### Acknowledgment
 We thank X, Y, Z, [Contextual AI](https://contextual.ai/) and [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).

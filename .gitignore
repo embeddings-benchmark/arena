@@ -3,3 +3,4 @@ corpus.jsonl
 corpus.jsonl.gz
 results_dataset_to_upload
 *.pyc
+videos/*.mp4
