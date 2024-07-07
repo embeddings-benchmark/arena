@@ -4,6 +4,7 @@ import gradio as gr
 import numpy as np
 import pandas as pd
 
+from arena_elo.elo_analysis import load_results
 
 leader_component_values = [None] * 5
 
@@ -77,9 +78,7 @@ def build_leaderboard_tab(elo_results_file, leaderboard_table_file, show_plot=Fa
         md = "Loading ..."
         p1 = p2 = p3 = p4 = None
     else:
-        with open(elo_results_file, "rb") as fin:
-            elo_results = pickle.load(fin)
-
+        elo_results = load_results(elo_results_file)
         anony_elo_results = elo_results["anony"]
         anony_arena_df = anony_elo_results["leaderboard_table_df"]
         p1 = anony_elo_results["win_fraction_heatmap"]
