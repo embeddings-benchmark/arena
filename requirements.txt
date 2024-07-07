@@ -4,3 +4,4 @@ gritlm
 mteb
 plotly
 umap-learn
+kaleido
