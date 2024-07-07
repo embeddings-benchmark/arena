@@ -11,6 +11,8 @@ import pandas as pd
 import plotly.express as px
 from tqdm import tqdm
 from datasets import load_dataset
+import plotly
+import os
 
 from .basic_stats import get_log_files
 from .clean_battle_data import clean_battle_data
@@ -337,6 +339,125 @@ def pretty_print_elo_rating(rating):
         print(f"{i+1:2d}, {model:25s}, {rating[model]:.0f}")
 
 
+
+def write_out_results(item: dict, item_name: str):
+    """
+    Due to their complex structure, let's recursively create subfolders until we reach the end
+        of the item and then save the DFs as jsonl files
+
+    Args:
+        item (dict): The item to save
+        item_name (str): The name of the item
+    
+    Returns:
+        None
+    """
+    main_folder = item_name
+
+    if isinstance(item, list): 
+        for i, v in enumerate(item):
+            write_out_results(v, os.path.join(main_folder, str(i)))
+
+    elif isinstance(item, dict):
+        for key, value in item.items():
+            if isinstance(value, dict):
+                write_out_results(value, os.path.join(main_folder, key))
+            elif isinstance(value, list):
+                for i, v in enumerate(value):
+                    write_out_results(v, os.path.join(main_folder, key + str(i)))
+            else:
+                write_out_results(value, os.path.join(main_folder, key))
+
+    elif isinstance(item, pd.DataFrame):
+        print(f"Saving {main_folder} to {main_folder}/default.jsonl")
+        os.makedirs(main_folder, exist_ok=True)
+        item.reset_index().to_json(f"{main_folder}/default.jsonl", orient="records", lines=True)
+
+    elif isinstance(item, pd.Series):
+        print(f"Saving {main_folder} to {main_folder}/default.jsonl")
+        os.makedirs(main_folder, exist_ok=True)
+        item.to_frame().reset_index().to_json(f"{main_folder}/default.jsonl", orient="records", lines=True)
+
+    elif isinstance(item, plotly.graph_objs._figure.Figure):
+        print(f"Saving {main_folder} to {main_folder}/default.png")
+        os.makedirs(main_folder, exist_ok=True)
+        item.write_image(f"{main_folder}/default.png")
+
+    elif isinstance(item, str):
+        print(f"Saving {main_folder} to {main_folder}/default.txt")
+        os.makedirs(main_folder, exist_ok=True)
+        with open(f"{main_folder}/default.txt", "w") as f:
+            f.write(item)
+
+    elif item is None:
+        # write out an empty file
+        print(f"Saving {main_folder} to {main_folder}/default.txt")
+        os.makedirs(main_folder, exist_ok=True)
+        with open(f"{main_folder}/default.txt", "w") as f:
+            f.write("")
+
+    elif isinstance(item, float):
+        print(f"Saving {main_folder} to {main_folder}/default.txt")
+        os.makedirs(main_folder, exist_ok=True)
+        with open(f"{main_folder}/default.txt", "w") as f:
+            f.write(str(item))
+
+    else:
+        print(main_folder)
+        raise Exception(f"Unknown type {type(item)}")
+    
+
+
+def load_results(data_path):
+    """
+    Do the reverse of `write_out_results` to reconstruct the item
+
+    Args:
+        data_path (str): The path to the data to load
+
+    Returns:
+        dict: The loaded data
+    """
+    if os.path.isdir(data_path):
+        # if the folder just has numbers from 0 to N, load as a list
+        all_files_in_dir = list(os.listdir(data_path))
+        if set(all_files_in_dir) == set([str(i) for i in range(len(all_files_in_dir))]):
+            ### the list case
+            return [load_results(os.path.join(data_path, str(i))) for i in range(len(os.listdir(data_path)))]
+        else:
+            if len(all_files_in_dir) == 1:
+                file_name = all_files_in_dir[0]
+                if file_name == "default.jsonl": 
+                    return load_results(os.path.join(data_path, file_name))
+                else: ### the dict case
+                    return {file_name: load_results(os.path.join(data_path, file_name))}
+            else:
+                return {file_name: load_results(os.path.join(data_path, file_name)) for file_name in all_files_in_dir}
+        
+    elif data_path.endswith(".png"):
+        return None
+    
+    elif data_path.endswith(".jsonl"):
+        df = pd.read_json(data_path, orient="records", lines=True)
+        if "index" in df.columns:
+            df = df.set_index("index")
+        return df
+    
+    else:
+        with open(data_path, "r") as f:
+            data = f.read()
+
+        try:
+            return float(data)
+        except ValueError:
+            pass # not a float
+
+        if data == "":
+            return None
+        else:
+            return data
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--clean-battle-file", type=str)
@@ -383,5 +504,4 @@ if __name__ == "__main__":
         "anony": anony_results,
         "full": full_results,
     }
-    with open(f"elo_results_{cutoff_date}.pkl", "wb") as fout:
-        pickle.dump(results, fout)
+    write_out_results(results, f"elo_results_{cutoff_date}")

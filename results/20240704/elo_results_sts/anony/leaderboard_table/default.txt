@@ -1,0 +1,4 @@
+| Rank | Model | Elo Rating | Description |
+| --- | --- | --- | --- |
+| 1 | 🥇 [intfloat/multilingual-e5-small](https://huggingface.co/intfloat/multilingual-e5-small) | 1054 | multilingual-e5-small by Microsoft |
+| 2 | 🥈 [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) | 946 | all-MiniLM-L6-v2 by Sentence Transformers |

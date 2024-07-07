@@ -7,6 +7,16 @@ from leaderboard import build_leaderboard_tab
 from models import ModelManager
 from ui import build_side_by_side_ui_anon, build_side_by_side_ui_anon_sts, build_side_by_side_ui_anon_clustering, build_side_by_side_ui_named, build_side_by_side_ui_named_sts, build_side_by_side_ui_named_clustering, build_single_model_ui, build_single_model_ui_sts, build_single_model_ui_clustering
 
+
+# download the videos 
+from huggingface_hub import hf_hub_url
+for file_to_download in ["sts_explanation.mp4", "clustering_explanation.mp4"]:
+    file_url = hf_hub_url(repo_id="mteb/arena-videos", repo_type="dataset", endpoint=None, filename=file_to_download)
+    # download it to videos/ folder using wget
+    os.system(f"wget {file_url} -O videos/{file_to_download}")
+
+
+
 acknowledgment_md = """
 ### Acknowledgment
 We thank X, Y, Z, [Contextual AI](https://contextual.ai/) and [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).
@@ -39,15 +49,15 @@ def load_elo_results(elo_results_dir):
         elo_results_dir = Path(elo_results_dir)
         elo_results_file = {}
         leaderboard_table_file = {}
-        for file in elo_results_dir.glob('elo_results_*.pkl'):
-            if 'clustering' in file.name:
-                elo_results_file['clustering'] = file
-            elif 'retrieval' in file.name:
-                elo_results_file['retrieval'] = file
-            elif 'sts' in file.name:
-                elo_results_file['sts'] = file
+        for folder in elo_results_dir.glob('elo_results_*'):
+            if 'clustering' in folder.name:
+                elo_results_file['clustering'] = folder
+            elif 'retrieval' in folder.name:
+                elo_results_file['retrieval'] = folder
+            elif 'sts' in folder.name:
+                elo_results_file['sts'] = folder
             else:
-                raise ValueError(f"Unknown file name: {file.name}")
+                raise ValueError(f"Unknown folder name: {folder.name}")
         for file in elo_results_dir.glob('*_leaderboard.csv'):
             if 'clustering' in file.name:
                 leaderboard_table_file['clustering'] = file

@@ -1,0 +1,2 @@
+{"index":"intfloat\/multilingual-e5-small","rating":1042.1840569751,"variance":null,"rating_q975":1049.5586030298,"rating_q025":1049.5586030298,"num_battles":25}
+{"index":"sentence-transformers\/all-MiniLM-L6-v2","rating":957.8159430249,"variance":null,"rating_q975":950.4413969702,"rating_q025":950.4413969702,"num_battles":25}

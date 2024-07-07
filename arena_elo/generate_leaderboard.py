@@ -3,6 +3,7 @@ import json
 import pandas as pd
 import pickle
 from yaml import safe_load
+from .elo_analysis import load_results
 
 RENAME_KEYS = {
     "organization": "Organization",
@@ -15,7 +16,7 @@ RENAME_KEYS = {
 }
 
 def main(
-    elo_rating_pkl: str,
+    elo_rating_folder: str,
     output_csv: str
 ):    
 
@@ -31,8 +32,7 @@ def main(
             if key in model_info[model]:
                 model_info[model][RENAME_KEYS[key]] = model_info[model].pop(key)
 
-    with open(elo_rating_pkl, "rb") as fin:
-        elo_rating_results = pickle.load(fin)
+    elo_rating_results = load_results(elo_rating_folder)
 
     anony_elo_rating_results = elo_rating_results["anony"]
     full_elo_rating_results = elo_rating_results["full"]
