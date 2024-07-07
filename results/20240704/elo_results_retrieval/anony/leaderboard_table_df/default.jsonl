@@ -1,2 +1,2 @@
-{"rating":1045.9703208908,"variance":null,"rating_q975":1038.0497229215,"rating_q025":1038.0497229215,"num_battles":23}
-{"rating":954.0296791092,"variance":null,"rating_q975":961.9502770785,"rating_q025":961.9502770785,"num_battles":23}
+{"index":"intfloat\/multilingual-e5-small","rating":1045.9703208908,"variance":null,"rating_q975":1038.0497229215,"rating_q025":1038.0497229215,"num_battles":23}
+{"index":"sentence-transformers\/all-MiniLM-L6-v2","rating":954.0296791092,"variance":null,"rating_q975":961.9502770785,"rating_q025":961.9502770785,"num_battles":23}
