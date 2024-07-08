@@ -10,6 +10,7 @@ from log_utils import build_logger
 from retrieval.index import build_index, load_or_initialize_index
 from retrieval.index import DistributedIndex
 from retrieval.gcp_index import VertexIndex
+from retrieval.bm25_index import BM25Index
 
 model_logger = build_logger("model_logger", "model_logger.log")
 
@@ -75,6 +76,20 @@ class ModelManager:
         index.load_endpoint()
         self.loaded_indices[model_name] = index
         return index
+
+    def load_bm25_index(self, model_name:str, corpus:str, limit=None) -> BM25Index:
+        if model_name in self.loaded_indices:
+            if corpus in self.loaded_indices[model_name]:
+                return self.loaded_indices[model_name][corpus]
+        index = BM25Index(
+            model_name=model_name, 
+            corpus=corpus, 
+            limit=limit
+        )
+        index.load_index()
+        self.loaded_indices[model_name][corpus] = index
+        return index
+        
     
     def retrieve_draw(self):
         if "retrieval" not in self.loaded_samples:
@@ -117,6 +132,11 @@ class ModelManager:
 
     # @spaces.GPU(duration=120)
     def retrieve(self, query, corpus, model_name, topk=1):
+
+        if "bm25" in model_name:
+            index = self.load_bm25_index(model_name, corpus)
+            
+
         model = self.load_model(model_name)
         
         if self.use_gcp_index:

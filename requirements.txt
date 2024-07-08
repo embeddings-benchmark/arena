@@ -1,6 +1,8 @@
+bm25s[full]
 fire
 google-cloud-aiplatform
 gradio
 mteb
 plotly
+PyStemmer
 umap-learn

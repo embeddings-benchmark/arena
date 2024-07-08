@@ -1,42 +1,17 @@
-from datasets import load_dataset
 import math
 import json
 import os
 from tqdm import tqdm
 from google.cloud import aiplatform, storage
 
+from .common import load_passages_from_hf
 from log_utils import build_logger
 logger = build_logger("index_logger", "index_logger.log")
 
-#logger = logging.getLogger(__name__)
 
-
-CORPORA = {
-    "wikipedia": {"name": "orionweller/wikipedia-2024-06-24-docs", "columns": {"id": "_id"}},
-    "arxiv": {"name": "orionweller/raw_arxiv_7_2_24", "columns": {"id": "_id", "abstract": "text"}},
-    "stackexchange": {"name": "orionweller/stackexchange_chunked", "columns": {"id": "_id"}},
-}
 
 def model_name_as_path(model_name) -> str:
     return model_name.replace("/", "__").replace(" ", "_")
-
-def load_passages_from_hf(corpus: str, limit: int = None):
-    """ 
-    Returns a list of passages. Each passage is a dict with the following keys:
-    {
-        "_id:" doc0,
-        "title": "Title 1",
-        "text": "Body text 1",
-    }
-    """
-    if CORPORA.get(corpus) is None:
-        raise NotImplementedError(f"Corpus={corpus} is not found. Try using `wikipedia`, `arxiv`, or `stackexchange`.")
-    corpus_dict = CORPORA[corpus]
-    ds = load_dataset(corpus_dict['name'], split="train")
-    passages = ds.rename_columns(corpus_dict['columns'])
-    if limit and limit > 1:
-        passages = passages.take(limit)
-    return passages.to_list()
 
 
 class VertexIndex:
@@ -222,7 +197,7 @@ class VertexIndex:
         )
     
     def search(self, query_embeds: list, topk=1):
-        """Return topk docs and scores."""
+        """Return topk docs"""
         if self.endpoint is None:
             self.load_endpoint()
 
