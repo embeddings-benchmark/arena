@@ -66,10 +66,10 @@ class ModelManager:
             return self.loaded_indices[model_name]
         meta = self.model_meta.get(model_name, {})
         index = VertexIndex(
-            dim=meta.get("dim", None), 
-            model_name=model_name, 
-            model=self.loaded_models[model_name], 
-            corpus=corpus, 
+            dim=meta.get("dim", None),
+            model_name=model_name,
+            model=self.loaded_models[model_name],
+            corpus=corpus,
             limit=meta.get("limit", None)
         )
         index.load_endpoint()
