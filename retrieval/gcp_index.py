@@ -58,10 +58,6 @@ class VertexIndex:
         self.dim = dim
         self.model = model
         model_path = model_name_as_path(model_name)
-        # Legacy indices
-        #if (model_path in ("intfloat__multilingual-e5-small", "sentence-transformers__all-MiniLM-L6-v2")) and (corpus == "wikipedia"):
-        #    self.index_name = f"index_{model_path}"
-        #else:
         self.index_name = f"index_{corpus}_{model_path}"
         self.index_resource_name = None
         self.deploy_index_name = None
@@ -191,7 +187,6 @@ class VertexIndex:
         if self.index is None:
             self._load_index()
 
-        exit()
         if self._endpoint_exists():
             self.endpoint = aiplatform.MatchingEngineIndexEndpoint(
                 index_endpoint_name=self.endpoint_resource_name
