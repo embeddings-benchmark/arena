@@ -73,7 +73,7 @@ class ModelManager:
             limit=meta.get("limit", None)
         )
         index.load_endpoint()
-        self.loaded_indices[model_name] = index
+        self.loaded_indices[model_name][corpus] = index
         return index
     
     def retrieve_draw(self):
