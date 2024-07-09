@@ -8,4 +8,3 @@ git+https://github.com/embeddings-benchmark/mteb.git@simplify-models
 plotly
 PyStemmer
 umap-learn
-umap-learn
