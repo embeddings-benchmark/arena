@@ -1,6 +1,11 @@
+bm25s[full]
+einops
 fire
+google-cloud-aiplatform
 gradio
 gritlm
 mteb
 plotly
+PyStemmer
+umap-learn
 umap-learn

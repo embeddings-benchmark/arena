@@ -4,13 +4,21 @@ import math
 import random
 
 import mteb
-#import spaces
+import spaces
 
+from log_utils import build_logger
 from retrieval.index import build_index, load_or_initialize_index
+from retrieval.index import DistributedIndex
+from retrieval.gcp_index import VertexIndex
+from retrieval.bm25_index import BM25Index
+
+logger = build_logger("model_logger", "model_logger.log")
+
 
 class ModelManager:
-    def __init__(self, model_meta):
+    def __init__(self, model_meta, use_gcp_index: bool = False):
         self.model_meta = model_meta["model_meta"]
+        self.use_gcp_index = use_gcp_index
         self.loaded_models = {}
         self.loaded_indices = {}
         self.loaded_samples = {}
@@ -18,16 +26,18 @@ class ModelManager:
     def load_model(self, model_name):
         if model_name in self.loaded_models:
             return self.loaded_models[model_name]
+        logger.info(f"Loading & caching model: {model_name}")
         model = mteb.get_model(model_name, revision=self.model_meta[model_name].get("revision", None))
         self.loaded_models[model_name] = model
         return model
 
-    def load_index(self, model_name, embedbs=32):
-        if model_name in self.loaded_indices:
-            return self.loaded_indices[model_name]
+    def load_local_index(self, model_name, corpus, embedbs=32) -> DistributedIndex:
+        """Load local index into memory. Create index if it does not exist."""
+        if (model_name in self.loaded_indices) and (corpus in self.loaded_indices[model_name]):
+            return self.loaded_indices[model_name][corpus]
         meta = self.model_meta.get(model_name, {})
 
-        save_path = "index_" + model_name.replace("/", "_")
+        save_path = "index_" + corpus + "_" + model_name.replace("/", "_")
         load_index_path = None
         if os.path.exists(save_path):
             load_index_path = save_path
@@ -50,8 +60,40 @@ class ModelManager:
             os.makedirs(save_path, exist_ok=True)
             index.save_index(save_path)
 
-        self.loaded_indices[model_name] = index
+        self.loaded_indices.setdefault(model_name, {})
+        self.loaded_indices[model_name][corpus] = index
         return index
+    
+    def load_gcp_index(self, model_name, corpus) -> VertexIndex:
+        if (model_name in self.loaded_indices) and (corpus in self.loaded_indices[model_name]):
+            return self.loaded_indices[model_name][corpus]
+        meta = self.model_meta.get(model_name, {})
+        index = VertexIndex(
+            dim=meta.get("dim", None),
+            model_name=model_name,
+            model=self.loaded_models[model_name],
+            corpus=corpus,
+            limit=meta.get("limit", None)
+        )
+        index.load_endpoint()
+        self.loaded_indices.setdefault(model_name, {})
+        self.loaded_indices[model_name][corpus] = index
+        return index
+
+    def load_bm25_index(self, model_name:str, corpus:str, limit=None) -> BM25Index:
+        if model_name in self.loaded_indices:
+            if corpus in self.loaded_indices[model_name]:
+                return self.loaded_indices[model_name][corpus]
+        index = BM25Index(
+            model_name=model_name, 
+            corpus=corpus, 
+            limit=limit
+        )
+        index.load_index()
+        self.loaded_indices.setdefault(model_name, {})
+        self.loaded_indices[model_name][corpus] = index
+        return index
+        
     
     def retrieve_draw(self):
         if "retrieval" not in self.loaded_samples:
@@ -81,23 +123,45 @@ class ModelManager:
         random.shuffle(samples) # Randomly permute order of the three samples
         return samples
 
-    def retrieve_parallel(self, prompt, model_A, model_B):
+    def retrieve_parallel(self, prompt, corpus, model_A, model_B):
         if model_A == "" and model_B == "":
             model_names = random.sample(list(self.model_meta.keys()), 2)
         else:
             model_names = [model_A, model_B]
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [executor.submit(self.retrieve, prompt, model) for model in model_names]
+            futures = [executor.submit(self.retrieve, prompt, corpus, model) for model in model_names]
             results = [future.result() for future in futures]
         return results[0], results[1], model_names[0], model_names[1]
 
-    # @spaces.GPU(duration=120)
-    def retrieve(self, query, model_name, topk=1):
+    @spaces.GPU(duration=120)
+    def retrieve(self, query, corpus, model_name, topk=1):
+
+        if "bm25" in model_name:
+            index = self.load_bm25_index(model_name, corpus)
+            docs = index.search([query], topk=topk)
+            return docs
+            
         model = self.load_model(model_name)
-        index = self.load_index(model_name)
-        docs, scores = index.search_knn(model.encode([query], convert_to_tensor=True), topk=topk)
-        docs = [[query, "Title: " + docs[0][0]["title"] + "\n\n" + "Passage: " + docs[0][0]["text"]]]
+        
+        if self.use_gcp_index:
+            # Optionally time embedding & search
+            # import time
+            # x = time.time()
+            query_embed = model.encode([query])
+            # y = time.time()
+            # logger.info(f"Embedding time: {y - x}")
+            index = self.load_gcp_index(model_name, corpus)
+            # z = time.time()
+            # logger.info(f"Loading time: {z - y}")
+            docs = index.search(query_embeds=query_embed.tolist(), topk=topk)
+            # logger.info(f"Search time: {time.time() - z}")
+            docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0]["text"]]]
+        else:
+            query_embed = model.encode([query], convert_to_tensor=True)
+            index = self.load_local_index(model_name, corpus)
+            docs, scores = index.search_knn(query_embed, topk=topk)
+            docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0][0]["text"]]]
         return docs
     
     def clustering_parallel(self, prompt, model_A, model_B, ncluster=1, ndim="3D", dim_method="PCA", clustering_method="KMeans"):
@@ -110,7 +174,8 @@ class ModelManager:
             futures = [executor.submit(self.clustering, prompt, model, ncluster, ndim, dim_method, clustering_method) for model in model_names]
             results = [future.result() for future in futures]
         return results[0], results[1], model_names[0], model_names[1]
-    
+
+    @spaces.GPU(duration=120)
     def clustering(self, queries, model_name, ncluster=1, ndim="3D", dim_method="PCA", clustering_method="KMeans"):
         """
         Sources:
@@ -192,7 +257,7 @@ class ModelManager:
             results = [future.result() for future in futures]
         return results[0], results[1], model_names[0], model_names[1]
 
-
+    @spaces.GPU(duration=120)
     def sts(self, txt0, txt1, txt2, model_name):
         import numpy as np
         from numpy.linalg import norm
