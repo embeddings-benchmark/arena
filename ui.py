@@ -171,6 +171,7 @@ class RetrievalState:
         self.conv_id = uuid.uuid4().hex
         self.model_name = model_name
         self.prompt = ""
+        self.corpus = ""
         self.output = ""
 
     def dict(self, prefix: str = None):
@@ -179,15 +180,15 @@ class RetrievalState:
         else:
             return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_prompt": self.prompt, f"{prefix}_output": self.output}
 
-def retrieve_side_by_side(gen_func, state0, state1, text, model_name0, model_name1, request: gr.Request):
+def retrieve_side_by_side(gen_func, state0, state1, text, corpus, model_name0, model_name1, request: gr.Request):
     if not text: raise gr.Warning("Query cannot be empty.")
     state0, state1 = RetrievalState(model_name0), RetrievalState(model_name1)
     ip = get_ip(request)
     retrieval_logger.info(f"Retrieval. ip: {ip}")
     start_tstamp = time.time()
-    model_name0, model_name1 = "", ""
-    retrieved_txt0, retrieved_txt1, model_name0, model_name1 = gen_func(text, model_name0, model_name1)
+    retrieved_txt0, retrieved_txt1, model_name0, model_name1 = gen_func(text, corpus, model_name0, model_name1)
     state0.prompt, state1.prompt = text, text
+    state0.corpus, state1.corpus = corpus, corpus
     state0.output, state1.output = retrieved_txt0, retrieved_txt1
     state0.model_name, state1.model_name = model_name0, model_name1
     
@@ -222,15 +223,16 @@ def retrieve_side_by_side(gen_func, state0, state1, text, model_name0, model_nam
     }
     store_data_in_hub(data, "retrieval_individual")
 
-def retrieve(gen_func, state, text, model_name, request: gr.Request):
+def retrieve(gen_func, state, text, corpus, model_name, request: gr.Request):
     if not text: raise gr.Warning("Query cannot be empty.")
     if not model_name: raise gr.Warning("Model name cannot be empty.")
     state = RetrievalState(model_name)
     ip = get_ip(request)
     retrieval_logger.info(f"Retrieval. ip: {ip}")
     start_tstamp = time.time()
-    retrieved_txt = gen_func(text, model_name)
+    retrieved_txt = gen_func(text, corpus, model_name)
     state.prompt = text
+    state.corpus = corpus
     state.output = retrieved_txt
     state.model_name = model_name
 
@@ -310,11 +312,21 @@ def build_side_by_side_ui_anon(models):
 
     with gr.Row():
         textbox = gr.Textbox(
-            show_label=False,
-            placeholder="👉 Enter your query and press ENTER",
+            label="Query",
+            show_label=True,
+            placeholder="👉 Enter text and press ENTER",
             container=True,
             elem_id="input_box",
         )
+        corpus = gr.Dropdown(
+            label="Corpus",
+            choices=["wikipedia", "stackoverflow", "arxiv"],
+            value="wikipedia",
+            interactive=True,
+            show_label=True,
+            container=True,
+            scale=0,
+        )        
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
         draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
 
@@ -347,12 +359,12 @@ def build_side_by_side_ui_anon(models):
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 3),
+        partial(disable_buttons_side_by_side, 4),
         inputs=None,
-        outputs=[send_btn, textbox, draw_btn],
+        outputs=[textbox, corpus, send_btn, draw_btn],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
+        inputs=[state0, state1, textbox, corpus, model_selector_left, model_selector_right],
         outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right],
         api_name="submit_btn_anon"
     ).then(
@@ -366,12 +378,12 @@ def build_side_by_side_ui_anon(models):
         inputs=textbox,
         outputs=None,
     ).success(        
-        partial(disable_buttons_side_by_side, 3),
+        partial(disable_buttons_side_by_side, 4),
         inputs=None,
-        outputs=[send_btn, textbox, draw_btn],
+        outputs=[textbox, corpus, send_btn, draw_btn],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
+        inputs=[state0, state1, textbox, corpus, model_selector_left, model_selector_right],
         outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right],
         api_name="send_btn_anon"
     ).then(
@@ -390,9 +402,9 @@ def build_side_by_side_ui_anon(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_btns, 3),
+        partial(enable_btns, 4),
         inputs=None,
-        outputs=[send_btn, textbox, draw_btn],
+        outputs=[textbox, corpus, send_btn, draw_btn],
     )
 
     dummy_left_model = gr.State("")
@@ -471,8 +483,7 @@ def build_side_by_side_ui_named(models):
                     interactive=True,
                     show_label=False,
                     container=False,
-                    allow_custom_value=True
-                    )
+                )
             with gr.Column():
                 model_selector_right = gr.Dropdown(
                     choices=model_list,
@@ -480,8 +491,7 @@ def build_side_by_side_ui_named(models):
                     interactive=True,
                     show_label=False,
                     container=False,
-                    allow_custom_value=True
-                    )
+                )
         with gr.Row():
             with gr.Accordion("🔍 Expand to see all model descriptions", open=False):
                 model_description_md = models.get_model_description_md()
@@ -516,9 +526,20 @@ def build_side_by_side_ui_named(models):
 
     with gr.Row():
         textbox = gr.Textbox(
-            show_label=False,
-            placeholder="👉 Enter your query and press ENTER",
-            elem_id="input_box"
+            label="Query",
+            show_label=True,
+            placeholder="👉 Enter text and press ENTER",
+            container=True,
+            elem_id="input_box",
+        )
+        corpus = gr.Dropdown(
+            label="Corpus",
+            choices=["wikipedia", "stackoverflow", "arxiv"],
+            value="wikipedia",
+            interactive=True,
+            show_label=True,
+            container=True,
+            scale=0,
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
         draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
@@ -551,12 +572,12 @@ def build_side_by_side_ui_named(models):
         inputs=textbox,
         outputs=None,
     ).success(        
-        partial(disable_buttons_side_by_side, 3),
+        partial(disable_buttons_side_by_side, 4),
         inputs=None,
-        outputs=[send_btn, textbox, draw_btn],
+        outputs=[textbox, corpus, send_btn, draw_btn],
     ).then(        
         gen_func,
-        inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
+        inputs=[state0, state1, textbox, corpus, model_selector_left, model_selector_right],
         outputs=[state0, state1, chatbot_left, chatbot_right],
         api_name="textbox_side_by_side"
     ).then(
@@ -570,12 +591,12 @@ def build_side_by_side_ui_named(models):
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 3),
+        partial(disable_buttons_side_by_side, 4),
         inputs=None,
-        outputs=[textbox, send_btn, draw_btn],
+        outputs=[textbox, corpus, send_btn, draw_btn],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
+        inputs=[state0, state1, textbox, corpus, model_selector_left, model_selector_right],
         outputs=[state0, state1, chatbot_left, chatbot_right],
         api_name="send_side_by_side"
     ).then(
@@ -594,9 +615,9 @@ def build_side_by_side_ui_named(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_btns, 3),
+        partial(enable_btns, 4),
         inputs=None,
-        outputs=[textbox, send_btn, draw_btn],
+        outputs=[textbox, corpus, send_btn, draw_btn],
     )
 
     leftvote_btn.click(
@@ -686,9 +707,20 @@ def build_single_model_ui(models):
 
     with gr.Row():
         textbox = gr.Textbox(
-            show_label=False,
-            placeholder="👉 Enter your query and press ENTER",
-            elem_id="input_box"
+            label="Query",
+            show_label=True,
+            placeholder="👉 Enter text and press ENTER",
+            container=True,
+            elem_id="input_box",
+        )
+        corpus = gr.Dropdown(
+            label="Corpus",
+            choices=["wikipedia", "stackoverflow", "arxiv"],
+            value="wikipedia",
+            interactive=True,
+            show_label=True,
+            container=True,
+            scale=0,
         )
         send_btn = gr.Button(value="Send", variant="primary", scale=0)
         draw_btn = gr.Button(value="🎲 Random sample", variant="primary", scale=0)
@@ -728,9 +760,9 @@ def build_single_model_ui(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_btns, 3),
+        partial(enable_btns, 4),
         inputs=None,
-        outputs=[textbox, send_btn, draw_btn],
+        outputs=[textbox, corpus, send_btn, draw_btn],
     )
 
     textbox.submit(
@@ -738,12 +770,12 @@ def build_single_model_ui(models):
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 3),
+        partial(disable_buttons_side_by_side, 4),
         inputs=None,
-        outputs=[textbox, send_btn, draw_btn],
+        outputs=[textbox, corpus, send_btn, draw_btn],
     ).then(
         gen_func,
-        inputs=[state, textbox, model_selector],
+        inputs=[state, textbox, corpus, model_selector],
         outputs=[state, chatbot],
         api_name="submit_btn_single",
         show_progress = "full"
@@ -758,12 +790,12 @@ def build_single_model_ui(models):
         inputs=textbox,
         outputs=None,
     ).success(
-        partial(disable_buttons_side_by_side, 3),
+        partial(disable_buttons_side_by_side, 4),
         inputs=None,
-        outputs=[textbox, send_btn, draw_btn],
+        outputs=[textbox, corpus, send_btn, draw_btn],
     ).then(
         gen_func,
-        inputs=[state, textbox, model_selector],
+        inputs=[state, textbox, corpus, model_selector],
         outputs=[state, chatbot],
         api_name="send_btn_single",
         show_progress = "full"
@@ -798,9 +830,9 @@ def build_single_model_ui(models):
         inputs=None,
         outputs=btn_list
     ).then(
-        partial(enable_btns, 3),
+        partial(enable_btns, 4),
         inputs=None,
-        outputs=[textbox, send_btn, draw_btn],
+        outputs=[textbox, corpus, send_btn, draw_btn],
     )
 
 ### Clustering ###
@@ -857,7 +889,6 @@ def clustering_side_by_side(gen_func, state0, state1, txt, ncluster, ndim, dim_m
     ip = get_ip(request)
     clustering_logger.info(f"Clustering. ip: {ip}")
     start_tstamp = time.time()
-    model_name0, model_name1 = "", ""
     generated_image0, generated_image1, model_name0, model_name1 = gen_func(state0.prompts, model_name0, model_name1, ncluster, ndim=ndim.split(" ")[0], dim_method=dim_method, clustering_method=clustering_method)
     state0.model_name, state1.model_name = model_name0, model_name1
     
@@ -1177,8 +1208,7 @@ def build_side_by_side_ui_named_clustering(models):
                     interactive=True,
                     show_label=False,
                     container=False,
-                    allow_custom_value=True
-                    )
+                )
             with gr.Column():
                 model_selector_right = gr.Dropdown(
                     choices=model_list,
@@ -1186,8 +1216,7 @@ def build_side_by_side_ui_named_clustering(models):
                     interactive=True,
                     show_label=False,
                     container=False,
-                    allow_custom_value=True
-                    )
+                )
         with gr.Row():
             with gr.Accordion("🔍 Expand to see all model descriptions", open=False):
                 model_description_md = models.get_model_description_md()
@@ -1596,11 +1625,9 @@ def sts_side_by_side(gen_func, state0, state1, txt0, txt1, txt2, model_name0, mo
     ip = get_ip(request)
     retrieval_logger.info(f"Retrieval. ip: {ip}")
     start_tstamp = time.time()
-    model_name0, model_name1 = "", ""
     generated_image0, generated_image1, model_name0, model_name1 = gen_func(txt0, txt1, txt2, model_name0, model_name1)
     state0.txt0, state0.txt1, state0.txt2 = txt0, txt1, txt2
     state1.txt0, state1.txt1, state1.txt2 = txt0, txt1, txt2
-    # state0.output, state1.output = generated_image0, generated_image1
     state0.model_name, state1.model_name = model_name0, model_name1
     
     yield state0, state1, generated_image0, generated_image1, \
@@ -1851,8 +1878,7 @@ def build_side_by_side_ui_named_sts(models):
                     interactive=True,
                     show_label=False,
                     container=False,
-                    allow_custom_value=True
-                    )
+                )
             with gr.Column():
                 model_selector_right = gr.Dropdown(
                     choices=model_list,
@@ -1860,8 +1886,7 @@ def build_side_by_side_ui_named_sts(models):
                     interactive=True,
                     show_label=False,
                     container=False,
-                    allow_custom_value=True
-                    )
+                )
         with gr.Row():
             with gr.Accordion("🔍 Expand to see all model descriptions", open=False):
                 model_description_md = models.get_model_description_md()

@@ -1,40 +1,17 @@
-import logging
-from datasets import load_dataset
 import math
 import json
 import os
 from tqdm import tqdm
 from google.cloud import aiplatform, storage
 
-logger = logging.getLogger(__name__)
+from .common import load_passages_from_hf
+from log_utils import build_logger
 
+logger = build_logger("index_logger", "index_logger.log")
 
-CORPORA = {
-    "wikipedia": {"name": "orionweller/wikipedia-2024-06-24-docs", "columns": {"id": "_id"}},
-    "arxiv": {"name": "orionweller/raw_arxiv_7_2_24", "columns": {"id": "_id", "abstract": "text"}},
-    "stackexchange": {"name": "orionweller/stackexchange_chunked", "columns": {"id": "_id"}},
-}
 
 def model_name_as_path(model_name) -> str:
     return model_name.replace("/", "__").replace(" ", "_")
-
-def load_passages_from_hf(corpus: str, limit: int = None):
-    """ 
-    Returns a list of passages. Each passage is a dict with the following keys:
-    {
-        "_id:" doc0,
-        "title": "Title 1",
-        "text": "Body text 1",
-    }
-    """
-    if CORPORA.get(corpus) is None:
-        raise NotImplementedError(f"Corpus={corpus} is not found. Try using `wikipedia`, `arxiv`, or `stackexchange`.")
-    corpus_dict = CORPORA[corpus]
-    ds = load_dataset(corpus_dict['name'], split="train")
-    passages = ds.rename_columns(corpus_dict['columns'])
-    if limit and limit > 1:
-        passages = passages.take(limit)
-    return passages.to_list()
 
 
 class VertexIndex:
@@ -43,28 +20,35 @@ class VertexIndex:
     """
     index: aiplatform.MatchingEngineIndex = None
     endpoint: aiplatform.MatchingEngineIndexEndpoint = None
-    PROJECT_ID = "mike-sandbox-376720"
-    REGION = "us-central1"
+    PROJECT_ID = "contextual-research-common"
+    # us-central-1 & us-east-1 are cheapest
+    # https://cloud.withgoogle.com/region-picker/
+    # REGION = "us-east1" # "us-central1"
     MACHINE_TYPE = "e2-standard-16"
-    GCS_BUCKET_NAME = "arena-embed-test"
-    GCS_BUCKET_URI = f"gs://{GCS_BUCKET_NAME}"
-    TMP_FILE_PATH = "tmp.json"
 
-    def __init__(self, dim: int, model_name: str, model, corpus: str = "wikipedia",limit=None):
-        aiplatform.init(project=self.PROJECT_ID, location=self.REGION)
+    def __init__(self, dim: int, model_name: str, model, corpus: str = "wikipedia", limit=None):
+        region = "us-east1" if corpus == "wikipedia" else "us-central1"
+        self.gcs_bucket_name = "mtebarena" if corpus == "wikipedia" else "mtebarenauscentral"
+        self.gcs_bucket_uri = f"gs://{self.gcs_bucket_name}"
+        aiplatform.init(project=self.PROJECT_ID, location=region)
         self.dim = dim
         self.model = model
         model_path = model_name_as_path(model_name)
-        self.index_name = f"index_{model_path}"
+        # GCP filters do not allow `.` in the name, see _index_exists()
+        self.index_name = f"index_{corpus}_{model_path}".replace(".", "_")
         self.index_resource_name = None
         self.deploy_index_name = None
-        self.endpoint_name = f"endpoint_{model_path}"
+        # Reuse endpoint across indexes
+        self.endpoint_name = "endpoint" # f"endpoint_{corpus}_{model_path}"
+        self.tmp_file_path = f"tmp_{corpus}_{model_path}.json"
+        self.tmp_folder = f"tmp_{corpus}_{model_path}"
         self.endpoint_resource_name = None
         self.passages = load_passages_from_hf(corpus=corpus, limit=limit)
         self.doc_map = {str(i): doc for i, doc in enumerate(self.passages)}
-    
-    
+
     def _index_exists(self) -> bool:
+        logger.info(f"Checking if index {self.index_name} exists ...")
+        # This fails with `google.api_core.exceptions.InvalidArgument: 400 Provided filter is not valid.` if `.` is in the name
         index_names = [
             index.resource_name
             for index in aiplatform.MatchingEngineIndex.list(
@@ -77,7 +61,7 @@ class VertexIndex:
         return False
 
     def _write_embeddings_to_tmp_file(self, embeddings, indices):
-        with open(self.TMP_FILE_PATH, "a") as f:
+        with open(self.tmp_file_path, "a") as f:
             embeddings_formatted = [
                 json.dumps(
                     {
@@ -90,10 +74,10 @@ class VertexIndex:
             ]
             f.writelines(embeddings_formatted)
 
-    def _write_embeddings(self, gpu_embedder_batch_size=512) -> None:
-        """Batch encoding passages, the write a jsonl file."""
-        if os.path.exists(self.TMP_FILE_PATH):
-            os.remove(self.TMP_FILE_PATH)
+    def _write_embeddings(self, gpu_embedder_batch_size=32*8) -> None:
+        """Batch encoding passages, then write a jsonl file."""
+        if os.path.exists(self.tmp_file_path):
+            os.remove(self.tmp_file_path)
 
         n_batch = math.ceil(len(self.passages) / gpu_embedder_batch_size)
         total = 0
@@ -101,23 +85,23 @@ class VertexIndex:
             indices = range(i * gpu_embedder_batch_size, (i + 1) * gpu_embedder_batch_size)
             batch = self.passages[i * gpu_embedder_batch_size : (i + 1) * gpu_embedder_batch_size]
             if hasattr(self.model, "encode_corpus"):
-                embeddings = self.model.encode_corpus(batch, batch_size=gpu_embedder_batch_size)
+                embeddings = self.model.encode_corpus(batch, batch_size=gpu_embedder_batch_size//8)
             else:
-                embeddings = self.model.encode(batch, batch_size=gpu_embedder_batch_size)
+                embeddings = self.model.encode(batch, batch_size=gpu_embedder_batch_size//8)
             total += len(embeddings)
             self._write_embeddings_to_tmp_file(embeddings.tolist(), indices)
             if i % 500 == 0 and i > 0:
                 logger.info(f"Number of passages encoded: {total}")
         logger.info(f"{total} passages encoded.")
 
-    def _upload_embedding_file(self)-> None:
+    def _upload_embedding_file(self) -> None:
         """Upload temp file to GCP storage bucket."""
-        logger.info(f"Uploading {self.TMP_FILE_PATH} to {self.GCS_BUCKET_URI}")
+        logger.info(f"Uploading {self.tmp_file_path} to {self.gcs_bucket_uri}/{self.tmp_folder}")
         storage_client = storage.Client()
-        bucket = storage_client.bucket(self.GCS_BUCKET_NAME)
-        blob = bucket.blob(self.TMP_FILE_PATH)
-        blob.upload_from_filename(self.TMP_FILE_PATH)
-
+        bucket = storage_client.bucket(self.gcs_bucket_name)
+        # Include the folder name in the blob path
+        blob = bucket.blob(f"{self.tmp_folder}/{self.tmp_file_path.split('/')[-1]}")
+        blob.upload_from_filename(self.tmp_file_path)
 
     def _create_index(self) -> None:
         """
@@ -130,7 +114,7 @@ class VertexIndex:
         self.index = aiplatform.MatchingEngineIndex.create_tree_ah_index(
             display_name=self.index_name,
             dimensions=self.dim,
-            contents_delta_uri=self.GCS_BUCKET_URI,
+            contents_delta_uri=self.gcs_bucket_uri + "/" + self.tmp_folder,
             approximate_neighbors_count=150,
             distance_measure_type="DOT_PRODUCT_DISTANCE",
             feature_norm_type="UNIT_L2_NORM",
@@ -215,7 +199,7 @@ class VertexIndex:
         )
     
     def search(self, query_embeds: list, topk=1):
-        """Return topk docs and scores."""
+        """Return topk docs"""
         if self.endpoint is None:
             self.load_endpoint()
 
