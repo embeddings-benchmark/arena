@@ -4,7 +4,7 @@ fire
 google-cloud-aiplatform
 gradio
 gritlm
-mteb>=1.12.75
+git+https://github.com/embeddings-benchmark/mteb.git@simplify-models
 plotly
 PyStemmer
 umap-learn
