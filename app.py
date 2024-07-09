@@ -26,9 +26,14 @@ We thank [Chatbot Arena](https://chat.lmsys.org/), [Vision Arena](https://huggin
 ELO_RESULTS_DIR = os.getenv("ELO_RESULTS_DIR", "./results/latest")
 MODEL_META_PATH = "model_meta.yml"
 # Debugging
-MODEL_META_PATH = "model_meta_debug.yml"
+# MODEL_META_PATH = "model_meta_debug.yml"
 with open(MODEL_META_PATH, 'r', encoding='utf-8') as f:
     model_meta = safe_load(f)
+# Not supported atm
+model_meta['model_meta'].pop('intfloat/multilingual-e5-small')
+model_meta['model_meta'].pop('bm25')
+model_meta['model_meta'].pop('nvidia/NV-Embed-v1')
+model_meta['model_meta'].pop('McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised')
 models = ModelManager(model_meta, use_gcp_index=True)
 
 def load_elo_results(elo_results_dir):

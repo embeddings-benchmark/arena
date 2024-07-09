@@ -32,8 +32,8 @@ class ModelManager:
 
     def load_local_index(self, model_name, corpus, embedbs=32) -> DistributedIndex:
         """Load local index into memory. Create index if it does not exist."""
-        if model_name in self.loaded_indices:
-            return self.loaded_indices[model_name]
+        if (model_name in self.loaded_indices) and (corpus in self.loaded_indices[model_name]):
+            return self.loaded_indices[model_name][corpus]
         meta = self.model_meta.get(model_name, {})
 
         save_path = "index_" + corpus + "_" + model_name.replace("/", "_")
@@ -59,22 +59,24 @@ class ModelManager:
             os.makedirs(save_path, exist_ok=True)
             index.save_index(save_path)
 
-        self.loaded_indices[model_name] = index
+        self.loaded_indices.setdefault(model_name, {})
+        self.loaded_indices[model_name][corpus] = index
         return index
     
     def load_gcp_index(self, model_name, corpus) -> VertexIndex:
-        if model_name in self.loaded_indices: 
-            return self.loaded_indices[model_name]
+        if (model_name in self.loaded_indices) and (corpus in self.loaded_indices[model_name]):
+            return self.loaded_indices[model_name][corpus]
         meta = self.model_meta.get(model_name, {})
         index = VertexIndex(
-            dim=meta.get("dim", None), 
-            model_name=model_name, 
-            model=self.loaded_models[model_name], 
-            corpus=corpus, 
+            dim=meta.get("dim", None),
+            model_name=model_name,
+            model=self.loaded_models[model_name],
+            corpus=corpus,
             limit=meta.get("limit", None)
         )
         index.load_endpoint()
-        self.loaded_indices[model_name] = index
+        self.loaded_indices.setdefault(model_name, {})
+        self.loaded_indices[model_name][corpus] = index
         return index
 
     def load_bm25_index(self, model_name:str, corpus:str, limit=None) -> BM25Index:

@@ -527,9 +527,11 @@ def build_side_by_side_ui_named(models):
 
     with gr.Row():
         textbox = gr.Textbox(
-            show_label=False,
-            placeholder="👉 Enter your query and press ENTER",
-            elem_id="input_box"
+            label="Query",
+            show_label=True,
+            placeholder="👉 Enter text and press ENTER",
+            container=True,
+            elem_id="input_box",
         )
         corpus = gr.Dropdown(
             label="Corpus",
@@ -706,9 +708,11 @@ def build_single_model_ui(models):
 
     with gr.Row():
         textbox = gr.Textbox(
-            show_label=False,
-            placeholder="👉 Enter your query and press ENTER",
-            elem_id="input_box"
+            label="Query",
+            show_label=True,
+            placeholder="👉 Enter text and press ENTER",
+            container=True,
+            elem_id="input_box",
         )
         corpus = gr.Dropdown(
             label="Corpus",

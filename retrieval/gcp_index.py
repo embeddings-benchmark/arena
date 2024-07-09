@@ -6,8 +6,8 @@ from google.cloud import aiplatform, storage
 
 from .common import load_passages_from_hf
 from log_utils import build_logger
-logger = build_logger("index_logger", "index_logger.log")
 
+logger = build_logger("index_logger", "index_logger.log")
 
 
 def model_name_as_path(model_name) -> str:
@@ -21,28 +21,28 @@ class VertexIndex:
     index: aiplatform.MatchingEngineIndex = None
     endpoint: aiplatform.MatchingEngineIndexEndpoint = None
     PROJECT_ID = "contextual-research-common"
-    REGION = "us-east1"
+    # us-central-1 & us-east-1 are cheapest
+    # https://cloud.withgoogle.com/region-picker/
+    # REGION = "us-east1" # "us-central1"
     MACHINE_TYPE = "e2-standard-16"
-    GCS_BUCKET_NAME = "mtebarena"
+    GCS_BUCKET_NAME = "mtebarena"#"mtebarenauscentral"#"mtebarena"
     GCS_BUCKET_URI = f"gs://{GCS_BUCKET_NAME}"
-    TMP_FILE_PATH = "tmp_gritlm.json"
 
     def __init__(self, dim: int, model_name: str, model, corpus: str = "wikipedia", limit=None):
-        aiplatform.init(project=self.PROJECT_ID, location=self.REGION)
+        region = "us-east1" if corpus == "wikipedia" else "us-central1"
+        aiplatform.init(project=self.PROJECT_ID, location=region)
         self.dim = dim
         self.model = model
         model_path = model_name_as_path(model_name)
-        # Legacy indices
-        if (model_path in ("intfloat__multilingual-e5-small", "sentence-transformers__all-MiniLM-L6-v2")) and (corpus == "wikipedia"):
-            self.index_name = f"index_{model_path}"
-        else:
-            self.index_name = f"index_{corpus}_{model_path}"
+        self.index_name = f"index_{corpus}_{model_path}"
         self.index_resource_name = None
         self.deploy_index_name = None
         if (model_path in ("intfloat__multilingual-e5-small", "sentence-transformers__all-MiniLM-L6-v2")) and (corpus == "wikipedia"):
             self.endpoint_name = f"endpoint_{model_path}"
         else:
             self.endpoint_name = f"endpoint_{corpus}_{model_path}"
+        self.tmp_file_path = f"tmp_{corpus}_{model_path}.json"
+        self.tmp_folder = f"tmp_{corpus}_{model_path}"
         self.endpoint_resource_name = None
         self.passages = load_passages_from_hf(corpus=corpus, limit=limit)
         self.doc_map = {str(i): doc for i, doc in enumerate(self.passages)}
@@ -60,7 +60,7 @@ class VertexIndex:
         return False
 
     def _write_embeddings_to_tmp_file(self, embeddings, indices):
-        with open(self.TMP_FILE_PATH, "a") as f:
+        with open(self.tmp_file_path, "a") as f:
             embeddings_formatted = [
                 json.dumps(
                     {
@@ -73,10 +73,10 @@ class VertexIndex:
             ]
             f.writelines(embeddings_formatted)
 
-    def _write_embeddings(self, gpu_embedder_batch_size=64*8) -> None:
+    def _write_embeddings(self, gpu_embedder_batch_size=32*8) -> None:
         """Batch encoding passages, then write a jsonl file."""
-        if os.path.exists(self.TMP_FILE_PATH):
-            os.remove(self.TMP_FILE_PATH)
+        if os.path.exists(self.tmp_file_path):
+            os.remove(self.tmp_file_path)
 
         n_batch = math.ceil(len(self.passages) / gpu_embedder_batch_size)
         total = 0
@@ -93,13 +93,14 @@ class VertexIndex:
                 logger.info(f"Number of passages encoded: {total}")
         logger.info(f"{total} passages encoded.")
 
-    def _upload_embedding_file(self)-> None:
+    def _upload_embedding_file(self) -> None:
         """Upload temp file to GCP storage bucket."""
-        logger.info(f"Uploading {self.TMP_FILE_PATH} to {self.GCS_BUCKET_URI}")
+        logger.info(f"Uploading {self.tmp_file_path} to {self.GCS_BUCKET_URI}/{self.tmp_folder}")
         storage_client = storage.Client()
         bucket = storage_client.bucket(self.GCS_BUCKET_NAME)
-        blob = bucket.blob(self.TMP_FILE_PATH)
-        blob.upload_from_filename(self.TMP_FILE_PATH)
+        # Include the folder name in the blob path
+        blob = bucket.blob(f"{self.tmp_folder}/{self.tmp_file_path.split('/')[-1]}")
+        blob.upload_from_filename(self.tmp_file_path)
 
     def _create_index(self) -> None:
         """
@@ -112,7 +113,7 @@ class VertexIndex:
         self.index = aiplatform.MatchingEngineIndex.create_tree_ah_index(
             display_name=self.index_name,
             dimensions=self.dim,
-            contents_delta_uri=self.GCS_BUCKET_URI,
+            contents_delta_uri=self.GCS_BUCKET_URI + "/" + self.tmp_folder,
             approximate_neighbors_count=150,
             distance_measure_type="DOT_PRODUCT_DISTANCE",
             feature_norm_type="UNIT_L2_NORM",
@@ -133,6 +134,7 @@ class VertexIndex:
         self._create_index()
     
     def _endpoint_exists(self) -> bool:
+        return False
         endpoint_names = [
             endpoint.resource_name
             for endpoint in aiplatform.MatchingEngineIndexEndpoint.list(
