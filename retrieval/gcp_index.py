@@ -25,22 +25,21 @@ class VertexIndex:
     # https://cloud.withgoogle.com/region-picker/
     # REGION = "us-east1" # "us-central1"
     MACHINE_TYPE = "e2-standard-16"
-    GCS_BUCKET_NAME = "mtebarena"#"mtebarenauscentral"#"mtebarena"
-    GCS_BUCKET_URI = f"gs://{GCS_BUCKET_NAME}"
 
     def __init__(self, dim: int, model_name: str, model, corpus: str = "wikipedia", limit=None):
         region = "us-east1" if corpus == "wikipedia" else "us-central1"
+        self.gcs_bucket_name = "mtebarena" if corpus == "wikipedia" else "mtebarenauscentral"
+        self.gcs_bucket_uri = f"gs://{self.gcs_bucket_name}"
         aiplatform.init(project=self.PROJECT_ID, location=region)
         self.dim = dim
         self.model = model
         model_path = model_name_as_path(model_name)
-        self.index_name = f"index_{corpus}_{model_path}"
+        # GCP filters do not allow `.` in the name, see _index_exists()
+        self.index_name = f"index_{corpus}_{model_path}".replace(".", "_")
         self.index_resource_name = None
         self.deploy_index_name = None
-        if (model_path in ("intfloat__multilingual-e5-small", "sentence-transformers__all-MiniLM-L6-v2")) and (corpus == "wikipedia"):
-            self.endpoint_name = f"endpoint_{model_path}"
-        else:
-            self.endpoint_name = f"endpoint_{corpus}_{model_path}"
+        # Reuse endpoint across indexes
+        self.endpoint_name = "endpoint" # f"endpoint_{corpus}_{model_path}"
         self.tmp_file_path = f"tmp_{corpus}_{model_path}.json"
         self.tmp_folder = f"tmp_{corpus}_{model_path}"
         self.endpoint_resource_name = None
@@ -48,6 +47,8 @@ class VertexIndex:
         self.doc_map = {str(i): doc for i, doc in enumerate(self.passages)}
 
     def _index_exists(self) -> bool:
+        logger.info(f"Checking if index {self.index_name} exists ...")
+        # This fails with `google.api_core.exceptions.InvalidArgument: 400 Provided filter is not valid.` if `.` is in the name
         index_names = [
             index.resource_name
             for index in aiplatform.MatchingEngineIndex.list(
@@ -95,9 +96,9 @@ class VertexIndex:
 
     def _upload_embedding_file(self) -> None:
         """Upload temp file to GCP storage bucket."""
-        logger.info(f"Uploading {self.tmp_file_path} to {self.GCS_BUCKET_URI}/{self.tmp_folder}")
+        logger.info(f"Uploading {self.tmp_file_path} to {self.gcs_bucket_uri}/{self.tmp_folder}")
         storage_client = storage.Client()
-        bucket = storage_client.bucket(self.GCS_BUCKET_NAME)
+        bucket = storage_client.bucket(self.gcs_bucket_name)
         # Include the folder name in the blob path
         blob = bucket.blob(f"{self.tmp_folder}/{self.tmp_file_path.split('/')[-1]}")
         blob.upload_from_filename(self.tmp_file_path)
@@ -113,7 +114,7 @@ class VertexIndex:
         self.index = aiplatform.MatchingEngineIndex.create_tree_ah_index(
             display_name=self.index_name,
             dimensions=self.dim,
-            contents_delta_uri=self.GCS_BUCKET_URI + "/" + self.tmp_folder,
+            contents_delta_uri=self.gcs_bucket_uri + "/" + self.tmp_folder,
             approximate_neighbors_count=150,
             distance_measure_type="DOT_PRODUCT_DISTANCE",
             feature_norm_type="UNIT_L2_NORM",
@@ -134,7 +135,6 @@ class VertexIndex:
         self._create_index()
     
     def _endpoint_exists(self) -> bool:
-        return False
         endpoint_names = [
             endpoint.resource_name
             for endpoint in aiplatform.MatchingEngineIndexEndpoint.list(

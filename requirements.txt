@@ -1,4 +1,5 @@
 bm25s[full]
+einops
 fire
 google-cloud-aiplatform
 gradio

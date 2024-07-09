@@ -186,7 +186,6 @@ def retrieve_side_by_side(gen_func, state0, state1, text, corpus, model_name0, m
     ip = get_ip(request)
     retrieval_logger.info(f"Retrieval. ip: {ip}")
     start_tstamp = time.time()
-    model_name0, model_name1 = "", ""
     retrieved_txt0, retrieved_txt1, model_name0, model_name1 = gen_func(text, corpus, model_name0, model_name1)
     state0.prompt, state1.prompt = text, text
     state0.corpus, state1.corpus = corpus, corpus
@@ -597,7 +596,7 @@ def build_side_by_side_ui_named(models):
         outputs=[textbox, corpus, send_btn, draw_btn],
     ).then(
         gen_func,
-        inputs=[state0, state1, textbox, model_selector_left, model_selector_right],
+        inputs=[state0, state1, textbox, corpus, model_selector_left, model_selector_right],
         outputs=[state0, state1, chatbot_left, chatbot_right],
         api_name="send_side_by_side"
     ).then(
@@ -890,7 +889,6 @@ def clustering_side_by_side(gen_func, state0, state1, txt, ncluster, ndim, dim_m
     ip = get_ip(request)
     clustering_logger.info(f"Clustering. ip: {ip}")
     start_tstamp = time.time()
-    model_name0, model_name1 = "", ""
     generated_image0, generated_image1, model_name0, model_name1 = gen_func(state0.prompts, model_name0, model_name1, ncluster, ndim=ndim.split(" ")[0], dim_method=dim_method, clustering_method=clustering_method)
     state0.model_name, state1.model_name = model_name0, model_name1
     
@@ -1627,11 +1625,9 @@ def sts_side_by_side(gen_func, state0, state1, txt0, txt1, txt2, model_name0, mo
     ip = get_ip(request)
     retrieval_logger.info(f"Retrieval. ip: {ip}")
     start_tstamp = time.time()
-    model_name0, model_name1 = "", ""
     generated_image0, generated_image1, model_name0, model_name1 = gen_func(txt0, txt1, txt2, model_name0, model_name1)
     state0.txt0, state0.txt1, state0.txt2 = txt0, txt1, txt2
     state1.txt0, state1.txt1, state1.txt2 = txt0, txt1, txt2
-    # state0.output, state1.output = generated_image0, generated_image1
     state0.model_name, state1.model_name = model_name0, model_name1
     
     yield state0, state1, generated_image0, generated_image1, \
