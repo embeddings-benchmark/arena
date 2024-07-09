@@ -4,7 +4,7 @@ fire
 google-cloud-aiplatform
 gradio
 gritlm
-mteb
+mteb>=1.12.75
 plotly
 PyStemmer
 umap-learn
