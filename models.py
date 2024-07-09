@@ -4,14 +4,14 @@ import math
 import random
 
 import mteb
-#import spaces
+import spaces
 
 from log_utils import build_logger
 from retrieval.index import build_index, load_or_initialize_index
 from retrieval.index import DistributedIndex
 from retrieval.gcp_index import VertexIndex
 
-model_logger = build_logger("model_logger", "model_logger.log")
+logger = build_logger("model_logger", "model_logger.log")
 
 
 class ModelManager:
@@ -25,6 +25,7 @@ class ModelManager:
     def load_model(self, model_name):
         if model_name in self.loaded_models:
             return self.loaded_models[model_name]
+        logger.info(f"Loading & caching model: {model_name}")
         model = mteb.get_model(model_name, revision=self.model_meta[model_name].get("revision", None))
         self.loaded_models[model_name] = model
         return model
@@ -117,7 +118,7 @@ class ModelManager:
             results = [future.result() for future in futures]
         return results[0], results[1], model_names[0], model_names[1]
 
-    # @spaces.GPU(duration=120)
+    @spaces.GPU(duration=120)
     def retrieve(self, query, corpus, model_name, topk=1):
         model = self.load_model(model_name)
         
@@ -127,12 +128,12 @@ class ModelManager:
             # x = time.time()
             query_embed = model.encode([query])
             # y = time.time()
-            # model_logger.info(f"Embedding time: {y - x}")
+            # logger.info(f"Embedding time: {y - x}")
             index = self.load_gcp_index(model_name, corpus)
             # z = time.time()
-            # model_logger.info(f"Loading time: {z - y}")
+            # logger.info(f"Loading time: {z - y}")
             docs = index.search(query_embeds=query_embed.tolist(), topk=topk)
-            # model_logger.info(f"Search time: {time.time() - z}")
+            # logger.info(f"Search time: {time.time() - z}")
             docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0]["text"]]]
         else:
             query_embed = model.encode([query], convert_to_tensor=True)
@@ -151,7 +152,8 @@ class ModelManager:
             futures = [executor.submit(self.clustering, prompt, model, ncluster, ndim, dim_method, clustering_method) for model in model_names]
             results = [future.result() for future in futures]
         return results[0], results[1], model_names[0], model_names[1]
-    
+
+    @spaces.GPU(duration=120)
     def clustering(self, queries, model_name, ncluster=1, ndim="3D", dim_method="PCA", clustering_method="KMeans"):
         """
         Sources:
@@ -233,7 +235,7 @@ class ModelManager:
             results = [future.result() for future in futures]
         return results[0], results[1], model_names[0], model_names[1]
 
-
+    @spaces.GPU(duration=120)
     def sts(self, txt0, txt1, txt2, model_name):
         import numpy as np
         from numpy.linalg import norm

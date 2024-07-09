@@ -1,3 +1,4 @@
+einops
 fire
 google-cloud-aiplatform
 gradio

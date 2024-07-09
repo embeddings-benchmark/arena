@@ -96,7 +96,7 @@ model_meta:
     desc: gte-Qwen2-7B-instruct by Alibaba
     seq_len: 131072
     size: 7613
-    dim: 4096
+    dim: 3584
     license: Apache 2.0
     organization: Alibaba
     mteb_overall: 70.24
