@@ -89,6 +89,7 @@ class ModelManager:
             limit=limit
         )
         index.load_index()
+        self.loaded_indices.setdefault(model_name, {})
         self.loaded_indices[model_name][corpus] = index
         return index
         
@@ -137,8 +138,9 @@ class ModelManager:
 
         if "bm25" in model_name:
             index = self.load_bm25_index(model_name, corpus)
+            docs = index.search([query], topk=topk)
+            return docs
             
-
         model = self.load_model(model_name)
         
         if self.use_gcp_index:

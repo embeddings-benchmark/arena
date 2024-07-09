@@ -1,5 +1,6 @@
 import os
 import bm25s
+import bm25s.hf
 from typing import List
 import Stemmer
 from .common import load_passages_from_hf
@@ -25,6 +26,8 @@ class BM25Index:
         ## By default, bm25s uses method="lucene". See https://github.com/xhluca/bm25s?tab=readme-ov-file#variants.
         retriever = bm25s.hf.BM25HF()
         retriever.index(corpus_tokenized)
+
+        ## Save to hub as a model.
         hf_token = os.getenv("HF_TOKEN")
         retriever.save_to_hub(repo_id=f"mteb/{self.repo_name}", token=hf_token, corpus=passages)
         self.index = retriever
@@ -35,10 +38,10 @@ class BM25Index:
         """Load the bm25 index or create one if it does not exist."""
         try:
             self.index = bm25s.hf.BM25HF.load_from_hub(
-                f"mteb /{self.repo_name}", load_corpus=True, mmap=True
+                f"mteb/{self.repo_name}", load_corpus=True, mmap=True
             )
         except:
-            logger.warn("Index not found on Huggingface. Creating index.")
+            logger.warning("Index not found on Huggingface. Creating index.")
             self._create_index()
         logger.info("Index loaded.")
 
@@ -46,5 +49,12 @@ class BM25Index:
     def search(self, queries: List[str], top_k=1):
         """Return topk docs"""
         queries_tokenized = bm25s.tokenize(queries, stemmer=self.stemmer)
-        results = self.index.retrieve(queries_tokenized, k=top_k)
-        return [r.documents for r in results]
+        results, scores = self.index.retrieve(queries_tokenized, k=top_k)
+        return results[0]
+
+
+if __name__ == "__main__":
+    ## To test this, run `python -m retrieval.bm25_index`
+    index = BM25Index("bm25", limit=10)
+    index.load_index()
+    print(index.search(["what is going on?"]))
