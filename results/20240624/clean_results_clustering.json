@@ -222,13 +222,5 @@
     "judge": "arena_user_",
     "anony": true,
     "tstamp": 1719274013.9183
-  },
-  {
-    "model_a": "intfloat/multilingual-e5-small",
-    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
-    "winner": "model_b",
-    "judge": "arena_user_",
-    "anony": true,
-    "tstamp": 1720120597.967
   }
 ]
