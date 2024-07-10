@@ -5,6 +5,7 @@ import random
 
 import mteb
 import spaces
+import torch
 
 from log_utils import build_logger
 from retrieval.index import build_index, load_or_initialize_index
@@ -27,7 +28,11 @@ class ModelManager:
         if model_name in self.loaded_models:
             return self.loaded_models[model_name]
         logger.info(f"Loading & caching model: {model_name}")
-        model = mteb.get_model(model_name, revision=self.model_meta[model_name].get("revision", None))
+        model = mteb.get_model(
+            model_name, 
+            revision=self.model_meta[model_name].get("revision", None),
+            device="cuda" if torch.cuda.is_available() else "cpu"
+        )
         self.loaded_models[model_name] = model
         return model
 
