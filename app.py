@@ -9,7 +9,7 @@ from ui import build_side_by_side_ui_anon, build_side_by_side_ui_anon_sts, build
 
 acknowledgment_md = """
 ### Acknowledgment
-We thank X, Y, Z, [Contextual AI](https://contextual.ai/) and [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).
+We thank [Contextual AI](https://contextual.ai/) and [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).
 
 <div class="sponsor-image-about" style="display: flex; align-items: center; gap: 10px;">
     <a href="https://contextual.ai/">
@@ -22,6 +22,22 @@ We thank X, Y, Z, [Contextual AI](https://contextual.ai/) and [Hugging Face](htt
 
 We thank [Chatbot Arena](https://chat.lmsys.org/), [Vision Arena](https://huggingface.co/spaces/WildVision/vision-arena) and [GenAI-Arena](https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena) for inspiration.
 """
+
+# process of getting credentials
+def get_credentials():
+    import tempfile
+    creds_json_str = os.getenv("GCP_CREDENTIALS") # get json credentials stored as a string
+    if creds_json_str is None:
+        raise ValueError("GCP_CREDENTIALS not found in environment")
+
+    # create a temporary file
+    with tempfile.NamedTemporaryFile(mode="w+", delete=False, suffix=".json") as temp:
+        temp.write(creds_json_str) # write in json format
+        temp_filename = temp.name 
+
+    return temp_filename
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = get_credentials()
 
 ELO_RESULTS_DIR = os.getenv("ELO_RESULTS_DIR", "./results/latest")
 MODEL_META_PATH = "model_meta.yml"

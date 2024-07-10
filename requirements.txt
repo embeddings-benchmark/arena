@@ -1,10 +1,13 @@
 bm25s[full]
+# Required by nomic-ai/nomic-embed-text-v1.5
 einops
 fire
+# Required by Alibaba-NLP/gte-Qwen2-7B-instruct
+flash_attn
 google-cloud-aiplatform
 gradio
 gritlm
-mteb
+git+https://github.com/embeddings-benchmark/mteb.git@simplify-models
 plotly
 PyStemmer
 umap-learn
