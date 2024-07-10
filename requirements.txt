@@ -3,6 +3,7 @@ einops
 fire
 google-cloud-aiplatform
 gradio
+gritlm
 mteb
 plotly
 PyStemmer
