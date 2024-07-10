@@ -15,6 +15,19 @@ from retrieval.bm25_index import BM25Index
 
 logger = build_logger("model_logger", "model_logger.log")
 
+MODEL_TO_CUDA_DEVICE = {
+    "sentence-transformers/all-MiniLM-L6-v2": "0",
+    "nomic-ai/nomic-embed-text-v1.5": "0",
+    "intfloat/multilingual-e5-large-instruct": "1",
+    "intfloat/e5-mistral-7b-instruct": "2",
+    "GritLM/GritLM-7B": "3",
+    "BAAI/bge-large-en-v1.5": "4",
+    "Alibaba-NLP/gte-Qwen2-7B-instruct": "5",
+    "Salesforce/SFR-Embedding-2_R": "6",
+    "jinaai/jina-embeddings-v2-base-en": "7",
+    "mixedbread-ai/mxbai-embed-large-v1": "7",
+}
+
 
 class ModelManager:
     def __init__(self, model_meta, use_gcp_index: bool = False):
@@ -28,10 +41,15 @@ class ModelManager:
         if model_name in self.loaded_models:
             return self.loaded_models[model_name]
         logger.info(f"Loading & caching model: {model_name}")
+        device = "cpu"
+        if torch.cuda.is_available():
+            device = "cuda"
+            if model_name in MODEL_TO_CUDA_DEVICE:
+                device += ":" + MODEL_TO_CUDA_DEVICE[model_name]
         model = mteb.get_model(
             model_name, 
             revision=self.model_meta[model_name].get("revision", None),
-            device="cuda" if torch.cuda.is_available() else "cpu"
+            device=device,
         )
         self.loaded_models[model_name] = model
         return model
@@ -148,12 +166,19 @@ class ModelManager:
             return docs
             
         model = self.load_model(model_name)
-        
+        kwargs = {} if self.use_gcp_index else {convert_to_tensor: True}
+        if f"instruction_query_{corpus}" in self.model_meta[model_name]:
+            kwargs["instruction"] = self.model_meta[model_name][f"instruction_query_{corpus}"]
+            logger.info(f"Using instruction: {kwargs['instruction']}")
+        # Optionally time embedding & search
+        # import time
+        # x = time.time()
+        if hasattr(model, "encode_queries"):
+            query_embed = model.encode_queries([query], **kwargs)
+        else:
+            query_embed = model.encode([query], **kwargs)
+
         if self.use_gcp_index:
-            # Optionally time embedding & search
-            # import time
-            # x = time.time()
-            query_embed = model.encode([query])
             # y = time.time()
             # logger.info(f"Embedding time: {y - x}")
             index = self.load_gcp_index(model_name, corpus)
@@ -163,7 +188,6 @@ class ModelManager:
             # logger.info(f"Search time: {time.time() - z}")
             docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0]["text"]]]
         else:
-            query_embed = model.encode([query], convert_to_tensor=True)
             index = self.load_local_index(model_name, corpus)
             docs, scores = index.search_knn(query_embed, topk=topk)
             docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0][0]["text"]]]

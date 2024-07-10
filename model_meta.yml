@@ -47,6 +47,8 @@ model_meta:
     dim: 4096
     license: MIT License
     organization: Microsoft
+    instruction_query_arxiv: Given a query, retrieve a relevant paper title and abstract from arXiv
+    instruction_query_wikipedia: Given a query, retrieve a relevant title and passage from Wikipedia
     mteb_overall: 66.63
     mteb_retrieval: 56.89
     mteb_sts: 84.63
@@ -60,6 +62,8 @@ model_meta:
     dim: 4096
     license: Apache-2.0
     organization: Contextual AI, HKU, Microsoft
+    instruction_query_arxiv: Given a query, retrieve a relevant paper title and abstract from arXiv
+    instruction_query_wikipedia: Given a query, retrieve a relevant title and passage from Wikipedia
     mteb_overall: 66.76
     mteb_retrieval: 57.41
     mteb_sts: 83.35
@@ -99,6 +103,8 @@ model_meta:
     dim: 3584
     license: Apache 2.0
     organization: Alibaba
+    instruction_query_arxiv: Given a query, retrieve a relevant paper title and abstract from arXiv
+    instruction_query_wikipedia: Given a query, retrieve a relevant title and passage from Wikipedia
     mteb_overall: 70.24
     mteb_retrieval: 60.25
     mteb_sts: 83.04
@@ -112,6 +118,8 @@ model_meta:
     dim: 4096
     license: CC-BY-NC-4.0
     organization: Salesforce
+    instruction_query_arxiv: Given a query, retrieve a relevant paper title and abstract from arXiv
+    instruction_query_wikipedia: Given a query, retrieve a relevant title and passage from Wikipedia
     mteb_overall: 70.31
     mteb_retrieval: 60.18
     mteb_sts: 81.26
@@ -169,6 +177,11 @@ model_meta:
     mteb_sts: 83.58
     mteb_clustering: 46.45
   bm25:
-    link: https://en.wikipedia.org/wiki/Okapi_BM25
+    link: https://github.com/xhluca/bm25s
     desc: Keyword-based matching
-    size: 0
+    seq_len: 8192
+    size: 7505
+    dim: 4096
+    license: MIT
+    organization: McGill
+    mteb_retrieval: 42.4
