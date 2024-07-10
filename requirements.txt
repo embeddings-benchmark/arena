@@ -10,4 +10,5 @@ gritlm
 git+https://github.com/embeddings-benchmark/mteb.git@simplify-models
 plotly
 PyStemmer
+spaces
 umap-learn

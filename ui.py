@@ -49,7 +49,8 @@ def disable_buttons_side_by_side(i=6):
     return tuple(gr.update(visible=i>=4, interactive=False) for i in range(i))
 
 def vote_last_response(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
-    gr.Info(info_txt)
+    if vote_type != "share":
+        gr.Info(info_txt)
     retrieval_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
 
     data = {
@@ -70,7 +71,8 @@ def vote_last_response(vote_type, state0, state1, model_selector0, model_selecto
     return ("Press 🎲 New Round to start over 👇 (Note: Your vote shapes the leaderboard, please vote RESPONSIBLY!)",) + disable_btns(4) + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
 
 def vote_last_response_sts(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
-    gr.Info(info_txt)
+    if vote_type != "share":
+        gr.Info(info_txt)
     sts_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
 
     data = {
@@ -92,7 +94,8 @@ def vote_last_response_sts(vote_type, state0, state1, model_selector0, model_sel
     return disable_btns(4) + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
 
 def vote_last_response_clustering(vote_type, state0, state1, model_selector0, model_selector1, request: gr.Request):
-    gr.Info(info_txt)
+    if vote_type != "share":
+        gr.Info(info_txt)
     clustering_logger.info(f"{vote_type} (named). ip: {get_ip(request)}")
 
     data = {
@@ -110,8 +113,8 @@ def vote_last_response_clustering(vote_type, state0, state1, model_selector0, mo
     if vote_type == "share": return
 
     if model_selector0 == "":
-        return disable_btns(4, visible=False) + disable_btns(4) + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
-    return disable_btns(4, visible=False) + disable_btns(4) + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
+        return disable_btns(5, visible=False) + disable_btns(4) + (gr.Markdown(f"### Model A: {state0.model_name}", visible=True), gr.Markdown(f"### Model B: {state1.model_name}", visible=True))
+    return disable_btns(5, visible=False) + disable_btns(4) + (gr.Markdown(state0.model_name, visible=True), gr.Markdown(state1.model_name, visible=True))
 
 def vote_last_response_single(vote_type, state, model_selector, request: gr.Request):
     gr.Info(info_txt)
@@ -261,7 +264,7 @@ def build_side_by_side_ui_anon(models):
 # ⚔️ MTEB Arena: Retrieval 🔎
 ## 📜 Rules
 - Send any query to two anonymous models and vote which retrieves the better document.
-- Both models retrieve from the same corpus: Wikipedia.
+- You can choose a corpus for the models to retrieve from: Wikipedia or ArXiv.
 
 ## 👇 Vote now!
 """
@@ -451,9 +454,9 @@ function (a, b, c, d) {
 }
 """
     share_btn.click(
-        partial(vote_last_response, "share"), 
-        inputs=[state0, state1, model_selector_left, model_selector_right], 
-        outputs=[], 
+        partial(vote_last_response, "share"),
+        inputs=[state0, state1, model_selector_left, model_selector_right],
+        outputs=[],
         js=share_js
     )
 
@@ -463,7 +466,7 @@ def build_side_by_side_ui_named(models):
 
 ## 📜 Rules
 - Send any query to two anonymous models and vote which retrieves the better document.
-- Both models retrieve from the same corpus: Wikipedia.
+- You can choose a corpus for the models to retrieve from: Wikipedia or ArXiv.
 
 ## 👇 Choose two models & vote now!
 """
@@ -1156,22 +1159,22 @@ def build_side_by_side_ui_anon_clustering(models):
     leftvote_btn.click(
         partial(vote_last_response_clustering, "leftvote"),
         inputs=[state0, state1, dummy_left_model, dummy_right_model],
-        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, dim_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     rightvote_btn.click(
         partial(vote_last_response_clustering, "rightvote"),
         inputs=[state0, state1, dummy_left_model, dummy_right_model],
-        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, dim_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     tie_btn.click(
         partial(vote_last_response_clustering, "tievote"),
         inputs=[state0, state1, dummy_left_model, dummy_right_model],
-        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, dim_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     bothbad_btn.click(
         partial(vote_last_response_clustering, "bothbadvote"),
         inputs=[state0, state1, dummy_left_model, dummy_right_model],
-        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, dim_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
 
 def build_side_by_side_ui_named_clustering(models):
@@ -1378,22 +1381,22 @@ def build_side_by_side_ui_named_clustering(models):
     leftvote_btn.click(
         partial(vote_last_response_clustering, "leftvote"),
         inputs=[state0, state1, model_selector_left, model_selector_right],
-        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, dim_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     rightvote_btn.click(
         partial(vote_last_response_clustering, "rightvote"),
         inputs=[state0, state1, model_selector_left, model_selector_right],
-        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, dim_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     tie_btn.click(
         partial(vote_last_response_clustering, "tievote"),
         inputs=[state0, state1, model_selector_left, model_selector_right],
-        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, dim_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
     bothbad_btn.click(
         partial(vote_last_response_clustering, "bothbadvote"),
         inputs=[state0, state1, model_selector_left, model_selector_right],
-        outputs=[send_btn, draw_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
+        outputs=[send_btn, draw_btn, dim_btn, textbox, ncluster, leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, model_selector_left, model_selector_right]
     )
 
 def build_single_model_ui_clustering(models):
