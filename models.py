@@ -47,7 +47,7 @@ class ModelManager:
             if model_name in MODEL_TO_CUDA_DEVICE:
                 device += ":" + MODEL_TO_CUDA_DEVICE[model_name]
         model = mteb.get_model(
-            model_name, 
+            model_name,
             revision=self.model_meta[model_name].get("revision", None),
             device=device,
         )
@@ -388,7 +388,8 @@ class ModelManager:
 
         # Update layout
         fig.update_layout(
-            title='Similarity Triangle',
+            # Do not put title so there is more space for the plot; does not seem to add value anyways
+            # title='Similarity Triangle',
             xaxis=dict(
                 visible=False,
                 scaleanchor='y',  # Anchor x-axis scale to y-axis
@@ -399,8 +400,11 @@ class ModelManager:
                 scaleanchor='x',  # Anchor y-axis scale to x-axis
                 scaleratio=1,     # Ensure equal scaling
             ),
-            width=600,
-            height=600,
+            # Make it auto-resize to fit the screen (important to make single mode take the full width)
+            # width=1200,
+            # height=600,
+            # Add padding instead
+            margin=dict(l=0, r=0, b=0, t=0),
             plot_bgcolor='white'
         )
 
