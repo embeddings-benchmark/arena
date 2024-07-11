@@ -246,5 +246,13 @@
     "judge": "arena_user_",
     "anony": true,
     "tstamp": 1720599059.1815
+  },
+  {
+    "model_a": "nomic-ai/nomic-embed-text-v1.5",
+    "model_b": "mixedbread-ai/mxbai-embed-large-v1",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1720650347.2494
   }
 ]
