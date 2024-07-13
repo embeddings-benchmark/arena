@@ -5,7 +5,6 @@ import glob
 import argparse
 from datasets import load_dataset
 import gzip
-import re
 
 from extractor import _parse_and_clean_wikicode, ENDING_PHRASES
 from newest_arxiv import create_newest_arxiv
