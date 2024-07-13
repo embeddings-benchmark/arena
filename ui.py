@@ -874,13 +874,12 @@ class ClusteringState:
         self.ndim = "3D"
         self.dim_method = "PCA"
         self.clustering_method = "KMeans"
-        self.corpus = ""
 
     def dict(self, prefix: str = None):
         if prefix is None:
-            return {"conv_id": self.conv_id, "model_name": self.model_name, "prompt": self.prompts, "ncluster": self.ncluster, "output": self.output, "ndim": self.ndim, "dim_method": self.dim_method, "clustering_method": self.clustering_method, "corpus": self.corpus}
+            return {"conv_id": self.conv_id, "model_name": self.model_name, "prompt": self.prompts, "ncluster": self.ncluster, "output": self.output, "ndim": self.ndim, "dim_method": self.dim_method, "clustering_method": self.clustering_method}
         else:
-            return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_prompt": self.prompts, f"{prefix}_ncluster": self.ncluster, f"{prefix}_output": self.output, f"{prefix}_ndim": self.ndim, f"{prefix}_dim_method": self.dim_method, f"{prefix}_clustering_method": self.clustering_method, f"{prefix}_corpus": self.corpus}
+            return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_prompt": self.prompts, f"{prefix}_ncluster": self.ncluster, f"{prefix}_output": self.output, f"{prefix}_ndim": self.ndim, f"{prefix}_dim_method": self.dim_method, f"{prefix}_clustering_method": self.clustering_method}
 
 def clustering_side_by_side(gen_func, state0, state1, txt, ncluster, ndim, dim_method, clustering_method, model_name0, model_name1, request: gr.Request):
     if state0 is None:
@@ -1636,13 +1635,12 @@ class STSState:
         self.txt1 = ""
         self.txt2 = ""
         self.output = ""
-        self.corpus = ""
 
     def dict(self, prefix: str = None):
         if prefix is None:
-            return {"conv_id": self.conv_id, "model_name": self.model_name, "txt0": self.txt0, "txt1": self.txt1, "txt2": self.txt2, "output": self.output, "corpus": self.corpus}
+            return {"conv_id": self.conv_id, "model_name": self.model_name, "txt0": self.txt0, "txt1": self.txt1, "txt2": self.txt2, "output": self.output}
         else:
-            return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_txt0": self.txt0, f"{prefix}_txt1": self.txt1, f"{prefix}_txt2": self.txt2, f"{prefix}_output": self.output, f"{prefix}_corpus": self.corpus}
+            return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_txt0": self.txt0, f"{prefix}_txt1": self.txt1, f"{prefix}_txt2": self.txt2, f"{prefix}_output": self.output}
         
 
 def sts_side_by_side(gen_func, state0, state1, txt0, txt1, txt2, model_name0, model_name1, request: gr.Request):
