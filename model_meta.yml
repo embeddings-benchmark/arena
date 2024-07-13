@@ -34,6 +34,8 @@ model_meta:
     dim: 1024
     license: MIT License
     organization: Microsoft
+    instruction_query_arxiv: Given a query, retrieve a relevant paper title and abstract from arXiv
+    instruction_query_wikipedia: Given a query, retrieve a relevant title and passage from Wikipedia    
     mteb_overall: 64.41
     mteb_retrieval: 52.47
     mteb_sts: 84.78
