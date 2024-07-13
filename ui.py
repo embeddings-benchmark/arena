@@ -11,8 +11,8 @@ from log_utils import build_logger, store_data_in_hub
 
 LOGDIR = os.getenv("LOGDIR", "./MTEB-Arena-logs/vote_log")
 
-DEFAULT_MODEL_A = "BAAI/bge-large-en-v1.5"
-DEFAULT_MODEL_B = "GritLM/GritLM-7B"
+DEFAULT_MODEL_A = "GritLM/GritLM-7B"
+DEFAULT_MODEL_B = "BAAI/bge-large-en-v1.5"
 
 info_txt = "🎉 Thanks for voting! Your vote shapes the leaderboard, please vote RESPONSIBLY."
 
@@ -344,10 +344,11 @@ def build_side_by_side_ui_anon(models):
 
     gr.Examples(
         examples=[
-            ["In which book 42 is mentioned as the meaning of life?", "wikipedia"],
+            ["Which test seeks to answer the question whether machines can think?", "wikipedia"],
             ["I read this paper about handling data constraints when training large language models. Among others, it investigated repeating data as one solution & the name starts with Scaling. Could you help me find it?", "arxiv"],
-            ["Who famously asked 'Can machines think?' in 1950?", "wikipedia"],
+            ["Which planets in the solar system are most likely to be habitable?", "wikipedia"],
             ["I am searching for a good and large-scale benchmark for testing the performance of text embeddings.", "arxiv"],
+            ["Who wrote about a guide that's more popular than the Encyclopedia Galactica?", "wikipedia"],
             ["I am looking for the paper that introduced HumanEvalPack and talks about instruction tuning Code Large Language Models.", "arxiv"],
         ],
         inputs=[textbox, corpus],
