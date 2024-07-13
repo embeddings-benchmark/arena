@@ -55,7 +55,7 @@ def create_newest_arxiv(args):
             old_json = json.loads(line)
             new_json = {
                 "id": old_json["id"],
-                "title": old_json["title"],
+                "title": clean_text_newlines(old_json["title"]),
                 "abstract": clean_text_newlines(old_json["abstract"]),
                 "categories": old_json["categories"],
             }
