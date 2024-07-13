@@ -2,6 +2,7 @@ import concurrent.futures
 import os
 import math
 import random
+import threading
 
 import mteb
 import spaces
@@ -28,31 +29,38 @@ MODEL_TO_CUDA_DEVICE = {
     "mixedbread-ai/mxbai-embed-large-v1": "7",
 }
 
-
 class ModelManager:
     def __init__(self, model_meta, use_gcp_index: bool = False):
         self.model_meta = model_meta["model_meta"]
+        self.models_retrieval = sorted(set(model_meta["model_meta"].keys()))
+        self.models_sts = sorted(set(model_meta["model_meta"].keys()) - set(["BM25"]))
+        self.models_clustering = sorted(set(model_meta["model_meta"].keys()) - set(["BM25"]))
         self.use_gcp_index = use_gcp_index
         self.loaded_models = {}
         self.loaded_indices = {}
         self.loaded_samples = {}
+        self.lock = threading.Lock()
 
     def load_model(self, model_name):
         if model_name in self.loaded_models:
             return self.loaded_models[model_name]
-        logger.info(f"Loading & caching model: {model_name}")
-        device = "cpu"
-        if torch.cuda.is_available():
-            device = "cuda"
-            if model_name in MODEL_TO_CUDA_DEVICE:
-                device += ":" + MODEL_TO_CUDA_DEVICE[model_name]
-        model = mteb.get_model(
-            model_name,
-            revision=self.model_meta[model_name].get("revision", None),
-            device=device,
-        )
-        self.loaded_models[model_name] = model
-        return model
+        # Do not allow this function to be run by processes in parallel but always one by one
+        # which is needed due to a bug in transformers where it temporarily sets a default torch dtype
+        # so if two models are loaded in parallel & have different dtypes, one will have the wrong dtype
+        with self.lock:
+            logger.info(f"Loading & caching model: {model_name}")
+            device = "cpu"
+            if torch.cuda.is_available():
+                device = "cuda"
+                if model_name in MODEL_TO_CUDA_DEVICE:
+                    device += ":" + MODEL_TO_CUDA_DEVICE[model_name]
+            model = mteb.get_model(
+                model_name,
+                revision=self.model_meta[model_name].get("revision", None),
+                device=device,
+            )
+            self.loaded_models[model_name] = model
+            return model
 
     def load_local_index(self, model_name, corpus, embedbs=32) -> DistributedIndex:
         """Load local index into memory. Create index if it does not exist."""
@@ -116,8 +124,7 @@ class ModelManager:
         self.loaded_indices.setdefault(model_name, {})
         self.loaded_indices[model_name][corpus] = index
         return index
-        
-    
+
     def retrieve_draw(self):
         if "retrieval" not in self.loaded_samples:
             from datasets import load_dataset
@@ -148,7 +155,7 @@ class ModelManager:
 
     def retrieve_parallel(self, prompt, corpus, model_A, model_B):
         if model_A == "" and model_B == "":
-            model_names = random.sample(list(self.model_meta.keys()), 2)
+            model_names = random.sample(self.models_retrieval, 2)
         else:
             model_names = [model_A, model_B]
 
@@ -160,9 +167,14 @@ class ModelManager:
     @spaces.GPU(duration=120)
     def retrieve(self, query, corpus, model_name, topk=1):
 
-        if "bm25" in model_name:
+        if "BM25" in model_name:
             index = self.load_bm25_index(model_name, corpus)
             docs = index.search([query], topk=topk)
+            #print("GOT DOCS", docs)
+            #print("GOT DOCS0", docs[0])
+            #print("GOT DOCS0", type(docs[0]))
+            #import pdb; pdb.set_trace()
+            docs = [[query, "Title: " + docs[0][0].get("title", "") + "\n\n" + "Passage: " + docs[0][0]["text"]]]
             return docs
             
         model = self.load_model(model_name)
@@ -195,7 +207,7 @@ class ModelManager:
     
     def clustering_parallel(self, prompt, model_A, model_B, ncluster=1, ndim="3D", dim_method="PCA", clustering_method="KMeans"):
         if model_A == "" and model_B == "":
-            model_names = random.sample(list(self.model_meta.keys()), 2)
+            model_names = random.sample(self.models_clustering, 2)
         else:
             model_names = [model_A, model_B]
 
@@ -277,7 +289,7 @@ class ModelManager:
 
     def sts_parallel(self, txt0, txt1, txt2, model_A, model_B):
         if model_A == "" and model_B == "":
-            model_names = random.sample(list(self.model_meta.keys()), 2)
+            model_names = random.sample(self.models_sts, 2)
         else:
             model_names = [model_A, model_B]
 
@@ -410,13 +422,20 @@ class ModelManager:
 
         return fig
 
-    def get_model_description_md(self):
+    def get_model_description_md(self, task_type="retrieval"):
         model_description_md = """
 | | | |
 | ---- | ---- | ---- |
 """
+        if task_type == "retrieval":
+            models = self.models_retrieval
+        elif task_type == "clustering":
+            models = self.models_clustering
+        else:
+            models = self.models_sts
+
         ct = 0
-        for i, name in enumerate(self.model_meta):
+        for i, name in enumerate(models):
             one_model_md = f"[{name}]({self.model_meta[name]['link']}): {self.model_meta[name]['desc']}"
             if ct % 3 == 0:
                 model_description_md += "|"
