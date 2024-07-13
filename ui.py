@@ -66,7 +66,11 @@ def vote_last_response(vote_type, state0, state1, model_selector0, model_selecto
         **state0.dict(prefix="0"),
         **state1.dict(prefix="1")
     }
-    store_data_in_hub(data, "retrieval_battle")
+    # if models are anonymous, send to battle, otherwise side-by-side
+    if model_selector0 in ["", None] and model_selector1 in ["", None]:
+        store_data_in_hub(data, "retrieval_battle")
+    else:
+        store_data_in_hub(data, "retrieval_side_by_side")
 
     if vote_type == "share": return
 
@@ -88,8 +92,11 @@ def vote_last_response_sts(vote_type, state0, state1, model_selector0, model_sel
         **state0.dict(prefix="0"),
         **state1.dict(prefix="1")
     }
-    store_data_in_hub(data, "sts_battle")
-
+    # if models are anonymous, send to battle, otherwise side-by-side
+    if model_selector0 in ["", None] and model_selector1 in ["", None]:
+        store_data_in_hub(data, "sts_battle")
+    else:
+        store_data_in_hub(data, "sts_side_by_side")
 
     if vote_type == "share": return
 
@@ -111,7 +118,11 @@ def vote_last_response_clustering(vote_type, state0, state1, model_selector0, mo
         **state0.dict(prefix="0"),
         **state1.dict(prefix="1")
     }
-    store_data_in_hub(data, "clustering_battle")
+    # if models are anonymous, send to battle, otherwise side-by-side
+    if model_selector0 in ["", None] and model_selector1 in ["", None]:
+        store_data_in_hub(data, "clustering_battle")
+    else:
+        store_data_in_hub(data, "clustering_side_by_side")
 
 
     if vote_type == "share": return
@@ -184,9 +195,9 @@ class RetrievalState:
 
     def dict(self, prefix: str = None):
         if prefix is None:
-            return {"conv_id": self.conv_id, "model_name": self.model_name, "prompt": self.prompt, "output": self.output}
+            return {"conv_id": self.conv_id, "model_name": self.model_name, "prompt": self.prompt, "output": self.output, "corpus": self.corpus}
         else:
-            return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_prompt": self.prompt, f"{prefix}_output": self.output}
+            return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_prompt": self.prompt, f"{prefix}_output": self.output, f"{prefix}_corpus": self.corpus}
 
 def retrieve_side_by_side(gen_func, state0, state1, text, corpus, model_name0, model_name1, request: gr.Request):
     if not text: raise gr.Warning("Query cannot be empty.")
@@ -867,9 +878,9 @@ class ClusteringState:
 
     def dict(self, prefix: str = None):
         if prefix is None:
-            return {"conv_id": self.conv_id, "model_name": self.model_name, "prompt": self.prompts, "ncluster": self.ncluster, "output": self.output}
+            return {"conv_id": self.conv_id, "model_name": self.model_name, "prompt": self.prompts, "ncluster": self.ncluster, "output": self.output, "ndim": self.ndim, "dim_method": self.dim_method, "clustering_method": self.clustering_method}
         else:
-            return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_prompt": self.prompts, f"{prefix}_ncluster": self.ncluster, f"{prefix}_output": self.output}
+            return {f"{prefix}_conv_id": self.conv_id, f"{prefix}_model_name": self.model_name, f"{prefix}_prompt": self.prompts, f"{prefix}_ncluster": self.ncluster, f"{prefix}_output": self.output, f"{prefix}_ndim": self.ndim, f"{prefix}_dim_method": self.dim_method, f"{prefix}_clustering_method": self.clustering_method}
 
 def clustering_side_by_side(gen_func, state0, state1, txt, ncluster, ndim, dim_method, clustering_method, model_name0, model_name1, request: gr.Request):
     if state0 is None:
