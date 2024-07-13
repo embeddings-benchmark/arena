@@ -3,7 +3,7 @@ from datasets import load_dataset
 
 CORPORA = {
     "wikipedia": {"name": "orionweller/wikipedia-2024-06-24-docs", "columns": {"id": "_id"}},
-    "arxiv": {"name": "orionweller/raw_arxiv_7_2_24", "columns": {"id": "_id", "abstract": "text"}},
+    "arxiv": {"name": "orionweller/arxiv_7_2_24", "columns": {"id": "_id", "abstract": "text"}},
     "stackexchange": {"name": "orionweller/stackexchange_chunked", "columns": {"id": "_id"}},
 }
 
