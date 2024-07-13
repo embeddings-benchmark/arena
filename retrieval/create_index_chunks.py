@@ -5,6 +5,7 @@ import glob
 import argparse
 from datasets import load_dataset
 import gzip
+import re
 
 from extractor import _parse_and_clean_wikicode, ENDING_PHRASES
 from newest_arxiv import create_newest_arxiv
@@ -104,36 +105,6 @@ def prep_stackexchange(args):
     print(f"Skipped {skipped} and wrote out {written_out}")
 
 
-def prep_arxiv(args):
-    """
-    Creates the index for arxiv, limiting it to `args.word_limit` words per document.
-        The `args.corpus` directory should be a folder full of files from the original Dolma setup
-        See https://huggingface.co/datasets/orionweller/arxiv_redpajamas for an example
-
-    NOTE: Redpajama's arxiv does not have a title
-    """
-    print(f"Loading arxiv dataset")
-    if not os.path.isdir(args.output_dir):
-        os.makedirs(args.output_dir)
-    output_f = open(os.path.join(args.output_dir, "train.jsonl"), "w")
-
-    written_out = 0
-    skipped = 0
-    data = []
-    for file in tqdm.tqdm(glob.glob(os.path.join(args.corpus, "*.json.gz"))):
-        with gzip.open(file, "rb") as f:
-            for line in tqdm.tqdm(f):
-                inst = json.loads(line)
-                inst["text"] = " ".join(inst["text"].split()[:args.word_limit])
-                output_f.write(json.dumps({
-                    "text": inst["text"],
-                    "id": inst["id"],
-                }) + "\n")
-                written_out += 1
-
-    print(f"Wrote out {written_out}")
-
-
 def create_chunks(args):
     """
     A wrapper for created a chunked corpus from a given corpus type. Currently only Wikipedia is implemented
@@ -172,4 +143,4 @@ if __name__ == "__main__":
     # example usages:
     #   python retrieval/create_index_chunks.py -c enwiki-20240624-cirrussearch-content.json -o wiki_extracted.json -t wikipedia
     #   python retrieval/create_index_chunks.py -c stackexchange_redpajamas -o stackexchange_extracted -t stackexchange
-    #   python retrieval/create_index_chunks.py -c arxiv-metadata-oai-snapshot.json -o raw_arxiv -t arxiv
+    #   python retrieval/create_index_chunks.py -c arxiv-metadata-oai-snapshot.json -o raw_arxiv_newlines -t arxiv

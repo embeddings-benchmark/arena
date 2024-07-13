@@ -11,11 +11,27 @@ import json
 import jsonlines
 from tqdm import tqdm
 import os
+import re
+
+
+def clean_text_newlines(text):
+    # First, replace double newlines with a special marker
+    text = re.sub(r'\n\s*\n', '<<PARAGRAPH>>', text)
+    
+    # Replace all other whitespace (including single newlines) with a single space
+    text = re.sub(r'\s+', ' ', text)
+    
+    # Restore double newlines
+    text = text.replace('<<PARAGRAPH>>', '\n\n').strip()
+    return text
+
 
 
 def create_newest_arxiv(args):
     """
     Takes a dump from the newest arxiv and turns it into a format that can be used for indexing.
+        Download it via https://www.kaggle.com/datasets/Cornell-University/arxiv and unzip
+        Then run this script. Upload the .json.gz files to a Hugginface Dataset
     """
     os.makedirs(args.output_dir, exist_ok=True)
 
@@ -40,7 +56,7 @@ def create_newest_arxiv(args):
             new_json = {
                 "id": old_json["id"],
                 "title": old_json["title"],
-                "abstract": old_json["abstract"],
+                "abstract": clean_text_newlines(old_json["abstract"]),
                 "categories": old_json["categories"],
             }
             new_lines.append(new_json)
