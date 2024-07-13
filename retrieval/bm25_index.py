@@ -13,7 +13,7 @@ class BM25Index:
     def __init__(self, model_name: str, corpus: str = "wikipedia", limit=None):
         self.model_name = model_name
         self.corpus = corpus
-        self.repo_name = f"index_{corpus}_{model_name}"
+        self.repo_name = f"index_{corpus}_{model_name.lower()}"
         self.limit = limit
         self.index = None
         self.stemmer = Stemmer.Stemmer("english")
@@ -33,7 +33,6 @@ class BM25Index:
         self.index = retriever
         logger.info(f"Index created and uploaded to `mteb/{self.repo_name}`.")
 
-    
     def load_index(self):
         """Load the bm25 index or create one if it does not exist."""
         try:
@@ -45,16 +44,15 @@ class BM25Index:
             self._create_index()
         logger.info("Index loaded.")
 
-        
-    def search(self, queries: List[str], top_k=1):
+    def search(self, queries: List[str], topk=1):
         """Return topk docs"""
         queries_tokenized = bm25s.tokenize(queries, stemmer=self.stemmer)
-        results, scores = self.index.retrieve(queries_tokenized, k=top_k)
-        return results[0]
+        results, scores = self.index.retrieve(queries_tokenized, k=topk)
+        return results
 
 
 if __name__ == "__main__":
     ## To test this, run `python -m retrieval.bm25_index`
-    index = BM25Index("bm25", limit=10)
+    index = BM25Index("BM25", limit=10)
     index.load_index()
     print(index.search(["what is going on?"]))

@@ -1,5 +1,6 @@
 from functools import partial
 import datetime
+import random
 import time
 import os
 import uuid
@@ -9,6 +10,9 @@ import gradio as gr
 from log_utils import build_logger, store_data_in_hub
 
 LOGDIR = os.getenv("LOGDIR", "./MTEB-Arena-logs/vote_log")
+
+DEFAULT_MODEL_A = "BAAI/bge-large-en-v1.5"
+DEFAULT_MODEL_B = "GritLM/GritLM-7B"
 
 info_txt = "🎉 Thanks for voting! Your vote shapes the leaderboard, please vote RESPONSIBLY."
 
@@ -336,17 +340,17 @@ def build_side_by_side_ui_anon(models):
 
     with gr.Row():
         clear_btn = gr.Button(value="🎲 New Round", interactive=False)
-        # regenerate_btn = gr.Button(value="🔄  Regenerate", interactive=False)
         share_btn = gr.Button(value="📷  Share")
 
     gr.Examples(
         examples=[
-            ["What is an MLP?"],
-            ["I am looking for information regarding minority interest"],
-            ["I am searching for a very remote island withouth any human inhabitants"],
-            ["端午节是什么？"],
+            ["In which book 42 is mentioned as the meaning of life?", "wikipedia"],
+            ["I read this paper about handling data constraints when training large language models. Among others, it investigated repeating data as one solution & the name starts with Scaling. Could you help me find it?", "arxiv"],
+            ["Who famously asked 'Can machines think?' in 1950?", "wikipedia"],
+            ["I am searching for a good and large-scale benchmark for testing the performance of text embeddings.", "arxiv"],
+            ["I am looking for the paper that introduced HumanEvalPack and talks about instruction tuning Code Large Language Models.", "arxiv"],
         ],
-        inputs=[textbox],
+        inputs=[textbox, corpus],
     )
 
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
@@ -471,7 +475,7 @@ def build_side_by_side_ui_named(models):
 
 ## 👇 Choose two models & vote now!
 """
-    model_list = list(models.model_meta.keys())
+    model_list = models.models_retrieval
 
     state0 = gr.State()
     state1 = gr.State()
@@ -483,7 +487,7 @@ def build_side_by_side_ui_named(models):
             with gr.Column():
                 model_selector_left = gr.Dropdown(
                     choices=model_list,
-                    value=model_list[0] if len(model_list) > 0 else "",
+                    value=DEFAULT_MODEL_A,
                     interactive=True,
                     show_label=False,
                     container=False,
@@ -491,7 +495,7 @@ def build_side_by_side_ui_named(models):
             with gr.Column():
                 model_selector_right = gr.Dropdown(
                     choices=model_list,
-                    value=model_list[1] if len(model_list) > 1 else "",
+                    value=DEFAULT_MODEL_B,
                     interactive=True,
                     show_label=False,
                     container=False,
@@ -554,12 +558,13 @@ def build_side_by_side_ui_named(models):
 
     gr.Examples(
         examples=[
-            ["What is an MLP?"],
-            ["I am looking for information regarding minority interest"],
-            ["I am searching for a very remote island withouth any human inhabitants"],
-            ["端午节是什么？"],            
+            ["In which book 42 is mentioned as the meaning of life?", "wikipedia"],
+            ["I read this paper about handling data constraints when training large language models. Among others, it investigated repeating data as one solution & the name starts with Scaling. Could you help me find it?", "arxiv"],
+            ["Who famously asked 'Can machines think?' in 1950?", "wikipedia"],
+            ["I am searching for a good and large-scale benchmark for testing the performance of text embeddings.", "arxiv"],
+            ["I am looking for the paper that introduced HumanEvalPack and talks about instruction tuning Code Large Language Models.", "arxiv"],
         ],
-        inputs=[textbox],
+        inputs=[textbox, corpus],
     )
     
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
@@ -682,12 +687,12 @@ def build_single_model_ui(models):
     gen_func = partial(retrieve, models.retrieve)
     gr.Markdown(notice_markdown, elem_id="notice_markdown")
 
-    model_list = list(models.model_meta.keys())
+    model_list = models.models_retrieval
 
     with gr.Row(elem_id="model_selector_row"):
         model_selector = gr.Dropdown(
             choices=model_list,
-            value=model_list[0] if len(model_list) > 0 else "",
+            value=DEFAULT_MODEL_A,
             interactive=True,
             show_label=False
         )
@@ -737,12 +742,13 @@ def build_single_model_ui(models):
 
     gr.Examples(
         examples=[
-            ["What is an MLP?"],
-            ["I am looking for information regarding minority interest"],
-            ["I am searching for a very remote island withouth any human inhabitants"],
-            ["端午节是什么？"],            
+            ["In which book 42 is mentioned as the meaning of life?", "wikipedia"],
+            ["I read this paper about handling data constraints when training large language models. Among others, it investigated repeating data as one solution & the name starts with Scaling. Could you help me find it?", "arxiv"],
+            ["Who famously asked 'Can machines think?' in 1950?", "wikipedia"],
+            ["I am searching for a good and large-scale benchmark for testing the performance of text embeddings.", "arxiv"],
+            ["I am looking for the paper that introduced HumanEvalPack and talks about instruction tuning Code Large Language Models.", "arxiv"],
         ],
-        inputs=[textbox],
+        inputs=[textbox, corpus],
     )
 
     btn_list = [upvote_btn, downvote_btn, flag_btn, clear_btn]
@@ -996,7 +1002,7 @@ def build_side_by_side_ui_anon_clustering(models):
 
     with gr.Group(elem_id="share-region-anon"):
         with gr.Accordion("🔍 Expand to see all Arena players", open=False):
-            model_description_md = models.get_model_description_md()
+            model_description_md = models.get_model_description_md(task_type="clustering")
             gr.Markdown(model_description_md, elem_id="model_description_markdown")
         with gr.Row():
             with gr.Column():
@@ -1194,7 +1200,7 @@ def build_side_by_side_ui_named_clustering(models):
 
 ## 👇 Vote now!
 """
-    model_list = list(models.model_meta.keys())
+    model_list = models.models_clustering
 
     state0 = gr.State(None)
     state1 = gr.State(None)
@@ -1211,7 +1217,7 @@ def build_side_by_side_ui_named_clustering(models):
             with gr.Column():
                 model_selector_left = gr.Dropdown(
                     choices=model_list,
-                    value=model_list[0] if len(model_list) > 0 else "",
+                    value=DEFAULT_MODEL_A,
                     interactive=True,
                     show_label=False,
                     container=False,
@@ -1219,14 +1225,14 @@ def build_side_by_side_ui_named_clustering(models):
             with gr.Column():
                 model_selector_right = gr.Dropdown(
                     choices=model_list,
-                    value=model_list[1] if len(model_list) > 1 else "",
+                    value=DEFAULT_MODEL_B,
                     interactive=True,
                     show_label=False,
                     container=False,
                 )
         with gr.Row():
             with gr.Accordion("🔍 Expand to see all model descriptions", open=False):
-                model_description_md = models.get_model_description_md()
+                model_description_md = models.get_model_description_md(task_type="clustering")
                 gr.Markdown(model_description_md, elem_id="model_description_markdown")
 
         with gr.Row():
@@ -1414,12 +1420,12 @@ def build_single_model_ui_clustering(models):
     gen_func = partial(clustering, models.clustering)
     gr.Markdown(notice_markdown, elem_id="notice_markdown")
 
-    model_list = list(models.model_meta.keys())
+    model_list = models.models_clustering
 
     with gr.Row(elem_id="model_selector_row"):
         model_selector = gr.Dropdown(
             choices=model_list,
-            value=model_list[0] if len(model_list) > 0 else "",
+            value=DEFAULT_MODEL_A,
             interactive=True,
             show_label=False
         )
@@ -1430,7 +1436,7 @@ def build_single_model_ui_clustering(models):
             open=False,
             elem_id="model_description_accordion",
         ):
-            model_description_md = models.get_model_description_md()
+            model_description_md = models.get_model_description_md(task_type="clustering")
             gr.Markdown(model_description_md, elem_id="model_description_markdown")
 
     with gr.Row():
@@ -1724,7 +1730,7 @@ def build_side_by_side_ui_anon_sts(models):
 
     with gr.Group(elem_id="share-region-anon"):
         with gr.Accordion("🔍 Expand to see all Arena players", open=False):
-            model_description_md = models.get_model_description_md()
+            model_description_md = models.get_model_description_md(task_type="sts")
             gr.Markdown(model_description_md, elem_id="model_description_markdown")
         with gr.Row():
             with gr.Column():
@@ -1865,7 +1871,7 @@ def build_side_by_side_ui_named_sts(models):
 
 ## 👇 Vote now!
 """
-    model_list = list(models.model_meta.keys())
+    model_list = models.models_sts
 
     state0 = gr.State()
     state1 = gr.State()
@@ -1881,7 +1887,7 @@ def build_side_by_side_ui_named_sts(models):
             with gr.Column():
                 model_selector_left = gr.Dropdown(
                     choices=model_list,
-                    value=model_list[0] if len(model_list) > 0 else "",
+                    value=DEFAULT_MODEL_A,
                     interactive=True,
                     show_label=False,
                     container=False,
@@ -1889,14 +1895,14 @@ def build_side_by_side_ui_named_sts(models):
             with gr.Column():
                 model_selector_right = gr.Dropdown(
                     choices=model_list,
-                    value=model_list[1] if len(model_list) > 1 else "",
+                    value=DEFAULT_MODEL_B,
                     interactive=True,
                     show_label=False,
                     container=False,
                 )
         with gr.Row():
             with gr.Accordion("🔍 Expand to see all model descriptions", open=False):
-                model_description_md = models.get_model_description_md()
+                model_description_md = models.get_model_description_md(task_type="sts")
                 gr.Markdown(model_description_md, elem_id="model_description_markdown")
 
         with gr.Row():
@@ -2029,12 +2035,12 @@ def build_single_model_ui_sts(models):
     gen_func = partial(sts, models.sts)
     gr.Markdown(notice_markdown, elem_id="notice_markdown")
 
-    model_list = list(models.model_meta.keys())
+    model_list = models.models_sts
 
     with gr.Row(elem_id="model_selector_row"):
         model_selector = gr.Dropdown(
             choices=model_list,
-            value=model_list[0] if len(model_list) > 0 else "",
+            value=DEFAULT_MODEL_A,
             interactive=True,
             show_label=False
         )
@@ -2045,7 +2051,7 @@ def build_single_model_ui_sts(models):
             open=False,
             elem_id="model_description_accordion",
         ):
-            model_description_md = models.get_model_description_md()
+            model_description_md = models.get_model_description_md(task_type="sts")
             gr.Markdown(model_description_md, elem_id="model_description_markdown")
 
     with gr.Group(elem_id="model"):

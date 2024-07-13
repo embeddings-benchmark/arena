@@ -20,7 +20,7 @@ We thank [Contextual AI](https://contextual.ai/) and [Hugging Face](https://hugg
     </a>
 </div>
 
-We thank [Chatbot Arena](https://chat.lmsys.org/), [Vision Arena](https://huggingface.co/spaces/WildVision/vision-arena) and [GenAI-Arena](https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena) for inspiration.
+This work builds on [MTEB](https://huggingface.co/spaces/mteb/leaderboard), [Chatbot Arena](https://chat.lmsys.org/), [Vision Arena](https://huggingface.co/spaces/WildVision/vision-arena) & [GenAI-Arena](https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena). We thank them for their pioneering work!
 """
 
 # process of getting credentials
@@ -37,7 +37,7 @@ def get_credentials():
 
     return temp_filename
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = get_credentials()
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = get_credentials()
 
 ELO_RESULTS_DIR = os.getenv("ELO_RESULTS_DIR", "./results/latest")
 MODEL_META_PATH = "model_meta.yml"
@@ -47,7 +47,7 @@ with open(MODEL_META_PATH, 'r', encoding='utf-8') as f:
     model_meta = safe_load(f)
 # Not supported atm
 model_meta['model_meta'].pop('intfloat/multilingual-e5-small')
-model_meta['model_meta'].pop('bm25')
+#model_meta['model_meta'].pop('BM25')
 model_meta['model_meta'].pop('nvidia/NV-Embed-v1')
 model_meta['model_meta'].pop('McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised')
 models = ModelManager(model_meta, use_gcp_index=True)

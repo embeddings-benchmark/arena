@@ -176,12 +176,8 @@ model_meta:
     mteb_retrieval: 56.63
     mteb_sts: 83.58
     mteb_clustering: 46.45
-  bm25:
+  BM25:
     link: https://github.com/xhluca/bm25s
-    desc: Keyword-based matching
-    seq_len: 8192
-    size: 7505
-    dim: 4096
+    desc: Fast lexical search via BM25
     license: MIT
-    organization: McGill
     mteb_retrieval: 42.4
