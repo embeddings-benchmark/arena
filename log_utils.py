@@ -1,6 +1,4 @@
-"""
-Common utilities.
-"""
+"""Common utilities."""
 import logging
 import logging.handlers
 import os
@@ -24,16 +22,20 @@ JSON_DATASET_DIR.mkdir(parents=True, exist_ok=True)
 # It also is append_only, so no previous data will be overwritten
 JSON_DATASET_PATH = JSON_DATASET_DIR / f"NAME_TO_REPLACE-{uuid4()}.jsonl"
 
-scheduler = CommitScheduler(
-    repo_id="mteb/arena-results",
-    repo_type="dataset",
-    folder_path=JSON_DATASET_DIR,
-    path_in_repo="data",
-    every=5,
-    token=os.environ["HF_TOKEN"]
-)
+if os.getenv("HF_TOKEN"):
+    scheduler = CommitScheduler(
+        repo_id="mteb/arena-results",
+        repo_type="dataset",
+        folder_path=JSON_DATASET_DIR,
+        path_in_repo="data",
+        every=5,
+        token=os.environ["HF_TOKEN"]
+    )
+else:
+    scheduler = None
+    print("No HF_TOKEN found, results will not be uploaded to the hub.")
 
-#from .utils import save_log_str_on_log_server
+# from .utils import save_log_str_on_log_server
 
 handler = None
 visited_loggers = set()
@@ -159,8 +161,9 @@ class StreamToLogger(object):
 
 
 def store_data_in_hub(message: str, message_type: str):
-    with scheduler.lock:
-        file_to_upload = Path(str(JSON_DATASET_PATH).replace("NAME_TO_REPLACE", message_type))
-        with file_to_upload.open("a") as f:
-            json.dump(message, f)
-            f.write("\n")
+    if scheduler:
+        with scheduler.lock:
+            file_to_upload = Path(str(JSON_DATASET_PATH).replace("NAME_TO_REPLACE", message_type))
+            with file_to_upload.open("a") as f:
+                json.dump(message, f)
+                f.write("\n")
