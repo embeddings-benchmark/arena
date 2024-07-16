@@ -33,6 +33,8 @@ class ModelManager:
     def __init__(self, model_meta, use_gcp_index: bool = False):
         self.model_meta = model_meta["model_meta"]
         self.models_retrieval = sorted(set(model_meta["model_meta"].keys()))
+        #self.models_retrieval.remove("voyage-multilingual-2")
+        #self.models_retrieval.remove("Alibaba-NLP/gte-Qwen2-7B-instruct")
         self.models_sts = sorted(set(model_meta["model_meta"].keys()) - set(["BM25"]))
         self.models_clustering = sorted(set(model_meta["model_meta"].keys()) - set(["BM25"]))
         self.use_gcp_index = use_gcp_index
@@ -170,10 +172,6 @@ class ModelManager:
         if "BM25" in model_name:
             index = self.load_bm25_index(model_name, corpus)
             docs = index.search([query], topk=topk)
-            #print("GOT DOCS", docs)
-            #print("GOT DOCS0", docs[0])
-            #print("GOT DOCS0", type(docs[0]))
-            #import pdb; pdb.set_trace()
             docs = [[query, "Title: " + docs[0][0].get("title", "") + "\n\n" + "Passage: " + docs[0][0]["text"]]]
             return docs
             
@@ -312,8 +310,6 @@ class ModelManager:
         cos_sim_02 = (emb0 @ emb2.T) / (norm(emb0)*norm(emb2))
         cos_sim_12 = (emb1 @ emb2.T) / (norm(emb1)*norm(emb2))
 
-        print(f"cos_sim_01: {cos_sim_01}, cos_sim_02: {cos_sim_02}, cos_sim_12: {cos_sim_12}")
-
         # Normalize the cosine similarities so that they sum to 1
         # cos_sims = np.array([cos_sim_01, cos_sim_02, cos_sim_12])
         # cos_sims /= cos_sims.sum()
@@ -323,8 +319,6 @@ class ModelManager:
         # Normalize the cosine similarities into a range from 1 to 0.5 (reverse of above such that higher similarity means lower)
         cos_sims = np.array([cos_sim_01, cos_sim_02, cos_sim_12])
         cos_sims = 1 - (cos_sims - cos_sims.min()) / (cos_sims.max() - cos_sims.min()) * 0.5
-
-        print(f"cos_sims: {cos_sims}")
 
         # Scale up the normalized values for better visualization
         cos_sims *= 200

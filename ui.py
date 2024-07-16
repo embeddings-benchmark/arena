@@ -356,11 +356,11 @@ def build_side_by_side_ui_anon(models):
     gr.Examples(
         examples=[
             ["Which test seeks to answer the question whether machines can think?", "wikipedia"],
-            ["I read this paper about handling data constraints when training large language models. Among others, it investigated repeating data as one solution & the name starts with Scaling. Could you help me find it?", "arxiv"],
+            ["I am looking for a paper to help me deal with data constraints as I scale up my language model.", "arxiv"],
             ["Which planets in the solar system are most likely to be habitable?", "wikipedia"],
             ["I am searching for a good and large-scale benchmark for testing the performance of text embeddings.", "arxiv"],
             ["Who wrote about a guide that's more popular than the Encyclopedia Galactica?", "wikipedia"],
-            ["I am looking for the paper that introduced HumanEvalPack and talks about instruction tuning Code Large Language Models.", "arxiv"],
+            ["Please find me the paper on training code large language models to follow instructions via git commits.", "arxiv"],
         ],
         inputs=[textbox, corpus],
     )
@@ -570,11 +570,12 @@ def build_side_by_side_ui_named(models):
 
     gr.Examples(
         examples=[
-            ["In which book 42 is mentioned as the meaning of life?", "wikipedia"],
-            ["I read this paper about handling data constraints when training large language models. Among others, it investigated repeating data as one solution & the name starts with Scaling. Could you help me find it?", "arxiv"],
-            ["Who famously asked 'Can machines think?' in 1950?", "wikipedia"],
+            ["Which test seeks to answer the question whether machines can think?", "wikipedia"],
+            ["I am looking for a paper to help me deal with data constraints as I scale up my language model.", "arxiv"],
+            ["Which planets in the solar system are most likely to be habitable?", "wikipedia"],
             ["I am searching for a good and large-scale benchmark for testing the performance of text embeddings.", "arxiv"],
-            ["I am looking for the paper that introduced HumanEvalPack and talks about instruction tuning Code Large Language Models.", "arxiv"],
+            ["Who wrote about a guide that's more popular than the Encyclopedia Galactica?", "wikipedia"],
+            ["Please find me the paper on training code large language models to follow instructions via git commits.", "arxiv"],
         ],
         inputs=[textbox, corpus],
     )
@@ -754,11 +755,12 @@ def build_single_model_ui(models):
 
     gr.Examples(
         examples=[
-            ["In which book 42 is mentioned as the meaning of life?", "wikipedia"],
-            ["I read this paper about handling data constraints when training large language models. Among others, it investigated repeating data as one solution & the name starts with Scaling. Could you help me find it?", "arxiv"],
-            ["Who famously asked 'Can machines think?' in 1950?", "wikipedia"],
+            ["Which test seeks to answer the question whether machines can think?", "wikipedia"],
+            ["I am looking for a paper to help me deal with data constraints as I scale up my language model.", "arxiv"],
+            ["Which planets in the solar system are most likely to be habitable?", "wikipedia"],
             ["I am searching for a good and large-scale benchmark for testing the performance of text embeddings.", "arxiv"],
-            ["I am looking for the paper that introduced HumanEvalPack and talks about instruction tuning Code Large Language Models.", "arxiv"],
+            ["Who wrote about a guide that's more popular than the Encyclopedia Galactica?", "wikipedia"],
+            ["Please find me the paper on training code large language models to follow instructions via git commits.", "arxiv"],
         ],
         inputs=[textbox, corpus],
     )

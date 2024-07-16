@@ -47,9 +47,11 @@ with open(MODEL_META_PATH, 'r', encoding='utf-8') as f:
     model_meta = safe_load(f)
 # Not supported atm
 model_meta['model_meta'].pop('intfloat/multilingual-e5-small')
-#model_meta['model_meta'].pop('BM25')
+model_meta['model_meta'].pop('voyage-large-2-instruct')
 model_meta['model_meta'].pop('nvidia/NV-Embed-v1')
 model_meta['model_meta'].pop('McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised')
+model_meta['model_meta'].pop('text-embedding-004')
+model_meta['model_meta'].pop('embed-english-v3.0')
 models = ModelManager(model_meta, use_gcp_index=True)
 
 def load_elo_results(elo_results_dir):
@@ -111,7 +113,7 @@ with gr.Blocks(title="MTEB Arena", head=head_js) as block:
             with gr.Tab("⚔️ Arena (side-by-side)", id=6):
                 build_side_by_side_ui_named_clustering(models)
 
-            with gr.Tab("💧 Single", id=7): #Direct Chat
+            with gr.Tab("💧 Single", id=7):
                 build_single_model_ui_clustering(models)
 
             if (elo_results_file) and ('clustering' in elo_results_file):

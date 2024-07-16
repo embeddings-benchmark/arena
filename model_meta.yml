@@ -178,6 +178,62 @@ model_meta:
     mteb_retrieval: 56.63
     mteb_sts: 83.58
     mteb_clustering: 46.45
+  voyage-multilingual-2:
+    link: https://docs.voyageai.com/docs/embeddings
+    revision: "1"
+    desc: voyage-multilingual-2 by Voyage AI
+    seq_len: 32000
+    dim: 1024
+    license: Proprietary
+    organization: Voyage AI
+  voyage-large-2-instruct:
+    link: https://docs.voyageai.com/docs/embeddings
+    revision: "1"
+    desc: voyage-large-2-instruct by Voyage AI
+    seq_len: 16000
+    dim: 1024
+    license: Proprietary
+    organization: Voyage AI
+    mteb_overall: 68.28
+    mteb_retrieval: 58.28
+    mteb_sts: 84.58
+    mteb_clustering: 53.35
+  text-embedding-004:
+    link: https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api
+    revision: "1"
+    desc: text-embedding-004 by Google
+    seq_len: 2048
+    dim: 768
+    license: Proprietary
+    organization: Google
+    mteb_overall: 66.31
+    mteb_retrieval: 55.7
+    mteb_sts: 85.07
+    mteb_clustering: 47.48
+  text-embedding-3-large:
+    link: https://platform.openai.com/docs/guides/embeddings
+    revision: "1"
+    desc: text-embedding-3-large by OpenAI
+    seq_len: 8191
+    dim: 3072
+    license: Proprietary
+    organization: OpenAI
+    mteb_overall: 64.59
+    mteb_retrieval: 55.44
+    mteb_sts: 81.73
+    mteb_clustering: 49.01
+  embed-english-v3.0:
+    link: https://docs.cohere.com/docs/cohere-embed
+    revision: "1"
+    desc: embed-english-v3.0 by Cohere
+    seq_len: 512
+    dim: 1024
+    license: Proprietary
+    organization: Cohere
+    mteb_overall: 64.47
+    mteb_retrieval: 55
+    mteb_sts: 82.62
+    mteb_clustering: 47.43
   BM25:
     link: https://github.com/xhluca/bm25s
     desc: Fast lexical search via BM25
