@@ -370,7 +370,7 @@ def build_side_by_side_ui_anon(models):
     draw_btn.click(
         models.retrieve_draw,
         inputs=None,
-        outputs=[textbox],
+        outputs=[textbox, corpus],
         api_name="draw_btn_anon"
     )
 
@@ -585,7 +585,7 @@ def build_side_by_side_ui_named(models):
     draw_btn.click(
         models.retrieve_draw,
         inputs=None,
-        outputs=[textbox],
+        outputs=[textbox, corpus],
         api_name="draw_btn_anon"
     )
 
@@ -770,7 +770,7 @@ def build_single_model_ui(models):
     draw_btn.click(
         models.retrieve_draw,
         inputs=None,
-        outputs=[textbox],
+        outputs=[textbox, corpus],
         api_name="draw_btn_single"
     )
 

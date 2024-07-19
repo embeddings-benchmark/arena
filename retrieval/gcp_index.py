@@ -1,6 +1,7 @@
 import math
 import json
 import os
+import time
 from tqdm import tqdm
 from google.cloud import aiplatform, storage
 
@@ -40,13 +41,14 @@ class VertexIndex:
         self.deploy_index_name = None
         # Reuse endpoint across indexes
         self.endpoint_name = "endpoint" # f"endpoint_{corpus}_{model_path}"
-        self.tmp_file_path = f"tmp_{corpus}_{model_path}.json"
-        self.tmp_folder = f"tmp_{corpus}_{model_path}"
+        self.emb_file_path = f"emb_{corpus}_{model_path}.json"
+        self.emb_folder = f"emb_{corpus}_{model_path}"
         self.endpoint_resource_name = None
         self.passages = load_passages_from_hf(corpus=corpus, limit=limit)
         self.doc_map = {str(i): doc for i, doc in enumerate(self.passages)}
 
     def _index_exists(self) -> bool:
+        # return False
         logger.info(f"Checking if index {self.index_name} exists ...")
         # This fails with `google.api_core.exceptions.InvalidArgument: 400 Provided filter is not valid.` if `.` is in the name
         index_names = [
@@ -60,8 +62,8 @@ class VertexIndex:
             return True
         return False
 
-    def _write_embeddings_to_tmp_file(self, embeddings, indices):
-        with open(self.tmp_file_path, "a") as f:
+    def _write_embeddings_to_file(self, embeddings, indices):
+        with open(self.emb_file_path, "a") as f:
             embeddings_formatted = [
                 json.dumps(
                     {
@@ -74,14 +76,16 @@ class VertexIndex:
             ]
             f.writelines(embeddings_formatted)
 
-    def _write_embeddings(self, gpu_embedder_batch_size=32*8) -> None:
+    def _write_embeddings(self, gpu_embedder_batch_size=32*16) -> None:
         """Batch encoding passages, then write a jsonl file."""
-        if os.path.exists(self.tmp_file_path):
-            os.remove(self.tmp_file_path)
+        if os.path.exists(self.emb_file_path):
+            os.remove(self.emb_file_path)
 
         n_batch = math.ceil(len(self.passages) / gpu_embedder_batch_size)
         total = 0
         for i in tqdm(range(n_batch), desc="Encoding passages"):
+            # print("I", i)
+            # if i < 2574: continue
             indices = range(i * gpu_embedder_batch_size, (i + 1) * gpu_embedder_batch_size)
             batch = self.passages[i * gpu_embedder_batch_size : (i + 1) * gpu_embedder_batch_size]
             if hasattr(self.model, "encode_corpus"):
@@ -89,19 +93,19 @@ class VertexIndex:
             else:
                 embeddings = self.model.encode(batch, batch_size=gpu_embedder_batch_size//8)
             total += len(embeddings)
-            self._write_embeddings_to_tmp_file(embeddings.tolist(), indices)
+            self._write_embeddings_to_file(embeddings.tolist(), indices)
             if i % 500 == 0 and i > 0:
                 logger.info(f"Number of passages encoded: {total}")
         logger.info(f"{total} passages encoded.")
 
     def _upload_embedding_file(self) -> None:
         """Upload temp file to GCP storage bucket."""
-        logger.info(f"Uploading {self.tmp_file_path} to {self.gcs_bucket_uri}/{self.tmp_folder}")
+        logger.info(f"Uploading {self.emb_file_path} to {self.gcs_bucket_uri}/{self.emb_folder}")
         storage_client = storage.Client()
         bucket = storage_client.bucket(self.gcs_bucket_name)
         # Include the folder name in the blob path
-        blob = bucket.blob(f"{self.tmp_folder}/{self.tmp_file_path.split('/')[-1]}")
-        blob.upload_from_filename(self.tmp_file_path)
+        blob = bucket.blob(f"{self.emb_folder}/{self.emb_file_path.split('/')[-1]}")
+        blob.upload_from_filename(self.emb_file_path)
 
     def _create_index(self) -> None:
         """
@@ -109,12 +113,13 @@ class VertexIndex:
         Reference: https://cloud.google.com/vertex-ai/docs/vector-search/configuring-indexes
         """
         self._write_embeddings()
+        exit()
         self._upload_embedding_file()
         logger.info(f"Creating Vector Search index {self.index_name} ...")
         self.index = aiplatform.MatchingEngineIndex.create_tree_ah_index(
             display_name=self.index_name,
             dimensions=self.dim,
-            contents_delta_uri=self.gcs_bucket_uri + "/" + self.tmp_folder,
+            contents_delta_uri=self.gcs_bucket_uri + "/" + self.emb_folder,
             approximate_neighbors_count=150,
             distance_measure_type="DOT_PRODUCT_DISTANCE",
             feature_norm_type="UNIT_L2_NORM",
@@ -198,16 +203,24 @@ class VertexIndex:
             f"Vector Search index {self.index.display_name} is deployed at endpoint {self.endpoint.display_name}"
         )
     
-    def search(self, query_embeds: list, topk=1):
+    def search(self, query_embeds: list, topk=1, num_retries=5):
         """Return topk docs"""
         if self.endpoint is None:
             self.load_endpoint()
 
-        response = self.endpoint.find_neighbors(
-            deployed_index_id=self.deploy_index_name,
-            queries=query_embeds,
-            num_neighbors=topk,
-        )
+        # https://github.com/google-gemini/generative-ai-python/issues/64
+        while num_retries > 0:
+            try:
+                response = self.endpoint.find_neighbors(
+                    deployed_index_id=self.deploy_index_name,
+                    queries=query_embeds,
+                    num_neighbors=topk,
+                )
+                break
+            except Exception as e:
+                num_retries -= 1
+                logger.error(f"Error in find_neighbors: {e}. Retries left: {num_retries}")
+                time.sleep(2)
 
         sorted_data = sorted(response[0], key=lambda x: x.distance, reverse=True)
         docs = [self.doc_map[x.id] for x in sorted_data]

@@ -9,12 +9,15 @@ from ui import build_side_by_side_ui_anon, build_side_by_side_ui_anon_sts, build
 
 acknowledgment_md = """
 ### Acknowledgment
-We thank [Contextual AI](https://contextual.ai/) and [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).
+We thank [Contextual AI](https://contextual.ai/), [ServiceNow](https://www.servicenow.com/) and [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).
 
 <div class="sponsor-image-about" style="display: flex; align-items: center; gap: 10px;">
     <a href="https://contextual.ai/">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd4EDMoZLFRrIjVBrSXOQYGcmvUJ3kL4U2usvjuKPla-LoRTZtLzFnb_Cu5tXzRI7DNBo&usqp=CAU" width="60" height="55" style="padding: 10px;">
     </a>
+    <a href="https://www.servicenow.com/">
+        <img src="https://play-lh.googleusercontent.com/HdfHZ5jnfMM1Ep7XpPaVdFIVSRx82wKlRC_qmnHx9H1E4aWNp4WKoOcH0x95NAnuYg" width="60" height="55" style="padding: 10px;">
+    </a>    
     <a href="https://huggingface.co">
         <img src="https://raw.githubusercontent.com/embeddings-benchmark/mteb/main/docs/images/hf_logo.png" width="60" height="55" style="padding: 10px;">
     </a>
@@ -50,8 +53,6 @@ model_meta['model_meta'].pop('intfloat/multilingual-e5-small')
 model_meta['model_meta'].pop('voyage-large-2-instruct')
 model_meta['model_meta'].pop('nvidia/NV-Embed-v1')
 model_meta['model_meta'].pop('McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised')
-model_meta['model_meta'].pop('text-embedding-004')
-model_meta['model_meta'].pop('embed-english-v3.0')
 models = ModelManager(model_meta, use_gcp_index=True)
 
 def load_elo_results(elo_results_dir):

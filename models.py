@@ -29,12 +29,18 @@ MODEL_TO_CUDA_DEVICE = {
     "mixedbread-ai/mxbai-embed-large-v1": "7",
 }
 
+CORPUS_TO_FORMAT = {
+    "arxiv": "Title: {title}\n\nAbstract: {text}",
+    "wikipedia": "Title: {title}\n\nPassage: {text}",
+}
+
 class ModelManager:
     def __init__(self, model_meta, use_gcp_index: bool = False):
         self.model_meta = model_meta["model_meta"]
         self.models_retrieval = sorted(set(model_meta["model_meta"].keys()))
         #self.models_retrieval.remove("voyage-multilingual-2")
-        #self.models_retrieval.remove("Alibaba-NLP/gte-Qwen2-7B-instruct")
+        self.models_retrieval.remove("Alibaba-NLP/gte-Qwen2-7B-instruct")
+        self.models_retrieval.remove("embed-english-v3.0")
         self.models_sts = sorted(set(model_meta["model_meta"].keys()) - set(["BM25"]))
         self.models_clustering = sorted(set(model_meta["model_meta"].keys()) - set(["BM25"]))
         self.use_gcp_index = use_gcp_index
@@ -129,9 +135,12 @@ class ModelManager:
 
     def retrieve_draw(self):
         if "retrieval" not in self.loaded_samples:
+            self.loaded_samples["retrieval"] = {}
             from datasets import load_dataset
-            self.loaded_samples["retrieval"] = load_dataset("mteb/nq", "queries")["queries"]["text"]
-        return random.choice(self.loaded_samples["retrieval"])
+            self.loaded_samples["retrieval"]["wikipedia"] = load_dataset("mteb/nq", "queries")["queries"]["text"]
+            self.loaded_samples["retrieval"]["arxiv"] = [x[k] for x in load_dataset("Muennighoff/arxiv_7_2_24_cites_queries", split="train") for k in ['query_1', 'query_2', 'query_3'] if x[k]]
+        corpus = random.choice(["wikipedia", "arxiv"])
+        return random.choice(self.loaded_samples["retrieval"][corpus]), corpus
 
     def clustering_draw(self):
         if "clustering" not in self.loaded_samples:
@@ -168,11 +177,12 @@ class ModelManager:
 
     @spaces.GPU(duration=120)
     def retrieve(self, query, corpus, model_name, topk=1):
+        corpus_format = CORPUS_TO_FORMAT[corpus]
 
         if "BM25" in model_name:
             index = self.load_bm25_index(model_name, corpus)
             docs = index.search([query], topk=topk)
-            docs = [[query, "Title: " + docs[0][0].get("title", "") + "\n\n" + "Passage: " + docs[0][0]["text"]]]
+            docs = [[query, corpus_format.format(title=docs[0][0]["title"], text=docs[0][0]["text"])]]
             return docs
             
         model = self.load_model(model_name)
@@ -196,11 +206,11 @@ class ModelManager:
             # logger.info(f"Loading time: {z - y}")
             docs = index.search(query_embeds=query_embed.tolist(), topk=topk)
             # logger.info(f"Search time: {time.time() - z}")
-            docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0]["text"]]]
+            docs = [[query, corpus_format.format(title=docs[0].get("title", ""), text=docs[0]["text"])]]
         else:
             index = self.load_local_index(model_name, corpus)
             docs, scores = index.search_knn(query_embed, topk=topk)
-            docs = [[query, "Title: " + docs[0].get("title", "") + "\n\n" + "Passage: " + docs[0][0]["text"]]]
+            docs = [[query, corpus_format.format(title=docs[0].get("title", ""), text=docs[0][0]["text"])]]
         return docs
     
     def clustering_parallel(self, prompt, model_A, model_B, ncluster=1, ndim="3D", dim_method="PCA", clustering_method="KMeans"):
