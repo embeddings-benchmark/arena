@@ -164,6 +164,6 @@ def store_data_in_hub(message: str, message_type: str):
     if scheduler:
         with scheduler.lock:
             file_to_upload = Path(str(JSON_DATASET_PATH).replace("NAME_TO_REPLACE", message_type))
-            with file_to_upload.open("a") as f:
-                json.dump(message, f)
+            with file_to_upload.open("a", encoding="utf-8") as f:
+                json.dump(message, f, ensure_ascii=False)
                 f.write("\n")

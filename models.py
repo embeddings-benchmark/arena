@@ -13,6 +13,7 @@ from retrieval.index import build_index, load_or_initialize_index
 from retrieval.index import DistributedIndex
 from retrieval.gcp_index import VertexIndex
 from retrieval.bm25_index import BM25Index
+from clustering_samples import CLUSTERING_CATEGORIES
 
 logger = build_logger("model_logger", "model_logger.log")
 
@@ -172,17 +173,21 @@ class ModelManager:
 
     def clustering_draw(self):
         if "clustering" not in self.loaded_samples:
-            from datasets import load_dataset
-            ds = load_dataset("mteb/reddit-clustering", split="test")
-            #ds = load_dataset("mteb/twentynewsgroups-clustering", split="test")
             self.loaded_samples["clustering"] = []
-            for s, l in zip(ds["sentences"], ds["labels"]):
-                # Limit to 4 labels to avoid having every sample stem from a different cluster
-                rand_clusters = random.sample(l, 4)
-                self.loaded_samples["clustering"].append([(x, y) for x, y in zip(s, l) if y in rand_clusters])
-        # Select 4-12 random samples
-        samples = random.sample(random.choice(self.loaded_samples["clustering"]), random.randint(4, 12))
-        return "<|SEP|>".join([x for x, y in samples]), len(set(y for x, y in samples))
+            for i in range(10000):
+                # Select 2-5 categories 
+                n_categories = random.randint(2, 5)
+                sampled_categories = random.sample(list(self.CLUSTERING_CATEGORIES.keys()), n_categories)
+                sampled_items = []
+                for category in sampled_categories:
+                    # Add all items from the selected category
+                    sampled_items.extend(random.sample(self.CLUSTERING_CATEGORIES[category], random.randomint(2, min(self.CLUSTERING_CATEGORIES[category], 8))))
+                
+                self.loaded_samples["clustering"].append((sampled_items, n_categories))
+        
+        # Randomly select one of the pre-generated samples
+        selected_sample = random.choice(self.loaded_samples["clustering"])
+        return "<|SEP|>".join(selected_sample[0]), selected_sample[1]
 
     def sts_draw(self):
         if "sts" not in self.loaded_samples:
