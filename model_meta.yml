@@ -36,6 +36,9 @@ model_meta:
     organization: Microsoft
     instruction_query_arxiv: Given a query, retrieve a relevant paper title and abstract from arXiv
     instruction_query_wikipedia: Given a query, retrieve a relevant title and passage from Wikipedia    
+    instruction_query_stackexchange: Given a query, retrieve a relevant question and answer from Stack Exchange
+    instruction_sts: Retrieve semantically similar text
+    instruction_clustering: Identify the topic/theme/category of the text
     mteb_overall: 64.41
     mteb_retrieval: 52.47
     mteb_sts: 84.78
@@ -51,6 +54,9 @@ model_meta:
     organization: Microsoft
     instruction_query_arxiv: Given a query, retrieve a relevant paper title and abstract from arXiv
     instruction_query_wikipedia: Given a query, retrieve a relevant title and passage from Wikipedia
+    instruction_query_stackexchange: Given a query, retrieve a relevant question and answer from Stack Exchange
+    instruction_sts: Retrieve semantically similar text
+    instruction_clustering: Identify the topic/theme/category of the text
     mteb_overall: 66.63
     mteb_retrieval: 56.89
     mteb_sts: 84.63
@@ -66,6 +72,9 @@ model_meta:
     organization: Contextual AI, HKU, Microsoft
     instruction_query_arxiv: Given a query, retrieve a relevant paper title and abstract from arXiv
     instruction_query_wikipedia: Given a query, retrieve a relevant title and passage from Wikipedia
+    instruction_query_stackexchange: Given a query, retrieve a relevant question and answer from Stack Exchange
+    instruction_sts: Retrieve semantically similar text
+    instruction_clustering: Identify the topic/theme/category of the text
     mteb_overall: 66.76
     mteb_retrieval: 57.41
     mteb_sts: 83.35
@@ -107,6 +116,9 @@ model_meta:
     organization: Alibaba
     instruction_query_arxiv: Given a query, retrieve a relevant paper title and abstract from arXiv
     instruction_query_wikipedia: Given a query, retrieve a relevant title and passage from Wikipedia
+    instruction_query_stackexchange: Given a query, retrieve a relevant question and answer from Stack Exchange
+    instruction_clustering: Identify the topic/theme/category of the text
+    instruction_sts: Retrieve semantically similar text
     mteb_overall: 70.24
     mteb_retrieval: 60.25
     mteb_sts: 83.04
@@ -122,6 +134,9 @@ model_meta:
     organization: Salesforce
     instruction_query_arxiv: Given a query, retrieve a relevant paper title and abstract from arXiv
     instruction_query_wikipedia: Given a query, retrieve a relevant title and passage from Wikipedia
+    instruction_query_stackexchange: Given a query, retrieve a relevant question and answer from Stack Exchange
+    instruction_clustering: Identify the topic/theme/category of the text
+    instruction_sts: Retrieve semantically similar text
     mteb_overall: 70.31
     mteb_retrieval: 60.18
     mteb_sts: 81.26

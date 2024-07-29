@@ -20,18 +20,21 @@ class BM25Index:
 
     def _create_index(self):
         passages = load_passages_from_hf(corpus=self.corpus, limit=self.limit)
-        corpus_lst = [r.get("title", "") + " " + r["text"] for r in passages]
+        if "title" in passages[0]:
+            corpus_lst = [r["title"] + " " + r["text"] for r in passages]
+        else:
+            corpus_lst = [r["text"] for r in passages]
         corpus_tokenized = bm25s.tokenize(corpus_lst, stemmer=self.stemmer)
         
-        ## By default, bm25s uses method="lucene". See https://github.com/xhluca/bm25s?tab=readme-ov-file#variants.
+        # By default bm25s uses method="lucene", see https://github.com/xhluca/bm25s?tab=readme-ov-file#variants.
         retriever = bm25s.hf.BM25HF()
         retriever.index(corpus_tokenized)
 
-        ## Save to hub as a model.
+        # Save to hub as a model
         hf_token = os.getenv("HF_TOKEN")
         retriever.save_to_hub(repo_id=f"mteb/{self.repo_name}", token=hf_token, corpus=passages)
         self.index = retriever
-        logger.info(f"Index created and uploaded to `mteb/{self.repo_name}`.")
+        logger.info(f"Index created & uploaded to `mteb/{self.repo_name}`")
 
     def load_index(self):
         """Load the bm25 index or create one if it does not exist."""
@@ -39,8 +42,8 @@ class BM25Index:
             self.index = bm25s.hf.BM25HF.load_from_hub(
                 f"mteb/{self.repo_name}", load_corpus=True, mmap=True
             )
-        except:
-            logger.warning("Index not found on Huggingface. Creating index.")
+        except Exception as e:
+            logger.warning(f"Index not found on Huggingface: {e}. Creating index.")
             self._create_index()
         logger.info("Index loaded.")
 

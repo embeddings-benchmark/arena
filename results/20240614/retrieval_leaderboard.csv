@@ -1,3 +1,0 @@
-key,Model,Arena Elo rating (anony),Arena Elo rating (full),MTEB Overall Avg,MTEB Retrieval Avg,MTEB Clustering Avg,MTEB STS Avg,License,Organization,Link
-intfloat/multilingual-e5-small,intfloat/multilingual-e5-small,1058.832274051678,1052.673145211082,57.87,46.64,37.08,79.1,MIT License,Microsoft,https://huggingface.co/intfloat/multilingual-e5-small
-sentence-transformers/all-MiniLM-L6-v2,sentence-transformers/all-MiniLM-L6-v2,941.1677259483218,947.3268547889179,56.26,41.95,42.35,78.9,Apache-2.0,Sentence Transformers,https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2

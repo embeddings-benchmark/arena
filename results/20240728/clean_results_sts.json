@@ -1,0 +1,10 @@
+[
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "voyage-multilingual-2",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722222732.4655
+  }
+]

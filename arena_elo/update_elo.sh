@@ -9,7 +9,7 @@ for task in "retrieval" "clustering" "sts"; do
     mkdir -p ./results/$battle_cutoff_date
     cp clean_battle_${task}_$battle_cutoff_date.json ./results/latest/clean_battle_$task.json
     mv clean_battle_${task}_$battle_cutoff_date.json ./results/$battle_cutoff_date/clean_results_${task}.json
-    python3 -m arena_elo.elo_analysis --clean-battle-file ./results/$battle_cutoff_date/clean_results_${task}.json --num-bootstrap 1
+    python3 -m arena_elo.elo_analysis --clean-battle-file ./results/$battle_cutoff_date/clean_results_${task}.json
     mv ./elo_results_$battle_cutoff_date.pkl ./results/$battle_cutoff_date/elo_results_${task}.pkl
     python -m arena_elo.generate_leaderboard \
         --elo_rating_pkl "./results/$battle_cutoff_date/elo_results_${task}.pkl" \

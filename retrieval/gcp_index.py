@@ -14,6 +14,7 @@ logger = build_logger("index_logger", "index_logger.log")
 def model_name_as_path(model_name) -> str:
     return model_name.replace("/", "__").replace(" ", "_")
 
+MODEL_TO_INDEX_MAP = {} # for debugging with custom index names
 
 class VertexIndex:
     """
@@ -22,25 +23,26 @@ class VertexIndex:
     index: aiplatform.MatchingEngineIndex = None
     endpoint: aiplatform.MatchingEngineIndexEndpoint = None
     PROJECT_ID = "contextual-research-common"
-    # us-central-1 & us-east-1 are cheapest
-    # https://cloud.withgoogle.com/region-picker/
-    # REGION = "us-east1" # "us-central1"
     MACHINE_TYPE = "e2-standard-16"
 
     def __init__(self, dim: int, model_name: str, model, corpus: str = "wikipedia", limit=None):
-        region = "us-east1" if corpus == "wikipedia" else "us-central1"
-        self.gcs_bucket_name = "mtebarena" if corpus == "wikipedia" else "mtebarenauscentral"
+        if model_name == "text-embedding-004" and corpus == "wikipedia":
+            region = "us-central1"
+            self.gcs_bucket_name = "mtebarenauscentral"
+        else:
+        # https://cloud.withgoogle.com/region-picker/; us-central-1 & us-east-1 are cheapest
+            region = "us-east1" if corpus in ["wikipedia", "stackexchange"] else "us-central1"
+            self.gcs_bucket_name = "mtebarena" if corpus in ["wikipedia", "stackexchange"] else "mtebarenauscentral"
         self.gcs_bucket_uri = f"gs://{self.gcs_bucket_name}"
         aiplatform.init(project=self.PROJECT_ID, location=region)
         self.dim = dim
         self.model = model
         model_path = model_name_as_path(model_name)
         # GCP filters do not allow `.` in the name, see _index_exists()
-        self.index_name = f"index_{corpus}_{model_path}".replace(".", "_")
+        self.index_name = MODEL_TO_INDEX_MAP.get(model_name, f"index_{corpus}_{model_path}".replace(".", "_"))
         self.index_resource_name = None
         self.deploy_index_name = None
-        # Reuse endpoint across indexes
-        self.endpoint_name = "endpoint" # f"endpoint_{corpus}_{model_path}"
+        self.endpoint_name = "endpoint" # Reuse endpoint across indexes
         self.emb_file_path = f"emb_{corpus}_{model_path}.json"
         self.emb_folder = f"emb_{corpus}_{model_path}"
         self.endpoint_resource_name = None
@@ -76,17 +78,44 @@ class VertexIndex:
             ]
             f.writelines(embeddings_formatted)
 
-    def _write_embeddings(self, gpu_embedder_batch_size=32*16) -> None:
+    # def _write_embeddings(self, gpu_embedder_batch_size=32//4) -> None:#32//4) -> None:
+    def _write_embeddings(self, gpu_embedder_batch_size=32*16) -> None:        
         """Batch encoding passages, then write a jsonl file."""
         if os.path.exists(self.emb_file_path):
-            os.remove(self.emb_file_path)
+            raise FileExistsError(f"{self.emb_file_path} already exists. Delete it before running this method.")
+        logger.info(f"Writing embeddings to {self.emb_file_path} ...")
 
+        """
+        seen_ids = set()
+        with open("emb_wikipedia_text-embedding-004.json_122534567101114151618", 'r') as f:
+            for line in f:
+                data = json.loads(line)
+                if data['id'] not in seen_ids:
+                    seen_ids.add(str(data['id']))
+        """           
+        
         n_batch = math.ceil(len(self.passages) / gpu_embedder_batch_size)
         total = 0
         for i in tqdm(range(n_batch), desc="Encoding passages"):
-            # print("I", i)
-            # if i < 2574: continue
+            print("I", i)
+            
             indices = range(i * gpu_embedder_batch_size, (i + 1) * gpu_embedder_batch_size)
+            """
+            if all([str(index) in seen_ids for index in indices]):
+                print("Skipping as all indices in seen_ids")
+                continue
+            elif any([str(index) in seen_ids for index in indices]):
+                raise ValueError("Some indices are missing in seen_ids")
+            else:
+                print("All indices are missing in seen_ids", indices, len(seen_ids))
+                # exit()
+            """
+            """
+            assert len(indices) == 1
+            if indices[0] in seen_ids:
+                continue
+            """
+
             batch = self.passages[i * gpu_embedder_batch_size : (i + 1) * gpu_embedder_batch_size]
             if hasattr(self.model, "encode_corpus"):
                 embeddings = self.model.encode_corpus(batch, batch_size=gpu_embedder_batch_size//8)
@@ -113,8 +142,9 @@ class VertexIndex:
         Reference: https://cloud.google.com/vertex-ai/docs/vector-search/configuring-indexes
         """
         self._write_embeddings()
-        exit()
+        #exit()
         self._upload_embedding_file()
+        #exit()
         logger.info(f"Creating Vector Search index {self.index_name} ...")
         self.index = aiplatform.MatchingEngineIndex.create_tree_ah_index(
             display_name=self.index_name,

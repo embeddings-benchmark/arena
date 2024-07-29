@@ -1,0 +1,19 @@
+"""Remove duplicates if an embedding file has the same document multiple times"""
+import json
+
+input_file = "emb_wikipedia_text-embedding-004.json_122534567101114151618192021"
+output_file = "emb_wikipedia_text-embedding-004.json_122534567101114151618192021_cleaned"
+
+seen_ids = set()
+unique_lines = []
+
+with open(input_file, 'r') as f:
+    for line in f:
+        data = json.loads(line)
+        if data['id'] not in seen_ids:
+            unique_lines.append(line)
+            seen_ids.add(data['id'])
+
+with open(output_file, 'w') as f:
+    for line in unique_lines:
+        f.write(line)

@@ -9,7 +9,7 @@ from ui import build_side_by_side_ui_anon, build_side_by_side_ui_anon_sts, build
 
 acknowledgment_md = """
 ### Acknowledgment
-We thank [Contextual AI](https://contextual.ai/), [ServiceNow](https://www.servicenow.com/) and [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).
+We thank [Contextual AI](https://contextual.ai/), [ServiceNow](https://www.servicenow.com/), [Ai2](https://allenai.org/), [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).
 
 <div class="sponsor-image-about" style="display: flex; align-items: center; gap: 10px;">
     <a href="https://contextual.ai/">
@@ -17,11 +17,16 @@ We thank [Contextual AI](https://contextual.ai/), [ServiceNow](https://www.servi
     </a>
     <a href="https://www.servicenow.com/">
         <img src="https://play-lh.googleusercontent.com/HdfHZ5jnfMM1Ep7XpPaVdFIVSRx82wKlRC_qmnHx9H1E4aWNp4WKoOcH0x95NAnuYg" width="60" height="55" style="padding: 10px;">
-    </a>    
+    </a>
+    <a href="https://allenai.org/">
+        <img src="https://allenai.org/newsletters/archive/2023-02-newsletter_files/927c3ca8-6c75-862c-ee5d-81703ef10a8d.png" width="60" height="55" style="padding: 10px;">
+    </a>
     <a href="https://huggingface.co">
         <img src="https://raw.githubusercontent.com/embeddings-benchmark/mteb/main/docs/images/hf_logo.png" width="60" height="55" style="padding: 10px;">
     </a>
 </div>
+
+We also thank the following companies which provide API credits to serve their models on MTEB Arena: [Cohere](https://cohere.com/), [Voyage AI](https://www.voyageai.com/)
 
 This work builds on [MTEB](https://huggingface.co/spaces/mteb/leaderboard), [Chatbot Arena](https://chat.lmsys.org/), [Vision Arena](https://huggingface.co/spaces/WildVision/vision-arena) & [GenAI-Arena](https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena). We thank them for their pioneering work!
 """
@@ -53,7 +58,7 @@ model_meta['model_meta'].pop('intfloat/multilingual-e5-small')
 model_meta['model_meta'].pop('voyage-large-2-instruct')
 model_meta['model_meta'].pop('nvidia/NV-Embed-v1')
 model_meta['model_meta'].pop('McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised')
-models = ModelManager(model_meta, use_gcp_index=True)
+models = ModelManager(model_meta, use_gcp_index=True, load_all=True)
 
 def load_elo_results(elo_results_dir):
     from collections import defaultdict

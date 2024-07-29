@@ -19,7 +19,7 @@ pd.options.display.float_format = "{:.2f}".format
 
 MODEL_META_PATH = "model_meta.yml"
 # Debugging
-MODEL_META_PATH = "model_meta_debug.yml"
+# MODEL_META_PATH = "model_meta_debug.yml"
 with open(MODEL_META_PATH, 'r', encoding='utf-8') as f:
     model_meta = safe_load(f)
 
@@ -284,14 +284,18 @@ def report_elo_analysis_results(battles_json, rating_system="bt", num_bootstrap=
     model_order = model_order[:limit_show_number]
 
     # leaderboard_table_df: elo rating, variance, 95% interval, number of battles
+    # import pdb; pdb.set_trace()
     leaderboard_table_df = pd.DataFrame(
         {
             "rating": elo_rating_final,
             "variance": bootstrap_df.var(),
             "rating_q975": bootstrap_df.quantile(0.975),
             "rating_q025": bootstrap_df.quantile(0.025),
-            "num_battles": battles["model_a"].value_counts()
-            + battles["model_b"].value_counts(),
+            # "num_battles": battles["model_a"].value_counts() + battles["model_b"].value_counts(),
+            # Turn NaN into zero
+            #"num_battles": (battles["model_a"].value_counts() + battles["model_b"].value_counts()).fillna(0),
+            # Concat all models first & then count values
+            "num_battles": pd.concat([battles["model_a"], battles["model_b"]]).value_counts(),
         }
     )
     # required for leaderboard, catch it here

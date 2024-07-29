@@ -21,7 +21,7 @@ def main(
 
     MODEL_META_PATH = "model_meta.yml"
     # Debugging
-    MODEL_META_PATH = "model_meta_debug.yml"
+    # MODEL_META_PATH = "model_meta_debug.yml"
     with open(MODEL_META_PATH, 'r', encoding='utf-8') as f:
         model_info = safe_load(f)["model_meta"]
 

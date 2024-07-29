@@ -31,16 +31,25 @@ MODEL_TO_CUDA_DEVICE = {
 
 CORPUS_TO_FORMAT = {
     "arxiv": "Title: {title}\n\nAbstract: {text}",
-    "wikipedia": "Title: {title}\n\nPassage: {text}",
+#    "wikipedia": "Title: {title}\n\nPassage: {text}",
+    "wikipedia": "{title}\n\n{text}",
+    "stackexchange": "{text}",
 }
 
 class ModelManager:
-    def __init__(self, model_meta, use_gcp_index: bool = False):
+    def __init__(self, model_meta, use_gcp_index: bool = False, load_all: bool = False):
         self.model_meta = model_meta["model_meta"]
         self.models_retrieval = sorted(set(model_meta["model_meta"].keys()))
-        #self.models_retrieval.remove("voyage-multilingual-2")
-        self.models_retrieval.remove("Alibaba-NLP/gte-Qwen2-7B-instruct")
-        self.models_retrieval.remove("embed-english-v3.0")
+        self.models_retrieval_stackexchange = [
+            "sentence-transformers/all-MiniLM-L6-v2",
+            "nomic-ai/nomic-embed-text-v1.5",
+            "mixedbread-ai/mxbai-embed-large-v1",
+            "jinaai/jina-embeddings-v2-base-en",
+            "GritLM/GritLM-7B",
+            "BAAI/bge-large-en-v1.5",
+            "intfloat/multilingual-e5-large-instruct",
+            "BM25",
+        ]
         self.models_sts = sorted(set(model_meta["model_meta"].keys()) - set(["BM25"]))
         self.models_clustering = sorted(set(model_meta["model_meta"].keys()) - set(["BM25"]))
         self.use_gcp_index = use_gcp_index
@@ -48,6 +57,17 @@ class ModelManager:
         self.loaded_indices = {}
         self.loaded_samples = {}
         self.lock = threading.Lock()
+        if load_all:
+            for model_name in self.models_sts:
+                self.load_model(model_name)
+            # Load BM25 indices
+            self.load_bm25_index("BM25", "wikipedia")
+            self.load_bm25_index("BM25", "arxiv")
+            self.load_bm25_index("BM25", "stackexchange")
+            # Load random samples
+            self.retrieve_draw()
+            self.clustering_draw()
+            self.sts_draw()
 
     def load_model(self, model_name):
         if model_name in self.loaded_models:
@@ -139,7 +159,8 @@ class ModelManager:
             from datasets import load_dataset
             self.loaded_samples["retrieval"]["wikipedia"] = load_dataset("mteb/nq", "queries")["queries"]["text"]
             self.loaded_samples["retrieval"]["arxiv"] = [x[k] for x in load_dataset("Muennighoff/arxiv_7_2_24_cites_queries", split="train") for k in ['query_1', 'query_2', 'query_3'] if x[k]]
-        corpus = random.choice(["wikipedia", "arxiv"])
+            self.loaded_samples["retrieval"]["stackexchange"] = [x["query"] for sub_ds in load_dataset("colbertv2/lotte", "pooled", split=['search_dev', 'search_test']) for x in sub_ds]
+        corpus = random.choice(["wikipedia", "arxiv", "stackexchange"])
         return random.choice(self.loaded_samples["retrieval"][corpus]), corpus
 
     def clustering_draw(self):
@@ -166,7 +187,10 @@ class ModelManager:
 
     def retrieve_parallel(self, prompt, corpus, model_A, model_B):
         if model_A == "" and model_B == "":
-            model_names = random.sample(self.models_retrieval, 2)
+            if corpus == "stackexchange":
+                model_names = random.sample(self.models_retrieval_stackexchange, 2)
+            else:
+                model_names = random.sample(self.models_retrieval, 2)
         else:
             model_names = [model_A, model_B]
 
@@ -182,8 +206,10 @@ class ModelManager:
         if "BM25" in model_name:
             index = self.load_bm25_index(model_name, corpus)
             docs = index.search([query], topk=topk)
-            docs = [[query, corpus_format.format(title=docs[0][0]["title"], text=docs[0][0]["text"])]]
-            return docs
+            if corpus == "stackexchange":
+                return [[query, corpus_format.format(text=docs[0][0]["text"])]]
+            else:
+                return [[query, corpus_format.format(title=docs[0][0]["title"], text=docs[0][0]["text"])]]
             
         model = self.load_model(model_name)
         kwargs = {} if self.use_gcp_index else {convert_to_tensor: True}
@@ -216,6 +242,7 @@ class ModelManager:
     def clustering_parallel(self, prompt, model_A, model_B, ncluster=1, ndim="3D", dim_method="PCA", clustering_method="KMeans"):
         if model_A == "" and model_B == "":
             model_names = random.sample(self.models_clustering, 2)
+            model_names = ["intfloat/multilingual-e5-large-instruct", random.choice(self.models_clustering)]
         else:
             model_names = [model_A, model_B]
 
@@ -239,6 +266,12 @@ class ModelManager:
         from sklearn.manifold import TSNE
         from umap import UMAP
 
+        model_kwargs = {}
+        if model_name == "text-embedding-004":
+            model_kwargs["google_task_type"] = "CLUSTERING"
+        elif model_name == "embed-english-v3.0":
+            model_kwargs["cohere_task_type"] = "clustering"
+
         if len(queries) == 1:
             # No need to do PCA; just return a 1D plot
             df = pd.DataFrame({"txt": queries, "x": [0]})
@@ -247,7 +280,7 @@ class ModelManager:
             fig.update_layout(xaxis_title='', yaxis_title='')
         elif (ndim == "2D") or (len(queries) < 4):
             model = self.load_model(model_name)
-            emb = model.encode(queries)
+            emb = model.encode(queries, **model_kwargs)
             if dim_method == "UMAP":
                 vis_dims = UMAP(n_components=2).fit_transform(emb)
             elif dim_method == "TSNE":
@@ -269,7 +302,7 @@ class ModelManager:
             fig.update_traces(marker=dict(size=12))
         else:
             model = self.load_model(model_name)
-            emb = model.encode(queries)
+            emb = model.encode(queries, **model_kwargs)
             if dim_method == "UMAP":
                 vis_dims = UMAP(n_components=3).fit_transform(emb)
             elif dim_method == "TSNE":
@@ -312,6 +345,13 @@ class ModelManager:
         from numpy.linalg import norm
         import plotly.graph_objects as go
 
+        model_kwargs = {}
+        if model_name == "text-embedding-004":
+            model_kwargs["google_task_type"] = "SEMANTIC_SIMILARITY"
+        # Cohere has no specific task type for STS
+        # elif model_name == "embed-english-v3.0":
+        #     model_kwargs["cohere_task_type"] =
+    
         model = self.load_model(model_name)
         # Compute cos sim all texts; Shape: [3, dim]
         emb0, emb1, emb2 = model.encode([txt0, txt1, txt2])

@@ -280,7 +280,8 @@ def build_side_by_side_ui_anon(models):
 # ⚔️ MTEB Arena: Retrieval 🔎
 ## 📜 Rules
 - Send any query to two anonymous models and vote which retrieves the better document.
-- You can choose a corpus for the models to retrieve from: Wikipedia or ArXiv.
+- You can choose a corpus for the models to retrieve from: [Wikipedia](https://huggingface.co/datasets/mteb/arena-wikipedia-7-15-24), [arXiv](https://huggingface.co/datasets/mteb/arena-arxiv-7-2-24) or [Stack Exchange](https://huggingface.co/datasets/mteb/arena-stackexchange).
+- Stack Exchange is currently in beta testing with limited models.
 
 ## 👇 Vote now!
 """
@@ -339,7 +340,7 @@ def build_side_by_side_ui_anon(models):
         )
         corpus = gr.Dropdown(
             label="Corpus",
-            choices=["wikipedia", "arxiv"], #, "stackexchange"
+            choices=["wikipedia", "arxiv", "stackexchange"],
             value="wikipedia",
             interactive=True,
             show_label=True,
@@ -355,12 +356,15 @@ def build_side_by_side_ui_anon(models):
 
     gr.Examples(
         examples=[
-            ["Which test seeks to answer the question whether machines can think?", "wikipedia"],
+            ["Which test was devised to determine whether robots can think?", "wikipedia"],
             ["I am looking for a paper to help me deal with data constraints as I scale up my language model.", "arxiv"],
-            ["Which planets in the solar system are most likely to be habitable?", "wikipedia"],
+            ["What's the purpose of `if __name__ == '__main__'`?", "stackexchange"],
+            ["Find me a planet near α 23h 06m 29.368s and δ −05° 02′ 29.04″ that could be habitable.", "wikipedia"],
             ["I am searching for a good and large-scale benchmark for testing the performance of text embeddings.", "arxiv"],
-            ["Who wrote about a guide that's more popular than the Encyclopedia Galactica?", "wikipedia"],
+            ["In English when to use –, — vs -?", "stackexchange"],
+            ["Who wrote about a guide more popular than the Encyclopedia Galactica?", "wikipedia"],
             ["Please find me the paper on training code large language models to follow instructions via git commits.", "arxiv"],
+            ["Why did the machines in The Matrix keep humans around?", "stackexchange"],
         ],
         inputs=[textbox, corpus],
     )
@@ -483,7 +487,7 @@ def build_side_by_side_ui_named(models):
 
 ## 📜 Rules
 - Send any query to two anonymous models and vote which retrieves the better document.
-- You can choose a corpus for the models to retrieve from: Wikipedia or ArXiv.
+- You can choose a corpus for the models to retrieve from: [Wikipedia](https://huggingface.co/datasets/mteb/arena-wikipedia-7-15-24) or [arXiv](https://huggingface.co/datasets/mteb/arena-arxiv-7-2-24). ([Stack Exchange](https://huggingface.co/datasets/mteb/arena-stackexchange) coming soon!)
 
 ## 👇 Choose two models & vote now!
 """
@@ -554,7 +558,7 @@ def build_side_by_side_ui_named(models):
         )
         corpus = gr.Dropdown(
             label="Corpus",
-            choices=["wikipedia", "arxiv"],
+            choices=["wikipedia", "arxiv"], # "stackexchange"
             value="wikipedia",
             interactive=True,
             show_label=True,
@@ -570,12 +574,15 @@ def build_side_by_side_ui_named(models):
 
     gr.Examples(
         examples=[
-            ["Which test seeks to answer the question whether machines can think?", "wikipedia"],
+            ["Which test was devised to determine whether robots can think?", "wikipedia"],
             ["I am looking for a paper to help me deal with data constraints as I scale up my language model.", "arxiv"],
-            ["Which planets in the solar system are most likely to be habitable?", "wikipedia"],
+#            ["What's the purpose of `if __name__ == '__main__'`?", "stackexchange"],
+            ["Find me a planet near α 23h 06m 29.368s and δ −05° 02′ 29.04″ that could be habitable.", "wikipedia"],
             ["I am searching for a good and large-scale benchmark for testing the performance of text embeddings.", "arxiv"],
-            ["Who wrote about a guide that's more popular than the Encyclopedia Galactica?", "wikipedia"],
+#            ["In English when to use –, — vs -?", "stackexchange"],
+            ["Who wrote about a guide more popular than the Encyclopedia Galactica?", "wikipedia"],
             ["Please find me the paper on training code large language models to follow instructions via git commits.", "arxiv"],
+#            ["Why did the machines in The Matrix keep humans around?", "stackexchange"],
         ],
         inputs=[textbox, corpus],
     )
@@ -737,7 +744,7 @@ def build_single_model_ui(models):
         )
         corpus = gr.Dropdown(
             label="Corpus",
-            choices=["wikipedia", "arxiv"],
+            choices=["wikipedia", "arxiv"],#, "stackexchange"],
             value="wikipedia",
             interactive=True,
             show_label=True,
@@ -755,12 +762,15 @@ def build_single_model_ui(models):
 
     gr.Examples(
         examples=[
-            ["Which test seeks to answer the question whether machines can think?", "wikipedia"],
+            ["Which test was devised to determine whether robots can think?", "wikipedia"],
             ["I am looking for a paper to help me deal with data constraints as I scale up my language model.", "arxiv"],
-            ["Which planets in the solar system are most likely to be habitable?", "wikipedia"],
+#            ["What's the purpose of `if __name__ == '__main__'`?", "stackexchange"],
+            ["Find me a planet near α 23h 06m 29.368s and δ −05° 02′ 29.04″ that could be habitable.", "wikipedia"],
             ["I am searching for a good and large-scale benchmark for testing the performance of text embeddings.", "arxiv"],
-            ["Who wrote about a guide that's more popular than the Encyclopedia Galactica?", "wikipedia"],
+#            ["In English when to use –, — vs -?", "stackexchange"],
+            ["Who wrote about a guide more popular than the Encyclopedia Galactica?", "wikipedia"],
             ["Please find me the paper on training code large language models to follow instructions via git commits.", "arxiv"],
+#            ["Why did the machines in The Matrix keep humans around?", "stackexchange"],
         ],
         inputs=[textbox, corpus],
     )
@@ -918,8 +928,8 @@ def clustering_side_by_side(gen_func, state0, state1, txt, ncluster, ndim, dim_m
     generated_image0, generated_image1, model_name0, model_name1 = gen_func(state0.prompts, model_name0, model_name1, ncluster, ndim=ndim.split(" ")[0], dim_method=dim_method, clustering_method=clustering_method)
     state0.model_name, state1.model_name = model_name0, model_name1
     
-    yield state0, state1, generated_image0, generated_image1, \
-        gr.Markdown(f"### Model A: {model_name0}", visible=False), gr.Markdown(f"### Model B: {model_name1}", visible=False), None
+    yield state0, state1, generated_image0, generated_image1, None, \
+        gr.Markdown(f"### Model A: {model_name0}", visible=False), gr.Markdown(f"### Model B: {model_name1}", visible=False)
     
     finish_tstamp = time.time()
     
@@ -1084,10 +1094,10 @@ def build_side_by_side_ui_anon_clustering(models):
     gr.Examples(
         examples=[
             ["Shanghai<|SEP|>Beijing<|SEP|>Shenzhen<|SEP|>Hangzhou<|SEP|>Seattle<|SEP|>Boston<|SEP|>New York<|SEP|>San Francisco", 2],
+            ["Pikachu<|SEP|>Darth Vader<|SEP|>Yoda<|SEP|>Squirtle<|SEP|>Gandalf<|SEP|>Legolas<|SEP|>Mickey Mouse<|SEP|>Donald Duck<|SEP|>Charizard", 4],
             # https://www.reddit.com/r/Bitcoin/top/?t=all ; https://www.reddit.com/r/longevity/top/?t=all ; https://www.reddit.com/r/MachineLearning/top/?t=all
             ["It's official! 1 Bitcoin = $10,000 USD<|SEP|>Everyone who's trading BTC right now<|SEP|>Age reversal not only achievable but also possibly imminent: Retro Biosciences<|SEP|>MicroRNA regrows 90% of lost hair, study finds<|SEP|>Researchers have found that people who live beyond 105 years tend to have a unique genetic background that makes their bodies more efficient at repairing DNA, according to a new study.<|SEP|>[D] A Demo from 1993 of 32-year-old Yann LeCun showing off the World's first Convolutional Network for Text Recognition<|SEP|>Speech-to-speech translation for a real-world unwritten language<|SEP|>Seeking the Best Embedding Model: Experiences with bge & GritLM?", 3],
             ["If someone online buys something off of my Amazon wish list, do they get my full name and address?<|SEP|>Package \"In Transit\" over a week. No scheduled delivery date, no locations. What's up?<|SEP|>Can Amazon gift cards replace a debit card?<|SEP|>Homesick GWS star Cameron McCarthy on road to recovery<|SEP|>Accidently ordered 2 of an item, how do I only return 1? For free?<|SEP|>Need help ASAP, someone ordering in my account<|SEP|>So who's everyone tipping for Round 1?", 2],
-            ["Pikachu<|SEP|>Charmander<|SEP|>Squirtle<|SEP|>Chikorita<|SEP|>Electabuzz<|SEP|>Ponyta<|SEP|>Poliwhirl<|SEP|>Sunflora<|SEP|>Mareep<|SEP|>Slugma<|SEP|>Staryu<|SEP|>Grovyle<|SEP|>Bellossom<|SEP|>Voltorb", 4],
             ["which airlines fly from boston to washington dc via other cities<|SEP|>show me the airlines that fly between toronto and denver<|SEP|>show me round trip first class tickets from new york to miami<|SEP|>i'd like the lowest fare from denver to pittsburgh<|SEP|>show me a list of ground transportation at boston airport<|SEP|>show me boston ground transportation<|SEP|>of all airlines which airline has the most arrivals in atlanta<|SEP|>what ground transportation is available in boston<|SEP|>i would like your rates between atlanta and boston on september third<|SEP|>which airlines fly between boston and pittsburgh", 2],
         ],
         inputs=[textbox, ncluster],
@@ -1110,7 +1120,7 @@ def build_side_by_side_ui_anon_clustering(models):
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, ncluster, dim_btn, dim_method, clustering_method, model_selector_left, model_selector_right],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
+        outputs=[state0, state1, chatbot_left, chatbot_right, textbox, model_selector_left, model_selector_right],
         api_name="textbox_side_by_side"
     ).then(
         enable_btns_clustering,
@@ -1136,7 +1146,7 @@ def build_side_by_side_ui_anon_clustering(models):
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, ncluster, dim_btn, dim_method, clustering_method, model_selector_left, model_selector_right],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
+        outputs=[state0, state1, chatbot_left, chatbot_right, textbox, model_selector_left, model_selector_right],
         api_name="submit_btn_anon"
     ).then(
         enable_btns_clustering,
@@ -1155,7 +1165,7 @@ def build_side_by_side_ui_anon_clustering(models):
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, ncluster, dim_btn, dim_method, clustering_method, model_selector_left, model_selector_right],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
+        outputs=[state0, state1, chatbot_left, chatbot_right, textbox, model_selector_left, model_selector_right],
         api_name="send_btn_anon"
     ).then(
         enable_btns_clustering,
@@ -1308,10 +1318,10 @@ def build_side_by_side_ui_named_clustering(models):
     gr.Examples(
         examples=[
             ["Shanghai<|SEP|>Beijing<|SEP|>Shenzhen<|SEP|>Hangzhou<|SEP|>Seattle<|SEP|>Boston<|SEP|>New York<|SEP|>San Francisco", 2],
+            ["Pikachu<|SEP|>Darth Vader<|SEP|>Yoda<|SEP|>Squirtle<|SEP|>Gandalf<|SEP|>Legolas<|SEP|>Mickey Mouse<|SEP|>Donald Duck<|SEP|>Charizard", 4],
             # https://www.reddit.com/r/Bitcoin/top/?t=all ; https://www.reddit.com/r/longevity/top/?t=all ; https://www.reddit.com/r/MachineLearning/top/?t=all
             ["It's official! 1 Bitcoin = $10,000 USD<|SEP|>Everyone who's trading BTC right now<|SEP|>Age reversal not only achievable but also possibly imminent: Retro Biosciences<|SEP|>MicroRNA regrows 90% of lost hair, study finds<|SEP|>Researchers have found that people who live beyond 105 years tend to have a unique genetic background that makes their bodies more efficient at repairing DNA, according to a new study.<|SEP|>[D] A Demo from 1993 of 32-year-old Yann LeCun showing off the World's first Convolutional Network for Text Recognition<|SEP|>Speech-to-speech translation for a real-world unwritten language<|SEP|>Seeking the Best Embedding Model: Experiences with bge & GritLM?", 3],
             ["If someone online buys something off of my Amazon wish list, do they get my full name and address?<|SEP|>Package \"In Transit\" over a week. No scheduled delivery date, no locations. What's up?<|SEP|>Can Amazon gift cards replace a debit card?<|SEP|>Homesick GWS star Cameron McCarthy on road to recovery<|SEP|>Accidently ordered 2 of an item, how do I only return 1? For free?<|SEP|>Need help ASAP, someone ordering in my account<|SEP|>So who's everyone tipping for Round 1?", 2],
-            ["Pikachu<|SEP|>Charmander<|SEP|>Squirtle<|SEP|>Chikorita<|SEP|>Electabuzz<|SEP|>Ponyta<|SEP|>Poliwhirl<|SEP|>Sunflora<|SEP|>Mareep<|SEP|>Slugma<|SEP|>Staryu<|SEP|>Grovyle<|SEP|>Bellossom<|SEP|>Voltorb", 4],
             ["which airlines fly from boston to washington dc via other cities<|SEP|>show me the airlines that fly between toronto and denver<|SEP|>show me round trip first class tickets from new york to miami<|SEP|>i'd like the lowest fare from denver to pittsburgh<|SEP|>show me a list of ground transportation at boston airport<|SEP|>show me boston ground transportation<|SEP|>of all airlines which airline has the most arrivals in atlanta<|SEP|>what ground transportation is available in boston<|SEP|>i would like your rates between atlanta and boston on september third<|SEP|>which airlines fly between boston and pittsburgh", 2],
         ],
         inputs=[textbox, ncluster],
@@ -1334,7 +1344,7 @@ def build_side_by_side_ui_named_clustering(models):
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, ncluster, dim_btn, dim_method, clustering_method, model_selector_left, model_selector_right],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
+        outputs=[state0, state1, chatbot_left, chatbot_right, textbox],
         api_name="textbox_side_by_side"
     ).then(
         enable_btns_clustering,
@@ -1360,7 +1370,7 @@ def build_side_by_side_ui_named_clustering(models):
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, ncluster, dim_btn, dim_method, clustering_method, model_selector_left, model_selector_right],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
+        outputs=[state0, state1, chatbot_left, chatbot_right, textbox],
         api_name="textbox_side_by_side"
     ).then(
         enable_btns_clustering,
@@ -1379,7 +1389,7 @@ def build_side_by_side_ui_named_clustering(models):
     ).then(
         gen_func,
         inputs=[state0, state1, textbox, ncluster, dim_btn, dim_method, clustering_method, model_selector_left, model_selector_right],
-        outputs=[state0, state1, chatbot_left, chatbot_right, model_selector_left, model_selector_right, textbox],
+        outputs=[state0, state1, chatbot_left, chatbot_right, textbox],
         api_name="send_side_by_side"
     ).then(
         enable_btns_clustering,
@@ -1390,7 +1400,7 @@ def build_side_by_side_ui_named_clustering(models):
     clear_btn.click(
         clear_history_side_by_side_anon_clustering,
         inputs=None,
-        outputs=[state0, state1, textbox, ncluster, chatbot_left, chatbot_right, model_selector_left, model_selector_right],
+        outputs=[state0, state1, textbox, ncluster, chatbot_left, chatbot_right],
         api_name="clear_btn_anon"
     ).then(
         disable_buttons_side_by_side,
@@ -1501,10 +1511,10 @@ def build_single_model_ui_clustering(models):
     gr.Examples(
         examples=[
             ["Shanghai<|SEP|>Beijing<|SEP|>Shenzhen<|SEP|>Hangzhou<|SEP|>Seattle<|SEP|>Boston<|SEP|>New York<|SEP|>San Francisco", 2],
+            ["Pikachu<|SEP|>Darth Vader<|SEP|>Yoda<|SEP|>Squirtle<|SEP|>Gandalf<|SEP|>Legolas<|SEP|>Mickey Mouse<|SEP|>Donald Duck<|SEP|>Charizard", 4],
             # https://www.reddit.com/r/Bitcoin/top/?t=all ; https://www.reddit.com/r/longevity/top/?t=all ; https://www.reddit.com/r/MachineLearning/top/?t=all
             ["It's official! 1 Bitcoin = $10,000 USD<|SEP|>Everyone who's trading BTC right now<|SEP|>Age reversal not only achievable but also possibly imminent: Retro Biosciences<|SEP|>MicroRNA regrows 90% of lost hair, study finds<|SEP|>Researchers have found that people who live beyond 105 years tend to have a unique genetic background that makes their bodies more efficient at repairing DNA, according to a new study.<|SEP|>[D] A Demo from 1993 of 32-year-old Yann LeCun showing off the World's first Convolutional Network for Text Recognition<|SEP|>Speech-to-speech translation for a real-world unwritten language<|SEP|>Seeking the Best Embedding Model: Experiences with bge & GritLM?", 3],
             ["If someone online buys something off of my Amazon wish list, do they get my full name and address?<|SEP|>Package \"In Transit\" over a week. No scheduled delivery date, no locations. What's up?<|SEP|>Can Amazon gift cards replace a debit card?<|SEP|>Homesick GWS star Cameron McCarthy on road to recovery<|SEP|>Accidently ordered 2 of an item, how do I only return 1? For free?<|SEP|>Need help ASAP, someone ordering in my account<|SEP|>So who's everyone tipping for Round 1?", 2],
-            ["Pikachu<|SEP|>Charmander<|SEP|>Squirtle<|SEP|>Chikorita<|SEP|>Electabuzz<|SEP|>Ponyta<|SEP|>Poliwhirl<|SEP|>Sunflora<|SEP|>Mareep<|SEP|>Slugma<|SEP|>Staryu<|SEP|>Grovyle<|SEP|>Bellossom<|SEP|>Voltorb", 4],
             ["which airlines fly from boston to washington dc via other cities<|SEP|>show me the airlines that fly between toronto and denver<|SEP|>show me round trip first class tickets from new york to miami<|SEP|>i'd like the lowest fare from denver to pittsburgh<|SEP|>show me a list of ground transportation at boston airport<|SEP|>show me boston ground transportation<|SEP|>of all airlines which airline has the most arrivals in atlanta<|SEP|>what ground transportation is available in boston<|SEP|>i would like your rates between atlanta and boston on september third<|SEP|>which airlines fly between boston and pittsburgh", 2],
         ],
         inputs=[textbox, ncluster],
@@ -1801,10 +1811,10 @@ def build_side_by_side_ui_anon_sts(models):
     gr.Examples(
         examples=[
             ["hello", "good morning", "早上好"],
-            ["The dog likes to catch baseballs.", "a puppy about to jump to intercept a yellow ball", "The dog is trying to catch a tennis ball."],
-            ["A spaceship is flying very fast.", "The Millenium Falcon travelling in hyperspace", "A spaceship is landing very fast."],
+            ["She saw a bright star in the sky.", "She saw a bright star at the awards show.", "She observed a luminous celestial object."],
             ["People are shopping.", "Numerous customers browsing for produce in a market", "People are showering."],
             ["There's a red bus making a left turn into a traffic circle that has a sprinkler system.", "A red bus making a turn", "A red bus backing up into a spot"],
+            ["She trained a neural network to recognize faces.", "She developed an AI to identify human features.", "She trained a new recruit to recognize faces."],
         ],
         inputs=[textbox0, textbox1, textbox2],
     )
@@ -1967,10 +1977,10 @@ def build_side_by_side_ui_named_sts(models):
     gr.Examples(
         examples=[
             ["hello", "good morning", "早上好"],
-            ["The dog likes to catch baseballs.", "a puppy about to jump to intercept a yellow ball", "The dog is trying to catch a tennis ball."],
-            ["A spaceship is flying very fast.", "The Millenium Falcon travelling in hyperspace", "A spaceship is landing very fast."],
+            ["She saw a bright star in the sky.", "She saw a bright star at the awards show.", "She observed a luminous celestial object."],
             ["People are shopping.", "Numerous customers browsing for produce in a market", "People are showering."],
             ["There's a red bus making a left turn into a traffic circle that has a sprinkler system.", "A red bus making a turn", "A red bus backing up into a spot"],
+            ["She trained a neural network to recognize faces.", "She developed an AI to identify human features.", "She trained a new recruit to recognize faces."],
         ],
         inputs=[textbox0, textbox1, textbox2],
     )
@@ -2106,10 +2116,10 @@ def build_single_model_ui_sts(models):
     gr.Examples(
         examples=[
             ["hello", "good morning", "早上好"],
-            ["The dog likes to catch baseballs.", "a puppy about to jump to intercept a yellow ball", "The dog is trying to catch a tennis ball."],
-            ["A spaceship is flying very fast.", "The Millenium Falcon travelling in hyperspace", "A spaceship is landing very fast."],
+            ["She saw a bright star in the sky.", "She saw a bright star at the awards show.", "She observed a luminous celestial object."],
             ["People are shopping.", "Numerous customers browsing for produce in a market", "People are showering."],
             ["There's a red bus making a left turn into a traffic circle that has a sprinkler system.", "A red bus making a turn", "A red bus backing up into a spot"],
+            ["She trained a neural network to recognize faces.", "She developed an AI to identify human features.", "She trained a new recruit to recognize faces."],
         ],
         inputs=[textbox0, textbox1, textbox2],
     )

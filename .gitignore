@@ -5,3 +5,5 @@ results_dataset_to_upload
 *.pyc
 tmp*
 slurm_jobs
+emb_*
+scripts/arxiv_samples.py
