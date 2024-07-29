@@ -174,7 +174,7 @@ class ModelManager:
                 sampled_items = []
                 for category in sampled_categories:
                     # Add all items from the selected category
-                    sampled_items.extend(self.CLUSTERING_CATEGORIES[category])
+                    sampled_items.extend(random.sample(self.CLUSTERING_CATEGORIES[category], random.randomint(2, min(self.CLUSTERING_CATEGORIES[category], 8))))
                 
                 self.loaded_samples["clustering"].append((sampled_items, n_categories))
         
