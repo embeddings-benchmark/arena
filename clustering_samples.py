@@ -5,7 +5,7 @@ CLUSTERING_CATEGORIES = {
   "musical_instruments": ["guitar", "piano", "drums"],
   "sports": ["soccer", "basketball", "tennis"],
   "colors": ["red", "blue", "green"],
-  "planets": ["Mars", "Venus", "Jupiter"],
+  "planets": ["Mars", "Venus", "Jupiter", "Neptune"],
   "emotions": ["happiness", "anger", "sadness"],
   "seasons": ["spring", "summer", "winter"],
   "elements": ["oxygen", "carbon", "hydrogen"],

@@ -167,7 +167,7 @@ class ModelManager:
     def clustering_draw(self):
         if "clustering" not in self.loaded_samples:
             self.loaded_samples["clustering"] = []
-            for i in range(1000):
+            for i in range(10000):
                 # Select 2-5 categories 
                 n_categories = random.randint(2, 5)
                 sampled_categories = random.sample(list(self.CLUSTERING_CATEGORIES.keys()), n_categories)
