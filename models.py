@@ -64,6 +64,13 @@ class ModelManager:
             self.load_bm25_index("BM25", "wikipedia")
             self.load_bm25_index("BM25", "arxiv")
             self.load_bm25_index("BM25", "stackexchange")
+            # Load GCP indices
+            if use_gcp_index:
+                for model_name in self.models_retrieval:
+                    if model_name == "BM25": continue
+                    self.load_gcp_index(model_name, "wikipedia")
+                    self.load_gcp_index(model_name, "arxiv")
+                    self.load_gcp_index(model_name, "stackexchange")
             # Load random samples
             self.retrieve_draw()
             self.clustering_draw()
@@ -247,12 +254,12 @@ class ModelManager:
             model_names = [model_A, model_B]
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [executor.submit(self.clustering, prompt, model, ncluster, ndim, dim_method, clustering_method) for model in model_names]
+            futures = [executor.submit(self.clustering, prompt, model, ncluster, ndim, dim_method, clustering_method, False) for model in model_names]
             results = [future.result() for future in futures]
         return results[0], results[1], model_names[0], model_names[1]
 
     @spaces.GPU(duration=120)
-    def clustering(self, queries, model_name, ncluster=1, ndim="3D", dim_method="PCA", clustering_method="KMeans"):
+    def clustering(self, queries, model_name, ncluster=1, ndim="3D", dim_method="PCA", clustering_method="KMeans", single_ui=True):
         """
         Sources:
         - https://www.gradio.app/guides/plot-component-for-maps
@@ -272,10 +279,12 @@ class ModelManager:
         elif model_name == "embed-english-v3.0":
             model_kwargs["cohere_task_type"] = "clustering"
 
+        cutoff = 178 if single_ui else 88
+
         if len(queries) == 1:
             # No need to do PCA; just return a 1D plot
             df = pd.DataFrame({"txt": queries, "x": [0]})
-            df["txt"] = df["txt"].str[:90]
+            df["txt"] = df["txt"].str[:cutoff]
             fig = px.scatter(df, x="x", template="plotly_dark", hover_name="txt")
             fig.update_layout(xaxis_title='', yaxis_title='')
         elif (ndim == "2D") or (len(queries) < 4):
@@ -294,7 +303,7 @@ class ModelManager:
                 else:
                     data["cluster"] = KMeans(n_clusters=ncluster, n_init='auto', random_state=0).fit_predict(emb).tolist()
             df = pd.DataFrame(data)
-            df["txt"] = df["txt"].str[:90]
+            df["txt"] = df["txt"].str[:cutoff]
             if ncluster > 1:
                 fig = px.scatter(df, x="x", y="y", color="cluster", template="plotly_dark", hover_name="txt")
             else:
@@ -316,7 +325,7 @@ class ModelManager:
                 else:
                     data["cluster"] = KMeans(n_clusters=ncluster, n_init='auto', random_state=0).fit_predict(emb).tolist()
             df = pd.DataFrame(data)
-            df["txt"] = df["txt"].str[:90]
+            df["txt"] = df["txt"].str[:cutoff]
             if ncluster > 1:
                 fig = px.scatter_3d(df, x="x", y="y", z="z", color="cluster", template="plotly_dark", hover_name="txt")
             else:
