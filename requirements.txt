@@ -4,7 +4,7 @@ einops
 fire
 # Required by Alibaba-NLP/gte-Qwen2-7B-instruct
 # unfort can only be installed if GPU available which is not the case when using Spaces Zero GPU
-# flash_attn
+flash_attn
 google-cloud-aiplatform
 gradio
 gritlm

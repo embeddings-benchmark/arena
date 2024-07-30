@@ -179,11 +179,13 @@ class ModelManager:
             for i in range(10000):
                 # Select 2-5 categories 
                 n_categories = random.randint(2, 5)
-                sampled_categories = random.sample(list(self.CLUSTERING_CATEGORIES.keys()), n_categories)
+                sampled_categories = random.sample(list(CLUSTERING_CATEGORIES.keys()), n_categories)
                 sampled_items = []
                 for category in sampled_categories:
                     # Add all items from the selected category
-                    sampled_items.extend(random.sample(self.CLUSTERING_CATEGORIES[category], random.randomint(2, min(self.CLUSTERING_CATEGORIES[category], 8))))
+                    #sampled_items.extend(random.sample(CLUSTERING_CATEGORIES[category], random.randomint(2, min(CLUSTERING_CATEGORIES[category], 8))))
+                    # randomint does not exist; fix
+                    sampled_items.extend(random.sample(CLUSTERING_CATEGORIES[category], random.randint(2, min(len(CLUSTERING_CATEGORIES[category]), 8))))
                 
                 self.loaded_samples["clustering"].append((sampled_items, n_categories))
         
@@ -256,7 +258,6 @@ class ModelManager:
     def clustering_parallel(self, prompt, model_A, model_B, ncluster=1, ndim="3D", dim_method="PCA", clustering_method="KMeans"):
         if model_A == "" and model_B == "":
             model_names = random.sample(self.models_clustering, 2)
-            model_names = ["intfloat/multilingual-e5-large-instruct", random.choice(self.models_clustering)]
         else:
             model_names = [model_A, model_B]
 
