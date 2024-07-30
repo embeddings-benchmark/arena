@@ -180,6 +180,19 @@ model_meta:
     mteb_retrieval: 53.01
     mteb_sts: 81.94
     mteb_clustering: 43.93
+  nomic-ai/nomic-embed-text-v1:
+    link: https://huggingface.co/nomic-ai/nomic-embed-text-v1
+    revision: 0759316f275aa0cb93a5b830973843ca66babcf5
+    desc: nomic-embed-text-v1 by nomic.ai
+    seq_len: 8192
+    size: 137
+    dim: 768
+    license: Apache 2.0
+    organization: nomic.ai
+    mteb_overall: 62.39
+    mteb_retrieval: 52.81
+    mteb_sts: 82.06
+    mteb_clustering: 43.91
   McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised:
     link: https://huggingface.co/McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised
     revision: baa8ebf04a1c2500e61288e7dad65e8ae42601a7

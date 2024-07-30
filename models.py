@@ -231,7 +231,7 @@ class ModelManager:
                 return [[query, corpus_format.format(title=docs[0][0]["title"], text=docs[0][0]["text"])]]
             
         model = self.load_model(model_name)
-        kwargs = {} if self.use_gcp_index else {convert_to_tensor: True}
+        kwargs = {} if self.use_gcp_index else {"convert_to_tensor": True}
         if f"instruction_query_{corpus}" in self.model_meta[model_name]:
             kwargs["instruction"] = self.model_meta[model_name][f"instruction_query_{corpus}"]
             logger.info(f"Using instruction: {kwargs['instruction']}")
@@ -284,11 +284,13 @@ class ModelManager:
         from sklearn.manifold import TSNE
         from umap import UMAP
 
-        model_kwargs = {}
+        model_kwargs = {} if self.use_gcp_index else {"convert_to_tensor": True}
         if model_name == "text-embedding-004":
             model_kwargs["google_task_type"] = "CLUSTERING"
         elif model_name == "embed-english-v3.0":
             model_kwargs["cohere_task_type"] = "clustering"
+        elif model_name in ["nomic-ai/nomic-embed-text-v1.5", "nomic-ai/nomic-embed-text-v1"]:
+            model_kwargs["input_type"] = "clustering"
 
         cutoff = 178 if single_ui else 88
 
@@ -365,16 +367,18 @@ class ModelManager:
         from numpy.linalg import norm
         import plotly.graph_objects as go
 
-        model_kwargs = {}
+        model_kwargs = {} if self.use_gcp_index else {"convert_to_tensor": True}
         if model_name == "text-embedding-004":
             model_kwargs["google_task_type"] = "SEMANTIC_SIMILARITY"
+        elif model_name in ["nomic-ai/nomic-embed-text-v1.5", "nomic-ai/nomic-embed-text-v1"]:
+            model_kwargs["input_type"] = "classification"
         # Cohere has no specific task type for STS
         # elif model_name == "embed-english-v3.0":
         #     model_kwargs["cohere_task_type"] =
     
         model = self.load_model(model_name)
         # Compute cos sim all texts; Shape: [3, dim]
-        emb0, emb1, emb2 = model.encode([txt0, txt1, txt2])
+        emb0, emb1, emb2 = model.encode([txt0, txt1, txt2], **model_kwargs)
 
         cos_sim_01 = (emb0 @ emb1.T) / (norm(emb0)*norm(emb1))
         cos_sim_02 = (emb0 @ emb2.T) / (norm(emb0)*norm(emb2))
