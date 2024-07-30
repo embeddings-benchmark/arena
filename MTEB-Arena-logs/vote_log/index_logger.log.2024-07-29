@@ -47660,3 +47660,275 @@ xpected 5 arguments for function functools.partial(<function vote_last_response_
 2024-07-30 21:19:23 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
 2024-07-30 21:25:44 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
 2024-07-30 21:25:44 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:34:17 | ERROR | stderr | 
+2024-07-30 21:34:17 | ERROR | stderr | Split strings:   0%|                                                          | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:34:17 | ERROR | stderr | 
+2024-07-30 21:34:17 | ERROR | stderr | 
+2024-07-30 21:34:17 | ERROR | stderr | Stem Tokens:   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:34:17 | ERROR | stderr | 
+2024-07-30 21:34:17 | ERROR | stderr | 
+2024-07-30 21:34:17 | ERROR | stderr | BM25S Retrieve:   0%|                                                         | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:34:17 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:34:17 | ERROR | stderr | BM25S Retrieve: 100%|█████████████████████████████████████████████████| 1/1 [00:00<00:00,  6.10it/s]
+2024-07-30 21:34:17 | ERROR | stderr | 
+2024-07-30 21:34:43 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:36:07 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:36:30 | ERROR | stderr | 
+2024-07-30 21:36:30 | ERROR | stderr | Split strings:   0%|                                                          | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:36:30 | ERROR | stderr | 
+2024-07-30 21:36:30 | ERROR | stderr | 
+2024-07-30 21:36:30 | ERROR | stderr | Stem Tokens:   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:36:30 | ERROR | stderr | 
+2024-07-30 21:36:30 | ERROR | stderr | 
+2024-07-30 21:36:30 | ERROR | stderr | BM25S Retrieve:   0%|                                                         | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:36:30 | ERROR | stderr | 
+2024-07-30 21:36:30 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:38:06 | ERROR | stderr | 
+2024-07-30 21:38:06 | ERROR | stderr | Split strings:   0%|                                                          | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:38:06 | ERROR | stderr | 
+2024-07-30 21:38:06 | ERROR | stderr | 
+2024-07-30 21:38:06 | ERROR | stderr | Stem Tokens:   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:38:06 | ERROR | stderr | 
+2024-07-30 21:38:06 | ERROR | stderr | 
+2024-07-30 21:38:06 | ERROR | stderr | BM25S Retrieve:   0%|                                                         | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:38:06 | ERROR | stderr | 
+2024-07-30 21:38:12 | ERROR | stderr | 
+2024-07-30 21:38:12 | ERROR | stderr | Split strings:   0%|                                                          | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:38:12 | ERROR | stderr | 
+2024-07-30 21:38:12 | ERROR | stderr | 
+2024-07-30 21:38:12 | ERROR | stderr | Stem Tokens:   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:38:12 | ERROR | stderr | 
+2024-07-30 21:38:12 | ERROR | stderr | 
+2024-07-30 21:38:12 | ERROR | stderr | BM25S Retrieve:   0%|                                                         | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:38:12 | ERROR | stderr | 
+2024-07-30 21:43:55 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:48:09 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:52:25 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:53:53 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:00:06 | ERROR | stderr | 
+2024-07-30 22:00:06 | ERROR | stderr | Split strings:   0%|                                                          | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:00:06 | ERROR | stderr | 
+2024-07-30 22:00:06 | ERROR | stderr | 
+2024-07-30 22:00:06 | ERROR | stderr | Stem Tokens:   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:00:06 | ERROR | stderr | 
+2024-07-30 22:00:06 | ERROR | stderr | 
+2024-07-30 22:00:06 | ERROR | stderr | BM25S Retrieve:   0%|                                                         | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:00:06 | ERROR | stderr | 
+2024-07-30 22:00:06 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:00:52 | ERROR | stderr | 
+2024-07-30 22:00:52 | ERROR | stderr | Split strings:   0%|                                                          | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:00:52 | ERROR | stderr | 
+2024-07-30 22:00:52 | ERROR | stderr | 
+2024-07-30 22:00:52 | ERROR | stderr | Stem Tokens:   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:00:52 | ERROR | stderr | 
+2024-07-30 22:00:52 | ERROR | stderr | 
+2024-07-30 22:00:52 | ERROR | stderr | BM25S Retrieve:   0%|                                                         | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:00:52 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:00:52 | ERROR | stderr | 
+2024-07-30 22:03:15 | ERROR | stderr | 
+2024-07-30 22:03:15 | ERROR | stderr | Split strings:   0%|                                                          | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:03:15 | ERROR | stderr | 
+2024-07-30 22:03:15 | ERROR | stderr | 
+2024-07-30 22:03:15 | ERROR | stderr | Stem Tokens:   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:03:15 | ERROR | stderr | 
+2024-07-30 22:03:15 | ERROR | stderr | 
+2024-07-30 22:03:15 | ERROR | stderr | BM25S Retrieve:   0%|                                                         | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:03:15 | ERROR | stderr | 
+2024-07-30 22:03:26 | ERROR | stderr | 
+2024-07-30 22:03:26 | ERROR | stderr | Split strings:   0%|                                                          | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:03:26 | ERROR | stderr | 
+2024-07-30 22:03:26 | ERROR | stderr | 
+2024-07-30 22:03:26 | ERROR | stderr | Stem Tokens:   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:03:26 | ERROR | stderr | 
+2024-07-30 22:03:26 | ERROR | stderr | 
+2024-07-30 22:03:26 | ERROR | stderr | BM25S Retrieve:   0%|                                                         | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:03:26 | ERROR | stderr | 
+2024-07-30 22:09:38 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 22:09:38 | ERROR | stderr | 
+2024-07-30 22:09:38 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 22:09:38 | ERROR | stderr | 
+2024-07-30 22:09:54 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 22:09:54 | ERROR | stderr | 
+2024-07-30 22:09:54 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 22:09:54 | ERROR | stderr | 
+2024-07-30 22:10:07 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 22:10:07 | ERROR | stderr | 
+2024-07-30 22:10:07 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 22:10:07 | ERROR | stderr | 
+2024-07-30 22:10:21 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 22:10:21 | ERROR | stderr | 
+2024-07-30 22:10:21 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 22:10:21 | ERROR | stderr | 
+2024-07-30 22:10:33 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 22:10:33 | ERROR | stderr | 
+2024-07-30 22:10:33 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 22:10:33 | ERROR | stderr | 
+2024-07-30 22:10:46 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 22:10:46 | ERROR | stderr | 
+2024-07-30 22:10:46 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 22:10:46 | ERROR | stderr | 
+2024-07-30 22:11:13 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 22:11:13 | ERROR | stderr | 
+2024-07-30 22:11:13 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 22:11:13 | ERROR | stderr | 
+2024-07-30 22:11:18 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 22:11:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 22:11:18 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 22:11:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 22:11:18 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 22:11:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 22:11:18 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 22:11:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 22:11:18 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 22:11:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 22:11:18 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 22:11:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 22:11:18 | ERROR | stderr |     return await future
+2024-07-30 22:11:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 22:11:18 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 22:11:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 22:11:18 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 22:11:18 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 875, in check_input_clustering
+2024-07-30 22:11:18 | ERROR | stderr |     if not(txt): raise gr.Warning("Text cannot be empty.")
+2024-07-30 22:11:18 | ERROR | stderr | TypeError: exceptions must derive from BaseException
+2024-07-30 22:11:30 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 22:11:30 | ERROR | stderr | 
+2024-07-30 22:11:30 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 22:11:30 | ERROR | stderr | 
+2024-07-30 22:11:33 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 22:11:33 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 22:11:33 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 22:11:33 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 22:11:33 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 22:11:33 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 22:11:33 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 22:11:33 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 22:11:33 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 22:11:33 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 22:11:33 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 22:11:33 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 22:11:33 | ERROR | stderr |     return await future
+2024-07-30 22:11:33 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 22:11:33 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 22:11:33 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 22:11:33 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 22:11:33 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 875, in check_input_clustering
+2024-07-30 22:11:33 | ERROR | stderr |     if not(txt): raise gr.Warning("Text cannot be empty.")
+2024-07-30 22:11:33 | ERROR | stderr | TypeError: exceptions must derive from BaseException
+2024-07-30 22:11:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 22:11:43 | ERROR | stderr | 
+2024-07-30 22:11:43 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 22:11:43 | ERROR | stderr | 
+2024-07-30 22:11:53 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 22:11:53 | ERROR | stderr | 
+2024-07-30 22:11:53 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 22:11:53 | ERROR | stderr | 
+2024-07-30 22:12:49 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 22:12:49 | ERROR | stderr | 
+2024-07-30 22:12:49 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 22:12:49 | ERROR | stderr | 
+2024-07-30 22:21:45 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:21:45 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:22:58 | ERROR | stderr | 
+2024-07-30 22:22:58 | ERROR | stderr | Split strings:   0%|                                                                               | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:22:58 | ERROR | stderr | 
+2024-07-30 22:22:58 | ERROR | stderr | 
+2024-07-30 22:22:58 | ERROR | stderr | Stem Tokens:   0%|                                                                                 | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:22:58 | ERROR | stderr | 
+2024-07-30 22:22:58 | ERROR | stderr | 
+2024-07-30 22:22:58 | ERROR | stderr | BM25S Retrieve:   0%|                                                                              | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:22:58 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  3.39it/s]
+2024-07-30 22:22:58 | ERROR | stderr | 
+2024-07-30 22:23:22 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:23:35 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:24:57 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:25:18 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:26:05 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:26:39 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:27:26 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:27:26 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:28:07 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:40:15 | ERROR | stderr | 
+2024-07-30 22:40:15 | ERROR | stderr | Split strings:   0%|                                                                               | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:40:15 | ERROR | stderr | 
+2024-07-30 22:40:15 | ERROR | stderr | 
+2024-07-30 22:40:15 | ERROR | stderr | Stem Tokens:   0%|                                                                                 | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:40:15 | ERROR | stderr | 
+2024-07-30 22:40:15 | ERROR | stderr | 
+2024-07-30 22:40:15 | ERROR | stderr | BM25S Retrieve:   0%|                                                                              | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:40:15 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:40:15 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  3.89it/s]
+2024-07-30 22:40:15 | ERROR | stderr | 
+2024-07-30 22:41:37 | ERROR | stderr | 
+2024-07-30 22:41:37 | ERROR | stderr | Split strings:   0%|                                                                               | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:41:37 | ERROR | stderr | 
+2024-07-30 22:41:37 | ERROR | stderr | 
+2024-07-30 22:41:37 | ERROR | stderr | Stem Tokens:   0%|                                                                                 | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:41:37 | ERROR | stderr | 
+2024-07-30 22:41:37 | ERROR | stderr | 
+2024-07-30 22:41:37 | ERROR | stderr | BM25S Retrieve:   0%|                                                                              | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:41:37 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  8.39it/s]
+2024-07-30 22:41:37 | ERROR | stderr | 
+2024-07-30 22:42:56 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:45:51 | ERROR | stderr | 
+2024-07-30 22:45:51 | ERROR | stderr | Split strings:   0%|                                                                               | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:45:51 | ERROR | stderr | 
+2024-07-30 22:45:51 | ERROR | stderr | 
+2024-07-30 22:45:51 | ERROR | stderr | Stem Tokens:   0%|                                                                                 | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:45:51 | ERROR | stderr | 
+2024-07-30 22:45:51 | ERROR | stderr | 
+2024-07-30 22:45:51 | ERROR | stderr | BM25S Retrieve:   0%|                                                                              | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:45:51 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:45:51 | ERROR | stderr | 
+2024-07-30 22:49:18 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 22:49:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 22:49:18 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 22:49:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 22:49:18 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 22:49:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 22:49:18 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 22:49:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 22:49:18 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 22:49:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 22:49:18 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 22:49:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 22:49:18 | ERROR | stderr |     return await future
+2024-07-30 22:49:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 22:49:18 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 22:49:18 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 22:49:18 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 22:49:18 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 276, in check_input_retrieval
+2024-07-30 22:49:18 | ERROR | stderr |     if not(txt): raise gr.Warning("Query cannot be empty.")
+2024-07-30 22:49:18 | ERROR | stderr | TypeError: exceptions must derive from BaseException
+2024-07-30 22:55:17 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:55:51 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:55:51 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 22:56:04 | ERROR | stderr | 
+2024-07-30 22:56:04 | ERROR | stderr | Split strings:   0%|                                                                               | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:56:04 | ERROR | stderr | 
+2024-07-30 22:56:04 | ERROR | stderr | 
+2024-07-30 22:56:04 | ERROR | stderr | Stem Tokens:   0%|                                                                                 | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:56:04 | ERROR | stderr | 
+2024-07-30 22:56:04 | ERROR | stderr | 
+2024-07-30 22:56:04 | ERROR | stderr | BM25S Retrieve:   0%|                                                                              | 0/1 [00:00<?, ?it/s]
+2024-07-30 22:56:04 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.55it/s]
+2024-07-30 22:56:04 | ERROR | stderr | 
+2024-07-30 23:22:08 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 23:22:09 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 23:22:25 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 23:22:25 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 23:24:21 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 23:24:47 | ERROR | stderr | 
+2024-07-30 23:24:47 | ERROR | stderr | Split strings:   0%|                                                                               | 0/1 [00:00<?, ?it/s]
+2024-07-30 23:24:47 | ERROR | stderr | 
+2024-07-30 23:24:47 | ERROR | stderr | 
+2024-07-30 23:24:47 | ERROR | stderr | Stem Tokens:   0%|                                                                                 | 0/1 [00:00<?, ?it/s]
+2024-07-30 23:24:47 | ERROR | stderr | 
+2024-07-30 23:24:47 | ERROR | stderr | 
+2024-07-30 23:24:47 | ERROR | stderr | BM25S Retrieve:   0%|                                                                              | 0/1 [00:00<?, ?it/s]
+2024-07-30 23:24:47 | ERROR | stderr | 
+2024-07-30 23:25:02 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 23:25:35 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 23:25:58 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 23:27:50 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 23:27:51 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4

@@ -414,5 +414,21 @@
     "judge": "arena_user_",
     "anony": true,
     "tstamp": 1722367137.3081
+  },
+  {
+    "model_a": "text-embedding-3-large",
+    "model_b": "voyage-multilingual-2",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722372567.4089
+  },
+  {
+    "model_a": "voyage-multilingual-2",
+    "model_b": "jinaai/jina-embeddings-v2-base-en",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377608.5706
   }
 ]

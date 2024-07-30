@@ -15,6 +15,14 @@ def model_name_as_path(model_name) -> str:
     return model_name.replace("/", "__").replace(" ", "_")
 
 MODEL_TO_INDEX_MAP = {} # for debugging with custom index names
+# https://cloud.withgoogle.com/region-picker/; us-central-1 & us-east-1 are cheapest
+INDEX_TO_REGION_MAP = {
+    "index_stackexchange_Salesforce__SFR-Embedding-2_R": "us-central1",
+    "index_stackexchange_text-embedding-004": "us-central1",
+    "index_stackexchange_intfloat__e5-mistral-7b-instruct": "us-central1",
+    "index_stackexchange_voyage-multilingual-2": "us-central1",
+    "index_wikipedia_text-embedding-004": "us-central1",
+}
 
 class VertexIndex:
     """
@@ -26,20 +34,17 @@ class VertexIndex:
     MACHINE_TYPE = "e2-standard-16"
 
     def __init__(self, dim: int, model_name: str, model, corpus: str = "wikipedia", limit=None):
-        if model_name == "text-embedding-004" and corpus == "wikipedia":
-            region = "us-central1"
-            self.gcs_bucket_name = "mtebarenauscentral"
-        else:
-        # https://cloud.withgoogle.com/region-picker/; us-central-1 & us-east-1 are cheapest
+        model_path = model_name_as_path(model_name)
+        self.index_name = MODEL_TO_INDEX_MAP.get(model_name, f"index_{corpus}_{model_path}".replace(".", "_"))
+        region = INDEX_TO_REGION_MAP.get(self.index_name, "")
+        if region == "":
             region = "us-east1" if corpus in ["wikipedia", "stackexchange"] else "us-central1"
-            self.gcs_bucket_name = "mtebarena" if corpus in ["wikipedia", "stackexchange"] else "mtebarenauscentral"
+        self.gcs_bucket_name = "mtebarenauscentral" if region == "us-central1" else "mtebarena"
         self.gcs_bucket_uri = f"gs://{self.gcs_bucket_name}"
         aiplatform.init(project=self.PROJECT_ID, location=region)
         self.dim = dim
         self.model = model
-        model_path = model_name_as_path(model_name)
         # GCP filters do not allow `.` in the name, see _index_exists()
-        self.index_name = MODEL_TO_INDEX_MAP.get(model_name, f"index_{corpus}_{model_path}".replace(".", "_"))
         self.index_resource_name = None
         self.deploy_index_name = None
         self.endpoint_name = "endpoint" # Reuse endpoint across indexes

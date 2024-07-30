@@ -46,9 +46,12 @@ class ModelManager:
             "nomic-ai/nomic-embed-text-v1.5",
             "mixedbread-ai/mxbai-embed-large-v1",
             "jinaai/jina-embeddings-v2-base-en",
+            "Salesforce/SFR-Embedding-2_R",
             "GritLM/GritLM-7B",
             "BAAI/bge-large-en-v1.5",
             "intfloat/multilingual-e5-large-instruct",
+            "intfloat/e5-mistral-7b-instruct",
+            "voyage-multilingual-2",
             "BM25",
         ]
         self.models_sts = sorted(set(model_meta["model_meta"].keys()) - set(["BM25"]))
@@ -167,8 +170,8 @@ class ModelManager:
         if "retrieval" not in self.loaded_samples:
             self.loaded_samples["retrieval"] = {}
             from datasets import load_dataset
-            self.loaded_samples["retrieval"]["wikipedia"] = load_dataset("mteb/nq", "queries")["queries"]["text"]
-            self.loaded_samples["retrieval"]["arxiv"] = [x[k] for x in load_dataset("Muennighoff/arxiv_7_2_24_cites_queries", split="train") for k in ['query_1', 'query_2', 'query_3'] if x[k]]
+            self.loaded_samples["retrieval"]["wikipedia"] = load_dataset("mteb/nq", "queries", split="queries")["text"]
+            self.loaded_samples["retrieval"]["arxiv"] = load_dataset("mteb/arena-arxiv-7-2-24-samples", split="train")["query"]
             self.loaded_samples["retrieval"]["stackexchange"] = [x["query"] for sub_ds in load_dataset("colbertv2/lotte", "pooled", split=['search_dev', 'search_test']) for x in sub_ds]
         corpus = random.choice(["wikipedia", "arxiv", "stackexchange"])
         return random.choice(self.loaded_samples["retrieval"][corpus]), corpus

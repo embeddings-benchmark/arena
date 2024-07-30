@@ -494,5 +494,93 @@
     "judge": "arena_user_",
     "anony": true,
     "tstamp": 1722370311.0017
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "text-embedding-3-large",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377378.7801
+  },
+  {
+    "model_a": "BAAI/bge-large-en-v1.5",
+    "model_b": "intfloat/e5-mistral-7b-instruct",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377394.61
+  },
+  {
+    "model_a": "embed-english-v3.0",
+    "model_b": "intfloat/multilingual-e5-large-instruct",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377407.9489
+  },
+  {
+    "model_a": "voyage-multilingual-2",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377421.3814
+  },
+  {
+    "model_a": "nomic-ai/nomic-embed-text-v1.5",
+    "model_b": "text-embedding-3-large",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377433.317
+  },
+  {
+    "model_a": "mixedbread-ai/mxbai-embed-large-v1",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377446.2025
+  },
+  {
+    "model_a": "Alibaba-NLP/gte-Qwen2-7B-instruct",
+    "model_b": "text-embedding-3-large",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377473.7748
+  },
+  {
+    "model_a": "text-embedding-3-large",
+    "model_b": "Alibaba-NLP/gte-Qwen2-7B-instruct",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377490.1182
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "text-embedding-3-large",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377503.3609
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "intfloat/multilingual-e5-large-instruct",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377513.9379
+  },
+  {
+    "model_a": "Salesforce/SFR-Embedding-2_R",
+    "model_b": "mixedbread-ai/mxbai-embed-large-v1",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377569.7391
   }
 ]

@@ -667,3 +667,141 @@
 2024-07-30 21:19:23 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
 2024-07-30 21:25:44 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
 2024-07-30 21:25:44 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:27:47 | INFO | model_logger | Loading & caching model: Alibaba-NLP/gte-Qwen2-7B-instruct
+2024-07-30 21:28:03 | INFO | model_logger | Loading & caching model: BAAI/bge-large-en-v1.5
+2024-07-30 21:28:04 | INFO | model_logger | Loading & caching model: GritLM/GritLM-7B
+2024-07-30 21:28:09 | INFO | model_logger | Loading & caching model: Salesforce/SFR-Embedding-2_R
+2024-07-30 21:28:14 | INFO | model_logger | Loading & caching model: embed-english-v3.0
+2024-07-30 21:28:14 | INFO | model_logger | Loading & caching model: intfloat/e5-mistral-7b-instruct
+2024-07-30 21:28:19 | INFO | model_logger | Loading & caching model: intfloat/multilingual-e5-large-instruct
+2024-07-30 21:28:20 | INFO | model_logger | Loading & caching model: jinaai/jina-embeddings-v2-base-en
+2024-07-30 21:28:29 | INFO | model_logger | Loading & caching model: mixedbread-ai/mxbai-embed-large-v1
+2024-07-30 21:28:31 | INFO | model_logger | Loading & caching model: nomic-ai/nomic-embed-text-v1.5
+2024-07-30 21:28:33 | INFO | model_logger | Loading & caching model: sentence-transformers/all-MiniLM-L6-v2
+2024-07-30 21:28:33 | INFO | model_logger | Loading & caching model: text-embedding-004
+2024-07-30 21:28:33 | INFO | model_logger | Loading & caching model: text-embedding-3-large
+2024-07-30 21:28:33 | INFO | model_logger | Loading & caching model: voyage-multilingual-2
+2024-07-30 21:32:39 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:34:17 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:34:43 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:34:43 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:36:07 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 21:36:07 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 21:38:12 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:47:26 | INFO | model_logger | Loading & caching model: Alibaba-NLP/gte-Qwen2-7B-instruct
+2024-07-30 21:47:40 | INFO | model_logger | Loading & caching model: BAAI/bge-large-en-v1.5
+2024-07-30 21:47:42 | INFO | model_logger | Loading & caching model: GritLM/GritLM-7B
+2024-07-30 21:47:46 | INFO | model_logger | Loading & caching model: Salesforce/SFR-Embedding-2_R
+2024-07-30 21:47:51 | INFO | model_logger | Loading & caching model: embed-english-v3.0
+2024-07-30 21:47:51 | INFO | model_logger | Loading & caching model: intfloat/e5-mistral-7b-instruct
+2024-07-30 21:47:55 | INFO | model_logger | Loading & caching model: intfloat/multilingual-e5-large-instruct
+2024-07-30 21:47:56 | INFO | model_logger | Loading & caching model: jinaai/jina-embeddings-v2-base-en
+2024-07-30 21:48:05 | INFO | model_logger | Loading & caching model: mixedbread-ai/mxbai-embed-large-v1
+2024-07-30 21:48:06 | INFO | model_logger | Loading & caching model: nomic-ai/nomic-embed-text-v1.5
+2024-07-30 21:48:08 | INFO | model_logger | Loading & caching model: sentence-transformers/all-MiniLM-L6-v2
+2024-07-30 21:48:11 | INFO | model_logger | Loading & caching model: text-embedding-004
+2024-07-30 21:48:11 | INFO | model_logger | Loading & caching model: text-embedding-3-large
+2024-07-30 21:48:11 | INFO | model_logger | Loading & caching model: voyage-multilingual-2
+2024-07-30 21:52:25 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:52:47 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:52:47 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:53:00 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:53:14 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:53:26 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:53:40 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:53:53 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:54:08 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:54:18 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 22:01:07 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 22:01:34 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 22:04:03 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 22:05:34 | INFO | model_logger | Loading & caching model: Alibaba-NLP/gte-Qwen2-7B-instruct
+2024-07-30 22:05:49 | INFO | model_logger | Loading & caching model: BAAI/bge-large-en-v1.5
+2024-07-30 22:05:50 | INFO | model_logger | Loading & caching model: GritLM/GritLM-7B
+2024-07-30 22:05:55 | INFO | model_logger | Loading & caching model: Salesforce/SFR-Embedding-2_R
+2024-07-30 22:05:59 | INFO | model_logger | Loading & caching model: embed-english-v3.0
+2024-07-30 22:05:59 | INFO | model_logger | Loading & caching model: intfloat/e5-mistral-7b-instruct
+2024-07-30 22:06:03 | INFO | model_logger | Loading & caching model: intfloat/multilingual-e5-large-instruct
+2024-07-30 22:06:04 | INFO | model_logger | Loading & caching model: jinaai/jina-embeddings-v2-base-en
+2024-07-30 22:06:13 | INFO | model_logger | Loading & caching model: mixedbread-ai/mxbai-embed-large-v1
+2024-07-30 22:06:14 | INFO | model_logger | Loading & caching model: nomic-ai/nomic-embed-text-v1.5
+2024-07-30 22:06:16 | INFO | model_logger | Loading & caching model: sentence-transformers/all-MiniLM-L6-v2
+2024-07-30 22:06:16 | INFO | model_logger | Loading & caching model: text-embedding-004
+2024-07-30 22:06:16 | INFO | model_logger | Loading & caching model: text-embedding-3-large
+2024-07-30 22:06:17 | INFO | model_logger | Loading & caching model: voyage-multilingual-2
+2024-07-30 22:08:33 | INFO | model_logger | Loading & caching model: Alibaba-NLP/gte-Qwen2-7B-instruct
+2024-07-30 22:08:47 | INFO | model_logger | Loading & caching model: BAAI/bge-large-en-v1.5
+2024-07-30 22:08:48 | INFO | model_logger | Loading & caching model: GritLM/GritLM-7B
+2024-07-30 22:08:52 | INFO | model_logger | Loading & caching model: Salesforce/SFR-Embedding-2_R
+2024-07-30 22:08:57 | INFO | model_logger | Loading & caching model: embed-english-v3.0
+2024-07-30 22:08:57 | INFO | model_logger | Loading & caching model: intfloat/e5-mistral-7b-instruct
+2024-07-30 22:09:01 | INFO | model_logger | Loading & caching model: intfloat/multilingual-e5-large-instruct
+2024-07-30 22:09:02 | INFO | model_logger | Loading & caching model: jinaai/jina-embeddings-v2-base-en
+2024-07-30 22:09:10 | INFO | model_logger | Loading & caching model: mixedbread-ai/mxbai-embed-large-v1
+2024-07-30 22:09:12 | INFO | model_logger | Loading & caching model: nomic-ai/nomic-embed-text-v1.5
+2024-07-30 22:09:14 | INFO | model_logger | Loading & caching model: sentence-transformers/all-MiniLM-L6-v2
+2024-07-30 22:09:14 | INFO | model_logger | Loading & caching model: text-embedding-004
+2024-07-30 22:09:14 | INFO | model_logger | Loading & caching model: text-embedding-3-large
+2024-07-30 22:09:14 | INFO | model_logger | Loading & caching model: voyage-multilingual-2
+2024-07-30 22:21:45 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 22:23:22 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 22:24:06 | INFO | model_logger | Loading & caching model: Alibaba-NLP/gte-Qwen2-7B-instruct
+2024-07-30 22:24:20 | INFO | model_logger | Loading & caching model: BAAI/bge-large-en-v1.5
+2024-07-30 22:24:21 | INFO | model_logger | Loading & caching model: GritLM/GritLM-7B
+2024-07-30 22:24:26 | INFO | model_logger | Loading & caching model: Salesforce/SFR-Embedding-2_R
+2024-07-30 22:24:30 | INFO | model_logger | Loading & caching model: embed-english-v3.0
+2024-07-30 22:24:30 | INFO | model_logger | Loading & caching model: intfloat/e5-mistral-7b-instruct
+2024-07-30 22:24:34 | INFO | model_logger | Loading & caching model: intfloat/multilingual-e5-large-instruct
+2024-07-30 22:24:35 | INFO | model_logger | Loading & caching model: jinaai/jina-embeddings-v2-base-en
+2024-07-30 22:24:44 | INFO | model_logger | Loading & caching model: mixedbread-ai/mxbai-embed-large-v1
+2024-07-30 22:24:45 | INFO | model_logger | Loading & caching model: nomic-ai/nomic-embed-text-v1.5
+2024-07-30 22:24:47 | INFO | model_logger | Loading & caching model: sentence-transformers/all-MiniLM-L6-v2
+2024-07-30 22:24:47 | INFO | model_logger | Loading & caching model: text-embedding-004
+2024-07-30 22:24:47 | INFO | model_logger | Loading & caching model: text-embedding-3-large
+2024-07-30 22:24:47 | INFO | model_logger | Loading & caching model: voyage-multilingual-2
+2024-07-30 22:24:57 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 22:26:05 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 22:27:26 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 22:29:47 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 22:40:15 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 22:42:05 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 22:42:46 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 22:42:56 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 22:43:37 | INFO | model_logger | Loading & caching model: Alibaba-NLP/gte-Qwen2-7B-instruct
+2024-07-30 22:43:55 | INFO | model_logger | Loading & caching model: BAAI/bge-large-en-v1.5
+2024-07-30 22:43:57 | INFO | model_logger | Loading & caching model: GritLM/GritLM-7B
+2024-07-30 22:44:02 | INFO | model_logger | Loading & caching model: Salesforce/SFR-Embedding-2_R
+2024-07-30 22:44:07 | INFO | model_logger | Loading & caching model: embed-english-v3.0
+2024-07-30 22:44:07 | INFO | model_logger | Loading & caching model: intfloat/e5-mistral-7b-instruct
+2024-07-30 22:44:11 | INFO | model_logger | Loading & caching model: intfloat/multilingual-e5-large-instruct
+2024-07-30 22:44:12 | INFO | model_logger | Loading & caching model: jinaai/jina-embeddings-v2-base-en
+2024-07-30 22:44:21 | INFO | model_logger | Loading & caching model: mixedbread-ai/mxbai-embed-large-v1
+2024-07-30 22:44:22 | INFO | model_logger | Loading & caching model: nomic-ai/nomic-embed-text-v1.5
+2024-07-30 22:44:24 | INFO | model_logger | Loading & caching model: sentence-transformers/all-MiniLM-L6-v2
+2024-07-30 22:44:24 | INFO | model_logger | Loading & caching model: text-embedding-004
+2024-07-30 22:44:24 | INFO | model_logger | Loading & caching model: text-embedding-3-large
+2024-07-30 22:44:25 | INFO | model_logger | Loading & caching model: voyage-multilingual-2
+2024-07-30 22:47:34 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 22:54:11 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 23:17:11 | INFO | model_logger | Loading & caching model: Alibaba-NLP/gte-Qwen2-7B-instruct
+2024-07-30 23:17:25 | INFO | model_logger | Loading & caching model: BAAI/bge-large-en-v1.5
+2024-07-30 23:17:26 | INFO | model_logger | Loading & caching model: GritLM/GritLM-7B
+2024-07-30 23:17:31 | INFO | model_logger | Loading & caching model: Salesforce/SFR-Embedding-2_R
+2024-07-30 23:17:35 | INFO | model_logger | Loading & caching model: embed-english-v3.0
+2024-07-30 23:17:35 | INFO | model_logger | Loading & caching model: intfloat/e5-mistral-7b-instruct
+2024-07-30 23:17:39 | INFO | model_logger | Loading & caching model: intfloat/multilingual-e5-large-instruct
+2024-07-30 23:17:41 | INFO | model_logger | Loading & caching model: jinaai/jina-embeddings-v2-base-en
+2024-07-30 23:17:50 | INFO | model_logger | Loading & caching model: mixedbread-ai/mxbai-embed-large-v1
+2024-07-30 23:17:51 | INFO | model_logger | Loading & caching model: nomic-ai/nomic-embed-text-v1.5
+2024-07-30 23:17:53 | INFO | model_logger | Loading & caching model: sentence-transformers/all-MiniLM-L6-v2
+2024-07-30 23:17:53 | INFO | model_logger | Loading & caching model: text-embedding-004
+2024-07-30 23:17:53 | INFO | model_logger | Loading & caching model: text-embedding-3-large
+2024-07-30 23:17:54 | INFO | model_logger | Loading & caching model: voyage-multilingual-2
+2024-07-30 23:22:25 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 23:23:43 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 23:24:03 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 23:25:02 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 23:25:21 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 23:29:57 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 23:29:57 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 23:30:08 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
