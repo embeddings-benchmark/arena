@@ -478,5 +478,21 @@
     "judge": "arena_user_",
     "anony": true,
     "tstamp": 1722354938.3291
+  },
+  {
+    "model_a": "embed-english-v3.0",
+    "model_b": "GritLM/GritLM-7B",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722367036.7553
+  },
+  {
+    "model_a": "text-embedding-004",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722370311.0017
   }
 ]

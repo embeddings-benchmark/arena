@@ -7,7 +7,7 @@ model_meta:
     dim: 384
     limit: 1000
     index_dtype: float32
-    license: Apache-2.0
+    license: Apache 2.0
     organization: Sentence Transformers
     mteb_overall: 56.26
     mteb_retrieval: 41.95

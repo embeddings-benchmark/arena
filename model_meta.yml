@@ -6,7 +6,7 @@ model_meta:
     seq_len: 512
     size: 23
     dim: 384
-    license: Apache-2.0
+    license: Apache 2.0
     organization: Sentence Transformers
     mteb_overall: 56.26
     mteb_retrieval: 41.95
@@ -68,7 +68,7 @@ model_meta:
     seq_len: 32768
     size: 7240
     dim: 4096
-    license: Apache-2.0
+    license: Apache 2.0
     organization: Contextual AI, HKU, Microsoft
     instruction_query_arxiv: Given a query, retrieve a relevant paper title and abstract from arXiv
     instruction_query_wikipedia: Given a query, retrieve a relevant title and passage from Wikipedia

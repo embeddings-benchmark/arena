@@ -406,5 +406,13 @@
     "judge": "arena_user_",
     "anony": true,
     "tstamp": 1722349290.0653
+  },
+  {
+    "model_a": "voyage-multilingual-2",
+    "model_b": "intfloat/multilingual-e5-large-instruct",
+    "winner": "tie (bothbad)",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722367137.3081
   }
 ]

@@ -47279,3 +47279,384 @@ xpected 5 arguments for function functools.partial(<function vote_last_response_
 2024-07-30 19:32:55 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 1732, in check_input_sts
 2024-07-30 19:32:55 | ERROR | stderr |     if any([not(x) for x in (txt0, txt1, txt2)]): raise gr.Warning("Text cannot be empty.")
 2024-07-30 19:32:55 | ERROR | stderr | TypeError: exceptions must derive from BaseException
+2024-07-30 19:41:41 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 19:43:47 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 19:44:19 | ERROR | stderr | 
+2024-07-30 19:44:19 | ERROR | stderr | Split strings:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
+2024-07-30 19:44:19 | ERROR | stderr | 
+2024-07-30 19:44:19 | ERROR | stderr | 
+2024-07-30 19:44:19 | ERROR | stderr | Stem Tokens:   0%|                                                                               | 0/1 [00:00<?, ?it/s]
+2024-07-30 19:44:19 | ERROR | stderr | 
+2024-07-30 19:44:19 | ERROR | stderr | 
+2024-07-30 19:44:19 | ERROR | stderr | BM25S Retrieve:   0%|                                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 19:44:19 | ERROR | stderr | 
+2024-07-30 19:47:58 | ERROR | stderr | 
+2024-07-30 19:47:58 | ERROR | stderr | Split strings:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
+2024-07-30 19:47:58 | ERROR | stderr | 
+2024-07-30 19:47:58 | ERROR | stderr | 
+2024-07-30 19:47:58 | ERROR | stderr | Stem Tokens:   0%|                                                                               | 0/1 [00:00<?, ?it/s]
+2024-07-30 19:47:58 | ERROR | stderr | 
+2024-07-30 19:47:58 | ERROR | stderr | 
+2024-07-30 19:47:58 | ERROR | stderr | BM25S Retrieve:   0%|                                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 19:47:58 | ERROR | stderr | 
+2024-07-30 19:51:02 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 19:52:48 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 19:52:48 | ERROR | stderr | 
+2024-07-30 19:52:48 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 19:52:48 | ERROR | stderr | 
+2024-07-30 19:56:33 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 19:56:33 | ERROR | stderr | 
+2024-07-30 19:56:33 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 19:56:33 | ERROR | stderr | 
+2024-07-30 19:56:34 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:09:15 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 20:09:15 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 20:09:15 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 20:09:15 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 20:09:15 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 20:09:15 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 20:09:15 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 20:09:15 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 20:09:15 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 20:09:15 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 20:09:15 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 20:09:15 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 20:09:15 | ERROR | stderr |     return await future
+2024-07-30 20:09:15 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 20:09:15 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 20:09:15 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 20:09:15 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 20:09:15 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 1002, in check_input_clustering_dim
+2024-07-30 20:09:15 | ERROR | stderr |     if not(state) or not(state.prompts): raise
+2024-07-30 20:09:15 | ERROR | stderr | RuntimeError: No active exception to reraise
+2024-07-30 20:09:17 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 20:09:17 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 20:09:17 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 20:09:17 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 20:09:17 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 20:09:17 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 20:09:17 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 20:09:17 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 20:09:17 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 20:09:17 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 20:09:17 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 20:09:17 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 20:09:17 | ERROR | stderr |     return await future
+2024-07-30 20:09:17 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 20:09:17 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 20:09:17 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 20:09:17 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 20:09:17 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 1002, in check_input_clustering_dim
+2024-07-30 20:09:17 | ERROR | stderr |     if not(state) or not(state.prompts): raise
+2024-07-30 20:09:17 | ERROR | stderr | RuntimeError: No active exception to reraise
+2024-07-30 20:11:22 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 20:11:22 | ERROR | stderr | 
+2024-07-30 20:11:22 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 20:11:22 | ERROR | stderr | 
+2024-07-30 20:19:36 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 20:19:36 | ERROR | stderr | 
+2024-07-30 20:19:36 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 20:19:36 | ERROR | stderr | 
+2024-07-30 20:20:39 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:21:20 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 20:21:20 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 20:21:20 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 20:21:20 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 20:21:20 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 20:21:20 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 20:21:20 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 20:21:20 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 20:21:20 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 20:21:20 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 20:21:20 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 20:21:20 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 20:21:20 | ERROR | stderr |     return await future
+2024-07-30 20:21:20 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 20:21:20 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 20:21:20 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 20:21:20 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 20:21:20 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 1732, in check_input_sts
+2024-07-30 20:21:20 | ERROR | stderr |     if any([not(x) for x in (txt0, txt1, txt2)]): raise gr.Warning("Text cannot be empty.")
+2024-07-30 20:21:20 | ERROR | stderr | TypeError: exceptions must derive from BaseException
+2024-07-30 20:23:33 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:24:24 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:24:29 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:24:42 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:25:15 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:29:32 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 20:29:32 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 20:29:32 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 20:29:32 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1520, in call_function
+2024-07-30 20:29:32 | ERROR | stderr |     prediction = await utils.async_iteration(iterator)
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 663, in async_iteration
+2024-07-30 20:29:32 | ERROR | stderr |     return await iterator.__anext__()
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 656, in __anext__
+2024-07-30 20:29:32 | ERROR | stderr |     return await anyio.to_thread.run_sync(
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 20:29:32 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 20:29:32 | ERROR | stderr |     return await future
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 20:29:32 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 639, in run_sync_iterator_async
+2024-07-30 20:29:32 | ERROR | stderr |     return next(iterator)
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 801, in gen_wrapper
+2024-07-30 20:29:32 | ERROR | stderr |     response = next(iterator)
+2024-07-30 20:29:32 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 208, in retrieve_side_by_side
+2024-07-30 20:29:32 | ERROR | stderr |     retrieved_txt0, retrieved_txt1, model_name0, model_name1 = gen_func(text, corpus, model_name0, model_name1)
+2024-07-30 20:29:32 | ERROR | stderr |   File "/data/niklas/arena/models.py", line 215, in retrieve_parallel
+2024-07-30 20:29:32 | ERROR | stderr |     results = [future.result() for future in futures]
+2024-07-30 20:29:32 | ERROR | stderr |   File "/data/niklas/arena/models.py", line 215, in <listcomp>
+2024-07-30 20:29:32 | ERROR | stderr |     results = [future.result() for future in futures]
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+2024-07-30 20:29:32 | ERROR | stderr |     return self.__get_result()
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+2024-07-30 20:29:32 | ERROR | stderr |     raise self._exception
+2024-07-30 20:29:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+2024-07-30 20:29:32 | ERROR | stderr |     result = self.fn(*self.args, **self.kwargs)
+2024-07-30 20:29:32 | ERROR | stderr |   File "/data/niklas/arena/models.py", line 230, in retrieve
+2024-07-30 20:29:32 | ERROR | stderr |     model = self.load_model(model_name)
+2024-07-30 20:29:32 | ERROR | stderr |   File "/data/niklas/arena/models.py", line 97, in load_model
+2024-07-30 20:29:32 | ERROR | stderr |     revision=self.model_meta[model_name].get("revision", None),
+2024-07-30 20:29:32 | ERROR | stderr | KeyError: '### Model A: voyage-multilingual-2'
+2024-07-30 20:30:31 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 20:30:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 20:30:31 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 20:30:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 20:30:31 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 20:30:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 20:30:31 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 20:30:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 20:30:31 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 20:30:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 20:30:31 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 20:30:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 20:30:31 | ERROR | stderr |     return await future
+2024-07-30 20:30:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 20:30:31 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 20:30:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 20:30:31 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 20:30:31 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 276, in check_input_retrieval
+2024-07-30 20:30:31 | ERROR | stderr |     if not(txt): raise gr.Warning("Query cannot be empty.")
+2024-07-30 20:30:31 | ERROR | stderr | TypeError: exceptions must derive from BaseException
+2024-07-30 20:31:18 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/components/dropdown.py:188: UserWarning:
+2024-07-30 20:31:18 | ERROR | stderr | 
+2024-07-30 20:31:18 | ERROR | stderr | The value passed into gr.Dropdown() is not in the list of choices. Please update the list of choices to include: stackexchange or set allow_custom_value=True.
+2024-07-30 20:31:18 | ERROR | stderr | 
+2024-07-30 20:31:19 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:33:32 | ERROR | stderr | 
+2024-07-30 20:33:32 | ERROR | stderr | Split strings:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
+2024-07-30 20:33:32 | ERROR | stderr | 
+2024-07-30 20:33:32 | ERROR | stderr | 
+2024-07-30 20:33:32 | ERROR | stderr | Stem Tokens:   0%|                                                                               | 0/1 [00:00<?, ?it/s]
+2024-07-30 20:33:32 | ERROR | stderr | 
+2024-07-30 20:33:32 | ERROR | stderr | 
+2024-07-30 20:33:32 | ERROR | stderr | BM25S Retrieve:   0%|                                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 20:33:32 | ERROR | stderr | 
+2024-07-30 20:34:53 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 20:34:53 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 20:34:53 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 20:34:53 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 20:34:53 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 20:34:53 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 20:34:53 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 20:34:53 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 20:34:53 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 20:34:53 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 20:34:53 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 20:34:53 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 20:34:53 | ERROR | stderr |     return await future
+2024-07-30 20:34:53 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 20:34:53 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 20:34:53 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 20:34:53 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 20:34:53 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 276, in check_input_retrieval
+2024-07-30 20:34:53 | ERROR | stderr |     if not(txt): raise gr.Warning("Query cannot be empty.")
+2024-07-30 20:34:53 | ERROR | stderr | TypeError: exceptions must derive from BaseException
+2024-07-30 20:34:57 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:35:12 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 20:35:12 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 20:35:12 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 20:35:12 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 20:35:12 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 20:35:12 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 20:35:12 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 20:35:12 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 20:35:12 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 20:35:12 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 20:35:12 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 20:35:12 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 20:35:12 | ERROR | stderr |     return await future
+2024-07-30 20:35:12 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 20:35:12 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 20:35:12 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 20:35:12 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 20:35:12 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 276, in check_input_retrieval
+2024-07-30 20:35:12 | ERROR | stderr |     if not(txt): raise gr.Warning("Query cannot be empty.")
+2024-07-30 20:35:12 | ERROR | stderr | TypeError: exceptions must derive from BaseException
+2024-07-30 20:35:49 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 20:35:49 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 20:35:49 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 20:35:49 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 20:35:49 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 20:35:49 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 20:35:49 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 20:35:49 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 20:35:49 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 20:35:49 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 20:35:49 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 20:35:49 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 20:35:49 | ERROR | stderr |     return await future
+2024-07-30 20:35:49 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 20:35:49 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 20:35:49 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 20:35:49 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 20:35:49 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 276, in check_input_retrieval
+2024-07-30 20:35:49 | ERROR | stderr |     if not(txt): raise gr.Warning("Query cannot be empty.")
+2024-07-30 20:35:49 | ERROR | stderr | TypeError: exceptions must derive from BaseException
+2024-07-30 20:35:57 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 20:35:57 | ERROR | stderr | 
+2024-07-30 20:35:57 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 20:35:57 | ERROR | stderr | 
+2024-07-30 20:37:05 | ERROR | stderr | 
+2024-07-30 20:37:05 | ERROR | stderr | Split strings:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
+2024-07-30 20:37:05 | ERROR | stderr | 
+2024-07-30 20:37:05 | ERROR | stderr | 
+2024-07-30 20:37:05 | ERROR | stderr | Stem Tokens:   0%|                                                                               | 0/1 [00:00<?, ?it/s]
+2024-07-30 20:37:05 | ERROR | stderr | 
+2024-07-30 20:37:05 | ERROR | stderr | 
+2024-07-30 20:37:05 | ERROR | stderr | BM25S Retrieve:   0%|                                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 20:37:05 | ERROR | stderr | 
+2024-07-30 20:38:31 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 20:38:31 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 20:38:31 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 20:38:31 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 20:38:31 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 20:38:31 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 20:38:31 | ERROR | stderr |     return await future
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 20:38:31 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 20:38:31 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 20:38:31 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 1002, in check_input_clustering_dim
+2024-07-30 20:38:31 | ERROR | stderr |     if not(state) or not(state.prompts): raise
+2024-07-30 20:38:31 | ERROR | stderr | RuntimeError: No active exception to reraise
+2024-07-30 20:38:31 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 20:38:31 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 20:38:31 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 20:38:31 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 20:38:31 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 20:38:31 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 20:38:31 | ERROR | stderr |     return await future
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 20:38:31 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 20:38:31 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 20:38:31 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 20:38:31 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 1002, in check_input_clustering_dim
+2024-07-30 20:38:31 | ERROR | stderr |     if not(state) or not(state.prompts): raise
+2024-07-30 20:38:31 | ERROR | stderr | RuntimeError: No active exception to reraise
+2024-07-30 20:38:32 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 20:38:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 20:38:32 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 20:38:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 20:38:32 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 20:38:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 20:38:32 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 20:38:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 20:38:32 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 20:38:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 20:38:32 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 20:38:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 20:38:32 | ERROR | stderr |     return await future
+2024-07-30 20:38:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 20:38:32 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 20:38:32 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 20:38:32 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 20:38:32 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 1002, in check_input_clustering_dim
+2024-07-30 20:38:32 | ERROR | stderr |     if not(state) or not(state.prompts): raise
+2024-07-30 20:38:32 | ERROR | stderr | RuntimeError: No active exception to reraise
+2024-07-30 20:38:34 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 20:38:34 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 20:38:34 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 20:38:34 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 20:38:34 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 20:38:34 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 20:38:34 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 20:38:34 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 20:38:34 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 20:38:34 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 20:38:34 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 20:38:34 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 20:38:34 | ERROR | stderr |     return await future
+2024-07-30 20:38:34 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 20:38:34 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 20:38:34 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 20:38:34 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 20:38:34 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 875, in check_input_clustering
+2024-07-30 20:38:34 | ERROR | stderr |     if not(txt): raise gr.Warning("Text cannot be empty.")
+2024-07-30 20:38:34 | ERROR | stderr | TypeError: exceptions must derive from BaseException
+2024-07-30 20:39:29 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 20:39:29 | ERROR | stderr | 
+2024-07-30 20:39:29 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 20:39:29 | ERROR | stderr | 
+2024-07-30 20:39:29 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:40:40 | ERROR | stderr | 
+2024-07-30 20:40:40 | ERROR | stderr | Split strings:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
+2024-07-30 20:40:40 | ERROR | stderr | 
+2024-07-30 20:40:40 | ERROR | stderr | 
+2024-07-30 20:40:40 | ERROR | stderr | Stem Tokens:   0%|                                                                               | 0/1 [00:00<?, ?it/s]
+2024-07-30 20:40:40 | ERROR | stderr | 
+2024-07-30 20:40:40 | ERROR | stderr | 
+2024-07-30 20:40:40 | ERROR | stderr | BM25S Retrieve:   0%|                                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 20:40:40 | ERROR | stderr | 
+2024-07-30 20:40:40 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:44:10 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 20:44:10 | ERROR | stderr | 
+2024-07-30 20:44:10 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 20:44:10 | ERROR | stderr | 
+2024-07-30 20:44:14 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 20:44:14 | ERROR | stderr | 
+2024-07-30 20:44:14 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 20:44:14 | ERROR | stderr | 
+2024-07-30 20:44:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 20:44:20 | ERROR | stderr | 
+2024-07-30 20:44:20 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 20:44:20 | ERROR | stderr | 
+2024-07-30 20:46:20 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:46:20 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:46:53 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:48:28 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:58:35 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 20:58:35 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:00:29 | ERROR | stderr | 
+2024-07-30 21:00:29 | ERROR | stderr | Split strings:   0%|                                                          | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:00:29 | ERROR | stderr | 
+2024-07-30 21:00:29 | ERROR | stderr | 
+2024-07-30 21:00:29 | ERROR | stderr | Stem Tokens:   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:00:29 | ERROR | stderr | 
+2024-07-30 21:00:29 | ERROR | stderr | 
+2024-07-30 21:00:29 | ERROR | stderr | BM25S Retrieve:   0%|                                                         | 0/1 [00:00<?, ?it/s]
+2024-07-30 21:00:29 | ERROR | stderr | 
+2024-07-30 21:02:51 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:04:06 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:04:56 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:06:45 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:19:23 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:25:44 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 21:25:44 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4

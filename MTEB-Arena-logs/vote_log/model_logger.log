@@ -592,3 +592,78 @@
 2024-07-30 19:17:44 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
 2024-07-30 19:25:45 | INFO | model_logger | Loading & caching model: intfloat/e5-mistral-7b-instruct
 2024-07-30 19:26:03 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 19:39:34 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 19:39:34 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 19:40:30 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 19:41:40 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 19:47:44 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 19:56:33 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 19:59:02 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 20:01:28 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:01:51 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 20:11:22 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 20:19:36 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 20:20:39 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 20:23:33 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:24:24 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:24:24 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:24:29 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 20:25:54 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:25:54 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:26:24 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:26:24 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:29:25 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:29:32 | INFO | model_logger | Loading & caching model: ### Model A: voyage-multilingual-2
+2024-07-30 20:29:32 | INFO | model_logger | Loading & caching model: ### Model B: intfloat/e5-mistral-7b-instruct
+2024-07-30 20:30:43 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:31:19 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 20:31:44 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 20:33:32 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:34:59 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:35:16 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:35:17 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 20:35:27 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:35:39 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:35:57 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:36:09 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:36:09 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:36:20 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:36:28 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:36:42 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:36:42 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:43:15 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:43:15 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:45:37 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 20:46:53 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 20:46:53 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 20:47:51 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:48:28 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:54:52 | INFO | model_logger | Loading & caching model: Alibaba-NLP/gte-Qwen2-7B-instruct
+2024-07-30 20:55:29 | INFO | model_logger | Loading & caching model: BAAI/bge-large-en-v1.5
+2024-07-30 20:55:33 | INFO | model_logger | Loading & caching model: GritLM/GritLM-7B
+2024-07-30 20:55:48 | INFO | model_logger | Loading & caching model: Salesforce/SFR-Embedding-2_R
+2024-07-30 20:56:05 | INFO | model_logger | Loading & caching model: embed-english-v3.0
+2024-07-30 20:56:05 | INFO | model_logger | Loading & caching model: intfloat/e5-mistral-7b-instruct
+2024-07-30 20:56:22 | INFO | model_logger | Loading & caching model: intfloat/multilingual-e5-large-instruct
+2024-07-30 20:56:24 | INFO | model_logger | Loading & caching model: jinaai/jina-embeddings-v2-base-en
+2024-07-30 20:56:33 | INFO | model_logger | Loading & caching model: mixedbread-ai/mxbai-embed-large-v1
+2024-07-30 20:56:35 | INFO | model_logger | Loading & caching model: nomic-ai/nomic-embed-text-v1.5
+2024-07-30 20:56:38 | INFO | model_logger | Loading & caching model: sentence-transformers/all-MiniLM-L6-v2
+2024-07-30 20:56:38 | INFO | model_logger | Loading & caching model: text-embedding-004
+2024-07-30 20:56:38 | INFO | model_logger | Loading & caching model: text-embedding-3-large
+2024-07-30 20:56:39 | INFO | model_logger | Loading & caching model: voyage-multilingual-2
+2024-07-30 20:58:35 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 20:58:57 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:01:00 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:01:46 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:02:51 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:03:24 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:04:00 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:04:06 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:04:06 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:05:20 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:05:20 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:19:06 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
+2024-07-30 21:19:23 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 21:25:44 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 21:25:44 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
