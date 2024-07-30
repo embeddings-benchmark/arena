@@ -7,6 +7,11 @@ from leaderboard import build_leaderboard_tab
 from models import ModelManager
 from ui import build_side_by_side_ui_anon, build_side_by_side_ui_anon_sts, build_side_by_side_ui_anon_clustering, build_side_by_side_ui_named, build_side_by_side_ui_named_sts, build_side_by_side_ui_named_clustering, build_single_model_ui, build_single_model_ui_sts, build_single_model_ui_clustering
 
+
+DEBUG = False
+GCP_INDEX = True
+
+
 acknowledgment_md = """
 ### Acknowledgment
 We thank [Contextual AI](https://contextual.ai/), [ServiceNow](https://www.servicenow.com/), [Ai2](https://allenai.org/), [Hugging Face](https://huggingface.co/) for their generous sponsorship. If you'd like to sponsor us, please get in [touch](mailto:n.muennighoff@gmail.com).
@@ -48,9 +53,10 @@ def get_credentials():
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = get_credentials()
 
 ELO_RESULTS_DIR = os.getenv("ELO_RESULTS_DIR", "./results/latest")
-MODEL_META_PATH = "model_meta.yml"
-# Debugging
-# MODEL_META_PATH = "model_meta_debug.yml"
+if DEBUG:
+    MODEL_META_PATH = "model_meta_debug.yml"
+else:
+    MODEL_META_PATH = "model_meta.yml"
 with open(MODEL_META_PATH, 'r', encoding='utf-8') as f:
     model_meta = safe_load(f)
 # Not supported atm
@@ -58,7 +64,7 @@ model_meta['model_meta'].pop('intfloat/multilingual-e5-small')
 model_meta['model_meta'].pop('voyage-large-2-instruct')
 model_meta['model_meta'].pop('nvidia/NV-Embed-v1')
 model_meta['model_meta'].pop('McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised')
-models = ModelManager(model_meta, use_gcp_index=True, load_all=True)
+models = ModelManager(model_meta, use_gcp_index=GCP_INDEX, load_all=not(DEBUG))
 
 def load_elo_results(elo_results_dir):
     from collections import defaultdict
@@ -142,9 +148,6 @@ with gr.Blocks(title="MTEB Arena", head=head_js) as block:
                     build_leaderboard_tab(elo_results_file['sts'], leaderboard_table_file['sts'], task_type="STS")
 
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
-
-    # with gr.Tab("About Us", id=4): 
-    #     pass#build_about()
 
 block.queue(max_size=10)
 block.launch(share=True)
