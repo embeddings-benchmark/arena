@@ -70,7 +70,11 @@ class ModelManager:
                 for model_name in self.models_retrieval:
                     if model_name == "BM25": continue
                     self.load_gcp_index(model_name, "wikipedia")
+                for model_name in self.models_retrieval_arxiv:
+                    if model_name == "BM25": continue
                     self.load_gcp_index(model_name, "arxiv")
+                for model_name in self.models_retrieval_stackexchange:
+                    if model_name == "BM25": continue
                     self.load_gcp_index(model_name, "stackexchange")
             # Load random samples
             self.retrieve_draw()
