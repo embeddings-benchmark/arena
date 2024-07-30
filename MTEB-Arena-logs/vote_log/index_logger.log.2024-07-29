@@ -47217,3 +47217,65 @@ xpected 5 arguments for function functools.partial(<function vote_last_response_
 2024-07-30 18:49:06 | ERROR | stderr | 
 2024-07-30 18:49:06 | ERROR | stderr | Unexpected argument. Filling with None.
 2024-07-30 18:49:06 | ERROR | stderr | 
+2024-07-30 19:13:26 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-30 19:16:56 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 19:16:56 | ERROR | stderr | 
+2024-07-30 19:16:56 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 19:16:56 | ERROR | stderr | 
+2024-07-30 19:17:16 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 19:17:16 | ERROR | stderr | 
+2024-07-30 19:17:16 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 19:17:16 | ERROR | stderr | 
+2024-07-30 19:17:41 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 19:17:41 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 19:17:41 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 19:17:41 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 19:17:41 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 19:17:41 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 19:17:41 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 19:17:41 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 19:17:41 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 19:17:41 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 19:17:41 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 19:17:41 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 19:17:41 | ERROR | stderr |     return await future
+2024-07-30 19:17:41 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 19:17:41 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 19:17:41 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 19:17:41 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 19:17:41 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 875, in check_input_clustering
+2024-07-30 19:17:41 | ERROR | stderr |     if not(txt): raise gr.Warning("Text cannot be empty.")
+2024-07-30 19:17:41 | ERROR | stderr | TypeError: exceptions must derive from BaseException
+2024-07-30 19:18:36 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
+2024-07-30 19:18:36 | ERROR | stderr | 
+2024-07-30 19:18:36 | ERROR | stderr | Unexpected argument. Filling with None.
+2024-07-30 19:18:36 | ERROR | stderr | 
+2024-07-30 19:27:14 | ERROR | stderr | 
+2024-07-30 19:27:14 | ERROR | stderr | Split strings:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
+2024-07-30 19:27:14 | ERROR | stderr | 
+2024-07-30 19:27:14 | ERROR | stderr | 
+2024-07-30 19:27:14 | ERROR | stderr | Stem Tokens:   0%|                                                                               | 0/1 [00:00<?, ?it/s]
+2024-07-30 19:27:14 | ERROR | stderr | 
+2024-07-30 19:27:14 | ERROR | stderr | 
+2024-07-30 19:27:14 | ERROR | stderr | BM25S Retrieve:   0%|                                                                            | 0/1 [00:00<?, ?it/s]
+2024-07-30 19:27:14 | ERROR | stderr | 
+2024-07-30 19:32:55 | ERROR | stderr | Traceback (most recent call last):
+2024-07-30 19:32:55 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
+2024-07-30 19:32:55 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-07-30 19:32:55 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
+2024-07-30 19:32:55 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-07-30 19:32:55 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
+2024-07-30 19:32:55 | ERROR | stderr |     result = await self.call_function(
+2024-07-30 19:32:55 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
+2024-07-30 19:32:55 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
+2024-07-30 19:32:55 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+2024-07-30 19:32:55 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
+2024-07-30 19:32:55 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
+2024-07-30 19:32:55 | ERROR | stderr |     return await future
+2024-07-30 19:32:55 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
+2024-07-30 19:32:55 | ERROR | stderr |     result = context.run(func, *args)
+2024-07-30 19:32:55 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
+2024-07-30 19:32:55 | ERROR | stderr |     response = f(*args, **kwargs)
+2024-07-30 19:32:55 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 1732, in check_input_sts
+2024-07-30 19:32:55 | ERROR | stderr |     if any([not(x) for x in (txt0, txt1, txt2)]): raise gr.Warning("Text cannot be empty.")
+2024-07-30 19:32:55 | ERROR | stderr | TypeError: exceptions must derive from BaseException

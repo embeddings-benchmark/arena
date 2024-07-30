@@ -585,3 +585,10 @@
 2024-07-30 18:30:45 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
 2024-07-30 18:47:23 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant paper title and abstract from arXiv
 2024-07-30 18:51:20 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 19:13:26 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 19:13:26 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 19:15:23 | INFO | model_logger | Loading & caching model: Salesforce/SFR-Embedding-2_R
+2024-07-30 19:15:43 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
+2024-07-30 19:17:44 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant title and passage from Wikipedia
+2024-07-30 19:25:45 | INFO | model_logger | Loading & caching model: intfloat/e5-mistral-7b-instruct
+2024-07-30 19:26:03 | INFO | model_logger | Using instruction: Given a query, retrieve a relevant question and answer from Stack Exchange
