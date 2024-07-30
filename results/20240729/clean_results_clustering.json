@@ -454,5 +454,13 @@
     "judge": "arena_user_",
     "anony": true,
     "tstamp": 1722282495.2203
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "intfloat/multilingual-e5-large-instruct",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722310865.1737
   }
 ]

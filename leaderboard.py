@@ -22,7 +22,7 @@ def make_arena_leaderboard_md(elo_results):
     leaderboard_md = f"""
 Total #models: **{total_models}**.&nbsp;&nbsp;&nbsp;&nbsp;Total #votes: **{total_votes}**.&nbsp;&nbsp;&nbsp;&nbsp;Last updated: {last_updated}.
 
-Contribute your votes 🗳️ at [MTEB Arena](https://huggingface.co/spaces/mteb/arena)! 
+Contribute your votes 🗳️ at [MTEB Arena](https://huggingface.co/spaces/mteb/arena)! **Rank** is only based on the MTEB Arena Elo. The MTEB Avg scores are just displayed for information and taken from the [MTEB LB](https://hf.co/spaces/mteb/leaderboard).
 """
     return leaderboard_md
 
