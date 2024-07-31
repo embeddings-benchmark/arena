@@ -64,6 +64,7 @@ model_meta['model_meta'].pop('intfloat/multilingual-e5-small')
 model_meta['model_meta'].pop('voyage-large-2-instruct')
 model_meta['model_meta'].pop('nvidia/NV-Embed-v1')
 model_meta['model_meta'].pop('McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp-supervised')
+model_meta['model_meta'].pop('nomic-ai/nomic-embed-text-v1')
 models = ModelManager(model_meta, use_gcp_index=GCP_INDEX, load_all=not(DEBUG))
 
 def load_elo_results(elo_results_dir):
