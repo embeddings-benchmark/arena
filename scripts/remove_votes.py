@@ -5,7 +5,13 @@ Remove all votes of a certain model, e.g. if a bug was found.
 import json
 import os
 
+MODELS_TO_REMOVE = ["text-embedding-004"]
+TASKS = ["sts"]
+
 MODELS_TO_REMOVE = ["nomic-embed-text-v1.5"]
+TASKS = ["retrieval", "sts", "clustering"]
+
+MODELS_TO_REMOVE = ["Alibaba-NLP/gte-Qwen2-7B-instruct"]
 TASKS = ["retrieval", "sts", "clustering"]
 
 for file in os.listdir("results_dataset_to_upload"):

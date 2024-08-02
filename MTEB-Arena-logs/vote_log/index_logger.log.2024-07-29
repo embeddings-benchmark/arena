@@ -47932,3 +47932,36 @@ xpected 5 arguments for function functools.partial(<function vote_last_response_
 2024-07-30 23:25:58 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
 2024-07-30 23:27:50 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
 2024-07-30 23:27:51 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
+2024-07-31 13:57:23 | INFO | stdout | Keyboard interruption in main thread... closing server.
+2024-07-31 13:57:23 | ERROR | stderr | 
+2024-07-31 13:57:23 | ERROR | stderr | Error in sys.excepthook:
+2024-07-31 13:57:23 | ERROR | stderr | Traceback (most recent call last):
+2024-07-31 13:57:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/linecache.py", line 46, in getlines
+2024-07-31 13:57:23 | ERROR | stderr |     return updatecache(filename, module_globals)
+2024-07-31 13:57:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/linecache.py", line 136, in updatecache
+2024-07-31 13:57:23 | ERROR | stderr |     with tokenize.open(fullname) as fp:
+2024-07-31 13:57:23 | ERROR | stderr | KeyboardInterrupt
+2024-07-31 13:57:23 | ERROR | stderr | 
+2024-07-31 13:57:23 | ERROR | stderr | Original exception was:
+2024-07-31 13:57:23 | ERROR | stderr | Traceback (most recent call last):
+2024-07-31 13:57:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 2690, in block_thread
+2024-07-31 13:57:23 | ERROR | stderr |     time.sleep(0.1)
+2024-07-31 13:57:23 | ERROR | stderr | KeyboardInterrupt
+2024-07-31 13:57:23 | ERROR | stderr | 
+2024-07-31 13:57:23 | ERROR | stderr | During handling of the above exception, another exception occurred:
+2024-07-31 13:57:23 | ERROR | stderr | 
+2024-07-31 13:57:23 | ERROR | stderr | Traceback (most recent call last):
+2024-07-31 13:57:23 | ERROR | stderr |   File "/data/niklas/arena/app.py", line 150, in <module>
+2024-07-31 13:57:23 | ERROR | stderr |     build_leaderboard_tab(elo_results_file['sts'], leaderboard_table_file['sts'], task_type="STS")
+2024-07-31 13:57:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 2595, in launch
+2024-07-31 13:57:23 | ERROR | stderr |     self.block_thread()
+2024-07-31 13:57:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 2694, in block_thread
+2024-07-31 13:57:23 | ERROR | stderr |     self.server.close()
+2024-07-31 13:57:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/http_server.py", line 68, in close
+2024-07-31 13:57:23 | ERROR | stderr |     self.thread.join(timeout=5)
+2024-07-31 13:57:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/threading.py", line 1100, in join
+2024-07-31 13:57:23 | ERROR | stderr |     self._wait_for_tstate_lock(timeout=max(timeout, 0))
+2024-07-31 13:57:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/threading.py", line 1116, in _wait_for_tstate_lock
+2024-07-31 13:57:23 | ERROR | stderr |     if lock.acquire(block, timeout):
+2024-07-31 13:57:23 | ERROR | stderr | KeyboardInterrupt
+2024-07-31 13:57:23 | INFO | stdout | [0mKilling tunnel 127.0.0.1:7860 <> https://7cd756ddd8ceaa7d27.gradio.live

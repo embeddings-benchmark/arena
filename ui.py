@@ -590,7 +590,7 @@ def build_side_by_side_ui_named(models):
     btn_list = [leftvote_btn, rightvote_btn, tie_btn, bothbad_btn, clear_btn]
 
     draw_btn.click(
-        models.retrieve_draw,
+        partial(models.retrieve_draw, ["wikipedia", "arxiv"]),
         inputs=None,
         outputs=[textbox, corpus],
         api_name="draw_btn_anon"
@@ -778,7 +778,7 @@ def build_single_model_ui(models):
     btn_list = [upvote_btn, downvote_btn, flag_btn, clear_btn]
 
     draw_btn.click(
-        models.retrieve_draw,
+        partial(models.retrieve_draw, ["wikipedia", "arxiv"]),
         inputs=None,
         outputs=[textbox, corpus],
         api_name="draw_btn_single"

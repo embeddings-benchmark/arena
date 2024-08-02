@@ -1,0 +1,14 @@
+key,Model,Arena Elo rating (anony),Arena Elo rating (full),MTEB Overall Avg,MTEB Retrieval Avg,MTEB Clustering Avg,MTEB STS Avg,License,Organization,Link
+intfloat/multilingual-e5-large-instruct,intfloat/multilingual-e5-large-instruct,1123.0243887021709,1123.0243887021709,64.41,52.47,47.1,84.78,MIT License,Microsoft,https://huggingface.co/intfloat/multilingual-e5-large-instruct
+intfloat/e5-mistral-7b-instruct,intfloat/e5-mistral-7b-instruct,1112.5756774364027,1112.5756774364027,66.63,56.89,50.26,84.63,MIT License,Microsoft,https://huggingface.co/intfloat/e5-mistral-7b-instruct
+text-embedding-3-large,text-embedding-3-large,1112.206742312326,1112.206742312326,64.59,55.44,49.01,81.73,Proprietary,OpenAI,https://platform.openai.com/docs/guides/embeddings
+text-embedding-004,text-embedding-004,1077.3160972757867,1077.3160972757867,66.31,55.7,47.48,85.07,Proprietary,Google,https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api
+jinaai/jina-embeddings-v2-base-en,jinaai/jina-embeddings-v2-base-en,1058.0452145214063,1058.0452145214063,60.38,47.87,41.73,80.7,Apache 2.0,Jina AI,https://huggingface.co/jinaai/jina-embeddings-v2-base-en
+GritLM/GritLM-7B,GritLM/GritLM-7B,1056.167413762088,1056.167413762088,66.76,57.41,50.61,83.35,Apache 2.0,"Contextual AI, HKU, Microsoft",https://huggingface.co/GritLM/GritLM-7B
+voyage-multilingual-2,voyage-multilingual-2,966.7259343668836,966.7259343668836,,,,,Proprietary,Voyage AI,https://docs.voyageai.com/docs/embeddings
+Salesforce/SFR-Embedding-2_R,Salesforce/SFR-Embedding-2_R,922.702001547445,922.702001547445,70.31,60.18,56.17,81.26,CC-BY-NC-4.0,Salesforce,https://huggingface.co/Salesforce/SFR-Embedding-2_R
+mixedbread-ai/mxbai-embed-large-v1,mixedbread-ai/mxbai-embed-large-v1,880.265656193617,880.265656193617,64.68,54.39,46.71,85.0,Apache 2.0,mixedbread.ai,https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1
+Alibaba-NLP/gte-Qwen2-7B-instruct,Alibaba-NLP/gte-Qwen2-7B-instruct,874.7889141280632,874.7889141280632,70.24,60.25,56.92,83.04,Apache 2.0,Alibaba,https://huggingface.co/Alibaba-NLP/gte-Qwen2-7B-instruct
+embed-english-v3.0,embed-english-v3.0,873.2339007160525,873.2339007160525,64.47,55,47.43,82.62,Proprietary,Cohere,https://docs.cohere.com/docs/cohere-embed
+BAAI/bge-large-en-v1.5,BAAI/bge-large-en-v1.5,828.8716756271845,828.8716756271845,64.23,54.29,46.08,83.11,MIT,BAAI,https://huggingface.co/BAAI/bge-large-en-v1.5
+sentence-transformers/all-MiniLM-L6-v2,sentence-transformers/all-MiniLM-L6-v2,801.0137138542218,801.0137138542218,56.26,41.95,42.35,78.9,Apache 2.0,Sentence Transformers,https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2

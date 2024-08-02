@@ -284,7 +284,6 @@ def report_elo_analysis_results(battles_json, rating_system="bt", num_bootstrap=
     model_order = model_order[:limit_show_number]
 
     # leaderboard_table_df: elo rating, variance, 95% interval, number of battles
-    # import pdb; pdb.set_trace()
     leaderboard_table_df = pd.DataFrame(
         {
             "rating": elo_rating_final,

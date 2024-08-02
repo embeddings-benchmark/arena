@@ -166,14 +166,14 @@ class ModelManager:
         self.loaded_indices[model_name][corpus] = index
         return index
 
-    def retrieve_draw(self):
+    def retrieve_draw(self, corpora=["wikipedia", "arxiv", "stackexchange"]):
         if "retrieval" not in self.loaded_samples:
             self.loaded_samples["retrieval"] = {}
             from datasets import load_dataset
             self.loaded_samples["retrieval"]["wikipedia"] = load_dataset("mteb/nq", "queries", split="queries")["text"]
             self.loaded_samples["retrieval"]["arxiv"] = load_dataset("mteb/arena-arxiv-7-2-24-samples", split="train")["query"]
             self.loaded_samples["retrieval"]["stackexchange"] = [x["query"] for sub_ds in load_dataset("colbertv2/lotte", "pooled", split=['search_dev', 'search_test']) for x in sub_ds]
-        corpus = random.choice(["wikipedia", "arxiv", "stackexchange"])
+        corpus = random.choice(corpora)
         return random.choice(self.loaded_samples["retrieval"][corpus]), corpus
 
     def clustering_draw(self):

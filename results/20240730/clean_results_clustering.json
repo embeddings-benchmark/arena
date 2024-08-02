@@ -582,5 +582,13 @@
     "judge": "arena_user_",
     "anony": true,
     "tstamp": 1722377569.7391
+  },
+  {
+    "model_a": "text-embedding-004",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722386134.7533
   }
 ]

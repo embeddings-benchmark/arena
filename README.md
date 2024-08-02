@@ -28,6 +28,13 @@ If you'd like to debug the app, set `DEBUG=True` in the beginning of `app.py`, w
 Some models require API keys which you can set as environment variables, e.g.
 `VOYAGE_API_KEY=YOUR_KEY HF_TOKEN=YOUR_KEY OPENAI_API_KEY=YOUR_KEY CO_API_KEY=YOUR_KEY python app.py`
 
+## Adding a Model
+
+1. Add the model to [mteb](https://github.com/embeddings-benchmark/mteb/tree/main/mteb/models) via PR.
+2. Add the model to this repo's `models.py` & `models_meta.yml` via PR.
+3. Test it in the Clustering and STS interfaces at least. Ideally, also retrieval.
+4. We will then consider adding it to the arena. Please note that keeping a model in the arena is costly to us as (1) we need to keep constant GPUs running with it in memory (2) we need to maintain retrieval indices for it. So we will focus on models that are most useful to the community. However, if you are willing to sponsor the hosting of your model, we may be able to add it faster.
+
 ## Results
 
 Results are auto-saved to [mteb/arena-results](https://huggingface.co/datasets/mteb/arena-results).

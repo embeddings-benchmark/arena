@@ -1,0 +1,13 @@
+key,Model,Arena Elo rating (anony),Arena Elo rating (full),MTEB Overall Avg,MTEB Retrieval Avg,MTEB Clustering Avg,MTEB STS Avg,License,Organization,Link
+text-embedding-3-large,text-embedding-3-large,1153.008071987539,1153.008071987539,64.59,55.44,49.01,81.73,Proprietary,OpenAI,https://platform.openai.com/docs/guides/embeddings
+intfloat/multilingual-e5-large-instruct,intfloat/multilingual-e5-large-instruct,1124.4728067250148,1124.4728067250148,64.41,52.47,47.1,84.78,MIT License,Microsoft,https://huggingface.co/intfloat/multilingual-e5-large-instruct
+intfloat/e5-mistral-7b-instruct,intfloat/e5-mistral-7b-instruct,1108.6686254758226,1108.6686254758226,66.63,56.89,50.26,84.63,MIT License,Microsoft,https://huggingface.co/intfloat/e5-mistral-7b-instruct
+text-embedding-004,text-embedding-004,1084.0984570627088,1084.0984570627088,66.31,55.7,47.48,85.07,Proprietary,Google,https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api
+jinaai/jina-embeddings-v2-base-en,jinaai/jina-embeddings-v2-base-en,1072.7539909047096,1072.7539909047096,60.38,47.87,41.73,80.7,Apache 2.0,Jina AI,https://huggingface.co/jinaai/jina-embeddings-v2-base-en
+voyage-multilingual-2,voyage-multilingual-2,940.2294211502937,940.2294211502937,,,,,Proprietary,Voyage AI,https://docs.voyageai.com/docs/embeddings
+GritLM/GritLM-7B,GritLM/GritLM-7B,939.502074004079,939.502074004079,66.76,57.41,50.61,83.35,Apache 2.0,"Contextual AI, HKU, Microsoft",https://huggingface.co/GritLM/GritLM-7B
+Salesforce/SFR-Embedding-2_R,Salesforce/SFR-Embedding-2_R,933.4201554304502,933.4201554304502,70.31,60.18,56.17,81.26,CC-BY-NC-4.0,Salesforce,https://huggingface.co/Salesforce/SFR-Embedding-2_R
+embed-english-v3.0,embed-english-v3.0,903.2813496721938,903.2813496721938,64.47,55,47.43,82.62,Proprietary,Cohere,https://docs.cohere.com/docs/cohere-embed
+mixedbread-ai/mxbai-embed-large-v1,mixedbread-ai/mxbai-embed-large-v1,852.7520686328589,852.7520686328589,64.68,54.39,46.71,85.0,Apache 2.0,mixedbread.ai,https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1
+sentence-transformers/all-MiniLM-L6-v2,sentence-transformers/all-MiniLM-L6-v2,845.1446244463016,845.1446244463016,56.26,41.95,42.35,78.9,Apache 2.0,Sentence Transformers,https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
+BAAI/bge-large-en-v1.5,BAAI/bge-large-en-v1.5,725.8682669797979,725.8682669797979,64.23,54.29,46.08,83.11,MIT,BAAI,https://huggingface.co/BAAI/bge-large-en-v1.5

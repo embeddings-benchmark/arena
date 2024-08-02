@@ -1,0 +1,13 @@
+key,Model,Arena Elo rating (anony),Arena Elo rating (full),MTEB Overall Avg,MTEB Retrieval Avg,MTEB Clustering Avg,MTEB STS Avg,License,Organization,Link
+GritLM/GritLM-7B,GritLM/GritLM-7B,1194.0837282020618,1194.0837282020618,66.76,57.41,50.61,83.35,Apache 2.0,"Contextual AI, HKU, Microsoft",https://huggingface.co/GritLM/GritLM-7B
+embed-english-v3.0,embed-english-v3.0,1113.8641169446,1113.8641169446,64.47,55,47.43,82.62,Proprietary,Cohere,https://docs.cohere.com/docs/cohere-embed
+Salesforce/SFR-Embedding-2_R,Salesforce/SFR-Embedding-2_R,1066.1572672505458,1066.1572672505458,70.31,60.18,56.17,81.26,CC-BY-NC-4.0,Salesforce,https://huggingface.co/Salesforce/SFR-Embedding-2_R
+BAAI/bge-large-en-v1.5,BAAI/bge-large-en-v1.5,1055.6702757030248,1055.6702757030248,64.23,54.29,46.08,83.11,MIT,BAAI,https://huggingface.co/BAAI/bge-large-en-v1.5
+mixedbread-ai/mxbai-embed-large-v1,mixedbread-ai/mxbai-embed-large-v1,1033.011416010837,1033.011416010837,64.68,54.39,46.71,85.0,Apache 2.0,mixedbread.ai,https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1
+voyage-multilingual-2,voyage-multilingual-2,1011.2448990523914,1011.2448990523914,,,,,Proprietary,Voyage AI,https://docs.voyageai.com/docs/embeddings
+intfloat/e5-mistral-7b-instruct,intfloat/e5-mistral-7b-instruct,1008.882951310737,1008.882951310737,66.63,56.89,50.26,84.63,MIT License,Microsoft,https://huggingface.co/intfloat/e5-mistral-7b-instruct
+text-embedding-3-large,text-embedding-3-large,1001.5456466870335,1001.5456466870335,64.59,55.44,49.01,81.73,Proprietary,OpenAI,https://platform.openai.com/docs/guides/embeddings
+intfloat/multilingual-e5-large-instruct,intfloat/multilingual-e5-large-instruct,989.3127003616494,989.3127003616494,64.41,52.47,47.1,84.78,MIT License,Microsoft,https://huggingface.co/intfloat/multilingual-e5-large-instruct
+Alibaba-NLP/gte-Qwen2-7B-instruct,Alibaba-NLP/gte-Qwen2-7B-instruct,888.1463469931351,888.1463469931351,70.24,60.25,56.92,83.04,Apache 2.0,Alibaba,https://huggingface.co/Alibaba-NLP/gte-Qwen2-7B-instruct
+jinaai/jina-embeddings-v2-base-en,jinaai/jina-embeddings-v2-base-en,875.4210557076487,875.4210557076487,60.38,47.87,41.73,80.7,Apache 2.0,Jina AI,https://huggingface.co/jinaai/jina-embeddings-v2-base-en
+sentence-transformers/all-MiniLM-L6-v2,sentence-transformers/all-MiniLM-L6-v2,762.6595957763358,762.6595957763358,56.26,41.95,42.35,78.9,Apache 2.0,Sentence Transformers,https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
