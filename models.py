@@ -232,6 +232,7 @@ class ModelManager:
             
         model = self.load_model(model_name)
         kwargs = {} if self.use_gcp_index else {"convert_to_tensor": True}
+        kwargs["normalize_embeddings"] = self.model_meta[model_name].get("normalize_embeddings", False)
         if f"instruction_query_{corpus}" in self.model_meta[model_name]:
             kwargs["instruction"] = self.model_meta[model_name][f"instruction_query_{corpus}"]
             logger.info(f"Using instruction: {kwargs['instruction']}")

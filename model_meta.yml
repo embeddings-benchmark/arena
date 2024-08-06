@@ -154,6 +154,7 @@ model_meta:
     mteb_retrieval: 47.87
     mteb_sts: 80.70
     mteb_clustering: 41.73
+    normalize_embedddings: True
   mixedbread-ai/mxbai-embed-large-v1:
     link: https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1
     revision: 990580e27d329c7408b3741ecff85876e128e203
