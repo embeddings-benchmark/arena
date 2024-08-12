@@ -83,8 +83,8 @@ if __name__ == "__main__":
             doc_maxlen=512,
         )
         indexer = Indexer(
-            checkpoint="answerdotai/AnswerAI-ColBERTv2.5-small", config=config
+            checkpoint="answerdotai/answerai-colbert-small-v1", config=config
         )
         indexer.index(
-            name=f"{dataset_name}_V1_ColBERTv2.5-small", collection=docs, overwrite=True
+            name=f"{dataset_name}_V1_AAIColBERT-small", collection=docs, overwrite=True
         )
