@@ -223,7 +223,7 @@ class ModelManager:
         corpus_format = CORPUS_TO_FORMAT[corpus]
 
         if "BM25" in model_name:
-            index = self.load_bm25_index(model_name, corpus)
+            index = self.load_bm25_index("BM25", corpus)
             docs = index.search([query], topk=topk)
             if corpus == "stackexchange":
                 return [[query, corpus_format.format(text=docs[0][0]["text"])]]
