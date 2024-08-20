@@ -1,0 +1,778 @@
+[
+  {
+    "model_a": "voyage-multilingual-2",
+    "model_b": "BAAI/bge-large-en-v1.5",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722263906.0355
+  },
+  {
+    "model_a": "BAAI/bge-large-en-v1.5",
+    "model_b": "GritLM/GritLM-7B",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722266426.4606
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "text-embedding-3-large",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722266465.3044
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "embed-english-v3.0",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722272659.3063
+  },
+  {
+    "model_a": "BAAI/bge-large-en-v1.5",
+    "model_b": "text-embedding-004",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722272694.603
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "jinaai/jina-embeddings-v2-base-en",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722272781.662
+  },
+  {
+    "model_a": "mixedbread-ai/mxbai-embed-large-v1",
+    "model_b": "text-embedding-3-large",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722276389.1412
+  },
+  {
+    "model_a": "text-embedding-004",
+    "model_b": "text-embedding-3-large",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722276839.4005
+  },
+  {
+    "model_a": "voyage-multilingual-2",
+    "model_b": "embed-english-v3.0",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722276997.8264
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "text-embedding-004",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277187.8827
+  },
+  {
+    "model_a": "GritLM/GritLM-7B",
+    "model_b": "jinaai/jina-embeddings-v2-base-en",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277210.6836
+  },
+  {
+    "model_a": "BAAI/bge-large-en-v1.5",
+    "model_b": "text-embedding-004",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277499.9324
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "BAAI/bge-large-en-v1.5",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277520.8821
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277608.0973
+  },
+  {
+    "model_a": "GritLM/GritLM-7B",
+    "model_b": "text-embedding-004",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277634.607
+  },
+  {
+    "model_a": "Salesforce/SFR-Embedding-2_R",
+    "model_b": "mixedbread-ai/mxbai-embed-large-v1",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277653.6919
+  },
+  {
+    "model_a": "text-embedding-004",
+    "model_b": "BAAI/bge-large-en-v1.5",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277689.5573
+  },
+  {
+    "model_a": "BAAI/bge-large-en-v1.5",
+    "model_b": "intfloat/e5-mistral-7b-instruct",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277704.7607
+  },
+  {
+    "model_a": "GritLM/GritLM-7B",
+    "model_b": "jinaai/jina-embeddings-v2-base-en",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277716.7904
+  },
+  {
+    "model_a": "jinaai/jina-embeddings-v2-base-en",
+    "model_b": "mixedbread-ai/mxbai-embed-large-v1",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277778.0722
+  },
+  {
+    "model_a": "text-embedding-004",
+    "model_b": "text-embedding-3-large",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277798.3561
+  },
+  {
+    "model_a": "text-embedding-3-large",
+    "model_b": "text-embedding-004",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277856.6326
+  },
+  {
+    "model_a": "mixedbread-ai/mxbai-embed-large-v1",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277877.938
+  },
+  {
+    "model_a": "jinaai/jina-embeddings-v2-base-en",
+    "model_b": "GritLM/GritLM-7B",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277898.6295
+  },
+  {
+    "model_a": "jinaai/jina-embeddings-v2-base-en",
+    "model_b": "text-embedding-3-large",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277923.6911
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277948.0387
+  },
+  {
+    "model_a": "jinaai/jina-embeddings-v2-base-en",
+    "model_b": "intfloat/e5-mistral-7b-instruct",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722277970.6393
+  },
+  {
+    "model_a": "mixedbread-ai/mxbai-embed-large-v1",
+    "model_b": "voyage-multilingual-2",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722278296.4392
+  },
+  {
+    "model_a": "Salesforce/SFR-Embedding-2_R",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722278315.581
+  },
+  {
+    "model_a": "embed-english-v3.0",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722278356.4265
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722278372.9652
+  },
+  {
+    "model_a": "jinaai/jina-embeddings-v2-base-en",
+    "model_b": "text-embedding-004",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722278391.4029
+  },
+  {
+    "model_a": "mixedbread-ai/mxbai-embed-large-v1",
+    "model_b": "voyage-multilingual-2",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722281821.2839
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "intfloat/multilingual-e5-large-instruct",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722281965.6179
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "voyage-multilingual-2",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722282005.3598
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "voyage-multilingual-2",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722282151.7917
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "embed-english-v3.0",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722282371.8069
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "mixedbread-ai/mxbai-embed-large-v1",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722282495.2203
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "intfloat/multilingual-e5-large-instruct",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722310865.1737
+  },
+  {
+    "model_a": "embed-english-v3.0",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722349264.7668
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722354938.3291
+  },
+  {
+    "model_a": "embed-english-v3.0",
+    "model_b": "GritLM/GritLM-7B",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722367036.7553
+  },
+  {
+    "model_a": "text-embedding-004",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722370311.0017
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "text-embedding-3-large",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377378.7801
+  },
+  {
+    "model_a": "BAAI/bge-large-en-v1.5",
+    "model_b": "intfloat/e5-mistral-7b-instruct",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377394.61
+  },
+  {
+    "model_a": "embed-english-v3.0",
+    "model_b": "intfloat/multilingual-e5-large-instruct",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377407.9489
+  },
+  {
+    "model_a": "voyage-multilingual-2",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377421.3814
+  },
+  {
+    "model_a": "mixedbread-ai/mxbai-embed-large-v1",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377446.2025
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "text-embedding-3-large",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377503.3609
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "intfloat/multilingual-e5-large-instruct",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377513.9379
+  },
+  {
+    "model_a": "Salesforce/SFR-Embedding-2_R",
+    "model_b": "mixedbread-ai/mxbai-embed-large-v1",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722377569.7391
+  },
+  {
+    "model_a": "text-embedding-004",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722386134.7533
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722404126.8902
+  },
+  {
+    "model_a": "mixedbread-ai/mxbai-embed-large-v1",
+    "model_b": "intfloat/e5-mistral-7b-instruct",
+    "winner": "tie (bothbad)",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722419487.8862
+  },
+  {
+    "model_a": "GritLM/GritLM-7B",
+    "model_b": "text-embedding-3-large",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722465648.9957
+  },
+  {
+    "model_a": "voyage-multilingual-2",
+    "model_b": "BAAI/bge-large-en-v1.5",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722504255.7293
+  },
+  {
+    "model_a": "text-embedding-3-large",
+    "model_b": "jinaai/jina-embeddings-v2-base-en",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722504382.0493
+  },
+  {
+    "model_a": "BAAI/bge-large-en-v1.5",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722523947.4992
+  },
+  {
+    "model_a": "mixedbread-ai/mxbai-embed-large-v1",
+    "model_b": "embed-english-v3.0",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722544433.5079
+  },
+  {
+    "model_a": "text-embedding-3-large",
+    "model_b": "GritLM/GritLM-7B",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722544559.5543
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "text-embedding-3-large",
+    "winner": "tie (bothbad)",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722582734.4937
+  },
+  {
+    "model_a": "text-embedding-004",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722612753.836
+  },
+  {
+    "model_a": "jinaai/jina-embeddings-v2-base-en",
+    "model_b": "GritLM/GritLM-7B",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722612795.3835
+  },
+  {
+    "model_a": "Salesforce/SFR-Embedding-2_R",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722615202.3598
+  },
+  {
+    "model_a": "embed-english-v3.0",
+    "model_b": "Alibaba-NLP/gte-Qwen2-7B-instruct",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722615253.2679
+  },
+  {
+    "model_a": "GritLM/GritLM-7B",
+    "model_b": "intfloat/multilingual-e5-large-instruct",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722615451.8371
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "mixedbread-ai/mxbai-embed-large-v1",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722615480.5966
+  },
+  {
+    "model_a": "text-embedding-004",
+    "model_b": "jinaai/jina-embeddings-v2-base-en",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722628273.8485
+  },
+  {
+    "model_a": "text-embedding-004",
+    "model_b": "voyage-multilingual-2",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722645867.6444
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "Alibaba-NLP/gte-Qwen2-7B-instruct",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722645945.4401
+  },
+  {
+    "model_a": "voyage-multilingual-2",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722654831.3119
+  },
+  {
+    "model_a": "text-embedding-3-large",
+    "model_b": "mixedbread-ai/mxbai-embed-large-v1",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722717837.4978
+  },
+  {
+    "model_a": "mixedbread-ai/mxbai-embed-large-v1",
+    "model_b": "intfloat/e5-mistral-7b-instruct",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722776811.3514
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "BAAI/bge-large-en-v1.5",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722796527.251
+  },
+  {
+    "model_a": "GritLM/GritLM-7B",
+    "model_b": "intfloat/e5-mistral-7b-instruct",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722796588.6399
+  },
+  {
+    "model_a": "text-embedding-3-large",
+    "model_b": "nomic-ai/nomic-embed-text-v1.5",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722894512.4169
+  },
+  {
+    "model_a": "mixedbread-ai/mxbai-embed-large-v1",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722927949.6768
+  },
+  {
+    "model_a": "voyage-multilingual-2",
+    "model_b": "BAAI/bge-large-en-v1.5",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1722937341.1871
+  },
+  {
+    "model_a": "jinaai/jina-embeddings-v2-base-en",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723102070.8179
+  },
+  {
+    "model_a": "GritLM/GritLM-7B",
+    "model_b": "text-embedding-004",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723102117.9081
+  },
+  {
+    "model_a": "voyage-multilingual-2",
+    "model_b": "text-embedding-3-large",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723134893.9338
+  },
+  {
+    "model_a": "text-embedding-3-large",
+    "model_b": "mixedbread-ai/mxbai-embed-large-v1",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723136681.2304
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "jinaai/jina-embeddings-v2-base-en",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723136723.7632
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "Alibaba-NLP/gte-Qwen2-7B-instruct",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723214645.1831
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "Alibaba-NLP/gte-Qwen2-7B-instruct",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723244337.8557
+  },
+  {
+    "model_a": "GritLM/GritLM-7B",
+    "model_b": "sentence-transformers/all-MiniLM-L6-v2",
+    "winner": "tie (bothbad)",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723409498.4434
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "voyage-multilingual-2",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723409942.498
+  },
+  {
+    "model_a": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_b": "mixedbread-ai/mxbai-embed-large-v1",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723410009.9832
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "voyage-multilingual-2",
+    "winner": "tie (bothbad)",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723411483.7118
+  },
+  {
+    "model_a": "mixedbread-ai/mxbai-embed-large-v1",
+    "model_b": "nomic-ai/nomic-embed-text-v1.5",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723411538.2593
+  },
+  {
+    "model_a": "text-embedding-004",
+    "model_b": "embed-english-v3.0",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723537022.381
+  },
+  {
+    "model_a": "intfloat/multilingual-e5-large-instruct",
+    "model_b": "BAAI/bge-large-en-v1.5",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723537063.3503
+  },
+  {
+    "model_a": "intfloat/e5-mistral-7b-instruct",
+    "model_b": "intfloat/multilingual-e5-large-instruct",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723537092.4097
+  },
+  {
+    "model_a": "Alibaba-NLP/gte-Qwen2-7B-instruct",
+    "model_b": "mixedbread-ai/mxbai-embed-large-v1",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723538460.2356
+  },
+  {
+    "model_a": "Salesforce/SFR-Embedding-2_R",
+    "model_b": "embed-english-v3.0",
+    "winner": "model_a",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723562661.3776
+  },
+  {
+    "model_a": "nomic-ai/nomic-embed-text-v1.5",
+    "model_b": "Salesforce/SFR-Embedding-2_R",
+    "winner": "tie",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723562710.3145
+  },
+  {
+    "model_a": "embed-english-v3.0",
+    "model_b": "voyage-multilingual-2",
+    "winner": "model_b",
+    "judge": "arena_user_",
+    "anony": true,
+    "tstamp": 1723685488.8576
+  }
+]

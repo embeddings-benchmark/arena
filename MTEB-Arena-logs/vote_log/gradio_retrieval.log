@@ -1,191 +1,105 @@
-2024-08-13 22:36:04 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-13 22:36:34 | INFO | gradio_retrieval | bothbadvote (named). ip: 
-2024-08-13 22:36:47 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-13 22:37:30 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-13 23:31:00 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-13 23:31:54 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-13 23:32:29 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-13 23:32:59 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 00:55:53 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 00:56:32 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 00:56:59 | INFO | gradio_retrieval | bothbadvote (named). ip: 
-2024-08-14 00:57:29 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 00:57:53 | INFO | gradio_retrieval | bothbadvote (named). ip: 
-2024-08-14 00:58:45 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 00:59:10 | INFO | gradio_retrieval | bothbadvote (named). ip: 
-2024-08-14 01:02:05 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 01:03:38 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 01:17:05 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 01:18:19 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 01:18:51 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 01:19:07 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 01:20:36 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 01:21:37 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 01:25:22 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 01:28:06 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 01:28:34 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 01:29:25 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 02:05:14 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 02:05:45 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 02:07:27 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 02:09:17 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 02:12:16 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 02:21:16 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 05:27:16 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 05:27:26 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 05:28:16 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 05:29:05 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 05:29:53 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 05:32:01 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 05:32:08 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 05:32:10 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 05:32:42 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 05:33:00 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 05:33:52 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 05:35:33 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 05:35:47 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 05:36:14 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:09:37 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:10:57 | INFO | gradio_retrieval | bothbadvote (named). ip: 
-2024-08-14 06:13:24 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:13:33 | INFO | gradio_retrieval | bothbadvote (named). ip: 
-2024-08-14 06:29:58 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:31:23 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 06:31:48 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:32:39 | INFO | gradio_retrieval | bothbadvote (named). ip: 
-2024-08-14 06:32:49 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:33:03 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:33:32 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 06:34:57 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:35:30 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 06:36:16 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:36:30 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 06:37:11 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:37:36 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 06:39:15 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:39:51 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 06:40:41 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:40:50 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:41:24 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:42:06 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:42:13 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 06:42:34 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:43:21 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:43:55 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:44:12 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 06:44:40 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:44:57 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:45:05 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 06:46:05 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:47:38 | INFO | gradio_retrieval | bothbadvote (named). ip: 
-2024-08-14 06:47:46 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:47:56 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 06:48:05 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:48:57 | INFO | gradio_retrieval | bothbadvote (named). ip: 
-2024-08-14 06:49:06 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:49:16 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:49:39 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 06:49:47 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:49:53 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 06:50:09 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:51:04 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:51:15 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:51:21 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 06:51:36 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:51:46 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:52:00 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:52:33 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:52:54 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:53:49 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:54:28 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 06:54:52 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:55:09 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:55:18 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 06:55:44 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:55:58 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 06:55:59 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 06:56:14 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:56:17 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 06:56:27 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:56:45 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:56:53 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 06:57:07 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 06:57:46 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:58:16 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 06:58:35 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:58:41 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 06:58:46 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:58:54 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 06:59:24 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 06:59:50 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 07:00:38 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 07:01:03 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 07:01:23 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 07:01:41 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 07:01:46 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 07:02:07 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 07:02:47 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 07:03:10 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 07:03:46 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 07:03:54 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 07:05:18 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 07:06:17 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 07:07:42 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 07:58:40 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 08:44:46 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 08:44:52 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 08:45:29 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 08:45:44 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 08:46:19 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 08:46:32 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 08:51:22 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 08:52:59 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 08:55:25 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 08:58:57 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 09:00:43 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 09:40:35 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 09:44:27 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 10:16:11 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 10:16:28 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 11:35:39 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 11:35:50 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 12:41:56 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 12:43:40 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 13:10:18 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 13:10:31 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 13:10:48 | INFO | gradio_retrieval | share (named). ip: 
-2024-08-14 13:10:52 | INFO | gradio_retrieval | share (named). ip: 
-2024-08-14 13:17:25 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 13:18:39 | INFO | gradio_retrieval | bothbadvote (named). ip: 
-2024-08-14 13:50:10 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 13:50:23 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 15:56:26 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 15:56:32 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 15:56:37 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 15:56:52 | INFO | gradio_retrieval | bothbadvote (named). ip: 
-2024-08-14 15:56:56 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 15:57:07 | INFO | gradio_retrieval | bothbadvote (named). ip: 
-2024-08-14 15:57:12 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 15:57:18 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 15:58:04 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 15:58:10 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 15:58:16 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 15:59:01 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 15:59:07 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 15:59:28 | INFO | gradio_retrieval | rightvote (named). ip: 
-2024-08-14 15:59:33 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 15:59:39 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 16:02:08 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 16:02:25 | INFO | gradio_retrieval | tievote (named). ip: 
-2024-08-14 16:45:22 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 16:45:51 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 16:48:47 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 16:48:55 | INFO | gradio_retrieval | leftvote (named). ip: 
-2024-08-14 16:59:43 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 17:00:29 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 17:10:09 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 17:11:02 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 17:11:39 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 17:12:24 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 18:01:01 | INFO | gradio_retrieval | Retrieval. ip: 
-2024-08-14 19:11:46 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 15:11:37 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 16:54:52 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 16:55:15 | INFO | gradio_retrieval | rightvote (named). ip: 
+2024-08-19 16:55:20 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 16:56:46 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 16:56:55 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 16:57:49 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 16:58:04 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 16:58:30 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 16:58:44 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 17:16:19 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 17:18:44 | INFO | gradio_retrieval | tievote (named). ip: 
+2024-08-19 17:19:13 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 17:19:23 | INFO | gradio_retrieval | bothbadvote (named). ip: 
+2024-08-19 17:33:11 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 18:12:20 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 18:12:38 | INFO | gradio_retrieval | tievote (named). ip: 
+2024-08-19 18:31:28 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 19:11:32 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 19:11:44 | INFO | gradio_retrieval | bothbadvote (named). ip: 
+2024-08-19 20:50:52 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:51:12 | INFO | gradio_retrieval | bothbadvote (named). ip: 
+2024-08-19 20:51:48 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:51:59 | INFO | gradio_retrieval | tievote (named). ip: 
+2024-08-19 20:53:11 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:53:39 | INFO | gradio_retrieval | bothbadvote (named). ip: 
+2024-08-19 20:53:56 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:54:29 | INFO | gradio_retrieval | rightvote (named). ip: 
+2024-08-19 20:54:43 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:54:52 | INFO | gradio_retrieval | bothbadvote (named). ip: 
+2024-08-19 20:54:59 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:55:08 | INFO | gradio_retrieval | tievote (named). ip: 
+2024-08-19 20:55:13 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:55:18 | INFO | gradio_retrieval | tievote (named). ip: 
+2024-08-19 20:55:50 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:56:03 | INFO | gradio_retrieval | rightvote (named). ip: 
+2024-08-19 20:56:15 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:56:38 | INFO | gradio_retrieval | leftvote (named). ip: 
+2024-08-19 20:56:49 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:56:52 | INFO | gradio_retrieval | tievote (named). ip: 
+2024-08-19 20:57:06 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:57:22 | INFO | gradio_retrieval | bothbadvote (named). ip: 
+2024-08-19 20:57:27 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:57:33 | INFO | gradio_retrieval | leftvote (named). ip: 
+2024-08-19 20:57:42 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:57:55 | INFO | gradio_retrieval | rightvote (named). ip: 
+2024-08-19 20:58:01 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:58:09 | INFO | gradio_retrieval | leftvote (named). ip: 
+2024-08-19 20:58:51 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:58:54 | INFO | gradio_retrieval | leftvote (named). ip: 
+2024-08-19 20:59:13 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-19 20:59:22 | INFO | gradio_retrieval | leftvote (named). ip: 
+2024-08-20 02:24:57 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 02:25:28 | INFO | gradio_retrieval | tievote (named). ip: 
+2024-08-20 03:52:08 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 03:53:54 | INFO | gradio_retrieval | rightvote (named). ip: 
+2024-08-20 07:24:29 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 07:24:39 | INFO | gradio_retrieval | bothbadvote (named). ip: 
+2024-08-20 08:05:12 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 08:05:34 | INFO | gradio_retrieval | rightvote (named). ip: 
+2024-08-20 08:23:40 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 08:24:28 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 08:26:38 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 08:27:03 | INFO | gradio_retrieval | leftvote (named). ip: 
+2024-08-20 08:58:38 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:15:56 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:23:17 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:24:36 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:28:54 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:29:47 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:37:33 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:45:49 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:46:02 | INFO | gradio_retrieval | rightvote (named). ip: 
+2024-08-20 09:46:22 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:46:46 | INFO | gradio_retrieval | bothbadvote (named). ip: 
+2024-08-20 09:47:01 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:47:26 | INFO | gradio_retrieval | rightvote (named). ip: 
+2024-08-20 09:47:58 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:48:26 | INFO | gradio_retrieval | bothbadvote (named). ip: 
+2024-08-20 09:48:35 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:48:43 | INFO | gradio_retrieval | tievote (named). ip: 
+2024-08-20 09:49:08 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 09:49:33 | INFO | gradio_retrieval | leftvote (named). ip: 
+2024-08-20 10:36:14 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 10:36:31 | INFO | gradio_retrieval | tievote (named). ip: 
+2024-08-20 11:23:21 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 12:13:52 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 12:15:59 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 12:40:34 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 12:41:09 | INFO | gradio_retrieval | tievote (named). ip: 
+2024-08-20 12:41:22 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 12:44:09 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 13:14:14 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 13:14:47 | INFO | gradio_retrieval | tievote (named). ip: 
+2024-08-20 13:15:15 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 13:47:36 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 13:47:43 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 13:48:28 | INFO | gradio_retrieval | bothbadvote (named). ip: 
+2024-08-20 13:48:51 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 14:14:27 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 14:14:51 | INFO | gradio_retrieval | leftvote (named). ip: 
+2024-08-20 14:15:20 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 14:15:34 | INFO | gradio_retrieval | rightvote (named). ip: 
+2024-08-20 14:15:55 | INFO | gradio_retrieval | Retrieval. ip: 
+2024-08-20 14:16:01 | INFO | gradio_retrieval | rightvote (named). ip: 
