@@ -7,3 +7,6 @@ tmp*
 slurm_jobs
 emb_*
 scripts/arxiv_samples.py
+results/2024*
+results/2025*
+MTEB-Arena-logs
