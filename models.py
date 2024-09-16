@@ -216,7 +216,7 @@ class ModelManager:
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = [executor.submit(self.retrieve, prompt, corpus, model) for model in model_names]
             results = [future.result() for future in futures]
-        return results[0], results[1], model_names[0], model_names[1]
+        return results[0][0], results[1][0], model_names[0], model_names[1], results[0][1], results[1][1]
 
     @spaces.GPU(duration=120)
     def retrieve(self, query, corpus, model_name, topk=1):
@@ -226,9 +226,9 @@ class ModelManager:
             index = self.load_bm25_index(model_name, corpus)
             docs = index.search([query], topk=topk)
             if corpus == "stackexchange":
-                return [[query, corpus_format.format(text=docs[0][0]["text"])]]
+                return [[query, corpus_format.format(text=docs[0][0]["text"])]], None 
             else:
-                return [[query, corpus_format.format(title=docs[0][0]["title"], text=docs[0][0]["text"])]]
+                return [[query, corpus_format.format(title=docs[0][0]["title"], text=docs[0][0]["text"])]], None 
             
         model = self.load_model(model_name)
         kwargs = {} if self.use_gcp_index else {"convert_to_tensor": True}
@@ -255,8 +255,8 @@ class ModelManager:
         else:
             index = self.load_local_index(model_name, corpus)
             docs, scores = index.search_knn(query_embed, topk=topk)
-            docs = [[query, corpus_format.format(title=docs[0].get("title", ""), text=docs[0][0]["text"])]]
-        return docs
+            docs = [[query, corpus_format.format(title=docs[0][0].get("title", ""), text=docs[0][0]["text"])]]
+        return docs, query_embed
     
     def clustering_parallel(self, prompt, model_A, model_B, ncluster=1, ndim="3D", dim_method="PCA", clustering_method="KMeans"):
         if model_A == "" and model_B == "":
@@ -512,3 +512,4 @@ class ModelManager:
                 model_description_md += "\n"
             ct += 1
         return model_description_md
+    
