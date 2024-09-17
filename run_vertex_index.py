@@ -20,7 +20,7 @@ path = model_name_as_path(model_name)
 from google.cloud import aiplatform, storage
 storage_client = storage.Client()
 bucket = storage_client.bucket("mtebarenauscentral")
-bucket = storage_client.bucket("mtebarena")
+# bucket = storage_client.bucket("mtebarena")
 # Include the folder name in the blob path
 blob = bucket.blob(f"emb_{corpus}_{path}/emb_{corpus}_{path}.json")
 blob.upload_from_filename(f"emb_{corpus}_{path}.json")

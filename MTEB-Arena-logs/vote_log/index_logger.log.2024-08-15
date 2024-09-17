@@ -1,731 +1,0 @@
-2024-08-15 03:54:02 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 03:58:54 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-15 03:58:54 | ERROR | stderr | 
-2024-08-15 03:58:54 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-15 03:58:54 | ERROR | stderr | 
-2024-08-15 04:00:41 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-15 04:00:41 | ERROR | stderr | 
-2024-08-15 04:00:41 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-15 04:00:41 | ERROR | stderr | 
-2024-08-15 06:58:57 | ERROR | stderr | 
-2024-08-15 06:58:57 | ERROR | stderr | Split strings:   0%|                                                                           | 0/1 [00:00<?, ?it/s]
-2024-08-15 06:58:57 | ERROR | stderr | 
-2024-08-15 06:58:57 | ERROR | stderr | 
-2024-08-15 06:58:57 | ERROR | stderr | Stem Tokens:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
-2024-08-15 06:58:57 | ERROR | stderr | 
-2024-08-15 06:58:57 | ERROR | stderr | 
-2024-08-15 06:58:57 | ERROR | stderr | BM25S Retrieve:   0%|                                                                          | 0/1 [00:00<?, ?it/s]
-2024-08-15 06:58:57 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 06:58:59 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████| 1/1 [00:02<00:00,  2.06s/it]
-2024-08-15 06:58:59 | ERROR | stderr | 
-2024-08-15 07:56:48 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 07:57:53 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 07:58:57 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 07:59:40 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 07:59:40 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 09:26:11 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 10:31:30 | ERROR | stderr | 
-2024-08-15 10:31:30 | ERROR | stderr | Split strings:   0%|                                                                           | 0/1 [00:00<?, ?it/s]
-2024-08-15 10:31:30 | ERROR | stderr | 
-2024-08-15 10:31:30 | ERROR | stderr | 
-2024-08-15 10:31:30 | ERROR | stderr | Stem Tokens:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
-2024-08-15 10:31:30 | ERROR | stderr | 
-2024-08-15 10:31:30 | ERROR | stderr | 
-2024-08-15 10:31:30 | ERROR | stderr | BM25S Retrieve:   0%|                                                                          | 0/1 [00:00<?, ?it/s]
-2024-08-15 10:31:32 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████| 1/1 [00:01<00:00,  1.16s/it]
-2024-08-15 10:31:32 | ERROR | stderr | 
-2024-08-15 10:34:40 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 10:34:40 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 10:35:32 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 10:35:32 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 12:39:57 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 14:29:48 | ERROR | stderr | 
-2024-08-15 14:29:48 | ERROR | stderr | Split strings:   0%|                                                                           | 0/1 [00:00<?, ?it/s]
-2024-08-15 14:29:48 | ERROR | stderr | 
-2024-08-15 14:29:48 | ERROR | stderr | 
-2024-08-15 14:29:48 | ERROR | stderr | Stem Tokens:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
-2024-08-15 14:29:48 | ERROR | stderr | 
-2024-08-15 14:29:48 | ERROR | stderr | 
-2024-08-15 14:29:48 | ERROR | stderr | BM25S Retrieve:   0%|                                                                          | 0/1 [00:00<?, ?it/s]
-2024-08-15 14:29:48 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 14:29:48 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  2.84it/s]
-2024-08-15 14:29:48 | ERROR | stderr | 
-2024-08-15 14:34:00 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 14:36:06 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 15:07:03 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 15:58:51 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 15:59:35 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 17:51:19 | ERROR | stderr | Loading checkpoint shards:   0%|                                                               | 0/7 [00:00<?, ?it/s]
-2024-08-15 17:51:22 | ERROR | stderr | Loading checkpoint shards:  14%|███████▊                                               | 1/7 [00:02<00:16,  2.76s/it]
-2024-08-15 17:51:26 | ERROR | stderr | Loading checkpoint shards:  29%|███████████████▋                                       | 2/7 [00:06<00:17,  3.55s/it]
-2024-08-15 17:51:31 | ERROR | stderr | Loading checkpoint shards:  43%|███████████████████████▌                               | 3/7 [00:11<00:15,  3.98s/it]
-2024-08-15 17:51:35 | ERROR | stderr | Loading checkpoint shards:  57%|███████████████████████████████▍                       | 4/7 [00:15<00:12,  4.18s/it]
-2024-08-15 17:51:40 | ERROR | stderr | Loading checkpoint shards:  71%|███████████████████████████████████████▎               | 5/7 [00:20<00:08,  4.31s/it]
-2024-08-15 17:51:43 | ERROR | stderr | Loading checkpoint shards:  86%|███████████████████████████████████████████████▏       | 6/7 [00:23<00:03,  3.89s/it]
-2024-08-15 17:51:43 | ERROR | stderr | Loading checkpoint shards: 100%|███████████████████████████████████████████████████████| 7/7 [00:23<00:00,  2.73s/it]
-2024-08-15 17:51:43 | ERROR | stderr | Loading checkpoint shards: 100%|███████████████████████████████████████████████████████| 7/7 [00:23<00:00,  3.40s/it]
-2024-08-15 17:51:43 | ERROR | stderr | 
-2024-08-15 17:51:43 | INFO | stdout | Created GritLM: torch.float32 dtype, lasttoken pool, embedding mode, cccc attn
-2024-08-15 17:53:25 | ERROR | stderr | Loading checkpoint shards:   0%|                                                               | 0/3 [00:00<?, ?it/s]
-2024-08-15 17:53:32 | ERROR | stderr | Loading checkpoint shards:  33%|██████████████████▎                                    | 1/3 [00:07<00:14,  7.47s/it]
-2024-08-15 17:53:40 | ERROR | stderr | Loading checkpoint shards:  67%|████████████████████████████████████▋                  | 2/3 [00:15<00:07,  7.75s/it]
-2024-08-15 17:53:47 | ERROR | stderr | Loading checkpoint shards: 100%|███████████████████████████████████████████████████████| 3/3 [00:22<00:00,  7.22s/it]
-2024-08-15 17:53:47 | ERROR | stderr | Loading checkpoint shards: 100%|███████████████████████████████████████████████████████| 3/3 [00:22<00:00,  7.34s/it]
-2024-08-15 17:53:47 | ERROR | stderr | 
-2024-08-15 17:53:47 | INFO | stdout | Created GritLM: torch.bfloat16 dtype, mean pool, embedding mode, bbcc attn
-2024-08-15 17:54:10 | ERROR | stderr | Loading checkpoint shards:   0%|                                                               | 0/3 [00:00<?, ?it/s]
-2024-08-15 17:54:18 | ERROR | stderr | Loading checkpoint shards:  33%|██████████████████▎                                    | 1/3 [00:08<00:17,  8.63s/it]
-2024-08-15 17:54:28 | ERROR | stderr | Loading checkpoint shards:  67%|████████████████████████████████████▋                  | 2/3 [00:18<00:09,  9.39s/it]
-2024-08-15 17:54:36 | ERROR | stderr | Loading checkpoint shards: 100%|███████████████████████████████████████████████████████| 3/3 [00:26<00:00,  8.51s/it]
-2024-08-15 17:54:36 | ERROR | stderr | Loading checkpoint shards: 100%|███████████████████████████████████████████████████████| 3/3 [00:26<00:00,  8.67s/it]
-2024-08-15 17:54:36 | ERROR | stderr | 
-2024-08-15 17:54:36 | INFO | stdout | Created GritLM: torch.bfloat16 dtype, lasttoken pool, embedding mode, cccc attn
-2024-08-15 17:55:00 | ERROR | stderr | Loading checkpoint shards:   0%|                                                               | 0/2 [00:00<?, ?it/s]
-2024-08-15 17:55:17 | ERROR | stderr | Loading checkpoint shards:  50%|███████████████████████████▌                           | 1/2 [00:16<00:16, 16.90s/it]
-2024-08-15 17:55:25 | ERROR | stderr | Loading checkpoint shards: 100%|███████████████████████████████████████████████████████| 2/2 [00:24<00:00, 11.67s/it]
-2024-08-15 17:55:25 | ERROR | stderr | Loading checkpoint shards: 100%|███████████████████████████████████████████████████████| 2/2 [00:24<00:00, 12.46s/it]
-2024-08-15 17:55:25 | ERROR | stderr | 
-2024-08-15 17:55:25 | INFO | stdout | Created GritLM: torch.float16 dtype, lasttoken pool, embedding mode, cccc attn
-2024-08-15 17:55:54 | INFO | stdout | Created GritLM: torch.float16 dtype, mean pool, embedding mode, cccc attn
-2024-08-15 17:56:13 | ERROR | stderr | README.md:   0%|                                                                          | 0.00/114k [00:00<?, ?B/s]
-2024-08-15 17:56:13 | ERROR | stderr | README.md: 100%|███████████████████████████████████████████████████████████████████| 114k/114k [00:00<00:00, 318MB/s]
-2024-08-15 17:56:13 | ERROR | stderr | 
-2024-08-15 17:56:28 | ERROR | stderr | /data/niklas/transformers/src/transformers/tokenization_utils_base.py:1601: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be depracted in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
-2024-08-15 17:56:28 | ERROR | stderr |   warnings.warn(
-2024-08-15 17:56:59 | ERROR | stderr | Fetching 9 files:   0%|                                                                        | 0/9 [00:00<?, ?it/s]
-2024-08-15 17:56:59 | ERROR | stderr | Fetching 9 files: 100%|█████████████████████████████████████████████████████████████| 9/9 [00:00<00:00, 72039.57it/s]
-2024-08-15 17:56:59 | ERROR | stderr | 
-2024-08-15 17:57:02 | INFO | index_logger | Index loaded.
-2024-08-15 17:57:02 | ERROR | stderr | Fetching 9 files:   0%|                                                                        | 0/9 [00:00<?, ?it/s]
-2024-08-15 17:57:02 | ERROR | stderr | Fetching 9 files: 100%|██████████████████████████████████████████████████████████████| 9/9 [00:00<00:00, 4469.42it/s]
-2024-08-15 17:57:02 | ERROR | stderr | 
-2024-08-15 17:57:03 | INFO | index_logger | Index loaded.
-2024-08-15 17:57:03 | ERROR | stderr | Fetching 9 files:   0%|                                                                        | 0/9 [00:00<?, ?it/s]
-2024-08-15 17:57:03 | ERROR | stderr | Fetching 9 files: 100%|██████████████████████████████████████████████████████████████| 9/9 [00:00<00:00, 3588.28it/s]
-2024-08-15 17:57:03 | ERROR | stderr | 
-2024-08-15 17:57:05 | INFO | index_logger | Index loaded.
-2024-08-15 17:58:04 | INFO | index_logger | Checking if index index_wikipedia_Alibaba-NLP__gte-Qwen2-7B-instruct exists ...
-2024-08-15 17:58:07 | INFO | index_logger | Vector Search index index_wikipedia_Alibaba-NLP__gte-Qwen2-7B-instruct exists with resource name projects/1048622315445/locations/us-east1/indexes/8684426621291069440
-2024-08-15 17:58:07 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 17:58:10 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 17:58:10 | ERROR | stderr | Resolving data files:   4%|██▎                                                        | 1/26 [00:00<00:03,  7.44it/s]
-2024-08-15 17:58:10 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 191.85it/s]
-2024-08-15 17:58:10 | ERROR | stderr | 
-2024-08-15 17:59:06 | INFO | index_logger | Checking if index index_arxiv_Alibaba-NLP__gte-Qwen2-7B-instruct exists ...
-2024-08-15 17:59:06 | INFO | index_logger | Vector Search index index_arxiv_Alibaba-NLP__gte-Qwen2-7B-instruct exists with resource name projects/1048622315445/locations/us-central1/indexes/7336517724614426624
-2024-08-15 17:59:06 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 17:59:25 | INFO | index_logger | Checking if index index_wikipedia_BAAI__bge-large-en-v1_5 exists ...
-2024-08-15 17:59:25 | INFO | index_logger | Vector Search index index_wikipedia_BAAI__bge-large-en-v1_5 exists with resource name projects/1048622315445/locations/us-east1/indexes/1815311289644220416
-2024-08-15 17:59:26 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 17:59:28 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 17:59:28 | ERROR | stderr | Resolving data files:   4%|██▎                                                        | 1/26 [00:00<00:02,  8.91it/s]
-2024-08-15 17:59:28 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 212.59it/s]
-2024-08-15 17:59:29 | ERROR | stderr | 
-2024-08-15 17:59:37 | INFO | index_logger | Checking if index index_arxiv_BAAI__bge-large-en-v1_5 exists ...
-2024-08-15 17:59:37 | INFO | index_logger | Vector Search index index_arxiv_BAAI__bge-large-en-v1_5 exists with resource name projects/1048622315445/locations/us-central1/indexes/1915450410655547392
-2024-08-15 17:59:38 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 17:59:55 | INFO | index_logger | Checking if index index_wikipedia_GritLM__GritLM-7B exists ...
-2024-08-15 17:59:56 | INFO | index_logger | Vector Search index index_wikipedia_GritLM__GritLM-7B exists with resource name projects/1048622315445/locations/us-east1/indexes/3778880727177756672
-2024-08-15 17:59:56 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 17:59:59 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 17:59:59 | ERROR | stderr | Resolving data files:   4%|██▎                                                        | 1/26 [00:00<00:02,  9.77it/s]
-2024-08-15 17:59:59 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 215.25it/s]
-2024-08-15 17:59:59 | ERROR | stderr | 
-2024-08-15 18:00:07 | INFO | index_logger | Checking if index index_arxiv_GritLM__GritLM-7B exists ...
-2024-08-15 18:00:07 | INFO | index_logger | Vector Search index index_arxiv_GritLM__GritLM-7B exists with resource name projects/1048622315445/locations/us-central1/indexes/7313296039035797504
-2024-08-15 18:00:08 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:00:26 | INFO | index_logger | Checking if index index_wikipedia_Salesforce__SFR-Embedding-2_R exists ...
-2024-08-15 18:00:27 | INFO | index_logger | Vector Search index index_wikipedia_Salesforce__SFR-Embedding-2_R exists with resource name projects/1048622315445/locations/us-east1/indexes/9075113888965459968
-2024-08-15 18:00:27 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:00:30 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 18:00:30 | ERROR | stderr | Resolving data files:   4%|██▎                                                        | 1/26 [00:00<00:02,  9.90it/s]
-2024-08-15 18:00:30 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 254.59it/s]
-2024-08-15 18:00:30 | ERROR | stderr | 
-2024-08-15 18:00:38 | INFO | index_logger | Checking if index index_arxiv_Salesforce__SFR-Embedding-2_R exists ...
-2024-08-15 18:00:38 | INFO | index_logger | Vector Search index index_arxiv_Salesforce__SFR-Embedding-2_R exists with resource name projects/1048622315445/locations/us-central1/indexes/2819407298361819136
-2024-08-15 18:00:38 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:00:56 | INFO | index_logger | Checking if index index_wikipedia_embed-english-v3_0 exists ...
-2024-08-15 18:00:57 | INFO | index_logger | Vector Search index index_wikipedia_embed-english-v3_0 exists with resource name projects/1048622315445/locations/us-east1/indexes/1095861249171783680
-2024-08-15 18:00:57 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:01:00 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 18:01:00 | ERROR | stderr | Resolving data files:  27%|███████████████▉                                           | 7/26 [00:00<00:00, 67.03it/s]
-2024-08-15 18:01:00 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 189.72it/s]
-2024-08-15 18:01:00 | ERROR | stderr | 
-2024-08-15 18:01:08 | INFO | index_logger | Checking if index index_arxiv_embed-english-v3_0 exists ...
-2024-08-15 18:01:08 | INFO | index_logger | Vector Search index index_arxiv_embed-english-v3_0 exists with resource name projects/1048622315445/locations/us-central1/indexes/8022472242858295296
-2024-08-15 18:01:08 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:01:28 | INFO | index_logger | Checking if index index_wikipedia_intfloat__e5-mistral-7b-instruct exists ...
-2024-08-15 18:01:28 | INFO | index_logger | Vector Search index index_wikipedia_intfloat__e5-mistral-7b-instruct exists with resource name projects/1048622315445/locations/us-east1/indexes/25130437764448256
-2024-08-15 18:01:29 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:01:31 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 18:01:32 | ERROR | stderr | Resolving data files:   4%|██▎                                                        | 1/26 [00:00<00:03,  7.43it/s]
-2024-08-15 18:01:32 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 191.22it/s]
-2024-08-15 18:01:32 | ERROR | stderr | 
-2024-08-15 18:01:40 | INFO | index_logger | Checking if index index_arxiv_intfloat__e5-mistral-7b-instruct exists ...
-2024-08-15 18:01:40 | INFO | index_logger | Vector Search index index_arxiv_intfloat__e5-mistral-7b-instruct exists with resource name projects/1048622315445/locations/us-central1/indexes/1548688516001562624
-2024-08-15 18:01:40 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:01:58 | INFO | index_logger | Checking if index index_wikipedia_intfloat__multilingual-e5-large-instruct exists ...
-2024-08-15 18:01:58 | INFO | index_logger | Vector Search index index_wikipedia_intfloat__multilingual-e5-large-instruct exists with resource name projects/1048622315445/locations/us-east1/indexes/6449515306208460800
-2024-08-15 18:01:59 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:02:01 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 18:02:02 | ERROR | stderr | Resolving data files:   4%|██▎                                                        | 1/26 [00:00<00:02,  9.19it/s]
-2024-08-15 18:02:02 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 151.03it/s]
-2024-08-15 18:02:02 | ERROR | stderr | 
-2024-08-15 18:02:10 | INFO | index_logger | Checking if index index_arxiv_intfloat__multilingual-e5-large-instruct exists ...
-2024-08-15 18:02:10 | INFO | index_logger | Vector Search index index_arxiv_intfloat__multilingual-e5-large-instruct exists with resource name projects/1048622315445/locations/us-central1/indexes/3659469366354771968
-2024-08-15 18:02:10 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:02:28 | INFO | index_logger | Checking if index index_wikipedia_jinaai__jina-embeddings-v2-base-en exists ...
-2024-08-15 18:02:28 | INFO | index_logger | Vector Search index index_wikipedia_jinaai__jina-embeddings-v2-base-en exists with resource name projects/1048622315445/locations/us-east1/indexes/3355542362204930048
-2024-08-15 18:02:29 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:02:31 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 18:02:32 | ERROR | stderr | Resolving data files:  88%|██████████████████████████████████████████████████▍      | 23/26 [00:00<00:00, 219.79it/s]
-2024-08-15 18:02:32 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 225.71it/s]
-2024-08-15 18:02:32 | ERROR | stderr | 
-2024-08-15 18:02:39 | INFO | index_logger | Checking if index index_arxiv_jinaai__jina-embeddings-v2-base-en exists ...
-2024-08-15 18:02:40 | INFO | index_logger | Vector Search index index_arxiv_jinaai__jina-embeddings-v2-base-en exists with resource name projects/1048622315445/locations/us-central1/indexes/2453630566126321664
-2024-08-15 18:02:40 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:02:58 | INFO | index_logger | Checking if index index_wikipedia_mixedbread-ai__mxbai-embed-large-v1 exists ...
-2024-08-15 18:02:58 | INFO | index_logger | Vector Search index index_wikipedia_mixedbread-ai__mxbai-embed-large-v1 exists with resource name projects/1048622315445/locations/us-east1/indexes/6750412056312152064
-2024-08-15 18:02:59 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:03:48 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 18:03:48 | ERROR | stderr | Resolving data files:   4%|██▎                                                        | 1/26 [00:00<00:04,  5.16it/s]
-2024-08-15 18:03:48 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 128.69it/s]
-2024-08-15 18:03:48 | ERROR | stderr | 
-2024-08-15 18:03:56 | INFO | index_logger | Checking if index index_arxiv_mixedbread-ai__mxbai-embed-large-v1 exists ...
-2024-08-15 18:03:56 | INFO | index_logger | Vector Search index index_arxiv_mixedbread-ai__mxbai-embed-large-v1 exists with resource name projects/1048622315445/locations/us-central1/indexes/6654363118556151808
-2024-08-15 18:03:56 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:04:16 | INFO | index_logger | Checking if index index_wikipedia_nomic-ai__nomic-embed-text-v1_5 exists ...
-2024-08-15 18:04:17 | INFO | index_logger | Vector Search index index_wikipedia_nomic-ai__nomic-embed-text-v1_5 exists with resource name projects/1048622315445/locations/us-east1/indexes/4248380988331130880
-2024-08-15 18:04:17 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:04:20 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 18:04:20 | ERROR | stderr | Resolving data files:   4%|██▎                                                        | 1/26 [00:00<00:02,  9.70it/s]
-2024-08-15 18:04:20 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 239.82it/s]
-2024-08-15 18:04:20 | ERROR | stderr | 
-2024-08-15 18:04:28 | INFO | index_logger | Checking if index index_arxiv_nomic-ai__nomic-embed-text-v1_5 exists ...
-2024-08-15 18:04:28 | INFO | index_logger | Vector Search index index_arxiv_nomic-ai__nomic-embed-text-v1_5 exists with resource name projects/1048622315445/locations/us-central1/indexes/1797019814204538880
-2024-08-15 18:04:28 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:04:47 | INFO | index_logger | Checking if index index_wikipedia_sentence-transformers__all-MiniLM-L6-v2 exists ...
-2024-08-15 18:04:47 | INFO | index_logger | Vector Search index index_wikipedia_sentence-transformers__all-MiniLM-L6-v2 exists with resource name projects/1048622315445/locations/us-east1/indexes/3665446311563362304
-2024-08-15 18:04:48 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:04:50 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 18:04:50 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 263.52it/s]
-2024-08-15 18:04:50 | ERROR | stderr | 
-2024-08-15 18:04:58 | INFO | index_logger | Checking if index index_arxiv_sentence-transformers__all-MiniLM-L6-v2 exists ...
-2024-08-15 18:04:59 | INFO | index_logger | Vector Search index index_arxiv_sentence-transformers__all-MiniLM-L6-v2 exists with resource name projects/1048622315445/locations/us-central1/indexes/5374214924476088320
-2024-08-15 18:04:59 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:05:17 | INFO | index_logger | Checking if index index_wikipedia_text-embedding-004 exists ...
-2024-08-15 18:05:17 | INFO | index_logger | Vector Search index index_wikipedia_text-embedding-004 exists with resource name projects/1048622315445/locations/us-central1/indexes/3894923184373235712
-2024-08-15 18:05:17 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:05:19 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 18:05:19 | ERROR | stderr | Resolving data files:   8%|████▌                                                      | 2/26 [00:00<00:01, 18.39it/s]
-2024-08-15 18:05:19 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 138.12it/s]
-2024-08-15 18:05:19 | ERROR | stderr | 
-2024-08-15 18:05:27 | INFO | index_logger | Checking if index index_arxiv_text-embedding-004 exists ...
-2024-08-15 18:05:28 | INFO | index_logger | Vector Search index index_arxiv_text-embedding-004 exists with resource name projects/1048622315445/locations/us-central1/indexes/7524120796592078848
-2024-08-15 18:05:28 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:05:49 | INFO | index_logger | Checking if index index_wikipedia_text-embedding-3-large exists ...
-2024-08-15 18:05:49 | INFO | index_logger | Vector Search index index_wikipedia_text-embedding-3-large exists with resource name projects/1048622315445/locations/us-east1/indexes/7849008890413842432
-2024-08-15 18:05:49 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:05:52 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 18:05:52 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 269.74it/s]
-2024-08-15 18:05:52 | ERROR | stderr | 
-2024-08-15 18:06:00 | INFO | index_logger | Checking if index index_arxiv_text-embedding-3-large exists ...
-2024-08-15 18:06:01 | INFO | index_logger | Vector Search index index_arxiv_text-embedding-3-large exists with resource name projects/1048622315445/locations/us-central1/indexes/1771898172533112832
-2024-08-15 18:06:01 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:06:19 | INFO | index_logger | Checking if index index_wikipedia_voyage-multilingual-2 exists ...
-2024-08-15 18:06:19 | INFO | index_logger | Vector Search index index_wikipedia_voyage-multilingual-2 exists with resource name projects/1048622315445/locations/us-east1/indexes/5000482126102003712
-2024-08-15 18:06:20 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:06:23 | ERROR | stderr | Resolving data files:   0%|                                                                   | 0/26 [00:00<?, ?it/s]
-2024-08-15 18:06:23 | ERROR | stderr | Resolving data files:  69%|███████████████████████████████████████▍                 | 18/26 [00:00<00:00, 173.08it/s]
-2024-08-15 18:06:23 | ERROR | stderr | Resolving data files: 100%|█████████████████████████████████████████████████████████| 26/26 [00:00<00:00, 225.87it/s]
-2024-08-15 18:06:23 | ERROR | stderr | 
-2024-08-15 18:06:31 | INFO | index_logger | Checking if index index_arxiv_voyage-multilingual-2 exists ...
-2024-08-15 18:06:32 | INFO | index_logger | Vector Search index index_arxiv_voyage-multilingual-2 exists with resource name projects/1048622315445/locations/us-central1/indexes/8651146603341545472
-2024-08-15 18:06:32 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:07:05 | INFO | index_logger | Checking if index index_stackexchange_sentence-transformers__all-MiniLM-L6-v2 exists ...
-2024-08-15 18:07:06 | INFO | index_logger | Vector Search index index_stackexchange_sentence-transformers__all-MiniLM-L6-v2 exists with resource name projects/1048622315445/locations/us-east1/indexes/2847761504218906624
-2024-08-15 18:07:06 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:07:15 | INFO | index_logger | Checking if index index_stackexchange_nomic-ai__nomic-embed-text-v1_5 exists ...
-2024-08-15 18:07:16 | INFO | index_logger | Vector Search index index_stackexchange_nomic-ai__nomic-embed-text-v1_5 exists with resource name projects/1048622315445/locations/us-east1/indexes/2987373092667392000
-2024-08-15 18:07:16 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:07:25 | INFO | index_logger | Checking if index index_stackexchange_mixedbread-ai__mxbai-embed-large-v1 exists ...
-2024-08-15 18:07:25 | INFO | index_logger | Vector Search index index_stackexchange_mixedbread-ai__mxbai-embed-large-v1 exists with resource name projects/1048622315445/locations/us-east1/indexes/127587329287127040
-2024-08-15 18:07:26 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:07:34 | INFO | index_logger | Checking if index index_stackexchange_jinaai__jina-embeddings-v2-base-en exists ...
-2024-08-15 18:07:34 | INFO | index_logger | Vector Search index index_stackexchange_jinaai__jina-embeddings-v2-base-en exists with resource name projects/1048622315445/locations/us-east1/indexes/7540512315938963456
-2024-08-15 18:07:35 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:07:48 | INFO | index_logger | Checking if index index_stackexchange_Salesforce__SFR-Embedding-2_R exists ...
-2024-08-15 18:07:48 | INFO | index_logger | Vector Search index index_stackexchange_Salesforce__SFR-Embedding-2_R exists with resource name projects/1048622315445/locations/us-central1/indexes/7201339367049134080
-2024-08-15 18:07:48 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:07:57 | INFO | index_logger | Checking if index index_stackexchange_GritLM__GritLM-7B exists ...
-2024-08-15 18:07:57 | INFO | index_logger | Vector Search index index_stackexchange_GritLM__GritLM-7B exists with resource name projects/1048622315445/locations/us-east1/indexes/6569986596240621568
-2024-08-15 18:07:58 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:08:06 | INFO | index_logger | Checking if index index_stackexchange_BAAI__bge-large-en-v1_5 exists ...
-2024-08-15 18:08:07 | INFO | index_logger | Vector Search index index_stackexchange_BAAI__bge-large-en-v1_5 exists with resource name projects/1048622315445/locations/us-east1/indexes/5020748324425170944
-2024-08-15 18:08:07 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:08:15 | INFO | index_logger | Checking if index index_stackexchange_intfloat__multilingual-e5-large-instruct exists ...
-2024-08-15 18:08:16 | INFO | index_logger | Vector Search index index_stackexchange_intfloat__multilingual-e5-large-instruct exists with resource name projects/1048622315445/locations/us-east1/indexes/4038963605658402816
-2024-08-15 18:08:16 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-east1/indexEndpoints/62672162783232000
-2024-08-15 18:08:26 | INFO | index_logger | Checking if index index_stackexchange_intfloat__e5-mistral-7b-instruct exists ...
-2024-08-15 18:08:27 | INFO | index_logger | Vector Search index index_stackexchange_intfloat__e5-mistral-7b-instruct exists with resource name projects/1048622315445/locations/us-central1/indexes/3645536355007594496
-2024-08-15 18:08:27 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:08:35 | INFO | index_logger | Checking if index index_stackexchange_voyage-multilingual-2 exists ...
-2024-08-15 18:08:35 | INFO | index_logger | Vector Search index index_stackexchange_voyage-multilingual-2 exists with resource name projects/1048622315445/locations/us-central1/indexes/3116363398791561216
-2024-08-15 18:08:35 | INFO | index_logger | Vector Search index endpoint endpoint exists with resource name projects/1048622315445/locations/us-central1/indexEndpoints/6423808724351057920
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning: Expected 7 arguments for function functools.partial(<function retrieve_side_by_side at 0x7fd918434ee0>, <bound method ModelManager.retrieve_parallel of <models.ModelManager object at 0x7fd918444100>>), received 6.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning: Expected at least 7 arguments for function functools.partial(<function retrieve_side_by_side at 0x7fd918434ee0>, <bound method ModelManager.retrieve_parallel of <models.ModelManager object at 0x7fd918444100>>), received 6.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning: Expected 5 arguments for function functools.partial(<function vote_last_response at 0x7fd918434af0>, 'leftvote'), received 4.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning: Expected at least 5 arguments for function functools.partial(<function vote_last_response at 0x7fd918434af0>, 'leftvote'), received 4.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning: Expected 5 arguments for function functools.partial(<function vote_last_response at 0x7fd918434af0>, 'rightvote'), received 4.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning: Expected at least 5 arguments for function functools.partial(<function vote_last_response at 0x7fd918434af0>, 'rightvote'), received 4.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning: Expected 5 arguments for function functools.partial(<function vote_last_response at 0x7fd918434af0>, 'tievote'), received 4.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning: Expected at least 5 arguments for function functools.partial(<function vote_last_response at 0x7fd918434af0>, 'tievote'), received 4.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning: Expected 5 arguments for function functools.partial(<function vote_last_response at 0x7fd918434af0>, 'bothbadvote'), received 4.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning: Expected at least 5 arguments for function functools.partial(<function vote_last_response at 0x7fd918434af0>, 'bothbadvote'), received 4.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning: Expected 5 arguments for function functools.partial(<function vote_last_response at 0x7fd918434af0>, 'share'), received 4.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning: Expected at least 5 arguments for function functools.partial(<function vote_last_response at 0x7fd918434af0>, 'share'), received 4.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning: Expected 5 arguments for function functools.partial(<function retrieve at 0x7fd918435090>, <bound method ModelManager.retrieve of <models.ModelManager object at 0x7fd918444100>>), received 4.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning: Expected at least 5 arguments for function functools.partial(<function retrieve at 0x7fd918435090>, <bound method ModelManager.retrieve of <models.ModelManager object at 0x7fd918444100>>), received 4.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning: Expected 3 arguments for function functools.partial(<function vote_last_response_single at 0x7fd918434ca0>, 'upvote'), received 2.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning: Expected at least 3 arguments for function functools.partial(<function vote_last_response_single at 0x7fd918434ca0>, 'upvote'), received 2.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning: Expected 3 arguments for function functools.partial(<function vote_last_response_single at 0x7fd918434ca0>, 'downvote'), received 2.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning: Expected at least 3 arguments for function functools.partial(<function vote_last_response_single at 0x7fd918434ca0>, 'downvote'), received 2.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning: Expected 3 arguments for function functools.partial(<function vote_last_response_single at 0x7fd918434ca0>, 'flag'), received 2.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:08:43 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning: Expected at least 3 arguments for function functools.partial(<function vote_last_response_single at 0x7fd918434ca0>, 'flag'), received 2.
-2024-08-15 18:08:43 | ERROR | stderr |   warnings.warn(
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 10 arguments for function functools.partial(<function clustering_side_by_side at 0x7fd9184353f0>, <bound method ModelManager.clustering_parallel of <models.ModelManager object at 0x7fd918444100>>), received 9.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 10 arguments for function functools.partial(<function clustering_side_by_side at 0x7fd9184353f0>, <bound method ModelManager.clustering_parallel of <models.ModelManager object at 0x7fd918444100>>), received 9.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'leftvote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'leftvote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'rightvote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'rightvote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'tievote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'tievote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'bothbadvote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'bothbadvote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 10 arguments for function functools.partial(<function clustering_side_by_side at 0x7fd9184353f0>, <bound method ModelManager.clustering_parallel of <models.ModelManager object at 0x7fd918444100>>), received 9.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 10 arguments for function functools.partial(<function clustering_side_by_side at 0x7fd9184353f0>, <bound method ModelManager.clustering_parallel of <models.ModelManager object at 0x7fd918444100>>), received 9.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'leftvote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'leftvote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'rightvote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'rightvote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'tievote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'tievote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'bothbadvote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_clustering at 0x7fd918434c10>, 'bothbadvote'), received 4.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 8 arguments for function functools.partial(<function clustering at 0x7fd9184355a0>, <bound method ModelManager.clustering of <models.ModelManager object at 0x7fd918444100>>), received 7.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 8 arguments for function functools.partial(<function clustering at 0x7fd9184355a0>, <bound method ModelManager.clustering of <models.ModelManager object at 0x7fd918444100>>), received 7.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 3 arguments for function functools.partial(<function vote_last_response_single_clustering at 0x7fd918434dc0>, 'upvote'), received 2.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 3 arguments for function functools.partial(<function vote_last_response_single_clustering at 0x7fd918434dc0>, 'upvote'), received 2.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 3 arguments for function functools.partial(<function vote_last_response_single_clustering at 0x7fd918434dc0>, 'downvote'), received 2.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 3 arguments for function functools.partial(<function vote_last_response_single_clustering at 0x7fd918434dc0>, 'downvote'), received 2.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected 3 arguments for function functools.partial(<function vote_last_response_single_clustering at 0x7fd918434dc0>, 'flag'), received 2.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:15 | ERROR | stderr | Expected at least 3 arguments for function functools.partial(<function vote_last_response_single_clustering at 0x7fd918434dc0>, 'flag'), received 2.
-2024-08-15 18:09:15 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected 8 arguments for function functools.partial(<function sts_side_by_side at 0x7fd918435900>, <bound method ModelManager.sts_parallel of <models.ModelManager object at 0x7fd918444100>>), received 7.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected at least 8 arguments for function functools.partial(<function sts_side_by_side at 0x7fd918435900>, <bound method ModelManager.sts_parallel of <models.ModelManager object at 0x7fd918444100>>), received 7.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'leftvote'), received 4.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'leftvote'), received 4.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'rightvote'), received 4.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'rightvote'), received 4.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'tievote'), received 4.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'tievote'), received 4.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'bothbadvote'), received 4.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'bothbadvote'), received 4.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected 8 arguments for function functools.partial(<function sts_side_by_side at 0x7fd918435900>, <bound method ModelManager.sts_parallel of <models.ModelManager object at 0x7fd918444100>>), received 7.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected at least 8 arguments for function functools.partial(<function sts_side_by_side at 0x7fd918435900>, <bound method ModelManager.sts_parallel of <models.ModelManager object at 0x7fd918444100>>), received 7.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'leftvote'), received 4.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'leftvote'), received 4.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'rightvote'), received 4.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'rightvote'), received 4.
-2024-08-15 18:09:20 | ERROR | stderr | 
-2024-08-15 18:09:20 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'tievote'), received 4.
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'tievote'), received 4.
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | Expected 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'bothbadvote'), received 4.
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | Expected at least 5 arguments for function functools.partial(<function vote_last_response_sts at 0x7fd918434b80>, 'bothbadvote'), received 4.
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | Expected 6 arguments for function functools.partial(<function sts at 0x7fd918435ab0>, <bound method ModelManager.sts of <models.ModelManager object at 0x7fd918444100>>), received 5.
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | Expected at least 6 arguments for function functools.partial(<function sts at 0x7fd918435ab0>, <bound method ModelManager.sts of <models.ModelManager object at 0x7fd918444100>>), received 5.
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | Expected 3 arguments for function functools.partial(<function vote_last_response_single_sts at 0x7fd918434d30>, 'upvote'), received 2.
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | Expected at least 3 arguments for function functools.partial(<function vote_last_response_single_sts at 0x7fd918434d30>, 'upvote'), received 2.
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | Expected 3 arguments for function functools.partial(<function vote_last_response_single_sts at 0x7fd918434d30>, 'downvote'), received 2.
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | Expected at least 3 arguments for function functools.partial(<function vote_last_response_single_sts at 0x7fd918434d30>, 'downvote'), received 2.
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:986: UserWarning:
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | Expected 3 arguments for function functools.partial(<function vote_last_response_single_sts at 0x7fd918434d30>, 'flag'), received 2.
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py:990: UserWarning:
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:21 | ERROR | stderr | Expected at least 3 arguments for function functools.partial(<function vote_last_response_single_sts at 0x7fd918434d30>, 'flag'), received 2.
-2024-08-15 18:09:21 | ERROR | stderr | 
-2024-08-15 18:09:27 | INFO | stdout | Running on local URL:  http://127.0.0.1:7860
-2024-08-15 18:09:31 | INFO | stdout | Running on public URL: https://c6f9f4dfe0c406663b.gradio.live
-2024-08-15 18:09:31 | INFO | stdout | 
-2024-08-15 18:09:31 | INFO | stdout | This share link expires in 72 hours. For free permanent hosting and GPU upgrades, run `gradio deploy` from Terminal to deploy to Spaces (https://huggingface.co/spaces)
-2024-08-15 18:19:13 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 18:19:45 | ERROR | stderr | Traceback (most recent call last):
-2024-08-15 18:19:45 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
-2024-08-15 18:19:45 | ERROR | stderr |     response = await route_utils.call_process_api(
-2024-08-15 18:19:45 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
-2024-08-15 18:19:45 | ERROR | stderr |     output = await app.get_blocks().process_api(
-2024-08-15 18:19:45 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
-2024-08-15 18:19:45 | ERROR | stderr |     result = await self.call_function(
-2024-08-15 18:19:45 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
-2024-08-15 18:19:45 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
-2024-08-15 18:19:45 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
-2024-08-15 18:19:45 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
-2024-08-15 18:19:45 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
-2024-08-15 18:19:45 | ERROR | stderr |     return await future
-2024-08-15 18:19:45 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
-2024-08-15 18:19:45 | ERROR | stderr |     result = context.run(func, *args)
-2024-08-15 18:19:45 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
-2024-08-15 18:19:45 | ERROR | stderr |     response = f(*args, **kwargs)
-2024-08-15 18:19:45 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 276, in check_input_retrieval
-2024-08-15 18:19:45 | ERROR | stderr |     if not(txt): raise gr.Warning("Query cannot be empty.")
-2024-08-15 18:19:45 | ERROR | stderr | TypeError: exceptions must derive from BaseException
-2024-08-15 18:19:51 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 18:19:52 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 18:21:17 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 18:21:17 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-15 18:22:41 | ERROR | stderr | 
-2024-08-15 18:22:41 | ERROR | stderr | Split strings:   0%|                                                                           | 0/1 [00:00<?, ?it/s]
-2024-08-15 18:22:41 | ERROR | stderr | 
-2024-08-15 18:22:41 | ERROR | stderr | 
-2024-08-15 18:22:41 | ERROR | stderr | Stem Tokens:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
-2024-08-15 18:22:41 | ERROR | stderr | 
-2024-08-15 18:22:41 | ERROR | stderr | 
-2024-08-15 18:22:41 | ERROR | stderr | BM25S Retrieve:   0%|                                                                          | 0/1 [00:00<?, ?it/s]
-2024-08-15 18:22:42 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  1.11it/s]
-2024-08-15 18:22:42 | ERROR | stderr | 
-2024-08-15 19:23:10 | ERROR | stderr | Traceback (most recent call last):
-2024-08-15 19:23:10 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/queueing.py", line 536, in process_events
-2024-08-15 19:23:10 | ERROR | stderr |     response = await route_utils.call_process_api(
-2024-08-15 19:23:10 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/route_utils.py", line 276, in call_process_api
-2024-08-15 19:23:10 | ERROR | stderr |     output = await app.get_blocks().process_api(
-2024-08-15 19:23:10 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1923, in process_api
-2024-08-15 19:23:10 | ERROR | stderr |     result = await self.call_function(
-2024-08-15 19:23:10 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 1508, in call_function
-2024-08-15 19:23:10 | ERROR | stderr |     prediction = await anyio.to_thread.run_sync(  # type: ignore
-2024-08-15 19:23:10 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
-2024-08-15 19:23:10 | ERROR | stderr |     return await get_async_backend().run_sync_in_worker_thread(
-2024-08-15 19:23:10 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2144, in run_sync_in_worker_thread
-2024-08-15 19:23:10 | ERROR | stderr |     return await future
-2024-08-15 19:23:10 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 851, in run
-2024-08-15 19:23:10 | ERROR | stderr |     result = context.run(func, *args)
-2024-08-15 19:23:10 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/utils.py", line 818, in wrapper
-2024-08-15 19:23:10 | ERROR | stderr |     response = f(*args, **kwargs)
-2024-08-15 19:23:10 | ERROR | stderr |   File "/data/niklas/arena/ui.py", line 276, in check_input_retrieval
-2024-08-15 19:23:10 | ERROR | stderr |     if not(txt): raise gr.Warning("Query cannot be empty.")
-2024-08-15 19:23:10 | ERROR | stderr | TypeError: exceptions must derive from BaseException
-2024-08-15 19:23:11 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-15 19:23:11 | ERROR | stderr | 
-2024-08-15 19:23:11 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-15 19:23:11 | ERROR | stderr | 
-2024-08-15 19:23:11 | ERROR | stderr | Split strings:   0%|                                                                           | 0/1 [00:00<?, ?it/s]
-2024-08-15 19:23:11 | ERROR | stderr | 
-2024-08-15 19:23:11 | ERROR | stderr | 
-2024-08-15 19:23:11 | ERROR | stderr | Stem Tokens:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
-2024-08-15 19:23:11 | ERROR | stderr | 
-2024-08-15 19:23:11 | ERROR | stderr | 
-2024-08-15 19:23:11 | ERROR | stderr | BM25S Retrieve:   0%|                                                                          | 0/1 [00:00<?, ?it/s]
-2024-08-15 19:23:14 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████| 1/1 [00:03<00:00,  3.03s/it]
-2024-08-15 19:23:14 | ERROR | stderr | 
-2024-08-15 19:23:21 | INFO | stdout | Keyboard interruption in main thread... closing server.
-2024-08-15 19:23:21 | ERROR | stderr | 
-2024-08-15 19:23:21 | ERROR | stderr | Error in sys.excepthook:
-2024-08-15 19:23:21 | ERROR | stderr | Traceback (most recent call last):
-2024-08-15 19:23:21 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/linecache.py", line 46, in getlines
-2024-08-15 19:23:21 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/linecache.py", line 136, in updatecache
-2024-08-15 19:23:21 | ERROR | stderr |     with tokenize.open(fullname) as fp:
-2024-08-15 19:23:21 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/tokenize.py", line 396, in open
-2024-08-15 19:23:22 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/tokenize.py", line 365, in detect_encoding
-2024-08-15 19:23:22 | ERROR | stderr |     first = read_or_stop()
-2024-08-15 19:23:22 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/tokenize.py", line 323, in read_or_stop
-2024-08-15 19:23:22 | ERROR | stderr |     return readline()
-2024-08-15 19:23:22 | ERROR | stderr | KeyboardInterrupt
-2024-08-15 19:23:22 | ERROR | stderr | 
-2024-08-15 19:23:22 | ERROR | stderr | Original exception was:
-2024-08-15 19:23:22 | ERROR | stderr | Traceback (most recent call last):
-2024-08-15 19:23:22 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 2690, in block_thread
-2024-08-15 19:23:22 | ERROR | stderr |     time.sleep(0.1)
-2024-08-15 19:23:22 | ERROR | stderr | KeyboardInterrupt
-2024-08-15 19:23:22 | ERROR | stderr | 
-2024-08-15 19:23:22 | ERROR | stderr | During handling of the above exception, another exception occurred:
-2024-08-15 19:23:22 | ERROR | stderr | 
-2024-08-15 19:23:22 | ERROR | stderr | Traceback (most recent call last):
-2024-08-15 19:23:22 | ERROR | stderr |   File "/data/niklas/arena/app.py", line 155, in <module>
-2024-08-15 19:23:22 | ERROR | stderr |     block.launch(share=True)
-2024-08-15 19:23:22 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 2595, in launch
-2024-08-15 19:23:22 | ERROR | stderr |     self.block_thread()
-2024-08-15 19:23:22 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/blocks.py", line 2694, in block_thread
-2024-08-15 19:23:22 | ERROR | stderr |     self.server.close()
-2024-08-15 19:23:22 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/http_server.py", line 68, in close
-2024-08-15 19:23:22 | ERROR | stderr |     self.thread.join(timeout=5)
-2024-08-15 19:23:22 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/threading.py", line 1100, in join
-2024-08-15 19:23:22 | ERROR | stderr |     self._wait_for_tstate_lock(timeout=max(timeout, 0))
-2024-08-15 19:23:22 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/threading.py", line 1116, in _wait_for_tstate_lock
-2024-08-15 19:23:22 | ERROR | stderr |     if lock.acquire(block, timeout):
-2024-08-15 19:23:22 | ERROR | stderr | KeyboardInterrupt
-2024-08-15 19:23:22 | INFO | stdout | [0mKilling tunnel 127.0.0.1:7860 <> https://938b1ec0fda16ad42f.gradio.live
-2024-08-15 19:23:22 | ERROR | stderr | Exception ignored in atexit callback: <bound method CommitScheduler._push_to_hub of <huggingface_hub._commit_scheduler.CommitScheduler object at 0x7f1f1dee07c0>>
-2024-08-15 19:23:22 | ERROR | stderr | Traceback (most recent call last):
-2024-08-15 19:23:22 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/huggingface_hub/_commit_scheduler.py", line 169, in _push_to_hub
-2024-08-15 19:23:22 | ERROR | stderr |     value = self.push_to_hub()
-2024-08-15 19:23:22 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/huggingface_hub/_commit_scheduler.py", line 243, in push_to_hub
-2024-08-15 19:23:22 | ERROR | stderr |     commit_info = self.api.create_commit(
-2024-08-15 19:23:22 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
-2024-08-15 19:23:22 | ERROR | stderr |     return fn(*args, **kwargs)
-2024-08-15 19:23:22 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 1398, in _inner
-2024-08-15 19:23:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 3770, in create_commit
-2024-08-15 19:23:23 | ERROR | stderr |     <Tip warning={true}>
-2024-08-15 19:23:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 4286, in preupload_lfs_files
-2024-08-15 19:23:23 | ERROR | stderr |     `revision` is set and is not a branch name (example: a commit oid), an
-2024-08-15 19:23:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
-2024-08-15 19:23:23 | ERROR | stderr |     return fn(*args, **kwargs)
-2024-08-15 19:23:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/huggingface_hub/_commit_api.py", line 530, in _fetch_upload_modes
-2024-08-15 19:23:23 | ERROR | stderr |     headers: Dict[str, str],
-2024-08-15 19:23:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/requests/sessions.py", line 637, in post
-2024-08-15 19:23:23 | ERROR | stderr | KeyboardInterrupt:
-2024-08-15 19:23:23 | ERROR | stderr | Exception ignored in atexit callback: <function dump_compile_times at 0x7f1f248a57e0>
-2024-08-15 19:23:23 | ERROR | stderr | Traceback (most recent call last):
-2024-08-15 19:23:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/torch/_dynamo/utils.py", line 320, in dump_compile_times
-2024-08-15 19:23:23 | ERROR | stderr |     log.info(compile_times(repr="str", aggregate=True))
-2024-08-15 19:23:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/torch/_dynamo/utils.py", line 307, in compile_times
-2024-08-15 19:23:23 | ERROR | stderr |     out += tabulate(rows, headers=("Function", "Runtimes (s)"))
-2024-08-15 19:23:23 | ERROR | stderr |   File "/env/lib/conda/gritkto/lib/python3.10/site-packages/torch/_dynamo/utils.py", line 121, in tabulate
-2024-08-15 19:23:23 | ERROR | stderr | KeyboardInterrupt:
-2024-08-16 01:17:46 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-16 01:17:46 | ERROR | stderr | 
-2024-08-16 01:17:46 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-16 01:17:46 | ERROR | stderr | 
-2024-08-16 01:19:54 | ERROR | stderr | 
-2024-08-16 01:19:54 | ERROR | stderr | Split strings:   0%|                                                                           | 0/1 [00:00<?, ?it/s]
-2024-08-16 01:19:54 | ERROR | stderr | 
-2024-08-16 01:19:54 | ERROR | stderr | 
-2024-08-16 01:19:54 | ERROR | stderr | Stem Tokens:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
-2024-08-16 01:19:54 | ERROR | stderr | 
-2024-08-16 01:19:54 | ERROR | stderr | 
-2024-08-16 01:19:54 | ERROR | stderr | BM25S Retrieve:   0%|                                                                          | 0/1 [00:00<?, ?it/s]
-2024-08-16 01:19:54 | ERROR | stderr | 
-2024-08-16 01:53:49 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-16 01:53:49 | ERROR | stderr | 
-2024-08-16 01:53:49 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-16 01:53:49 | ERROR | stderr | 
-2024-08-16 01:55:56 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-16 01:55:56 | ERROR | stderr | 
-2024-08-16 01:55:56 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-16 01:55:56 | ERROR | stderr | 
-2024-08-16 01:59:42 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-16 01:59:42 | ERROR | stderr | 
-2024-08-16 01:59:42 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-16 01:59:42 | ERROR | stderr | 
-2024-08-16 02:01:06 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-16 02:01:06 | ERROR | stderr | 
-2024-08-16 02:01:06 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-16 02:01:06 | ERROR | stderr | 
-2024-08-16 06:37:42 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-16 06:37:42 | ERROR | stderr | 
-2024-08-16 06:37:42 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-16 06:37:42 | ERROR | stderr | 
-2024-08-16 06:57:31 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-16 06:57:31 | ERROR | stderr | 
-2024-08-16 06:57:31 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-16 06:57:31 | ERROR | stderr | 
-2024-08-16 07:21:18 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-16 07:21:18 | ERROR | stderr | 
-2024-08-16 07:21:18 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-16 07:21:18 | ERROR | stderr | 
-2024-08-16 07:21:18 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-16 15:31:56 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-16 15:31:56 | ERROR | stderr | 
-2024-08-16 15:31:56 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-16 15:31:56 | ERROR | stderr | 
-2024-08-16 15:32:23 | ERROR | stderr | 
-2024-08-16 15:32:23 | ERROR | stderr | Split strings:   0%|                                                                           | 0/1 [00:00<?, ?it/s]
-2024-08-16 15:32:23 | ERROR | stderr | 
-2024-08-16 15:32:23 | ERROR | stderr | 
-2024-08-16 15:32:23 | ERROR | stderr | Stem Tokens:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
-2024-08-16 15:32:23 | ERROR | stderr | 
-2024-08-16 15:32:23 | ERROR | stderr | 
-2024-08-16 15:32:23 | ERROR | stderr | BM25S Retrieve:   0%|                                                                          | 0/1 [00:00<?, ?it/s]
-2024-08-16 15:32:25 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████| 1/1 [00:01<00:00,  1.79s/it]
-2024-08-16 15:32:25 | ERROR | stderr | 
-2024-08-16 15:32:45 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4

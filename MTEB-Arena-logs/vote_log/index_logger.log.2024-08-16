@@ -1,63 +1,0 @@
-2024-08-16 17:49:35 | ERROR | stderr | 
-2024-08-16 17:49:35 | ERROR | stderr | Split strings:   0%|                                                                           | 0/1 [00:00<?, ?it/s]
-2024-08-16 17:49:35 | ERROR | stderr | 
-2024-08-16 17:49:35 | ERROR | stderr | 
-2024-08-16 17:49:35 | ERROR | stderr | Stem Tokens:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
-2024-08-16 17:49:35 | ERROR | stderr | 
-2024-08-16 17:49:35 | ERROR | stderr | 
-2024-08-16 17:49:35 | ERROR | stderr | BM25S Retrieve:   0%|                                                                          | 0/1 [00:00<?, ?it/s]
-2024-08-16 17:49:38 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████| 1/1 [00:02<00:00,  2.16s/it]
-2024-08-16 17:49:38 | ERROR | stderr | 
-2024-08-16 17:50:06 | ERROR | stderr | 
-2024-08-16 17:50:06 | ERROR | stderr | Split strings:   0%|                                                                           | 0/1 [00:00<?, ?it/s]
-2024-08-16 17:50:06 | ERROR | stderr | 
-2024-08-16 17:50:06 | ERROR | stderr | 
-2024-08-16 17:50:06 | ERROR | stderr | Stem Tokens:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
-2024-08-16 17:50:06 | ERROR | stderr | 
-2024-08-16 17:50:06 | ERROR | stderr | 
-2024-08-16 17:50:06 | ERROR | stderr | BM25S Retrieve:   0%|                                                                          | 0/1 [00:00<?, ?it/s]
-2024-08-16 17:50:07 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████| 1/1 [00:01<00:00,  1.41s/it]
-2024-08-16 17:50:07 | ERROR | stderr | 
-2024-08-16 17:50:21 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-16 19:13:48 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-16 19:21:12 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-16 19:42:17 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-16 20:10:48 | ERROR | stderr | 
-2024-08-16 20:10:48 | ERROR | stderr | Split strings:   0%|                                                                           | 0/1 [00:00<?, ?it/s]
-2024-08-16 20:10:48 | ERROR | stderr | 
-2024-08-16 20:10:48 | ERROR | stderr | 
-2024-08-16 20:10:48 | ERROR | stderr | Stem Tokens:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
-2024-08-16 20:10:48 | ERROR | stderr | 
-2024-08-16 20:10:48 | ERROR | stderr | 
-2024-08-16 20:10:48 | ERROR | stderr | BM25S Retrieve:   0%|                                                                          | 0/1 [00:00<?, ?it/s]
-2024-08-16 20:10:48 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-16 20:10:50 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████| 1/1 [00:02<00:00,  2.21s/it]
-2024-08-16 20:10:50 | ERROR | stderr | 
-2024-08-16 23:03:25 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-16 23:53:52 | ERROR | stderr | 
-2024-08-16 23:53:52 | ERROR | stderr | Split strings:   0%|                                                                           | 0/1 [00:00<?, ?it/s]
-2024-08-16 23:53:52 | ERROR | stderr | 
-2024-08-16 23:53:52 | ERROR | stderr | 
-2024-08-16 23:53:52 | ERROR | stderr | Stem Tokens:   0%|                                                                             | 0/1 [00:00<?, ?it/s]
-2024-08-16 23:53:52 | ERROR | stderr | 
-2024-08-16 23:53:52 | ERROR | stderr | 
-2024-08-16 23:53:52 | ERROR | stderr | BM25S Retrieve:   0%|                                                                          | 0/1 [00:00<?, ?it/s]
-2024-08-16 23:53:55 | ERROR | stderr | BM25S Retrieve: 100%|██████████████████████████████████████████████████████████████████| 1/1 [00:02<00:00,  2.44s/it]
-2024-08-16 23:53:55 | ERROR | stderr | 
-2024-08-17 01:00:15 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-17 01:22:42 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-17 01:22:42 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-17 08:26:18 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4
-2024-08-17 08:29:00 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-17 08:29:00 | ERROR | stderr | 
-2024-08-17 08:29:00 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-17 08:29:00 | ERROR | stderr | 
-2024-08-17 08:31:41 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-17 08:31:41 | ERROR | stderr | 
-2024-08-17 08:31:41 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-17 08:31:41 | ERROR | stderr | 
-2024-08-17 08:32:29 | ERROR | stderr | /env/lib/conda/gritkto/lib/python3.10/site-packages/gradio/helpers.py:974: UserWarning:
-2024-08-17 08:32:29 | ERROR | stderr | 
-2024-08-17 08:32:29 | ERROR | stderr | Unexpected argument. Filling with None.
-2024-08-17 08:32:29 | ERROR | stderr | 
-2024-08-17 17:24:28 | ERROR | index_logger | Error in find_neighbors: 503 recvmsg:Connection reset by peer. Retries left: 4

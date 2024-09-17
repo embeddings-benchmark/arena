@@ -21,13 +21,12 @@ INDEX_TO_REGION_MAP = {
     "index_stackexchange_text-embedding-004": "us-central1",
     "index_stackexchange_intfloat__e5-mistral-7b-instruct": "us-central1",
     "index_stackexchange_voyage-multilingual-2": "us-central1",
+    "index_stackexchange_text-embedding-004": "us-central1",
     "index_wikipedia_text-embedding-004": "us-central1",
 }
 
 class VertexIndex:
-    """
-    A GCP Vertex AI Vector Search wrapper.
-    """
+    """A GCP Vertex AI Vector Search wrapper."""
     index: aiplatform.MatchingEngineIndex = None
     endpoint: aiplatform.MatchingEngineIndexEndpoint = None
     PROJECT_ID = "contextual-research-common"
@@ -83,14 +82,14 @@ class VertexIndex:
             ]
             f.writelines(embeddings_formatted)
 
-    # def _write_embeddings(self, gpu_embedder_batch_size=32//4) -> None:#32//4) -> None:
-    def _write_embeddings(self, gpu_embedder_batch_size=32*16) -> None:        
+    def _write_embeddings(self, gpu_embedder_batch_size=32//4) -> None:
+    # def _write_embeddings(self, gpu_embedder_batch_size=32*16) -> None:        
         """Batch encoding passages, then write a jsonl file."""
         if os.path.exists(self.emb_file_path):
             raise FileExistsError(f"{self.emb_file_path} already exists. Delete it before running this method.")
         logger.info(f"Writing embeddings to {self.emb_file_path} ...")
 
-        """
+        """Optionally skip already encoded passages
         seen_ids = set()
         with open("emb_wikipedia_text-embedding-004.json_122534567101114151618", 'r') as f:
             for line in f:
@@ -105,7 +104,7 @@ class VertexIndex:
             print("I", i)
             
             indices = range(i * gpu_embedder_batch_size, (i + 1) * gpu_embedder_batch_size)
-            """
+            """Optionally skip already encoded passages
             if all([str(index) in seen_ids for index in indices]):
                 print("Skipping as all indices in seen_ids")
                 continue
@@ -114,11 +113,6 @@ class VertexIndex:
             else:
                 print("All indices are missing in seen_ids", indices, len(seen_ids))
                 # exit()
-            """
-            """
-            assert len(indices) == 1
-            if indices[0] in seen_ids:
-                continue
             """
 
             batch = self.passages[i * gpu_embedder_batch_size : (i + 1) * gpu_embedder_batch_size]
@@ -147,9 +141,9 @@ class VertexIndex:
         Reference: https://cloud.google.com/vertex-ai/docs/vector-search/configuring-indexes
         """
         self._write_embeddings()
-        #exit()
+        # exit() # Optional: Skip uploading embeddings
         self._upload_embedding_file()
-        #exit()
+        # exit() # Optional: Skip creating index e.g. to do it in the GCP UI instead
         logger.info(f"Creating Vector Search index {self.index_name} ...")
         self.index = aiplatform.MatchingEngineIndex.create_tree_ah_index(
             display_name=self.index_name,
