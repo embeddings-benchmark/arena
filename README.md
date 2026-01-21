@@ -38,3 +38,17 @@ Some models require API keys which you can set as environment variables, e.g.
 ## Results
 
 Results are auto-saved to [mteb/arena-results](https://huggingface.co/datasets/mteb/arena-results).
+
+## Personal Leaderboards
+
+We have introduced a new feature that allows users to have their own personal leaderboards. This feature enables users to track their individual preferences and votes.
+
+### User Authentication
+
+To access your personal leaderboard, you need to log in using your Hugging Face account. The authentication is handled via OAuth.
+
+### Instructions
+
+1. Log in to your Hugging Face account.
+2. Navigate to the "Personal Leaderboard" tab in the UI.
+3. View your personal rankings based on your votes.

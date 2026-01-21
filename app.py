@@ -152,6 +152,14 @@ with gr.Blocks(title="MTEB Arena", head=head_js) as block:
                 with gr.Tab("🏆 Leaderboard", id=3):
                     build_leaderboard_tab(elo_results_file['sts'], leaderboard_table_file['sts'], task_type="STS")
 
+    with gr.Tab("🏅 Personal Leaderboard", id=13):
+        with gr.Tabs() as tabs_pl:
+            with gr.Tab("🔒 Login", id=14):
+                gr.Markdown("Please log in to view your personal leaderboard.")
+                gr.Button("Login with Hugging Face", variant="primary", elem_id="login_button")
+            with gr.Tab("🏆 Personal Leaderboard", id=15):
+                build_leaderboard_tab(elo_results_file['personal'], leaderboard_table_file['personal'], task_type="Personal")
+
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
 
 block.queue(max_size=10)

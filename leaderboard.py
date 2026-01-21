@@ -11,6 +11,7 @@ TASK_TYPE_TO_EMOJI = {
     "Retrieval": "🔎",
     "Clustering": "✨",
     "STS": "☘️",
+    "Personal": "🏅",
 }
 
 def make_arena_leaderboard_md(elo_results):
@@ -124,6 +125,98 @@ def build_leaderboard_tab(elo_results_file, leaderboard_table_file, show_plot=Fa
             value=arena_table_vals,
             elem_id="arena_leaderboard_dataframe",
             #height=700,
+            column_widths=[50, 150, 100, 100, 100, 100, 100, 150, 150],
+            wrap=True,
+        )
+        if not show_plot:
+            gr.Markdown(
+                """## We are still collecting more votes on more models. The ranking will be updated very frequently. Please stay tuned!""",
+                elem_id="leaderboard_markdown",
+            )
+    else:
+        pass
+
+    leader_component_values[:] = [md, p1, p2, p3, p4]
+
+    """
+    with gr.Row():
+        with gr.Column():
+            gr.Markdown(
+                "#### Figure 1: Fraction of Model A Wins for All Non-tied A vs. B Battles"
+            )
+            plot_1 = gr.Plot(p1, show_label=False)
+        with gr.Column():
+            gr.Markdown(
+                "#### Figure 2: Battle Count for Each Combination of Models (without Ties)"
+            )
+            plot_2 = gr.Plot(p2, show_label=False)
+    with gr.Row():
+        with gr.Column():
+            gr.Markdown(
+                "#### Figure 3: Bootstrap of Elo Estimates (1000 Rounds of Random Sampling)"
+            )
+            plot_3 = gr.Plot(p3, show_label=False)
+        with gr.Column():
+            gr.Markdown(
+                "#### Figure 4: Average Win Rate Against All Other Models (Assuming Uniform Sampling and No Ties)"
+            )
+            plot_4 = gr.Plot(p4, show_label=False)
+    """
+    # return [md_1, plot_1, plot_2, plot_3, plot_4]
+    return [md_1]
+
+def build_personal_leaderboard_tab(elo_results_file, leaderboard_table_file, user_id, show_plot=False, task_type="Personal"):
+    if elo_results_file is None:  # Do live update
+        md = "Loading ..."
+        p1 = p2 = p3 = p4 = None
+    else:
+        with open(elo_results_file, "rb") as fin:
+            elo_results = pickle.load(fin)
+
+        personal_elo_results = elo_results[user_id]
+        personal_arena_df = personal_elo_results["leaderboard_table_df"]
+        p1 = personal_elo_results["win_fraction_heatmap"]
+        p2 = personal_elo_results["battle_count_heatmap"]
+        p3 = personal_elo_results["bootstrap_elo_rating"]
+        p4 = personal_elo_results["average_win_rate_bar"]
+
+        md = f"""
+# 🏅 Personal Leaderboard: {task_type} {TASK_TYPE_TO_EMOJI[task_type]}
+"""
+    # | [GitHub](https://github.com/embeddings-benchmark) |
+    md_1 = gr.Markdown(md, elem_id="leaderboard_markdown")
+
+    if leaderboard_table_file:
+        model_table_df = load_leaderboard_table_csv(leaderboard_table_file)
+        personal_table_vals = get_arena_table(personal_arena_df, model_table_df, task_type=task_type)
+        md = make_arena_leaderboard_md(personal_elo_results)
+        gr.Markdown(md, elem_id="leaderboard_markdown")
+        gr.Dataframe(
+            headers=[
+                "Rank",
+                "🤖 Model",
+                "⭐ Personal Elo",
+                "📊 95% CI",
+                "🗳️ Votes",
+                "🥇 MTEB Overall Avg",
+                f"🥇 MTEB {task_type} Avg",                        
+                "Organization",
+                "License",
+            ],
+            datatype=[
+                "str",
+                "markdown",
+                "number",
+                "str",
+                "number",
+                "number", 
+                "number",
+                "str",
+                "str",
+            ],
+            value=personal_table_vals,
+            elem_id="personal_leaderboard_dataframe",
+            height=700,
             column_widths=[50, 150, 100, 100, 100, 100, 100, 150, 150],
             wrap=True,
         )
